@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .login-form {
+        margin: 50px auto;
+        max-width: 400px;
+        /*padding: 20px;*/
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        position: relative; /* Add position relative to make it a reference for absolute positioning */
+
+    }
+	   
+    /* Custom styling for the toast */
+	.toast-custom_att
+	{
+		position: absolute;
+		display: none;
+		z-index: 1000;
+		
+	}
+       
+	/* Custom styling for the overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    z-index: 999; /* Ensure it's above other elements, but below the toast */
+}
+.highlight {
+	
+	background-color: white;
+    color: Black;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+	border: 2px solid steelblue; /*black*/
+	position: relative;
+	z-index: 9999;
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="login-form">
+
+	<div class="card">
+	<div class="card-header" id="cardheader">
+                        LOGIN
+						<div id="cardheaderToast" class="toast-custom_att toast align-middle" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="me-auto">Welcome</strong>
+					<div class="col-auto">
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+					</div>
+                </div>
+                <div class="toast-body">
+				Welcome to the user LOGIN page
+                    <!-- Enter your username here. -->
+                </div>
+            </div>
+                    </div>
+                    <div class="card-body">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter User Name" required>
+			 <div class="invalid-tooltip">
+				  Please select a valid state.
+				</div>
+            <!-- Bootstrap Toast for username -->
+            <div id="usernameToast" class="toast-custom_att toast align-middle" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                <div class="toast-header">
+                    <strong class="me-auto">Username</strong>
+					<div class="col-auto">
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+					</div>
+                </div>
+                <div class="toast-body">
+				Enter the Username.
+                    <!-- Enter your username here. -->
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter Password" required>
+			<div class="invalid-tooltip">
+				  Please select a valid state.
+			</div>
+			<!-- Bootstrap Toast for password -->
+			<div id="passwordToast" class="toast-custom_att toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+				<div class="toast-header">
+					<strong class="me-auto">Password</strong>
+					<div class="col-auto">
+					<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+					</div>
+				</div>
+				<div class="toast-body">
+					Enter your Password.
+				</div>
+			</div>
+        </div>
+		<div class="mb-3">
+        <button id="loginBtn" type="button" class="btn btn-primary " onclick="checkifclicked()">Login</button>
+		<!-- Bootstrap Toast for password -->
+			<div id="LoginToast" class="toast toast-custom_att" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+				<div class="toast-header">
+					<strong class="me-auto">Login</strong>
+					<div class="col-auto">
+					<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+					</div>
+				</div>
+				<div class="toast-body">
+					Click on the Login button to access the application.
+				</div>
+			</div>
+			</div>
+			</div>
+	</div>
+    </div>
+	<div id="overlay" class="overlay"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Enable login button when both username/email and password fields are filled
+    document.getElementById('username').addEventListener('input', function() {
+        checkFormValidity();
+    });
+    document.getElementById('password').addEventListener('input', function() {
+        checkFormValidity();
+    });
+
+    function checkFormValidity() {
+	console.log("When on load");
+        var username = document.getElementById('username').value.trim();
+        var password = document.getElementById('password').value.trim();
+        var loginBtn = document.getElementById('loginBtn');
+        console.log("When on load "+username+". password="+password);
+        if (username && password) {
+            loginBtn.removeAttribute('disabled');
+        } else {
+            loginBtn.setAttribute('disabled', 'disabled');
+        }
+    }
+	function checkifclicked()
+	{
+	//alert("Login btn clicked");
+	window.location.href = "https://www.bing.com";
+	
+	}
+    const usernameInput = document.getElementById('username');
+    const usernameToast = new bootstrap.Toast(document.getElementById('usernameToast'));
+    const passwordInput = document.getElementById('password');
+    const passwordToast = new bootstrap.Toast(document.getElementById('passwordToast'));
+	const LoginInput = document.getElementById('loginBtn');
+    const LoginToast = new bootstrap.Toast(document.getElementById('LoginToast'));
+	const cardheaderToast = new bootstrap.Toast(document.getElementById('cardheaderToast'));
+	const overlay = document.getElementById('overlay');
+	function highlightLabel(elementId) {
+	const element = document.getElementById(elementId);
+	if(elementId === 'loginBtn' || elementId === 'cardheader')
+	{
+	element.classList.add('highlight');
+	}
+	else{
+	element.classList.add('highlight');
+    const label = document.querySelector(`label[for="${elementId}"]`);	
+	//element.setAttribute('disabled', 'disabled');
+    label.classList.add('highlight');
+	}
+}
+function removehighlight(elementId)
+{const element = document.getElementById(elementId);
+	if(elementId === 'loginBtn' || elementId === 'cardheader')
+	{
+	element.classList.remove('highlight');
+	}
+	else{
+	element.classList.remove('highlight');
+    const label = document.querySelector(`label[for="${elementId}"]`);
+	//element.removeAttribute('disabled','disabled');
+    label.classList.remove('highlight');
+	}
+} 
+    // Show the username toast when the page loads
+    window.addEventListener('DOMContentLoaded', () => {
+        const rect = usernameInput.getBoundingClientRect();
+        const top = rect.top + window.pageYOffset;
+        const left = rect.left + window.pageXOffset + rect.width + 10; // Adjusted for padding		
+		overlay.style.display = 'block';
+		highlightLabel('cardheader');		
+		checkFormValidity();
+		cardheaderToast.show();
+		  
+    });//document.querySelectorAll('[data-bs-dismiss="toast"]').forEach(function (element)
+    document.querySelectorAll('[data-dismiss="toast"]').forEach(function (element) {
+        element.addEventListener('click', function(){
+            // Dismiss the toast when the close button is clicked
+            const toastElement = this.closest('.toast');
+            const ToastInstance = new bootstrap.Toast(toastElement);
+            ToastInstance.hide();
+			if (toastElement.id === 'cardheaderToast')
+			{
+			const rect = usernameInput.getBoundingClientRect();
+                const top = rect.top + window.pageYOffset;
+				console.log("line 201 "+top);
+                const left = rect.left + window.pageXOffset + rect.width + 10; // Adjusted for padding
+				console.log("line 203 "+left);
+				removehighlight('cardheader');
+				highlightLabel('username');
+				usernameToast.show();  
+			}
+            if (toastElement.id === 'usernameToast') {
+                // If the username toast is dismissed, show the password toast
+				
+                const rect = passwordInput.getBoundingClientRect();
+                const top = rect.top + window.pageYOffset;
+				console.log("line 201 "+top);
+                const left = rect.left + window.pageXOffset + rect.width + 10; // Adjusted for padding
+				console.log("line 203 "+left);
+				removehighlight('username');
+				highlightLabel('password');
+                passwordToast.show();
+				// Adjust z-index for label, input, and username toast
+           
+            }
+			if (toastElement.id === 'passwordToast') {
+                // If the username toast is dismissed, show the password toast
+			    const rect = LoginInput.getBoundingClientRect();
+                const top = rect.top + window.pageYOffset;
+                const left = rect.left + window.pageXOffset + rect.width + 10; // Adjusted for padding
+				removehighlight('password');
+				highlightLabel('loginBtn');
+                LoginToast.show();            
+ 				
+            }
+			if (toastElement.id === 'LoginToast'){
+				removehighlight('loginBtn');			
+			overlay.style.display = 'none';}
+        });
+    });
+</script>
+</body>
+</html>
