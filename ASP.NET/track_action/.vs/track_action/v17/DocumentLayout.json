@@ -1,0 +1,102 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|c:\\users\\pallavimisal\\documents\\task\\track_action\\webapplication2\\resources\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\resources\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\webapplication2\\user_form.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\user_form.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\webapplication2\\resources\\clientfuncs.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\resources\\clientfuncs.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\webapplication2\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\webapplication2\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{744C3634-3E64-41F4-9CDE-1F4A6F04EA4E}|WebApplication2\\WebApplication2.csproj|solutionrelative:webapplication2\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Style.css",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\Resources\\Style.css",
+              "RelativeDocumentMoniker": "WebApplication2\\Resources\\Style.css",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\Resources\\Style.css",
+              "RelativeToolTip": "WebApplication2\\Resources\\Style.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-03-02T06:28:34.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Global.asax.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\Global.asax.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\Global.asax.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\Global.asax.cs",
+              "RelativeToolTip": "WebApplication2\\Global.asax.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAcwBUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-29T08:49:14.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClientFuncs.js",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\Resources\\ClientFuncs.js",
+              "RelativeDocumentMoniker": "WebApplication2\\Resources\\ClientFuncs.js",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\Resources\\ClientFuncs.js",
+              "RelativeToolTip": "WebApplication2\\Resources\\ClientFuncs.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-02-28T13:02:08.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\Web.config",
+              "RelativeDocumentMoniker": "WebApplication2\\Web.config",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\Web.config",
+              "RelativeToolTip": "WebApplication2\\Web.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAADFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-02-23T12:19:19.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "user_form.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\user_form.aspx.cs",
+              "RelativeDocumentMoniker": "WebApplication2\\user_form.aspx.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\track_action\\WebApplication2\\user_form.aspx.cs",
+              "RelativeToolTip": "WebApplication2\\user_form.aspx.cs",
+              "ViewState": "AQIAAJkAAAAAAAAAAAAAAOAAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-23T09:18:39.89Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
