@@ -1,0 +1,28 @@
+﻿@model WebApplication_Core.Models.Staff
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" asp-action="Create">
+            <div class="form-group">
+                <label>Last name</label>
+                <input type="text" class="form-control" name="LastName" placeholder="last name" required>
+            </div>
+            <div class="form-group">
+                <label>First name</label>
+                <input type="text" class="form-control" name="FirstName" placeholder="first name" required>
+            </div>
+            <div class="form-group">
+                <label>Staff No</label>
+                <input type="text" class="form-control" name="StaffNo" placeholder="staff no" required>
+            </div>
+            <div class="form-group">
+                <label>Designation</label>
+                <input type="text" class="form-control" name="Designation" placeholder="designation" required>
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <textarea class="form-control" name="Address" placeholder="address" required></textarea>
+            </div>
+            <button class="btn btn-success" type="submit">Add Staff</button>
+        </form>
+    </div>
+</div>

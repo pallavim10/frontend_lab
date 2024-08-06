@@ -1,0 +1,279 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\models\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\models\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\views\\staff\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\views\\staff\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\views\\staff\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\views\\staff\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\views\\staff\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\views\\staff\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\views\\staff\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\views\\staff\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|c:\\users\\pallavimisal\\documents\\task\\crud_mvc\\webapplication_core\\webapplication_core\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E0DCD758-9EDE-444A-BDAD-BFCCCB141E5D}|WebApplication_Core\\WebApplication_Core.csproj|solutionrelative:webapplication_core\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "WebApplication_Core\\Models\\ErrorViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T09:58:10.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Models\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "WebApplication_Core\\Models\\LoginViewModel.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABAAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T09:05:01.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "WebApplication_Core\\Views\\Account\\Login.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-06T09:03:23.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "WebApplication_Core\\Controllers\\AccountController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T09:00:35.079Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "WebApplication_Core\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-06T06:30:57.06Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "WebApplication_Core\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAqwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T06:30:35.965Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Staff\\Delete.cshtml",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Views\\Staff\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Staff\\Delete.cshtml",
+              "RelativeToolTip": "WebApplication_Core\\Views\\Staff\\Delete.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-06T06:21:34.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "List.cshtml",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Staff\\List.cshtml",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Views\\Staff\\List.cshtml",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Staff\\List.cshtml",
+              "RelativeToolTip": "WebApplication_Core\\Views\\Staff\\List.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-06T06:12:27.23Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Staff\\Edit.cshtml",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Views\\Staff\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Staff\\Edit.cshtml",
+              "RelativeToolTip": "WebApplication_Core\\Views\\Staff\\Edit.cshtml",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAAkAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-06T06:11:36.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Staff\\Create.cshtml",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Views\\Staff\\Create.cshtml",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Views\\Staff\\Create.cshtml",
+              "RelativeToolTip": "WebApplication_Core\\Views\\Staff\\Create.cshtml",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAMAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-06T05:39:44.413Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "StaffController.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Controllers\\StaffController.cs",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Controllers\\StaffController.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Controllers\\StaffController.cs",
+              "RelativeToolTip": "WebApplication_Core\\Controllers\\StaffController.cs",
+              "ViewState": "AQIAAGMAAAAAAAAAAAAUwGgAAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T05:35:58.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\appsettings.json",
+              "RelativeDocumentMoniker": "WebApplication_Core\\appsettings.json",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\appsettings.json",
+              "RelativeToolTip": "WebApplication_Core\\appsettings.json",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAgwAkAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-06T05:17:15.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Staff.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Models\\Staff.cs",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Models\\Staff.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Models\\Staff.cs",
+              "RelativeToolTip": "WebApplication_Core\\Models\\Staff.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAkwA0AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T05:05:34.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "WebApplication_Core\\Data\\AppDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T04:54:27.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Program.cs",
+              "RelativeDocumentMoniker": "WebApplication_Core\\Program.cs",
+              "ToolTip": "C:\\Users\\pallavimisal\\Documents\\Task\\CRUD_MVC\\WebApplication_Core\\WebApplication_Core\\Program.cs",
+              "RelativeToolTip": "WebApplication_Core\\Program.cs",
+              "ViewState": "AQIAADIAAAAAAAAAAAAswDUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-06T04:50:54.602Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
