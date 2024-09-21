@@ -16,6 +16,7 @@ namespace SpecimenTracking
     public partial class Master_Upload : System.Web.UI.Page
     {
         DAL_SETUP Dal_Setup = new DAL_SETUP();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -23,9 +24,8 @@ namespace SpecimenTracking
                 if (!Page.IsPostBack)
                 {
                     fileSpecimen.Attributes["onchange"] = "UploadFile(this)";
-                    //FileUploadEXL.Attributes.Add("onchange", "UploadFile(this)");
-                    //UploadSubjectfile.Attributes.Add("onchange", "UploadFile(this)");
                     fileSubject.Attributes["onchange"] = "UploadFile(this)";
+                    FileBoxList.Attributes["onchange"] = "UploadFile(this)";
                 }
             }
             catch (Exception ex)
@@ -112,16 +112,27 @@ namespace SpecimenTracking
                         BIND_DRP_COLS(ddlcolumnSID, dtExcelSheet);
                         BIND_DRP_COLS(ddlcolumnSite, dtExcelSheet);
 
-
                         ViewState["Specimen"] = excelData;
+                        ddlcolumnSite.Focus();
                     }
                     else if (Section == "Subject")
                     {
                         BIND_DRP_COLS(ddlSubjectID, dtExcelSheet);
                         BIND_DRP_COLS(ddlSiteID, dtExcelSheet);
 
-
                         ViewState["Subject"] = excelData;
+                        ddlSubjectID.Focus();
+                    }
+                    else if (Section == "BoxList")
+                    {
+                        BIND_DRP_COLS(drpsiteId, dtExcelSheet);
+                        BIND_DRP_COLS(drpSequenceNo, dtExcelSheet);
+                        BIND_DRP_COLS(drpslotno, dtExcelSheet);
+                        BIND_DRP_COLS(drpBoxno, dtExcelSheet);
+                        
+
+                        ViewState["BoxList"] = excelData;
+                        drpBoxno.Focus();
                     }
 
                 }
@@ -182,6 +193,11 @@ namespace SpecimenTracking
 
         protected void lbtnExportSpecimen_Click(object sender, EventArgs e)
         {
+            Export_SpecimenID();
+        }
+
+        private void Export_SpecimenID()
+        {
             try
             {
                 string xlname = "SPECIMEN_ID";
@@ -205,7 +221,7 @@ namespace SpecimenTracking
             }
         }
 
-        protected void lbnexportSubjectIds_Click(object sender, EventArgs e)
+        private void Export_SubjectID()
         {
             try
             {
@@ -230,6 +246,11 @@ namespace SpecimenTracking
             }
         }
 
+        protected void lbnexportSubjectIds_Click(object sender, EventArgs e)
+        {
+            Export_SubjectID();
+        }
+
         private void UPLOAD_SPECIMEN()
         {
             try
@@ -252,9 +273,12 @@ namespace SpecimenTracking
                         Specimen = true;
 
                     }
-                    if(Specimen == true)
+                    if (Specimen == true)
                     {
+                        Export_SpecimenID();
+
                         ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Specimen IDs Upload Successfully.', 'success');", true);
+
                     }
                 }
             }
@@ -263,12 +287,14 @@ namespace SpecimenTracking
                 ex.Message.ToString();
             }
         }
+
         protected void lbtnSubmit_Click(object sender, EventArgs e)
         {
             try
             {
                 UPLOAD_SPECIMEN();
                 CLEAR_Specimen();
+
             }
             catch (Exception ex)
             {
@@ -302,9 +328,13 @@ namespace SpecimenTracking
                         Subject = true;
                     }
 
-                    if(Subject == true)
+                    if (Subject == true)
                     {
+                        Export_SubjectID();
                         ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Subject IDs Upload Successfully.', 'success');", true);
+
+                        
+
                     }
                 }
             }
@@ -320,6 +350,7 @@ namespace SpecimenTracking
             {
                 UPLOAD_SUBJECT();
                 CLEAR_Subject();
+
             }
             catch (Exception ex)
             {
@@ -358,5 +389,115 @@ namespace SpecimenTracking
             }
         }
 
+        protected void btnBoxUpload_Click(object sender, EventArgs e)
+        {
+            UPLOAD_BOXLIST();
+            CLEAR_BOXLIST();
+        }
+
+        private void UPLOAD_BOXLIST()
+        {
+            try
+            {
+                bool boxlist = false;
+                if (ViewState["BoxList"] != null)
+                {
+                    DataTable dataTable = (DataTable)ViewState["BoxList"];
+
+                    foreach (DataRow dr in dataTable.Rows)
+                    {
+                        string SEQNO = dr[drpSequenceNo.SelectedValue].ToString();
+                        string SLOTNO = dr[drpslotno.SelectedValue].ToString();
+                        string BOXNO = dr[drpBoxno.SelectedValue].ToString();
+                        string SITEID = dr[drpsiteId.SelectedValue].ToString();
+
+                        DataSet ds = Dal_Setup.SETUP_UPLOADMASTER_SP(
+                                    ACTION: "UPLOAD_BOXLIST",
+                                    SEQNO: SEQNO,
+                                    SLOTNO: SLOTNO,
+                                    BOXNO: BOXNO,
+                                    SITEID: SITEID);
+                        boxlist = true;
+                    }
+
+                    if (boxlist == true)
+                    {
+                        Export_BOXLIST();
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Box List Upload Successfully.', 'success');", true);
+                        
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+            }
+        }
+
+        protected void btnBoxCancel_Click(object sender, EventArgs e)
+        {
+            CLEAR_BOXLIST();
+        }
+
+        protected void lbtnExportBoxlist_Click(object sender, EventArgs e)
+        {
+            Export_BOXLIST();
+        }
+
+        private void Export_BOXLIST()
+        {
+            try
+            {
+                string xlname = "Box List";
+
+                DataSet ds = Dal_Setup.SETUP_UPLOADMASTER_SP(
+                   ACTION: "EXPORT_BOXLIST"
+                   );
+                DataSet dsExport = new DataSet();
+                for (int i = 1; i < ds.Tables.Count; i++)
+                {
+                    ds.Tables[i].TableName = ds.Tables[i - 1].Rows[0][0].ToString();
+                    dsExport.Tables.Add(ds.Tables[i].Copy());
+                    i++;
+                }
+                Multiple_Export_Excel.ToExcel(dsExport, xlname, Page.Response);
+
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+            }
+        }
+
+        private void CLEAR_BOXLIST()
+        {
+            try
+            {
+                drpSequenceNo.Items.Clear();
+                drpBoxno.Items.Clear();
+                drpslotno.Items.Clear();
+
+                ViewState["BoxList"] = null;
+            }
+            catch (Exception ex)
+            {
+
+                ex.Message.ToString(); 
+            }
+        }
+
+        protected void btnBoxList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GET_DRP_COLS(FileBoxList, "BoxList");
+
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+            }
+        }
     }
 }

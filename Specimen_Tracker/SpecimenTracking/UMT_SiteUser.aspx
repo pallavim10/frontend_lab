@@ -55,38 +55,22 @@
             $.ajax({
                 type: "POST",
                 url: "AjaxFunction.aspx/showAuditTrail",
-                data: '{TABLENAME: "' + TABLENAME + '",ID: "' + ID + '"}',
+                data: JSON.stringify({ TABLENAME: TABLENAME, ID: ID }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (data) {
-                    if (data.d == 'Object reference not set to an instance of an object.') {
+                success: function (response) {
+                    if (response.d === 'Object reference not set to an instance of an object.') {
                         alert("Session Expired");
                         var url = "SessionExpired.aspx";
                         $(location).attr('href', url);
-                    }
-                    else {
-                        $('#DivAuditTrail').html(data.d)
+                    } else {
+                        $('#DivAuditTrail').html(response.d);
+                        $('#modal-lg').modal('show'); // Show the modal after populating it
                     }
                 },
-                failure: function (response) {
-                    if (response.d == 'Object reference not set to an instance of an object.') {
-                        alert("Session Expired");
-                        var url = "SessionExpired.aspx";
-                        $(location).attr('href', url);
-                    }
-                    else {
-                        alert("Contact administrator not suceesfully updated")
-                    }
-                }
-            });
-
-            $("#popup_AuditTrail").dialog({
-                title: "Audit Trail",
-                width: 900,
-                height: 450,
-                modal: true,
-                buttons: {
-                    "Close": function () { $(this).dialog("close"); }
+                error: function (xhr, status, error) {
+                    console.error('Error fetching audit trail:', status, error);
+                    alert("An error occurred. Please contact the administrator.");
                 }
             });
 
@@ -369,7 +353,7 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Edit" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lbtedituser" runat="server" CommandArgument='<%# Bind("ID") %>'
+                                                            <asp:LinkButton ID="lbtedituser" runat="server" CommandArgument='<%# Bind("ID") %>' CssClass="btn-info btn-sm"
                                                                 CommandName="EIDIT" ToolTip="Edit"><i class="fa fa-edit" style="font-size:15px"></i></asp:LinkButton>&nbsp;&nbsp;
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
@@ -474,13 +458,13 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Audit Trail" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lbtnAudttrail" runat="server" OnClientClick="return showAuditTrail(this);" ToolTip="Audit Trail"><i class="fa fa-history" style="color:blue; font-size: 20px"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="lbtnAudttrail" runat="server" OnClientClick="return showAuditTrail(this);" CssClass="btn-info btn-sm"  ToolTip="Audit Trail"><i class="fa fa-history"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Delete" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
                                                             <asp:LinkButton ID="lbtdeleteuser" runat="server" CommandArgument='<%# Bind("ID") %>'
-                                                                CommandName="DELETED" OnClientClick='<%# string.Format("return ConfirmMsg(\"{0}{1}\");", "Are you sure you want to delete this site user  : ", Eval("Fname") +" "+ Eval("Lname")) %>' ToolTip="Delete"><i class="fa fa-trash" style="font-size: 20px"></i></asp:LinkButton>
+                                                                CommandName="DELETED" OnClientClick="return confirm(event);"  CssClass="btn-danger btn-sm" ToolTip="Delete"><i class="fa fa-trash"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                 </Columns>
@@ -495,5 +479,33 @@
             </div>
         </section>
     </div>
+    <script type="text/javascript">
+
+        function confirm(event) {
+            event.preventDefault();
+
+            swal({
+                title: "Warning!",
+                text: "Are you sure you want to delete this Record?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                    var linkButton = event.target;
+                    if (linkButton.tagName.toLowerCase() === 'i') {
+                        linkButton = linkButton.parentElement;
+                    }
+                    linkButton.onclick = null;
+                    linkButton.click();
+                } else {
+                    Response.redirect(this);
+                }
+            });
+            return false;
+        }
+
+
+    </script>
 </asp:Content>
 

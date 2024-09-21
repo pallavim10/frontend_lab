@@ -6,8 +6,8 @@
             $('.select').select2();
             $(".Datatable").dataTable({
                 "bSort": true,
-                "ordering": false,
-                "bDestroy": false,
+                "ordering": true,
+                "bDestroy": true,
                 stateSave: true
             });
 

@@ -37,14 +37,15 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-         <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3><asp:Label runat="server" ID="lblHeader" Text="Site Users Report"></asp:Label></h3>
+                        <h3>
+                            <asp:Label runat="server" ID="lblHeader" Text="Site Users Report"></asp:Label></h3>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -73,8 +74,8 @@
                             <div class="card-header">
                                 <h3 class="card-title">Site Users Report</h3>
                                 <div class="pull-right">
-                                <asp:LinkButton runat="server" ID="btnExport" OnClick="btnExport_Click" CssClass="btn btn-default" Style="color: #333333; font-size:14px;">Export Site Users Report<span class="fa fa-download btn-xs"></span></asp:LinkButton>
-                                <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                    <asp:LinkButton runat="server" ID="btnExport" OnClick="btnExport_Click" CssClass="btn btn-default" Style="color: #333333; font-size: 14px;">Export Site Users Report<span class="fa fa-download btn-xs"></span></asp:LinkButton>
+                                    <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                 </div>
                             </div>
                             <div>
@@ -98,21 +99,11 @@
                                             </div>
                                             <div class="col-md-4 align-content-center">
                                                 <div class="d-inline-flex align-items-center">
-                                                    <asp:Button ID="btnGet" runat="server" Text="Get Data" CssClass="btn btn-primary btn-sm cls-btnSave" 
+                                                    <asp:Button ID="btnGet" runat="server" Text="Get Data" CssClass="btn btn-primary btn-sm cls-btnSave"
                                                         OnClick="btnGet_Click" />
                                                 </div>
-                                                </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div style="width: 100%; overflow: auto;">
-                                                        <div>
-                                                            <asp:GridView ID="grdData" HeaderStyle-CssClass="txt_center" runat="server" AutoGenerateColumns="true"
-                                    Width="100%" OnPreRender="grd_data_PreRender" CssClass="table table-bordered Datatable table-striped">
-                                </asp:GridView>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
+
                                             <br />
                                         </div>
                                     </div>
@@ -123,6 +114,34 @@
                 </div>
             </div>
         </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Records</h3>
+                        <div class="pull-right">
+                            <asp:LinkButton ID="lbtnExport" runat="server" Font-Size="14px" Style="margin-top: 3px;" CssClass="btn btn-default" OnClick="lbtnExport_Click" ForeColor="Black">Export Visits &nbsp;<span class="fas fa-download btn-xs"></span></asp:LinkButton>
+                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="width: 100%; overflow: auto;">
+                                    <div>
+                                        <asp:GridView ID="grdData" HeaderStyle-CssClass="txt_center" runat="server" AutoGenerateColumns="true"
+                                            Width="100%" OnPreRender="grd_data_PreRender" CssClass="table table-bordered Datatable table-striped">
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
 </asp:Content>
 

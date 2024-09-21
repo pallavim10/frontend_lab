@@ -40,45 +40,28 @@
         }
 
         function showAuditTrail(element) {
-
             var ID = $(element).closest('tr').find('td').eq(0).text().trim();
             var TABLENAME = 'UMT_Users';
 
             $.ajax({
                 type: "POST",
                 url: "AjaxFunction.aspx/showAuditTrail",
-                data: '{TABLENAME: "' + TABLENAME + '",ID: "' + ID + '"}',
+                data: JSON.stringify({ TABLENAME: TABLENAME, ID: ID }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (data) {
-                    if (data.d == 'Object reference not set to an instance of an object.') {
+                success: function (response) {
+                    if (response.d === 'Object reference not set to an instance of an object.') {
                         alert("Session Expired");
                         var url = "SessionExpired.aspx";
                         $(location).attr('href', url);
-                    }
-                    else {
-                        $('#DivAuditTrail').html(data.d)
+                    } else {
+                        $('#DivAuditTrail').html(response.d);
+                        $('#modal-lg').modal('show'); // Show the modal after populating it
                     }
                 },
-                failure: function (response) {
-                    if (response.d == 'Object reference not set to an instance of an object.') {
-                        alert("Session Expired");
-                        var url = "SessionExpired.aspx";
-                        $(location).attr('href', url);
-                    }
-                    else {
-                        alert("Contact administrator not suceesfully updated")
-                    }
-                }
-            });
-
-            $("#popup_AuditTrail").dialog({
-                title: "Audit Trail",
-                width: 900,
-                height: 450,
-                modal: true,
-                buttons: {
-                    "Close": function () { $(this).dialog("close"); }
+                error: function (xhr, status, error) {
+                    console.error('Error fetching audit trail:', status, error);
+                    alert("An error occurred. Please contact the administrator.");
                 }
             });
 
@@ -364,7 +347,7 @@
                                     <div style="width: 100%; overflow: auto;">
                                         <div>
                                             <asp:GridView ID="grdUser" runat="server" AllowSorting="True" AutoGenerateColumns="false"
-                                                CssClass="table table-bordered table-striped Datatable1" OnPreRender="grdUserDetails_PreRender" OnRowCommand="grdUser_RowCommand" OnRowDataBound="grdUser_RowDataBound">
+                                                CssClass="table table-bordered table-striped Datatable" OnPreRender="grdUserDetails_PreRender" OnRowCommand="grdUser_RowCommand" OnRowDataBound="grdUser_RowDataBound">
                                                 <Columns>
                                                     <asp:TemplateField HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none"
                                                         HeaderText="ID">
@@ -374,7 +357,7 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Edit" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lbtedituser" runat="server" CommandArgument='<%# Bind("ID") %>'
+                                                            <asp:LinkButton ID="lbtedituser" runat="server" CommandArgument='<%# Bind("ID") %>' CssClass="btn-info btn-sm"
                                                                 CommandName="EIDIT" ToolTip="Edit"><i class="fa fa-edit"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
@@ -420,12 +403,12 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Audit Trail" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lbtnAudttrail" runat="server" OnClientClick="return showAuditTrail(this);" ToolTip="Audit Trail"><i class="fa fa-history" style="color:blue; font-size:15px"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="lbtnAudttrail" runat="server" OnClientClick="return showAuditTrail(this);" CssClass="btn-info btn-sm" ToolTip="Audit Trail"><i class="fa fa-history"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Delete" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lbtdeleteuser" runat="server" CommandArgument='<%# Bind("ID") %>'
+                                                            <asp:LinkButton ID="lbtdeleteuser" runat="server" CommandArgument='<%# Bind("ID") %>' CssClass="btn-danger btn-sm"
                                                                 CommandName="DELETED" OnClientClick="return confirm(event);" ToolTip="Delete"><i class="fa fa-trash"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>

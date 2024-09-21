@@ -11,38 +11,22 @@
              $.ajax({
                  type: "POST",
                  url: "AjaxFunction.aspx/showAuditTrail",
-                 data: '{TABLENAME: "' + TABLENAME + '",ID: "' + ID + '"}',
+                 data: JSON.stringify({ TABLENAME: TABLENAME, ID: ID }),
                  contentType: "application/json; charset=utf-8",
                  dataType: "json",
-                 success: function (data) {
-                     if (data.d == 'Object reference not set to an instance of an object.') {
+                 success: function (response) {
+                     if (response.d === 'Object reference not set to an instance of an object.') {
                          alert("Session Expired");
                          var url = "SessionExpired.aspx";
                          $(location).attr('href', url);
-                     }
-                     else {
-                         $('#DivAuditTrail').html(data.d)
+                     } else {
+                         $('#DivAuditTrail').html(response.d);
+                         $('#modal-lg').modal('show'); // Show the modal after populating it
                      }
                  },
-                 failure: function (response) {
-                     if (response.d == 'Object reference not set to an instance of an object.') {
-                         alert("Session Expired");
-                         var url = "SessionExpired.aspx";
-                         $(location).attr('href', url);
-                     }
-                     else {
-                         alert("Contact administrator not suceesfully updated")
-                     }
-                 }
-             });
-
-             $("#popup_AuditTrail").dialog({
-                 title: "Audit Trail",
-                 width: 840,
-                 height: 450,
-                 modal: true,
-                 buttons: {
-                     "Close": function () { $(this).dialog("close"); }
+                 error: function (xhr, status, error) {
+                     console.error('Error fetching audit trail:', status, error);
+                     alert("An error occurred. Please contact the administrator.");
                  }
              });
 
@@ -230,7 +214,7 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Edit" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lbteditRole" runat="server" CommandArgument='<%# Bind("ID") %>'
+                                                            <asp:LinkButton ID="lbteditRole" runat="server" CommandArgument='<%# Bind("ID") %>' CssClass="btn-info btn-sm"
                                                                 CommandName="EIDIT" ToolTip="Edit"><i class="fa fa-edit"></i></asp:LinkButton>&nbsp;&nbsp;
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
@@ -255,55 +239,15 @@
                                                             <asp:Label ID="lblBlined" runat="server" Text='<%# Bind("Blind") %>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="eSource SDR" ItemStyle-CssClass="text-center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblSDRSource" runat="server" CommandArgument='<%# Eval("CRA_eSource") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconSDR_eSource" runat="server" class="fa fa-check"></i></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="eSource ReadOnly" ItemStyle-CssClass="text-center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblReadonlyeSource" runat="server" CommandArgument='<%# Eval("ReadOnly_eSource") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconReadOnly_eSource" runat="server" class="fa fa-check"></i></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="eSource Admin" ItemStyle-CssClass="text-center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblAdmineSource" runat="server" CommandArgument='<%# Eval("Admin_eSource") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconAdmin_eSource" runat="server" class="fa fa-check"></i></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Medical Opinion Module" ItemStyle-CssClass="text-center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblMedForm" runat="server" CommandArgument='<%# Eval("Med_FORM") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconMed_FORM" runat="server" class="fa fa-check"></i></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Medical Opinion Field" ItemStyle-CssClass="text-center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblMedField" runat="server" CommandArgument='<%# Eval("Med_FIELD") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconMed_FIELD" runat="server" class="fa fa-check"></i></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="SignOff Authority eSource" ItemStyle-CssClass="text-center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblSignofeSource" runat="server" CommandArgument='<%# Eval("Sign_eSource") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconSign_eSource" runat="server" class="fa fa-check"></i></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="SignOff Authority Pharmacovigilance" ItemStyle-CssClass="text-center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblsignofSaftey" runat="server" CommandArgument='<%# Eval("Sign_PV") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconSign_PV" runat="server" class="fa fa-check"></i></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="SignOff Authority eCRF" ItemStyle-CssClass="text-center">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblsignofeCRF" runat="server" CommandArgument='<%# Eval("Sign_DM") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconSign_DM" runat="server" class="fa fa-check"></i></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Audit Trail" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lbtnAudttrail" runat="server" OnClientClick="return showAuditTrail(this);" ToolTip="Audit Trail"><i class="fa fa-history" style="color:blue; font-size:15px"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="lbtnAudttrail" runat="server" OnClientClick="return showAuditTrail(this);" CssClass="btn-info btn-sm" ToolTip="Audit Trail"><i class="fa fa-history"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Delete" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
                                                             <asp:LinkButton ID="lbtdeleteRole" runat="server" CommandArgument='<%# Bind("ID") %>'
-                                                                CommandName="DELETED" OnClientClick="return confirm(event);" ToolTip="Delete"><i class="fa fa-trash"></i></asp:LinkButton>
+                                                                CommandName="DELETED" OnClientClick="return confirm(event);" CssClass="btn-danger btn-sm" ToolTip="Delete"><i class="fa fa-trash"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                 </Columns>

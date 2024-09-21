@@ -30,39 +30,23 @@
 
             $.ajax({
                 type: "POST",
-                url: "AjaxFunction.aspx/showAuditTrail",
-                data: '{TABLENAME: "' + TABLENAME + '",ID: "' + ID + '"}',
+                url: "AjaxFunction.aspx/SETUP_showAuditTrail",
+                data: JSON.stringify({ TABLENAME: TABLENAME, ID: ID }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (data) {
-                    if (data.d == 'Object reference not set to an instance of an object.') {
+                success: function (response) {
+                    if (response.d === 'Object reference not set to an instance of an object.') {
                         alert("Session Expired");
                         var url = "SessionExpired.aspx";
                         $(location).attr('href', url);
-                    }
-                    else {
-                        $('#DivAuditTrail').html(data.d)
+                    } else {
+                        $('#DivAuditTrail').html(response.d);
+                        $('#modal-lg').modal('show'); // Show the modal after populating it
                     }
                 },
-                failure: function (response) {
-                    if (response.d == 'Object reference not set to an instance of an object.') {
-                        alert("Session Expired");
-                        var url = "SessionExpired.aspx";
-                        $(location).attr('href', url);
-                    }
-                    else {
-                        alert("Contact administrator not suceesfully updated")
-                    }
-                }
-            });
-
-            $("#popup_AuditTrail").dialog({
-                title: "Audit Trail",
-                width: 840,
-                height: 450,
-                modal: true,
-                buttons: {
-                    "Close": function () { $(this).dialog("close"); }
+                error: function (xhr, status, error) {
+                    console.error('Error fetching audit trail:', status, error);
+                    alert("An error occurred. Please contact the administrator.");
                 }
             });
 
@@ -93,7 +77,34 @@
             });
             return false;
         }
+
+        function VisitNameChanged(element) {
+            event.preventDefault();
+            $(element).closest('td').find("input[id*='btnvisitname_Changed']").click();
+
+        }
+
+        function CheckVisitNumber(element) {
+            event.preventDefault();
+            console.log("checking on input number");
+            // Example of an immediate action on input change
+            $(element).closest('td').find("input[id*='txtVistNo']").click();
+            __doPostBack('<%= txtVistNo.ClientID %>', 'TextChanged');
+            var index = $("input[id*='txtVistName']").index(this);
+            $("input[id*='txtVistName']").eq(index + 1).focus();
+        }
+
+        function VisitNameChangedOnInput(element) {
+            event.preventDefault();
+            console.log("checking on input");
+            $(element).closest('td').find("input[id*='txtVistName']").click();
+            // Example of an immediate action on input change
+            //if (event.keyCode == 9 || event.keyCode == 13 || event.keyCode == 32 ) { // Tab key
+                __doPostBack('<%= txtVistName.ClientID %>', 'TextChanged');
+            // }
+        }
     </script>
+    
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -133,18 +144,25 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label>Enter Visit Number : &nbsp;</label>
-                                                            <asp:Label ID="Label4" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                            <asp:TextBox ID="txtVistNo" runat="server" CssClass="form-control required numeric w-25" AutoCompleteType="Disabled"></asp:TextBox>
+                                                            <label for="txtVistNov">Enter Visit Number : &nbsp;</label>
+                                                            <asp:Label ID="Label4" runat="server" Font-Size="Small" ForeColor="#FF3300"  Text="*"></asp:Label>
+                                                            <asp:TextBox ID="txtVistNo" runat="server" CssClass="form-control required numeric w-25" AutoCompleteType="Disabled" AutoPostBack="true" onChange="CheckVisitNumber(this);" OnTextChanged="VisitNumChanged" ></asp:TextBox>
                                                             <asp:HiddenField ID="hdnVisitNum" runat="server" />
+                                                            <div class="form-group has-warning">
+                                                                <asp:Label ID="lblNumError" CssClass="text-danger font-weight-bold" runat="server"></asp:Label>
                                                         </div>
                                                     </div>
+                                                   </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label>Enter Visit Name : &nbsp;</label>
+                                                            <label for="txtVistName">Enter Visit Name : &nbsp;</label>
                                                             <asp:Label ID="Label5" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                            <asp:TextBox ID="txtVistName" runat="server" CssClass="form-control required  w-50" AutoCompleteType="Disabled"></asp:TextBox>
+                                                            <asp:TextBox ID="txtVistName" runat="server" CssClass="form-control required  w-50" AutoCompleteType="Disabled"  AutoPostBack="true" onChange="VisitNameChanged(this);" OnTextChanged="VisitNameChanged"></asp:TextBox>
+                                                            <asp:Button runat="server" ID="btnvisitname_Changed" CssClass="d-none" OnClick="VisitNameChanged"></asp:Button>
                                                             <asp:HiddenField ID="hdnVisitName" runat="server" />
+                                                            <div class="form-group has-warning">
+                                                            <asp:Label ID="lblErrorMsg" CssClass="text-danger font-weight-bold" runat="server"></asp:Label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -177,7 +195,7 @@
                                     <div class="card-body">
                                         <div class="rows">
                                             <div class="col-md-12">
-                                                <asp:GridView ID="GrdVisits" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive grid" DataKeyNames="ID" EmptyDataText="No Data Found!" Width="100%" AllowPaging="true" AllowSorting="true" PageSize ="5" OnPageIndexChanging="GrdVisits_PageIndexChanging" >
+                                                <asp:GridView ID="GrdVisits" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive grid" DataKeyNames="ID" EmptyDataText="No Data Found!" Width="100%" AllowPaging="true" AllowSorting="true" PageSize ="5" OnPageIndexChanging="GrdVisits_PageIndexChanging"  OnRowCommand="GrdVisits_RowCommand">
                                                     <Columns>
                                                         <asp:TemplateField HeaderText="Visit_ID" HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none">
                                                             <ItemTemplate>
@@ -186,27 +204,31 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Edit" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
-                                                                <asp:LinkButton ID="lnkedit" runat="server" class="btn-info btn-xs" OnClick="lnkedit_Click"><i class="fas fa-edit btn-xs"></i></asp:LinkButton>
+                                                                <asp:LinkButton ID="lnkedit" CommandName="EditVisit" CommandArgument='<%# Eval("ID") %>' runat="server" class="btn-info btn-sm" ><i class="fas fa-edit"></i></asp:LinkButton> <%--OnClick="lnkedit_Click"--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
-                                                        <asp:TemplateField HeaderText="Visit_Number" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                        <asp:TemplateField HeaderText="Visit Number" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblVisitNumber" runat="server" Text='<%# Eval("VISITNUM") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Visit_Name" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                        <asp:TemplateField HeaderText="Visit Name" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblVisitName" runat="server" Text='<%# Eval("VISITNAME") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Action" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                         <asp:TemplateField HeaderText="Audit Trail" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="lnkaudit_trail" runat="server" class="btn-info btn-sm" OnClientClick="return showAuditTrail(this);" ToolTip="Audit Trail" CommandName="AuditTrailVisits" CommandArgument='<%# Eval("ID") %>'><i class="fas fa-history"></i></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Delete" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
 
-                                                                <asp:LinkButton ID="lnkdelete" runat="server" class="btn-danger btn-xs" OnClick="lnkDelete_Click" OnClientClick="return confirmDelete(event);"><i class="fas fa-trash btn-xs"></i></asp:LinkButton>
-
-                                                                <asp:LinkButton ID="lnkaudit_trail" runat="server" class="btn-info btn-xs" OnClientClick="return showAuditTrail(this);" ToolTip="Audit Trail" CommandArgument="Visits"><i class="fas fa-clock btn-xs"></i></asp:LinkButton>
-                                                            </ItemTemplate>
+                                                                <asp:LinkButton ID="lnkdelete" runat="server" class="btn-danger btn-sm" CommandName="DeleteVisit" CommandArgument='<%# Eval("ID") %>'  OnClientClick="return confirmDelete(event);"><i class="fas fa-trash"></i></asp:LinkButton>
+                                                                <%-- OnClick="lnkDelete_Click" --%>
+                                                                 </ItemTemplate>
                                                         </asp:TemplateField>
                                                     </Columns>
                                                 </asp:GridView>

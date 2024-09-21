@@ -1,5 +1,5 @@
-﻿using System;
-using SpecimenTracking.App_Code;
+﻿using SpecimenTracking.App_Code;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -26,18 +26,18 @@ namespace SpecimenTracking
                 FillCapctha();
                 // Assuming 'username' is the username you want to store
 
-                //if (Request.Cookies["Username"] != null)
-                //{
-                //    txtUserName.Text = Server.HtmlEncode(Request.Cookies["Username"].Value);
-                //    // Use the username as needed
-                //    Response.Redirect("LockScreen.aspx");
-                //}
+                if (Request.Cookies["Username"] != null)
+                {
+                    txtUserName.Text = Server.HtmlEncode(Request.Cookies["Username"].Value);
+                    // Use the username as needed
+                    Response.Redirect("LockScreen.aspx");
+                }
 
-                //if (Request.Cookies["Username"] != null)
-                //{
-                //    Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-30);
-                //    Response.Cookies["FullName"].Expires = DateTime.Now.AddDays(-30);
-                //}
+                if (Request.Cookies["Username"] != null)
+                {
+                    Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-30);
+                    Response.Cookies["FullName"].Expires = DateTime.Now.AddDays(-30);
+                }
             }
         }
 
@@ -215,7 +215,7 @@ namespace SpecimenTracking
             {
                 Random random = new Random();
 
-                string combination = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                string combination = "0123456789ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
                 StringBuilder captcha = new StringBuilder();
                 for (int i = 0; i < 6; i++)
                 {

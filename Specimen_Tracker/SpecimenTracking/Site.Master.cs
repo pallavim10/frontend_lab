@@ -13,7 +13,7 @@ namespace SpecimenTracking
 {
     public partial class Site : System.Web.UI.MasterPage
     {
-        
+
         DAL_UMT dal_UMT = new DAL_UMT();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,7 +29,7 @@ namespace SpecimenTracking
                     lblUserName.Text = Session["User_Name"].ToString();
                     if (!IsPostBack)
                     {
-                        
+
 
                         if (Session["PROJECTIDTEXT"] != null)
                         {
@@ -72,7 +72,7 @@ namespace SpecimenTracking
 
                             if (NavigationPath != "" && NavigationPath != "undefined")
                             {
-                               // lblnavmenuuName.Text = NavigationPath;
+                                // lblnavmenuuName.Text = NavigationPath;
                             }
                         }
                         else
@@ -85,6 +85,8 @@ namespace SpecimenTracking
 
                             PopulateMenuControl();
                         }
+
+                       // Get_DashboardData();
                     }
                 }
             }
@@ -96,7 +98,7 @@ namespace SpecimenTracking
             }
         }
 
-        
+
         private void PopulateMenuControl()
         {
             string CURRENT_SYSTEM = "";
@@ -175,7 +177,7 @@ namespace SpecimenTracking
                 lstsubmenu.DataSource = ds;
                 lstsubmenu.DataBind();
 
-               
+
             }
             else
             {
@@ -204,7 +206,7 @@ namespace SpecimenTracking
                     DataTable dt = ds.Tables[0];
 
                     DataRow[] rows;
-                    DataRow[] rows1;
+                    DataRow[]  rows1;
                     DataRow[] rows2;
                     DataRow[] rows3;
                     DataRow[] rows4;
@@ -293,108 +295,112 @@ namespace SpecimenTracking
                     sub.Visible = true;
                     Session["menu"] = menu;
                     PopulateMenuControlChildItem(menu);
-                   
+
                 }
 
             }
         }
 
         string NavPath_L1 = "", NavPath_L2 = "", NavPath_L3 = "", NavPath_L4 = "";
+      
         protected void lstsubmenu_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
-            LinkButton lbtnmenu = (LinkButton)e.Item.FindControl("lbtnmenu");
-            ListView lstsubmenu1 = (ListView)e.Item.FindControl("lstsubmenu1");
-            HtmlAnchor a1 = (HtmlAnchor)e.Item.FindControl("a1");
-            HtmlGenericControl lisub = (HtmlGenericControl)e.Item.FindControl("lisub");
-            HtmlControl i1 = (HtmlControl)e.Item.FindControl("i1");
-            HiddenField hdnPath = (HiddenField)e.Item.FindControl("hdnPath");
-
-            NavPath_L1 = lbtnmenu.Text.Trim();
-            hdnPath.Value = NavPath_L1;
-
-            string CURRENT_SYSTEM = "";
-
-            if (Session["UMT"] != null && Session["UMT"].ToString() == "YES")
+            if (e.Item.ItemType == ListViewItemType.DataItem)
             {
-                if (Session["menu"] != null && Session["menu"].ToString() != "")
+                DataRowView dr = (DataRowView)DataBinder.GetDataItem(e.Item);
+                LinkButton lbtnmenu = (LinkButton)e.Item.FindControl("lbtnmenu");
+                ListView lstsubmenu1 = (ListView)e.Item.FindControl("lstsubmenu1");
+                HtmlAnchor a1 = (HtmlAnchor)e.Item.FindControl("a1");
+                HtmlGenericControl lisub = (HtmlGenericControl)e.Item.FindControl("lisub");
+                HtmlControl i1 = (HtmlControl)e.Item.FindControl("i1");
+                HiddenField hdnPath = (HiddenField)e.Item.FindControl("hdnPath");
+                HtmlControl ICONSubCLASS = (HtmlControl)e.Item.FindControl("ICONSubCLASS");
+
+                NavPath_L1 = lbtnmenu.Text.Trim();
+                hdnPath.Value = NavPath_L1;
+
+                string CURRENT_SYSTEM = "";
+
+                if (Session["UMT"] != null && Session["UMT"].ToString() == "YES")
                 {
-                    CURRENT_SYSTEM = Session["menu"].ToString();
+                    if (Session["menu"] != null && Session["menu"].ToString() != "")
+                    {
+                        CURRENT_SYSTEM = Session["menu"].ToString();
+                    }
+                    else
+                    {
+                        CURRENT_SYSTEM = "Home";
+                    }
+
+                    DataSet ds = dal_UMT.SYS_FUNCTIONS_SP(
+                            ACTION: "GET_FUNCTIONS",
+                            SYSTEM: CURRENT_SYSTEM,
+                            PARENT: lbtnmenu.Text
+                            );
+                    lstsubmenu1.DataSource = ds;
+                    lstsubmenu1.DataBind();
+                    ICONSubCLASS.Attributes.Add("class", dr["Icon"].ToString());
+                    if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        lisub.Attributes.Add("class", "nav-item has-treeview");
+                        i1.Attributes.Add("class", "fas fa-angle-left right pull-right");
+                    }
                 }
                 else
                 {
-                    CURRENT_SYSTEM = "Home";
-                }
+                    string MyValue1 = Session["User_ID"] as string;
+                    DataSet ds1 = new DataSet();
+                    SqlConnection Sqlcon = new SqlConnection();
+                    Sqlcon = new SqlConnection(dal_UMT.getconstr());
+                    Sqlcon.Open();
+                    SqlDataAdapter da1 = new SqlDataAdapter("spQry_01_UserFunction", Sqlcon);
+                    da1.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    if (Session["PROJECTID"] != null)
+                    {
+                        da1.SelectCommand.Parameters.AddWithValue("@ProjectID", Session["PROJECTID"].ToString());
+                    }
+                    else
+                    {
+                        da1.SelectCommand.Parameters.AddWithValue("@ProjectID", "0");
+                    }
+                    da1.SelectCommand.Parameters.AddWithValue("@UserId", Session["User_ID"].ToString());
+                    da1.SelectCommand.Parameters.AddWithValue("@Parent", lbtnmenu.Text);
+                    da1.Fill(ds1);
+                    DataTable dt = ds1.Tables[0];
 
-                DataSet ds = dal_UMT.SYS_FUNCTIONS_SP(
-                        ACTION: "GET_FUNCTIONS",
-                        SYSTEM: CURRENT_SYSTEM,
-                        PARENT: lbtnmenu.Text
-                        );
-                lstsubmenu1.DataSource = ds;
-                lstsubmenu1.DataBind();
 
-                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                {
-                    //treeview-menu menu-close
-                    //lisub.Attributes.Add("class", "nav-treeview ");
-                    lisub.Attributes.Add("class", "nav-treeview has-treeview active");
-                    i1.Attributes.Add("class", "fa fa-angle-left pull-right");
+
+                    if (Session["PROJECTID"] == null)
+                    {
+                        DataRow[] rows;
+                        DataRow[] rows1;
+                        DataRow[] rows2;
+                        rows = dt.Select("FunctionName = 'Activate Site'");  //'UserName' is ColumnName
+                        foreach (DataRow row in rows)
+                            dt.Rows.Remove(row);
+                        rows1 = dt.Select("FunctionName = 'Add User DashBoard'");  //'UserName' is ColumnName
+                        foreach (DataRow row in rows1)
+                            dt.Rows.Remove(row);
+                        rows2 = dt.Select("FunctionName = 'Remove User Assign DashBoard'");  //'UserName' is ColumnName
+                        foreach (DataRow row in rows2)
+                            dt.Rows.Remove(row);
+                    }
+                    lstsubmenu1.DataSource = dt;
+                    lstsubmenu1.DataBind();
+
+
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        lisub.Attributes.Add("class", "nav-item has-treeview");
+                        i1.Attributes.Add("class", "fas fa-angle-left right pull-right");
+                    }
+                    Sqlcon.Close();
                 }
             }
-            else
-            {
-                string MyValue1 = Session["User_ID"] as string;
-                DataSet ds1 = new DataSet();
-                SqlConnection Sqlcon = new SqlConnection();
-                Sqlcon = new SqlConnection(dal_UMT.getconstr());
-                Sqlcon.Open();
-                SqlDataAdapter da1 = new SqlDataAdapter("spQry_01_UserFunction", Sqlcon);
-                da1.SelectCommand.CommandType = CommandType.StoredProcedure;
-                if (Session["PROJECTID"] != null)
-                {
-                    da1.SelectCommand.Parameters.AddWithValue("@ProjectID", Session["PROJECTID"].ToString());
-                }
-                else
-                {
-                    da1.SelectCommand.Parameters.AddWithValue("@ProjectID", "0");
-                }
-                da1.SelectCommand.Parameters.AddWithValue("@UserId", Session["User_ID"].ToString());
-                da1.SelectCommand.Parameters.AddWithValue("@Parent", lbtnmenu.Text);
-                da1.Fill(ds1);
-                DataTable dt = ds1.Tables[0];
-
-                
-
-                if (Session["PROJECTID"] == null)
-                {
-                    DataRow[] rows;
-                    DataRow[] rows1;
-                    DataRow[] rows2;
-                    rows = dt.Select("FunctionName = 'Activate Site'");  //'UserName' is ColumnName
-                    foreach (DataRow row in rows)
-                        dt.Rows.Remove(row);
-                    rows1 = dt.Select("FunctionName = 'Add User DashBoard'");  //'UserName' is ColumnName
-                    foreach (DataRow row in rows1)
-                        dt.Rows.Remove(row);
-                    rows2 = dt.Select("FunctionName = 'Remove User Assign DashBoard'");  //'UserName' is ColumnName
-                    foreach (DataRow row in rows2)
-                        dt.Rows.Remove(row);
-                }
-                lstsubmenu1.DataSource = dt;
-                lstsubmenu1.DataBind();
-
-
-
-                if (dt.Rows.Count > 0)
-                {
-                    
-                    lisub.Attributes.Add("class", "nav-treeview");
-                    i1.Attributes.Add("class", "fa fa-angle-left pull-right");
-                }
-                Sqlcon.Close();
-            }
-
         }
+
+       
 
         protected void lstsubmenu1_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
@@ -431,9 +437,8 @@ namespace SpecimenTracking
 
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    
-                    li2.Attributes.Add("class", "nav-treeview");
-                    i2.Attributes.Add("class", "fa fa-angle-left pull-right");
+                    li2.Attributes.Add("class", "nav-item has-treeview");
+                    i2.Attributes.Add("class", "fas fa-angle-left right pull-right");
                 }
             }
             else
@@ -463,9 +468,8 @@ namespace SpecimenTracking
                 lstsubmenu2.DataBind();
                 if (dt.Rows.Count > 0)
                 {
-                    
-                    li2.Attributes.Add("class", "nav-treeview");
-                    i2.Attributes.Add("class", "fa fa-angle-left pull-right");
+                    li2.Attributes.Add("class", "nav-item nav-treeview has-treeview");
+                    i2.Attributes.Add("class", "fas fa-angle-left right pull-right");
                 }
                 Sqlcon.Close();
             }
@@ -506,9 +510,8 @@ namespace SpecimenTracking
 
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    
-                    li3.Attributes.Add("class", "nav-treeview");
-                    i3.Attributes.Add("class", "fa fa-angle-left pull-right");
+                    li3.Attributes.Add("class", "nav-item  has-treeview");
+                    i3.Attributes.Add("class", "fas fa-angle-left right pull-right");
                 }
             }
             else
@@ -537,15 +540,12 @@ namespace SpecimenTracking
                 lstsubmenu3.DataBind();
                 if (dt.Rows.Count > 0)
                 {
-                    
-                    li3.Attributes.Add("class", "nav-treeview");
-                    i3.Attributes.Add("class", "fa fa-angle-left pull-right");
+                    li3.Attributes.Add("class", "nav-item nav-treeview has-treeview");
+                    i3.Attributes.Add("class", "fas fa-angle-left right pull-right");
                 }
                 Sqlcon.Close();
             }
         }
-
-       
 
         protected void lstsubmenu3_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
@@ -554,9 +554,11 @@ namespace SpecimenTracking
 
             NavPath_L4 = lbtnmenu3.Text.Trim();
             hdnPath3.Value = NavPath_L1 + " > " + NavPath_L2 + " > " + NavPath_L3 + " > " + NavPath_L4;
-           
+
 
         }
+
+        
 
     }
 }

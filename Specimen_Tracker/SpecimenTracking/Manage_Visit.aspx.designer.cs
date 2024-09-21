@@ -42,6 +42,15 @@ namespace SpecimenTracking
         protected global::System.Web.UI.WebControls.HiddenField hdnVisitNum;
 
         /// <summary>
+        /// lblNumError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumError;
+
+        /// <summary>
         /// Label5 control.
         /// </summary>
         /// <remarks>
@@ -60,6 +69,15 @@ namespace SpecimenTracking
         protected global::System.Web.UI.WebControls.TextBox txtVistName;
 
         /// <summary>
+        /// btnvisitname_Changed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnvisitname_Changed;
+
+        /// <summary>
         /// hdnVisitName control.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace SpecimenTracking
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnVisitName;
+
+        /// <summary>
+        /// lblErrorMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorMsg;
 
         /// <summary>
         /// lbtnSubmit control.

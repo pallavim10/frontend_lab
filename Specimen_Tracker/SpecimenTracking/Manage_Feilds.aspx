@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage_Feilds.aspx.cs" Inherits="SpecimenTracking.Manage_Feilds" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <link href="Style/Select2.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/Select2.js" type="text/javascript"></script>
@@ -37,47 +37,34 @@
             $(element).closest('td').find("input[id*='btnDATA_Changed']").click();
 
         }
+        function DATA_Changed1(textBox) {
+
+            document.getElementById('<%= btnDATA_Changed1.ClientID %>').click();
+        }
 
         function showAuditTrail(element) {
-
             var ID = $(element).closest('tr').find('td').eq(0).text().trim();
             var TABLENAME = 'FIELD_MASTER';
 
             $.ajax({
                 type: "POST",
                 url: "AjaxFunction.aspx/SETUP_showAuditTrail",
-                data: '{TABLENAME: "' + TABLENAME + '",ID: "' + ID + '"}',
+                data: JSON.stringify({ TABLENAME: TABLENAME, ID: ID }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (data) {
-                    if (data.d == 'Object reference not set to an instance of an object.') {
+                success: function (response) {
+                    if (response.d === 'Object reference not set to an instance of an object.') {
                         alert("Session Expired");
                         var url = "SessionExpired.aspx";
                         $(location).attr('href', url);
-                    }
-                    else {
-                        $('#DivAuditTrail').html(data.d)
+                    } else {
+                        $('#DivAuditTrail').html(response.d);
+                        $('#modal-lg').modal('show'); // Show the modal after populating it
                     }
                 },
-                failure: function (response) {
-                    if (response.d == 'Object reference not set to an instance of an object.') {
-                        alert("Session Expired");
-                        var url = "SessionExpired.aspx";
-                        $(location).attr('href', url);
-                    }
-                    else {
-                        alert("Contact administrator not suceesfully updated")
-                    }
-                }
-            });
-
-            $("#popup_AuditTrail").dialog({
-                title: "Audit Trail",
-                width: 900,
-                height: 450,
-                modal: true,
-                buttons: {
-                    "Close": function () { $(this).dialog("close"); }
+                error: function (xhr, status, error) {
+                    console.error('Error fetching audit trail:', status, error);
+                    alert("An error occurred. Please contact the administrator.");
                 }
             });
 
@@ -92,6 +79,12 @@
             return false;
         }
     </script>
+    <style>
+        .uppercase
+        {
+            text-transform: uppercase;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -137,9 +130,17 @@
                                                             <asp:TemplateField HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none"
                                                                 HeaderText="ID">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                                                                    <asp:Label ID="lblID" runat="server" Text='<%#Eval("ID")%>'></asp:Label>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none">
+                                                                <ItemTemplate>
                                                                     <asp:HiddenField ID="HdnISACTIVE" runat="server" Value='<%# Eval("ISACTIVE") %>' />
+                                                                    <asp:HiddenField ID="HdnRepeat" runat="server" Value='<%# Eval("REPEAT") %>' />
+                                                                    <asp:HiddenField ID="HdnLebvel1" runat="server" Value='<%# Eval("FIRSTENTRY") %>' />
+                                                                    <asp:HiddenField ID="HdnLebvel2" runat="server" Value='<%# Eval("SECONDENTRY") %>' />
                                                                     <asp:HiddenField ID="HdnControlType" runat="server" Value='<%# Eval("CONTROLTYPE") %>' />
+                                                                    <asp:HiddenField ID="HdnVariableName" runat="server" Value='<%# Eval("VARIABLENAME") %>' />
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Field Name" HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
@@ -156,9 +157,26 @@
                                                                         CommandName="ENABLE" ToolTip="Enable"><i class="fa fa-toggle-off" style='color: black;font-size: 25px' ></i></asp:LinkButton>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Repeat" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton ID="lbtRepeatYes" runat="server" CommandArgument='<%# Bind("ID") %>'
+                                                                        CommandName="REPEATNO" ToolTip="NO"><i class="fa fa-toggle-on" style='color: black;font-size: 25px' ></i></asp:LinkButton>
+                                                                    <asp:LinkButton ID="lbtRepeatNo" runat="server" CommandArgument='<%# Bind("ID") %>'
+                                                                        CommandName="REPEATYES" ToolTip="Yes"><i class="fa fa-toggle-off" style='color: black;font-size: 25px' ></i></asp:LinkButton>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Applicable for" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                                <ItemTemplate>
+                                                                    <asp:DropDownList ID="drplevel" runat="server" CssClass="form-control required" Width="100%" AutoPostBack="true" OnSelectedIndexChanged="drplevel_SelectedIndexChanged">
+                                                                        <asp:ListItem Selected="True" Text="--Select--" Value="0"></asp:ListItem>
+                                                                        <asp:ListItem Text="Level 1" Value="Level 1"></asp:ListItem>
+                                                                        <asp:ListItem Text="Level 2" Value="Level 2"></asp:ListItem>
+                                                                    </asp:DropDownList>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Variable Name" HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblVariable" runat="server" Text='<%# Bind("VARIABLENAME") %>' CssClass="form-control w-75"></asp:Label>
+                                                                    <asp:Label ID="lblVariable" runat="server" Text='<%# Bind("VARIABLENAME") %>' CssClass="form-control w-100"></asp:Label>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Audit Trail" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
@@ -193,7 +211,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <div class="card card-info">
                                             <div class="card-header">
                                                 <h3 class="card-title">Create Fields</h3>
@@ -216,7 +234,8 @@
                                                                 <div class="form-group">
                                                                     <label>Enter Variable Name : &nbsp;</label>
                                                                     <asp:Label ID="Label2" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                                    <asp:TextBox ID="txtVariableName" runat="server" CssClass="form-control required w-75"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtVariableName" runat="server" onChange="DATA_Changed1(this);" CssClass="form-control required w-75 uppercase"></asp:TextBox>
+                                                                    <asp:Button runat="server" ID="btnDATA_Changed1" CssClass="d-none" OnClick="DATA_Changed1"></asp:Button>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
@@ -232,6 +251,7 @@
                                                                     <asp:Label ID="Label5" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
                                                                     <asp:DropDownList ID="drpControlType" runat="server" AutoPostBack="true" class="form-control drpControl w-75 required select" SelectionMode="Single">
                                                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
+                                                                        <asp:ListItem Value="Readonly" Text="Readonly"></asp:ListItem>
                                                                         <asp:ListItem Value="Textbox" Text="Textbox"></asp:ListItem>
                                                                         <asp:ListItem Value="Multiline Textbox" Text="Multiline Textbox"></asp:ListItem>
                                                                         <asp:ListItem Value="Date" Text="Date"></asp:ListItem>
@@ -242,38 +262,79 @@
                                                                     </asp:DropDownList>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
                                                             <div class="col-md-12">
-                                                                <center>
-                                                                    <asp:LinkButton runat="server" ID="lbtnSubmit" Text="Submit" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" OnClick="lbtnSubmit_Click"></asp:LinkButton>
-                                                                    &nbsp;&nbsp;&nbsp;
-                                                                    <asp:LinkButton runat="server" ID="lbnUpdate" Text="Update" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" Visible="false" OnClick="lbnUpdate_Click"></asp:LinkButton>
-                                                                    &nbsp;&nbsp;&nbsp;
-                                                                    <asp:LinkButton runat="server" ID="lbtnCancel" Text="Cancel" ForeColor="White" CssClass="btn btn-primary btn-sm" OnClick="lbtnCancel_Click"></asp:LinkButton>
-                                                                </center>
+                                                                <div class="form-group">
+                                                                    <label>Enter Max Length : &nbsp;</label>
+                                                                    <asp:Label ID="Label6" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                                                    <asp:TextBox ID="txtmaxlenght" runat="server" CssClass="form-control numeric w-75"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="row form-group">
+
+                                                                    <label>Applicable for : &nbsp;</label>
+                                                                    <asp:Label ID="Label3" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                                                    <div class="col-md-12 d-inline-flex">
+                                                                        <div class="col-md-4">
+                                                                            <asp:RadioButton ID="rbtnFirst" runat="server" GroupName="Type" />&nbsp;&nbsp;
+                                                                            <label>Level 1</label>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <asp:RadioButton ID="rbtnSecond" runat="server" GroupName="Type" />&nbsp;&nbsp;
+                                                                        <label>Level 2</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Enable/Disable Properties : &nbsp;</label>
+                                                                    <br />
+                                                                    <div class="col-md-12 d-inline-flex">
+                                                                        <div class="col-md-4">
+                                                                            <asp:CheckBox ID="chkRepeat" runat="server" />&nbsp;&nbsp;
+                                                                            <label>Repeat</label>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <asp:CheckBox ID="chkRequired" runat="server" />&nbsp;&nbsp;
+                                                                            <label>Required</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <br />
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <center>
+                                                                <asp:LinkButton runat="server" ID="lbtnSubmit" Text="Submit" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" OnClick="lbtnSubmit_Click"></asp:LinkButton>
+                                                                &nbsp;&nbsp;&nbsp;
+                                                                    <asp:LinkButton runat="server" ID="lbnUpdate" Text="Update" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" Visible="false" OnClick="lbnUpdate_Click"></asp:LinkButton>
+                                                                &nbsp;&nbsp;&nbsp;
+                                                                    <asp:LinkButton runat="server" ID="lbtnCancel" Text="Cancel" ForeColor="White" CssClass="btn btn-primary btn-sm" OnClick="lbtnCancel_Click"></asp:LinkButton>
+                                                            </center>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <br />
                                             </div>
+                                            <br />
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <div class="card card-info">
                                             <div class="card-header">
                                                 <h3 class="card-title">Records</h3>
                                                 <div class="pull-right">
                                                     <asp:LinkButton ID="lbtnExport" runat="server" Font-Size="14px" Style="margin-top: 3px;" CssClass="btn btn-default" OnClick="lbtnExport_Click" ForeColor="Black">Export Fields &nbsp;<span class="fas fa-download btn-sm"></span></asp:LinkButton>
                                                     &nbsp;&nbsp;
-                                            <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                    <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                                 </div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="rows">
                                                     <div class="col-md-12">
-                                                        <div style="width: 100%; overflow: auto;">
+                                                        <div style="width: 100%; height: 607px; overflow: auto;">
                                                             <div>
                                                                 <asp:GridView ID="GrdMngFields" runat="server" AllowSorting="True" AutoGenerateColumns="false"
                                                                     CssClass="table table-bordered table-striped" OnRowCommand="GrdMngFields_RowCommand" OnRowDataBound="GrdMngFields_RowDataBound">
@@ -310,6 +371,26 @@
                                                                                 <asp:Label ID="lblControltype" runat="server" Text='<%# Bind("CONTROLTYPE") %>'></asp:Label>
                                                                             </ItemTemplate>
                                                                         </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="Data Entry L1">
+                                                                            <ItemTemplate>
+                                                                                <asp:Label ID="lblFirstEntry" runat="server" CommandArgument='<%# Eval("FIRSTENTRY") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconFIRSTENTRY" runat="server" class="fa fa-check"></i></asp:Label>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="Data Entry L2">
+                                                                            <ItemTemplate>
+                                                                                <asp:Label ID="lblSecondEntry" runat="server" CommandArgument='<%# Eval("SECONDENTRY") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconSECONDENTRY" runat="server" class="fa fa-check"></i></asp:Label>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="Repeat">
+                                                                            <ItemTemplate>
+                                                                                <asp:Label ID="lblRepeat" runat="server" CommandArgument='<%# Eval("REPEAT") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconREPEAT" runat="server" class="fa fa-check"></i></asp:Label>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="Required">
+                                                                            <ItemTemplate>
+                                                                                <asp:Label ID="lblRequired" runat="server" CommandArgument='<%# Eval("REQUIRED") %>' Style="color: #333333; font-size: initial; font-weight: bold;"><i id="iconREQUIRED" runat="server" class="fa fa-check"></i></asp:Label>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
                                                                         <asp:TemplateField HeaderText="Audit Trail" ItemStyle-HorizontalAlign="Center">
                                                                             <ItemTemplate>
                                                                                 <asp:LinkButton ID="lbtnAudttrail" runat="server" class="btn-info btn-sm" OnClientClick="return showAuditTrail(this);" ToolTip="Audit Trail"><i class="fa fa-history"></i></asp:LinkButton>
@@ -318,7 +399,7 @@
                                                                         <asp:TemplateField HeaderText="Add Option" ItemStyle-HorizontalAlign="Center">
                                                                             <ItemTemplate>
                                                                                 <asp:LinkButton ID="lbtAddOption" runat="server" class="btn-info btn-sm" CommandArgument='<%# Bind("ID") %>' OnClientClick="return AddOptions(this)"
-                                                                                    ToolTip="Add Option"><i class="fa fa-cog" "></i></asp:LinkButton>
+                                                                                    ToolTip="Add Option"><i class="fa fa-cog"></i></asp:LinkButton>
                                                                             </ItemTemplate>
                                                                         </asp:TemplateField>
                                                                         <asp:TemplateField HeaderText="Delete" ItemStyle-HorizontalAlign="Center">
@@ -343,12 +424,13 @@
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="lbtnSubmit" />
                         <asp:AsyncPostBackTrigger ControlID="lbnUpdate" />
+                        <asp:PostBackTrigger ControlID="lbtnExport" />
                     </Triggers>
                 </asp:UpdatePanel>
             </div>
         </section>
     </div>
-    
+
     <script type="text/javascript">
 
         function confirm(event) {
@@ -374,6 +456,19 @@
             });
             return false;
         }
+
+
+        $('.numeric').keypress(function (event) {
+
+            if (event.keyCode == 8 || event.keyCode == 9 || event.charCode == 48 || event.charCode == 49 || event.charCode == 50 || event.charCode == 51
+                || event.charCode == 52 || event.charCode == 52 || event.charCode == 53 || event.charCode == 54 || event.charCode == 55 || event.charCode == 56 || event.charCode == 57) {
+                // let it happen, don't do anything
+                return true;
+            }
+            else {
+                event.preventDefault();
+            }
+        });
 
     </script>
 

@@ -61,11 +61,11 @@
 </head>
 <body class="login-page" style="min-height: 405px;">
     <div class="login-box card card-outline card-primary" style="width:33%;">
-        <div class="login-logo">
-            <span class="form-avatar">
-                <img src="dist/img/TrackerLogo.jpg" class="logo-3d-border" alt="AVATAR"/>
-            </span>
-            <span><b>Specimen Tracker</b></span>
+        <div class="login-logo mt-3">
+            <%--<span class="form-avatar">
+                <%--<img src="dist/img/tracking-icon.jpg" class="logo-3d-border" alt="AVATAR"/>--%>
+            <%--</span>--%>
+            <h3><b>Specimen Tracker</b></h3>
            
         </div>
         <!-- /.login-logo -->

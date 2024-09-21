@@ -33,13 +33,13 @@ namespace SpecimenTracking
         protected global::System.Web.UI.WebControls.FileUpload Manifestfilename;
 
         /// <summary>
-        /// btnUpload control.
+        /// lbtnUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnUpload;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnUpload;
 
         /// <summary>
         /// lbtnCancel control.
@@ -49,5 +49,14 @@ namespace SpecimenTracking
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnCancel;
+
+        /// <summary>
+        /// GrdShipment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GrdShipment;
     }
 }

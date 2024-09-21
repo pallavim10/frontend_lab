@@ -133,6 +133,9 @@ C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\ExcelDataReader.DataSet.
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\ExcelDataReader.dll
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\ExcelNumberFormat.dll
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\Irony.dll
+C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\Microsoft.Exchange.WebServices.Auth.dll
+C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\Microsoft.Exchange.WebServices.dll
+C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\Newtonsoft.Json.dll
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\SixLabors.Fonts.dll
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\System.Buffers.dll
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\System.IO.Packaging.dll
@@ -146,6 +149,10 @@ C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\ExcelDataReader.xml
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\ExcelDataReader.DataSet.pdb
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\ExcelDataReader.DataSet.xml
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\ExcelNumberFormat.xml
+C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\Microsoft.Exchange.WebServices.pdb
+C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\Microsoft.Exchange.WebServices.xml
+C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\Microsoft.Exchange.WebServices.Auth.pdb
+C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\Microsoft.Exchange.WebServices.Auth.xml
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\SixLabors.Fonts.xml
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\System.Buffers.xml
 C:\Pallavi\DevOps\Specimen Tracker\SpecimenTracking\bin\System.IO.Packaging.xml
