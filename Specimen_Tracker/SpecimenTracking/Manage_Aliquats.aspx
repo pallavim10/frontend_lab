@@ -63,11 +63,14 @@
             __doPostBack('<%= txtaliquotnum.ClientID %>', 'TextChanged');
         }
 
-        function CheckAliquotSequence(element)
+        function Check_AliquotSEQALLOC(element)
         {
             event.preventDefault();
             $(element).closest('td').find("input[id*='allocatefrom_Changed']").click();
             __doPostBack('<%= allocatefrom.ClientID %>', 'TextChanged');
+            $(element).closest('td').find("input[id*='allocateto_Changed']").click();
+            __doPostBack('<%= allocateto.ClientID %>', 'TextChanged');
+            
         }
 
         function confirm(event) {
@@ -165,28 +168,23 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
-
-                                                        <div class="form-group">
-                                                            <label>Sequence No. Allocation : &nbsp;</label>
-                                                            <div class="row">
-                                                                <div class="d-inline-flex">
+                                                        <asp:Label CssClass="font-weight-bold" style="font-size:14px;" runat="server">Sequence No. Allocation : &nbsp;</asp:Label>
+                                                        <div class="form-group d-flex">
                                                                     <div class="col-md-6">
                                                                         <asp:Label ID="Label8" runat="server" Font-Size="Small" CssClass="font-weight-bold" ForeColor="Black">From :&nbsp;</asp:Label>
                                                                         <asp:Label ID="Label10" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*" Visible="false"></asp:Label>
-                                                                        <asp:TextBox ID="allocatefrom" runat="server" CssClass="form-control numeric w-100" ></asp:TextBox>
+                                                                        <asp:TextBox ID="allocatefrom" runat="server" CssClass="form-control numeric w-100"  AutoCompleteType="Disabled" AutoPostBack="true" OnTextChanged="Check_AliquotSEQALLOC" onChange="Check_AliquotSEQALLOC(this);"></asp:TextBox>
                                                                         <asp:HiddenField runat="server" ID="allocatefrm" />
                                                                     </div>
-                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                
+                                                                    &nbsp;&nbsp;                                         
                                                                 <div class="col-md-6">
                                                                     <asp:Label ID="Label9" runat="server" Font-Size="Small" CssClass="font-weight-bold" ForeColor="Black">To : &nbsp;</asp:Label>
                                                                     <asp:Label ID="Label11" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*" Visible ="false"></asp:Label>
-                                                                    <asp:TextBox ID="allocateto" runat="server" CssClass="form-control numeric w-100"></asp:TextBox>
+                                                                    <asp:TextBox ID="allocateto" runat="server" CssClass="form-control numeric w-100"  AutoCompleteType="Disabled" AutoPostBack="true" OnTextChanged="Check_AliquotSEQALLOC" onChange="Check_AliquotSEQALLOC(this);" ></asp:TextBox>
                                                                     <asp:HiddenField runat="server" ID="allocatetwo" />
+                                                                    <asp:Button runat="server" ID="btnDATA_Changed" CssClass="d-none"  ></asp:Button>
                                                                 </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -220,11 +218,12 @@
                                             <div class="col-md-12">
                                                 <div style="width: 100%; height: 446px; overflow: auto;">
                                                     <div>
-                                                        <asp:GridView ID="GrdAliquots" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive grid" DataKeyNames="ID" EmptyDataText="No Data Found!" Width="100%" AllowPaging="true" PageSize="5" OnPageIndexChanging="GrdAliquots_PageIndexChanging">
+                                                        <asp:GridView ID="GrdAliquots" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive grid" DataKeyNames="ID" EmptyDataText="No Data Found!" Width="100%" AllowPaging="true" PageSize="5" OnPageIndexChanging="GrdAliquots_PageIndexChanging" OnRowDataBound="GrdAliquot_RowDataBound">
                                                             <Columns>
                                                                 <asp:TemplateField HeaderText="AliquotID" HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none">
                                                                     <ItemTemplate>
                                                                         <asp:Label ID="lblAliquotRecID" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
+                                                                        <asp:HiddenField ID="hfALIQUOTID" runat="server" Value='<%# Eval("ID") %>' />
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Edit" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
@@ -232,14 +231,15 @@
                                                                         <asp:LinkButton ID="lnkedit" runat="server" class="btn-info btn-sm" OnClick="lnkedit_Click"><i class="fas fa-edit"></i></asp:LinkButton>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Aliquot ID" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="lblAliquotID" runat="server" Text='<%# Eval("ALIQUOTID") %>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
+                                                                
                                                                 <asp:TemplateField HeaderText="Sequence No" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                                     <ItemTemplate>
                                                                         <asp:Label ID="lblSeqno" runat="server" Text='<%# Eval("SEQNO") %>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="Aliquot ID" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="lblAliquotID" runat="server" Text='<%# Eval("ALIQUOTID") %>'></asp:Label>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Aliquot Type" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
@@ -290,7 +290,6 @@
         </section>
         <section class="content">
             <div class="container-fluid">
-
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <div class="row">

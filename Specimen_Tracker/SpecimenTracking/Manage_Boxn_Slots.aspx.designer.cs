@@ -24,13 +24,13 @@ namespace SpecimenTracking
         protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// dropdown_siteID control.
+        /// dropdown_visits control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dropdown_siteID;
+        protected global::System.Web.UI.WebControls.DropDownList dropdown_visits;
 
         /// <summary>
         /// hdnSiteno control.

@@ -11,7 +11,7 @@ namespace SpecimenTracking
 {
 
 
-    public partial class DATA_ENTRY
+    public partial class DE_EDIT_L1
     {
 
         /// <summary>
@@ -24,31 +24,31 @@ namespace SpecimenTracking
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// drpsite control.
+        /// Label5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpsite;
+        protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// drpSpecimenType control.
+        /// drpSite control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpSpecimenType;
+        protected global::System.Web.UI.WebControls.DropDownList drpSite;
 
         /// <summary>
-        /// drpSpecimen control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpSpecimen;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
         /// drpSubject control.
@@ -60,57 +60,48 @@ namespace SpecimenTracking
         protected global::System.Web.UI.WebControls.DropDownList drpSubject;
 
         /// <summary>
-        /// drpVisit control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpVisit;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// repeatFields control.
+        /// txtSpecimenID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repeatFields;
+        protected global::System.Web.UI.WebControls.TextBox txtSpecimenID;
 
         /// <summary>
-        /// divAliquotPrep control.
+        /// lbtnGETDATA control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAliquotPrep;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnGETDATA;
 
         /// <summary>
-        /// gridAliquots control.
+        /// divRecord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridAliquots;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRecord;
 
         /// <summary>
-        /// btnSubmit control.
+        /// Grid_Data control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
-
-        /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.GridView Grid_Data;
     }
 }

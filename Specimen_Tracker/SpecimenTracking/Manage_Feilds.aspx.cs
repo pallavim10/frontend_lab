@@ -91,7 +91,16 @@ namespace SpecimenTracking
 
                 GET_CLEAR();
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field created successfully.', 'success');", true);
+                //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field created successfully.', 'success');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Field created successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
                 GET_FIELDS();
 
             }
@@ -115,12 +124,21 @@ namespace SpecimenTracking
                                        SECONDENTRY: rbtnSecond.Checked,
                                        REPEAT: chkRepeat.Checked,
                                        REQUIRED: chkRequired.Checked,
-                                       MAXLENGHT: txtmaxlenght.Text
+                                       MAXLENGHT: txtmaxlength.Text
                                        );
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Please Select Entry Type.', 'warning');", true);
+                //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Please Select Entry Type.', 'warning');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", @"
+                    swal({
+                        title: 'Warning!',
+                        text: 'Please Select Entry Type.',
+                        icon: 'warning',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
             }
 
         }
@@ -129,7 +147,7 @@ namespace SpecimenTracking
             txtFieldsName.Text = "";
             txtVariableName.Text = "";
             txtSeqNo.Text = "";
-            txtmaxlenght.Text = "";
+            txtmaxlength.Text = "";
             drpControlType.ClearSelection();
             lbnUpdate.Visible = false;
             lbtnSubmit.Visible = true;
@@ -147,7 +165,16 @@ namespace SpecimenTracking
             GET_CLEAR();
             lbtnSubmit.Visible = true;
             lbnUpdate.Visible = false;
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field updated successfully.', 'success');", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field updated successfully.', 'success');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Field updated successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
             GET_FIELDS();
 
         }
@@ -166,7 +193,7 @@ namespace SpecimenTracking
                                        SECONDENTRY: rbtnSecond.Checked,
                                        REPEAT: chkRepeat.Checked,
                                        REQUIRED: chkRequired.Checked,
-                                       MAXLENGHT: txtmaxlenght.Text,
+                                       MAXLENGHT: txtmaxlength.Text,
                                       ID: ViewState["ID"].ToString()
                                       );
             }
@@ -222,7 +249,7 @@ namespace SpecimenTracking
 
 
                     LinkButton lbtEnable = (e.Row.FindControl("lbtEnable") as LinkButton);
-                    LinkButton lbtDiable = (e.Row.FindControl("lbtDiable") as LinkButton);
+                    LinkButton lbtDisable = (e.Row.FindControl("lbtDisable") as LinkButton);
                     HiddenField Active = (HiddenField)e.Row.FindControl("HdnISACTIVE");
                     HiddenField HdnControlType = (HiddenField)e.Row.FindControl("HdnControlType");
                     HiddenField VariableName = (HiddenField)e.Row.FindControl("HdnVariableName");
@@ -250,17 +277,21 @@ namespace SpecimenTracking
                         drplevel.SelectedValue = "0";
                     }
 
+                    if(VariableName.Value == "SCANALQ")
+                    {
+                        drplevel.Enabled = false;
+                    }
                     string ControlType = HdnControlType.Value.Trim();
                     if (Active.Value == "True")
                     {
                         lbtEnable.Visible = true;
-                        lbtDiable.Visible = false;
+                        lbtDisable.Visible = false;
 
                     }
                     else
                     {
                         lbtEnable.Visible = false;
-                        lbtDiable.Visible = true;
+                        lbtDisable.Visible = true;
                         txtFieldName.Enabled = false;
 
                     }
@@ -348,7 +379,7 @@ namespace SpecimenTracking
                     txtVariableName.Text = ds.Tables[0].Rows[0]["VARIABLENAME"].ToString();
                     txtSeqNo.Text = ds.Tables[0].Rows[0]["SEQNO"].ToString();
                     drpControlType.SelectedValue = ds.Tables[0].Rows[0]["CONTROLTYPE"].ToString();
-                    txtmaxlenght.Text = ds.Tables[0].Rows[0]["MAXLEN"].ToString();
+                    txtmaxlength.Text = ds.Tables[0].Rows[0]["MAXLEN"].ToString();
                     if (ds.Tables[0].Rows[0]["FIRSTENTRY"].ToString() == "True")
                     {
                         rbtnFirst.Checked = true;
@@ -398,8 +429,16 @@ namespace SpecimenTracking
                                       ID: ID
                                       );
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field Deleted Successfully.', 'success');", true);
-
+            //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field Deleted Successfully.', 'success');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                                swal({
+                                    title: 'Success!',
+                                    text: 'Field Deleted Successfully.',
+                                    icon: 'success',
+                                    button: 'OK'
+                                }).then(function(){
+                                     window.location.href = window.location.href; });
+                            ", true);
 
         }
 
@@ -498,8 +537,16 @@ namespace SpecimenTracking
                                       ID: ID
                                       );
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Fieldname changed successfully.', 'success');", true);
-
+                //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Fieldname changed successfully.', 'success');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Fieldname changed successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
                 GET_OPTION();
             }
             catch (Exception ex)
@@ -523,7 +570,17 @@ namespace SpecimenTracking
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     txtVariableName.Text = "";
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'VariableName already exists.', 'warning');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'VariableName already exists.', 'warning');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", @"
+                    swal({
+                        title: 'Warning!',
+                        text: 'VariableName already exists.',
+                        icon: 'warning',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+
                 }
             }
             catch (Exception ex)
@@ -546,7 +603,16 @@ namespace SpecimenTracking
                                           ISACTIVE: false,
                                           ID: ID
                                           );
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field disable successfully.', 'success');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field disable successfully.', 'success');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Field disable successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
                     GET_OPTION();
                 }
                 else if (CommandName == "ENABLE")
@@ -556,7 +622,16 @@ namespace SpecimenTracking
                                            ISACTIVE: true,
                                            ID: ID
                                            );
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field enable successfully.', 'success');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field enable successfully.', 'success');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Field enable successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
                     GET_OPTION();
                 }
                 else if (CommandName == "REPEATNO")
@@ -566,7 +641,16 @@ namespace SpecimenTracking
                                           REPEAT: false,
                                           ID: ID
                                           );
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Repeat disable successfully.', 'success');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Repeat disable successfully.', 'success');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Repeat disable successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
                     GET_OPTION();
                 }
                 else if (CommandName == "REPEATYES")
@@ -576,7 +660,17 @@ namespace SpecimenTracking
                                            REPEAT: true,
                                            ID: ID
                                            );
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Repeat enable successfully.', 'success');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Repeat enable successfully.', 'success');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Repeat enable successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+
                     GET_OPTION();
                 }
 
@@ -606,7 +700,16 @@ namespace SpecimenTracking
                                               SECONDENTRY: false,
                                               ID: ID
                                               );
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Applicable for Level 1 successfully.', 'success');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Applicable for Level 1 successfully.', 'success');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Applicable for Level 1 successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
                     GET_OPTION();
                 }
                 else if (drplevel == "Level 2")
@@ -617,10 +720,21 @@ namespace SpecimenTracking
                                               FIRSTENTRY: false,
                                               ID: ID
                                               );
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Applicable for Level 2 successfully.', 'success');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Applicable for Level 2 successfully.', 'success');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Applicable for Level 2 successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
                     GET_OPTION();
                 }
             }
         }
+
+        
     }
 }

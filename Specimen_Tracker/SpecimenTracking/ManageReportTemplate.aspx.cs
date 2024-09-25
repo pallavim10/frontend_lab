@@ -89,12 +89,30 @@ namespace SpecimenTracking
                         SIZE: fileSize.ToString()
                         );
 
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'file Uploaded Successfully.', 'success');", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'file Uploaded Successfully.', 'success');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'file Uploaded Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Please Select Word File Only.', 'warning');", true);
-                    
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Please Select Word File Only.', 'warning');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Warning!',
+                        text: 'Please Select Word File Only.',
+                        icon: 'warning',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+
                 }
             }
             catch (Exception ex)

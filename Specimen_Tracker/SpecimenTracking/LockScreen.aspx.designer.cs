@@ -9,8 +9,6 @@
 
 namespace SpecimenTracking
 {
-
-
     public partial class LockScreen
     {
 

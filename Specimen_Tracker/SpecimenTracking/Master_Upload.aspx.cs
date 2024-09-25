@@ -147,9 +147,10 @@ namespace SpecimenTracking
         {
             try
             {
-                ddlcolumnSID.Items.Clear();
-                ddlcolumnSite.Items.Clear();
-
+                //ddlcolumnSID.Items.Clear();
+                //ddlcolumnSite.Items.Clear();
+                ddlcolumnSID.ClearSelection();
+                ddlcolumnSite.ClearSelection();
                 ViewState["Specimen"] = null;
             }
             catch (Exception ex)
@@ -165,7 +166,8 @@ namespace SpecimenTracking
             {
                 ddlSubjectID.Items.Clear();
                 ddlSiteID.Items.Clear();
-
+                ddlSubjectID.ClearSelection();
+                ddlSiteID.ClearSelection();
                 ViewState["Subject"] = null;
             }
             catch (Exception ex)
@@ -275,9 +277,7 @@ namespace SpecimenTracking
                     }
                     if (Specimen == true)
                     {
-                        Export_SpecimenID();
-
-                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Specimen IDs Upload Successfully.', 'success');", true);
+                        Export_SpecimenID();                       
 
                     }
                 }
@@ -294,7 +294,7 @@ namespace SpecimenTracking
             {
                 UPLOAD_SPECIMEN();
                 CLEAR_Specimen();
-
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Specimen IDs Upload Successfully.', 'success');", true);
             }
             catch (Exception ex)
             {
@@ -331,7 +331,7 @@ namespace SpecimenTracking
                     if (Subject == true)
                     {
                         Export_SubjectID();
-                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Subject IDs Upload Successfully.', 'success');", true);
+                       
 
                         
 
@@ -350,7 +350,7 @@ namespace SpecimenTracking
             {
                 UPLOAD_SUBJECT();
                 CLEAR_Subject();
-
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Subject IDs Upload Successfully.', 'success');", true);
             }
             catch (Exception ex)
             {
@@ -393,6 +393,7 @@ namespace SpecimenTracking
         {
             UPLOAD_BOXLIST();
             CLEAR_BOXLIST();
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Box List Upload Successfully.', 'success');", true);
         }
 
         private void UPLOAD_BOXLIST()
@@ -423,7 +424,7 @@ namespace SpecimenTracking
                     if (boxlist == true)
                     {
                         Export_BOXLIST();
-                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Box List Upload Successfully.', 'success');", true);
+                        
                         
 
                     }
@@ -477,7 +478,9 @@ namespace SpecimenTracking
                 drpSequenceNo.Items.Clear();
                 drpBoxno.Items.Clear();
                 drpslotno.Items.Clear();
-
+                drpSequenceNo.ClearSelection();
+                drpBoxno.ClearSelection();
+                drpslotno.ClearSelection();
                 ViewState["BoxList"] = null;
             }
             catch (Exception ex)

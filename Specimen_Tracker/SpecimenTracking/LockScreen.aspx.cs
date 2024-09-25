@@ -11,12 +11,13 @@ namespace SpecimenTracking
 {
     public partial class LockScreen : System.Web.UI.Page
     {
+
         DAL_UMT dal_UMT = new DAL_UMT();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-
+                CHECK_USER_EXIST();
                 if (Request.Cookies["Username"] != null)
                 {
                     lblUserName.Text = Server.HtmlEncode(Request.Cookies["Username"].Value);
@@ -28,6 +29,33 @@ namespace SpecimenTracking
                     txtPassword.Attributes["value"] = Request.Cookies["Password"].Value;
                 }
             }
+        }
+
+        private void CHECK_USER_EXIST()
+        {
+            try
+            {
+                DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "CHECK_USER_EXIST");
+                if (ds.Tables[0].Rows[0]["Count"].ToString() == "0")
+                {
+                    string script = @"
+                         swal({
+                         title: 'Success!',
+                         text: 'Click OK to proceed with Super User registration.',
+                         icon: 'success',
+                         button: 'OK'
+                        }).then((value) => {
+                         window.location.href = 'RegisterSuperUser.aspx'; 
+                    });";
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.Message.ToString();
+            }
+
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

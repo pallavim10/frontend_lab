@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage_Boxn_Slots.aspx.cs" Inherits="SpecimenTracking.Manage_Boxn_Slots" %>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.min.css" />
+       <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.min.css" />
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
     <script src="Scripts/btnSave_Required.js" type="text/javascript"></script>
     <style type="text/css">
@@ -98,7 +97,7 @@
             $(element).closest('td').find("input[id*='txtVistName']").click();
             // Example of an immediate action on input change
             //if (event.keyCode == 9 || event.keyCode == 13 || event.keyCode == 32 ) { // Tab key
-            __doPostBack('<%= txtBoxTo.ClientID %>', 'TextChanged');
+                __doPostBack('<%= txtBoxTo.ClientID %>', 'TextChanged');
             // }
         }
     </script>
@@ -135,69 +134,80 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="row">
+                                        <div class="rows">
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="txtSiteID">Site ID: &nbsp;</label>
-                                                            <asp:Label ID="Label4" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                            <asp:DropDownList ID="dropdown_siteID" runat="server" Width="100%" class="form-control" AutoPostBack="true"></asp:DropDownList>
+                                                            <asp:Label ID="Label4" runat="server" Font-Size="Small" ForeColor="#FF3300"  Text="*"></asp:Label>
+                                                            <asp:DropDownList ID="dropdown_visits" runat="server" Width="100%" class="form-control" AutoPostBack="true" ></asp:DropDownList>
                                                             <%--OnSelectedIndexChanged="dropdown_visit_SelectedIndexChanged"--%>
                                                             <asp:HiddenField ID="hdnSiteno" runat="server" />
+                                                            <div class="form-group has-warning">
+                                                               <%-- <asp:Label ID="lblSiteError" CssClass="text-danger font-weight-bold" runat="server"></asp:Label>--%>
                                                         </div>
                                                     </div>
-
+                                                   </div>
+                                                    <div class="row">
                                                     <div class="col-md-12">
+                                                        
                                                         <div class="form-group">
                                                             <label for="txtBoxNo">No. of Boxes : &nbsp;</label>
                                                             <asp:Label ID="Label5" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                            <div class="row">
-                                                                <div class="col-md-12 d-flex">
+                                                            
+                                                                <div class="col-md-12">
+                                                                   
+                                                                <div class="form-group d-flex"> 
                                                                     <div class="col-md-6">
-                                                                        <asp:TextBox ID="txtBoxFrom" runat="server" CssClass="form-control required  w-100" AutoCompleteType="Disabled" AutoPostBack="true"></asp:TextBox>
-                                                                        <asp:Button runat="server" ID="btnBoxFrom_Changed" CssClass="d-none"></asp:Button>
-                                                                        <asp:HiddenField ID="hdnBoxFrom" runat="server" />
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <asp:TextBox ID="txtBoxTo" runat="server" CssClass="form-control required  w-100" AutoCompleteType="Disabled" AutoPostBack="true"></asp:TextBox>
-                                                                        <asp:Button runat="server" ID="btnBoxTo_Changed" CssClass="d-none"></asp:Button>
-                                                                        <asp:HiddenField ID="hdnBoxTo" runat="server" />
-                                                                    </div>
-                                                                </div>
+                                                            <asp:TextBox ID="txtBoxFrom" runat="server" CssClass="form-control required  w-100" AutoCompleteType="Disabled"  AutoPostBack="true"></asp:TextBox>
+                                                            <asp:Button runat="server" ID="btnBoxFrom_Changed" CssClass="d-none"></asp:Button>
+                                                            <asp:HiddenField ID="hdnBoxFrom" runat="server" />
+                                                                        </div>
+                                                            <div class="col-md-6">
+                                                                <asp:TextBox ID="txtBoxTo" runat="server" CssClass="form-control required  w-100" AutoCompleteType="Disabled" AutoPostBack="true" ></asp:TextBox>
+                                                            <asp:Button runat="server" ID="btnBoxTo_Changed" CssClass="d-none"></asp:Button>
+                                                            <asp:HiddenField ID="hdnBoxTo" runat="server" />
                                                             </div>
+                                                                    </div>
+                                                           </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-12">
+                                                             </div>
+                                                          <div class="row">
+                                                     <div class="col-md-12">
+                                                       
                                                         <div class="form-group">
                                                             <label for="txtBoxNo">No. of Slots : &nbsp;</label>
                                                             <asp:Label ID="Label6" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                            <div class="row">
-                                                                <div class="col-md-12 d-flex">
+                                                            <div class="col-md-12">
+
+                                                                <div class="form-group d-flex "> 
                                                                     <div class="col-md-6">
-                                                                        <asp:TextBox ID="txtSlotRow" runat="server" CssClass="form-control required  w-100" AutoCompleteType="Disabled" AutoPostBack="true"></asp:TextBox>
-                                                                        <asp:Button runat="server" ID="btnSlowRow_Changed" CssClass="d-none"></asp:Button>
-                                                                        <asp:HiddenField ID="hdnSlotRow" runat="server" />
+                                                            <asp:TextBox ID="txtSlotRow" runat="server" CssClass="form-control required  w-100" AutoCompleteType="Disabled"  AutoPostBack="true"></asp:TextBox>
+                                                            <asp:Button runat="server" ID="btnSlowRow_Changed" CssClass="d-none"></asp:Button>
+                                                            <asp:HiddenField ID="hdnSlotRow" runat="server" />
+                                                                        </div>
+                                                            <div class="col-md-6">
+                                                                <asp:TextBox ID="txtSlotColumn" runat="server" CssClass="form-control required  w-100" AutoCompleteType="Disabled" AutoPostBack="true" ></asp:TextBox>
+                                                            <asp:Button runat="server" ID="SlotColumn_Changed" CssClass="d-none"></asp:Button>
+                                                            <asp:HiddenField ID="hdnSlotColumn" runat="server" />
+                                                            </div>
                                                                     </div>
-                                                                    <div class="col-md-6">
-                                                                        <asp:TextBox ID="txtSlotColumn" runat="server" CssClass="form-control required  w-100" AutoCompleteType="Disabled" AutoPostBack="true"></asp:TextBox>
-                                                                        <asp:Button runat="server" ID="SlotColumn_Changed" CssClass="d-none"></asp:Button>
-                                                                        <asp:HiddenField ID="hdnSlotColumn" runat="server" />
-                                                                    </div>
-                                                                </div>
+                                                           </div>
                                                             </div>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <center>
-                                                            <asp:LinkButton runat="server" ID="lbtnSubmit" Text="Submit" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave"></asp:LinkButton>
+                                                            <asp:LinkButton runat="server" ID="lbtnSubmit" Text="Submit" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" ></asp:LinkButton>
                                                             <%--OnClick="lbtnSubmit_Click"--%>
                                                             &nbsp;&nbsp;
-                                                            <asp:LinkButton runat="server" ID="lbtnUpdate" Text="Update" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" Visible="false"></asp:LinkButton>&nbsp;&nbsp;
+                                                            <asp:LinkButton runat="server" ID="lbtnUpdate" Text="Update" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" Visible="false" ></asp:LinkButton>&nbsp;&nbsp;
                                                             <%-- OnClick="lbnUpdate_Click" --%>
-                                                            <asp:LinkButton runat="server" ID="lbtnCancel" Text="Cancel" ForeColor="White" CssClass="btn btn-primary btn-sm"></asp:LinkButton>
+                                                            <asp:LinkButton runat="server" ID="lbtnCancel" Text="Cancel" ForeColor="White" CssClass="btn btn-primary btn-sm" ></asp:LinkButton>
                                                             <%-- OnClick="lbtnCancel_Click" --%>
                                                         </center>
                                                     </div>
@@ -221,18 +231,17 @@
                                     <div class="card-body">
                                         <div class="rows">
                                             <div class="col-md-12">
-                                                <asp:GridView ID="GrdBoxnSlot" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive grid" DataKeyNames="ID" EmptyDataText="No Data Found!" Width="100%" AllowPaging="true" AllowSorting="true" PageSize="5" OnPageIndexChanging="GrdBoxnSlot_PageIndexChanging" >
-                                                    <%--  OnRowCommand="GrdBoxnSlot_RowCommand" --%>
-                                                    <Columns>
-                                                        <asp:TemplateField HeaderText="BOXNSLOT_ID" HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none">
+                                                <asp:GridView ID="GrdBoxnSlot" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive grid" DataKeyNames="ID" EmptyDataText="No Data Found!" Width="100%" AllowPaging="true" AllowSorting="true" PageSize ="5" >
+                                                    <%-- OnPageIndexChanging="GrdVisits_PageIndexChanging"  OnRowCommand="GrdVisits_RowCommand" --%>
+                                                   <Columns>
+                                                        <asp:TemplateField HeaderText="Visit_ID" HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lblBoxNSlotID" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
+                                                                <asp:Label ID="lblVisitID" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Edit" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
-                                                                <asp:LinkButton ID="lnkedit" CommandName="EditVisit" CommandArgument='<%# Eval("ID") %>' runat="server" class="btn-info btn-sm"><i class="fas fa-edit"></i></asp:LinkButton>
-                                                                <%--OnClick="lnkedit_Click"--%>
+                                                                <asp:LinkButton ID="lnkedit" CommandName="EditVisit" CommandArgument='<%# Eval("ID") %>' runat="server" class="btn-info btn-sm" ><i class="fas fa-edit"></i></asp:LinkButton> <%--OnClick="lnkedit_Click"--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
@@ -246,22 +255,22 @@
                                                                 <asp:Label ID="lblBoxesFrom" runat="server" Text='<%# Eval("BOX_FROM") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Box To" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                       <asp:TemplateField HeaderText="Box To" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblBoxesTo" runat="server" Text='<%# Eval("BOX_TO") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Slot From" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                       <asp:TemplateField HeaderText="Slot From" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblSlotFrom" runat="server" Text='<%# Eval("SLOTR_FROM") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Slot To" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                       <asp:TemplateField HeaderText="Slot To" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblSlotTo" runat="server" Text='<%# Eval("SLOTC_TO") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Audit Trail" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                         <asp:TemplateField HeaderText="Audit Trail" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="lnkaudit_trail" runat="server" class="btn-info btn-sm" OnClientClick="return showAuditTrail(this);" ToolTip="Audit Trail" CommandName="AuditTrailVisits" CommandArgument='<%# Eval("ID") %>'><i class="fas fa-history"></i></asp:LinkButton>
                                                             </ItemTemplate>
@@ -269,9 +278,9 @@
                                                         <asp:TemplateField HeaderText="Delete" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                             <ItemTemplate>
 
-                                                                <asp:LinkButton ID="lnkdelete" runat="server" class="btn-danger btn-sm" CommandName="DeleteVisit" CommandArgument='<%# Eval("ID") %>'><i class="fas fa-trash"></i></asp:LinkButton>
+                                                                <asp:LinkButton ID="lnkdelete" runat="server" class="btn-danger btn-sm" CommandName="DeleteVisit" CommandArgument='<%# Eval("ID") %>'  ><i class="fas fa-trash"></i></asp:LinkButton>
                                                                 <%--OnClientClick="return confirmDelete(event);" OnClick="lnkDelete_Click" --%>
-                                                            </ItemTemplate>
+                                                                </ItemTemplate>
                                                         </asp:TemplateField>
                                                     </Columns>
                                                 </asp:GridView>

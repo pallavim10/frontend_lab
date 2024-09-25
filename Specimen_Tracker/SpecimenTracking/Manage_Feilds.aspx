@@ -30,6 +30,7 @@
             });
 
             $('.select').select2();
+
         }
 
         function DATA_Changed(element) {
@@ -152,17 +153,17 @@
                                                             <asp:TemplateField HeaderText="Enable/Disable" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton ID="lbtEnable" runat="server" CommandArgument='<%# Bind("ID") %>'
-                                                                        CommandName="DISABLE" ToolTip="Diable"><i class="fa fa-toggle-on" style='color: black;font-size: 25px' ></i></asp:LinkButton>
-                                                                    <asp:LinkButton ID="lbtDiable" runat="server" CommandArgument='<%# Bind("ID") %>'
-                                                                        CommandName="ENABLE" ToolTip="Enable"><i class="fa fa-toggle-off" style='color: black;font-size: 25px' ></i></asp:LinkButton>
+                                                                        CommandName="DISABLE" ToolTip="Disable"><i class="fa fa-toggle-on" style='color: blue;font-size: 25px' ></i></asp:LinkButton>
+                                                                    <asp:LinkButton ID="lbtDisable" runat="server" CommandArgument='<%# Bind("ID") %>'
+                                                                        CommandName="ENABLE" ToolTip="Enable"><i class="fa fa-toggle-off" style='color: green;font-size: 25px' ></i></asp:LinkButton>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Repeat" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton ID="lbtRepeatYes" runat="server" CommandArgument='<%# Bind("ID") %>'
-                                                                        CommandName="REPEATNO" ToolTip="NO"><i class="fa fa-toggle-on" style='color: black;font-size: 25px' ></i></asp:LinkButton>
+                                                                        CommandName="REPEATNO" ToolTip="NO"><i class="fa fa-toggle-on" style='color: blue;font-size: 25px' ></i></asp:LinkButton>
                                                                     <asp:LinkButton ID="lbtRepeatNo" runat="server" CommandArgument='<%# Bind("ID") %>'
-                                                                        CommandName="REPEATYES" ToolTip="Yes"><i class="fa fa-toggle-off" style='color: black;font-size: 25px' ></i></asp:LinkButton>
+                                                                        CommandName="REPEATYES" ToolTip="Yes"><i class="fa fa-toggle-off" style='color: green;font-size: 25px' ></i></asp:LinkButton>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Applicable for" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
@@ -249,7 +250,7 @@
                                                                 <div class="form-group">
                                                                     <label>Select Control Type : &nbsp;</label>
                                                                     <asp:Label ID="Label5" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                                    <asp:DropDownList ID="drpControlType" runat="server" AutoPostBack="true" class="form-control drpControl w-75 required select" SelectionMode="Single">
+                                                                    <asp:DropDownList ID="drpControlType" runat="server" AutoPostBack="false" class="form-control drpControl w-75 required select" SelectionMode="Single">
                                                                         <asp:ListItem Value="0" Text="--Select--"></asp:ListItem>
                                                                         <asp:ListItem Value="Readonly" Text="Readonly"></asp:ListItem>
                                                                         <asp:ListItem Value="Textbox" Text="Textbox"></asp:ListItem>
@@ -263,10 +264,10 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <div class="form-group">
+                                                                <div class="form-group d-none" id="divMaxlength">
                                                                     <label>Enter Max Length : &nbsp;</label>
                                                                     <asp:Label ID="Label6" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                                    <asp:TextBox ID="txtmaxlenght" runat="server" CssClass="form-control numeric w-75"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtmaxlength" runat="server" CssClass="form-control numeric w-75"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12">
@@ -471,5 +472,22 @@
         });
 
     </script>
+    <script>
+        $(document).ready(function () {
+            var dropdown = $('#<%= drpControlType.ClientID %>');
+
+            dropdown.change(function () {
+                var selectedValue = $(this).val();  
+                var divMaxlength = $('#divMaxlength');
+
+                if (selectedValue === 'Textbox' || selectedValue === 'Multiline Textbox') {
+                    divMaxlength.removeClass('d-none');  
+                } else {
+                    divMaxlength.addClass('d-none');  
+                }
+            });
+        });
+
+</script>
 
 </asp:Content>

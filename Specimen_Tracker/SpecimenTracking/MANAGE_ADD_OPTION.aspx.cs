@@ -24,7 +24,16 @@ namespace SpecimenTracking
         {
             INSERT_OPTION();
             ClearOption();
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Option Added Successfully.', 'success');", true);
+            
+            ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Option Added Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
             GET_ADDED_OPTION(Request.QueryString["ID"].ToString());
             
 
@@ -90,7 +99,16 @@ namespace SpecimenTracking
             btnaddOption.Visible = true;
             btnUpdateOption.Visible = false;
             ClearOption();
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Option Updated Successfully.', 'success');", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Option Updated Successfully.', 'success');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Option Updated Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
             GET_ADDED_OPTION(Request.QueryString["ID"].ToString());
         }
 
@@ -136,7 +154,17 @@ namespace SpecimenTracking
             {
 
                 DELETE_OPTION(Option_ID);
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Option Deleted Successfully.', 'success');", true);
+                //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Option Deleted Successfully.', 'success');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Option Deleted Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+
                 GET_ADDED_OPTION(Request.QueryString["ID"].ToString());
             }
         }

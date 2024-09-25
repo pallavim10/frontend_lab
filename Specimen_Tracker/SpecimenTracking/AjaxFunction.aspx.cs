@@ -65,7 +65,30 @@ namespace SpecimenTracking
             }
             return str;
         }
+        [System.Web.Services.WebMethod]
+        public static string DE_showAuditTrail(string TABLENAME, string ID)
+        {
+            string str = "";
+            try
+            {
+                DAL_DE Dal_DE = new DAL_DE();
+                DataSet ds = Dal_DE.DE_LOG_SP(ACTION: "GET_AUDITTRAIL", TABLENAME: TABLENAME, ID: ID);
 
+                if (ds != null)
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        str = ConvertDataTableToHTML(ds);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
+            return str;
+        }
         public static string ConvertDataTableToHTML(DataSet ds)
         {
             string html = "<table class='table table-bordered table-striped table-responsive =' style='font-size:Small; border-collapse:collapse; '>";

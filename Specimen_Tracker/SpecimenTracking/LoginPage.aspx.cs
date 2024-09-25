@@ -23,9 +23,10 @@ namespace SpecimenTracking
             {
 
                 Session.Clear();
+                CHECK_USER_EXIST();
                 FillCapctha();
                 // Assuming 'username' is the username you want to store
-
+               
                 if (Request.Cookies["Username"] != null)
                 {
                     txtUserName.Text = Server.HtmlEncode(Request.Cookies["Username"].Value);
@@ -41,6 +42,32 @@ namespace SpecimenTracking
             }
         }
 
+        private void CHECK_USER_EXIST()
+        {
+            try
+            {
+                DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "CHECK_USER_EXIST");
+                if (ds.Tables[0].Rows[0]["Count"].ToString()=="0")
+                {
+                    string script = @"
+                         swal({
+                         title: 'Success!',
+                         text: 'Click OK to proceed with Super User registration.',
+                         icon: 'success',
+                         button: 'OK'
+                        }).then((value) => {
+                         window.location.href = 'RegisterSuperUser.aspx'; 
+                    });";
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.Message.ToString();
+            }
+            
+        }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -84,7 +111,7 @@ namespace SpecimenTracking
 
                             case "First Login":
                                 Session["User_ID"] = txtUserName.Text;
-                               script = @"
+                                script = @"
                                     swal({
                                         title: 'Success!',
                                         text: 'Login successful, please change the password and set security question.',
@@ -110,7 +137,7 @@ namespace SpecimenTracking
                                     });";
 
                                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
-                                
+
 
                                 break;
 
@@ -127,7 +154,7 @@ namespace SpecimenTracking
                                     });";
 
                                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
-                                
+
                                 break;
 
                             case "Password Expired":
@@ -143,7 +170,7 @@ namespace SpecimenTracking
                                     });";
 
                                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
-                                
+
                                 break;
 
                             default:
@@ -194,7 +221,7 @@ namespace SpecimenTracking
                 Session["User_Name"] = dr["User_Name"].ToString().Trim();
                 Session["USER_ID"] = dr["UserID"].ToString().Trim();
 
-                
+
 
                 Session["UMT"] = "YES";
 

@@ -6,8 +6,8 @@
         var ctrl = $(this).prop('type');
 
         if (ctrl == "select-one") {
-            if (value == "0" || value == null) {
-                if ($(this).hasClass("select") == true) {
+            if (value == "0" || value == null || value == '') {
+                if ($(this).hasClass("select") == true || $(this).hasClass("select2") == true) {
                     $(this).next("span").addClass("brd-1px-redimp");
                     test = "1";
                 }
@@ -27,6 +27,24 @@
                 }
                 test = "1";
             }
+        }
+    });
+
+    $('.txtTime').each(function (index, element) {
+        var value = $(this).val();
+
+        if (value.indexOf('H') != -1 || value.indexOf('M') != -1) {
+            $(this).addClass("brd-1px-redimp");
+            test = "1";
+        }
+    });
+
+    $('.initial').each(function (index, element) {
+        var value = $(this).val();
+
+        if (value.indexOf('_') != -1) {
+            $(this).addClass("brd-1px-redimp");
+            test = "1";
         }
     });
 

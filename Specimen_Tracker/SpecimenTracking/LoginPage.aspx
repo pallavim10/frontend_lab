@@ -4,21 +4,21 @@
 <html>
 <head>
     <%--runat="server"--%>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title></title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css"/>
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css"/>
+    <link rel="stylesheet" href="dist/css/adminlte.min.css" />
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
     <script type="text/javascript" src="dist/js/sweetalert.min.js"></script>
     <style type="text/css">
         .captcha-container {
@@ -60,13 +60,13 @@
     </style>
 </head>
 <body class="login-page" style="min-height: 405px;">
-    <div class="login-box card card-outline card-primary" style="width:33%;">
+    <div class="login-box card card-outline card-primary" style="width: 33%;">
         <div class="login-logo mt-3">
             <%--<span class="form-avatar">
                 <%--<img src="dist/img/tracking-icon.jpg" class="logo-3d-border" alt="AVATAR"/>--%>
             <%--</span>--%>
             <h3><b>Specimen Tracker</b></h3>
-           
+
         </div>
         <!-- /.login-logo -->
         <div class="card-body login-card-body">
@@ -97,7 +97,7 @@
                         <asp:Image ID="imgCaptcha" CssClass="captcha-image" runat="server" />
                     </div>
                     <div class="col-2">
-                        <asp:LinkButton ID="btnrefcaptcha" class="btn btn-success reload-btn" runat="server" OnClick="btnrefcaptcha_Click"><i class="fas ion-ios-refresh" style="margin-left:7px; margin-right:7px;" ></i></asp:LinkButton>
+                        <asp:LinkButton ID="btnrefcaptcha" class="btn btn-info reload-btn" runat="server" OnClick="btnrefcaptcha_Click"><i class="fas ion-ios-refresh" style="margin-left:7px; margin-right:7px;" ></i></asp:LinkButton>
                     </div>
                 </div>
                 <br />
@@ -109,39 +109,23 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <asp:CheckBox runat="server" ID="Chkremember" />
-                            <label for="Chkremember">
-                                Remember Me
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <asp:Button ID="btnLogin" runat="server" class="btn btn-success btn-block btn-lg" Text="Log In" OnClick="btnLogin_Click"></asp:Button>
-                    </div>
+                    <asp:Button ID="btnLogin" runat="server" class="btn btn-info btn-block btn-lg" Text="Log In" OnClick="btnLogin_Click"></asp:Button>
                 </div>
-              <%--  <div class="row" style="margin-top: 7px;">
+                <div class="row" style="margin-top: 7px;">
                     <div class="col-8">
-                        
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
                         <a href="Forgot_Password.aspx">Forgot password?</a>
                     </div>
-                    <!-- /.col -->
-                </div>--%>
+                </div>
             </form>
         </div>
-        <!-- /.login-card-body -->
     </div>
-    <!-- /.login-box -->
-
-    <!-- jQuery -->
     <script type="text/javascript" src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
+    
     <script type="text/javascript" src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
+    
     <script type="text/javascript" src="dist/js/adminlte.min.js"></script>
 
     <script type="text/javascript">

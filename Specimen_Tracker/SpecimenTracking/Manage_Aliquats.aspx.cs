@@ -326,20 +326,48 @@ namespace SpecimenTracking
         }
 
         protected void Check_AliquotSEQALLOC(object sender, EventArgs e)
-        {
+            {
             try
             {
-                string SEQFROM = allocatefrom.Text.Trim();
-                string SEQTO = allocateto.Text.Trim();
-                DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQUALLOC", ALIQUOTFROM:SEQFROM, ALIQUOTSEQTO:SEQTO );
-                if (ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                if (!string.IsNullOrWhiteSpace(allocatefrom.Text) && !string.IsNullOrWhiteSpace(allocateto.Text))
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Sequence Already Exists.','warning');", true);
-                    allocatefrom.Text = string.Empty;
-                    allocateto.Text = string.Empty;
-                    ScriptManager.RegisterStartupScript(this, GetType(), "focusNext", "document.getElementById('" + allocatefrom.ClientID + "').focus();", true);
+                    string SEQFROM = allocatefrom.Text.Trim();
+                    string SEQTO = allocateto.Text.Trim();
+                    DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQALLOC", ALIQUOTFROM: SEQFROM, ALIQUOTSEQTO: SEQTO);
+                    //if (ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                    //{
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        DataTable dt = ds.Tables[0];
+
+                        // Ensure the table has rows
+                        if (dt.Rows.Count > 0)
+                        {
+                            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Please Enter Aliquot Sequence in the Correct Format.', 'warning');", true);
+                            allocatefrom.Text = string.Empty;
+                            allocateto.Text = string.Empty;
+                            
+                        }
+                        else
+                        {
+                            // Handle no results scenario
+                            Console.WriteLine("No overlapping sequences found.");
+                        }
+                    }
+                    else
+                    {
+                        // Handle case where no table exists in the dataset
+                        Console.WriteLine("No table returned in the dataset.");
+                    }
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Sequence Already Exists.','warning');", true);
+                    //allocatefrom.Text = string.Empty;
+                    //allocateto.Text = string.Empty;
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "focusNext", "document.getElementById('" + allocateto.ClientID + "').focus();", true);
                 }
-                
+                else {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "focusNext", "document.getElementById('" + allocateto.ClientID + "').focus();", true);
+                }
+                //}
             }
             catch (Exception ex)
             {
@@ -455,7 +483,7 @@ namespace SpecimenTracking
                 gridAddedAliquot.DataSource = string.Empty;
                 gridAddedAliquot.DataBind();
             }
-            
+            GET_ALIQUOTMASTER();
         }
         protected void btn_Add_Click(object sender, EventArgs e)
         {
@@ -497,16 +525,42 @@ namespace SpecimenTracking
                         DAL_SETUP.Visit_Aliquot_Mapping(ACTION: "REMOVE_ALIQUOT", VISITID: dropdown_visits.SelectedValue, hdnfield.Value, ADDED: false);
                     }
                 }
+                
                 Bind_NotMatchingCheckBoxList(dropdown_visits.SelectedValue);
-
-
             }
             catch (Exception ex) 
             {
                 Console.WriteLine(ex.StackTrace.ToString()); 
             }
         }
-       
+
+        protected void GrdAliquot_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                HiddenField hiddenField = e.Row.FindControl("hfALIQUOTID") as HiddenField;
+                LinkButton lnkedit = e.Row.FindControl("lnkedit") as LinkButton;
+                LinkButton lnkDelete = e.Row.FindControl("lnkdelete") as LinkButton;
+
+                if (hiddenField != null && lnkedit != null && lnkDelete != null)
+                {
+                    string AliquotID = hiddenField.Value.ToString();
+                    DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotExistInMapping", ID: AliquotID, ALIQUOTID: dropdown_visits.SelectedValue);
+                    if (ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                    {
+                        // Check if the first value is TRUE, indicating the record exists
+                        if (ds.Tables[0].Rows[0][0].ToString().Equals("TRUE", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Hide the delete button if record exists
+                            lnkDelete.Visible = false;
+                        }
+
+                    }
+                }
+
+            }
+        }
+
         protected void lbtnExport_Click(object sender, EventArgs e)
         {
             try

@@ -21,7 +21,7 @@ namespace SpecimenTracking.App_Code
             return ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         }
 
-        public DataSet DATA_ENTRY_SP(string ACTION = null, string SITEID = null, string VISITNUM = null, string SID = null, string SUBJID = null, string VARIABLENAME = null)
+        public DataSet DATA_ENTRY_SP(string ACTION = null, string SITEID = null, string VISITNUM = null, string VISIT = null, string SID = null, string SUBJID = null, string VARIABLENAME = null, string INSERTQUERY = null, string UPDATEQUERY = null, string ALQID = null, string ALIQUOTID = null, string ALIQUOTTYPE = null, string ALIQUOTNO_CONCAT = null, string ALIQUOTNO = null, string BOXNO = null, string SLOTNO = null, string SPECTYP = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -51,9 +51,21 @@ namespace SpecimenTracking.App_Code
                 cmd.Parameters.AddWithValue("@ACTION", ACTION);
                 cmd.Parameters.AddWithValue("@SITEID", SITEID);
                 cmd.Parameters.AddWithValue("@VISITNUM", VISITNUM);
+                cmd.Parameters.AddWithValue("@VISIT", VISIT);
                 cmd.Parameters.AddWithValue("@SID", SID);
                 cmd.Parameters.AddWithValue("@SUBJID", SUBJID);
                 cmd.Parameters.AddWithValue("@VARIABLENAME", VARIABLENAME);
+                cmd.Parameters.AddWithValue("@INSERTQUERY", INSERTQUERY);
+                cmd.Parameters.AddWithValue("@UPDATEQUERY", UPDATEQUERY);
+
+                cmd.Parameters.AddWithValue("@ALQID", ALQID);
+                cmd.Parameters.AddWithValue("@ALIQUOTID", ALIQUOTID);
+                cmd.Parameters.AddWithValue("@ALIQUOTTYPE", ALIQUOTTYPE);
+                cmd.Parameters.AddWithValue("@ALIQUOTNO_CONCAT", ALIQUOTNO_CONCAT);
+                cmd.Parameters.AddWithValue("@ALIQUOTNO", ALIQUOTNO);
+                cmd.Parameters.AddWithValue("@BOXNO", BOXNO);
+                cmd.Parameters.AddWithValue("@SLOTNO", SLOTNO);
+                cmd.Parameters.AddWithValue("@SPECTYP", SPECTYP);
 
                 cmd.Parameters.AddWithValue("@UserID", UserID);
                 cmd.Parameters.AddWithValue("@User_Name", User_Name);
@@ -132,6 +144,140 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
+        public DataSet CRITERIA_SP(string ACTION = null, string Condition = null, string CritName = null)
+        {
+            DataSet ds = new DataSet();
+            SqlCommand cmd;
+            SqlDataAdapter adp;
+            try
+            {
+                cmd = new SqlCommand("CRITERIA_SP", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ACTION", ACTION);
+                cmd.Parameters.AddWithValue("@Condition", Condition);
+                cmd.Parameters.AddWithValue("@CritName", CritName);
+                adp = new SqlDataAdapter(cmd);
+                adp.Fill(ds);
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                ////ds.Dispose();
+            }
+            return ds;
+        }
+
+        public DataSet DATA_ENTRYLIST_SP(string ACTION = null, string SITEID = null, string VISITNUM = null, string SID = null, string SUBJID = null, string VARIABLENAME = null)
+        {
+            DataSet ds = new DataSet();
+            SqlCommand cmd;
+            SqlDataAdapter adp;
+            try
+            {
+                string UserID = null, TZ_VAL = null, User_Name = null;
+                if (HttpContext.Current.Session["USER_ID"] != null)
+                {
+                    UserID = HttpContext.Current.Session["USER_ID"].ToString();
+                }
+                if (HttpContext.Current.Session["User_Name"] != null)
+                {
+                    User_Name = HttpContext.Current.Session["User_Name"].ToString();
+                }
+                if (HttpContext.Current.Session["TimeZone_Value"] == null)
+                {
+                    TZ_VAL = "+05:30";
+                }
+                else
+                {
+                    TZ_VAL = HttpContext.Current.Session["TimeZone_Value"].ToString();
+                }
+
+                cmd = new SqlCommand("DATA_ENTRYLIST_SP", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ACTION", ACTION);
+                cmd.Parameters.AddWithValue("@SITEID", SITEID);
+                cmd.Parameters.AddWithValue("@VISITNUM", VISITNUM);
+                cmd.Parameters.AddWithValue("@SID", SID);
+                cmd.Parameters.AddWithValue("@SUBJID", SUBJID);
+                cmd.Parameters.AddWithValue("@VARIABLENAME", VARIABLENAME);
+
+                cmd.Parameters.AddWithValue("@UserID", UserID);
+                cmd.Parameters.AddWithValue("@User_Name", User_Name);
+                cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
+
+                adp = new SqlDataAdapter(cmd);
+                adp.Fill(ds);
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                cmd = null;
+                adp = null;
+                con.Close();
+            }
+            return ds;
+        }
+
+        public DataSet DE_LOG_SP(string ACTION = null, string FROMDATE = null, string TODATE = null, string USERNAME = null, string TABLENAME = null, string ID = null)
+        {
+            DataSet ds = new DataSet();
+            SqlCommand cmd;
+            SqlDataAdapter adp;
+            try
+            {
+                string TZ_VAL = null, User_Name = null, USERID = null;
+                if (HttpContext.Current.Session["User_Name"] != null)
+                {
+                    User_Name = HttpContext.Current.Session["User_Name"].ToString();
+                }
+                if (HttpContext.Current.Session["TimeZone_Value"] == null)
+                {
+                    TZ_VAL = "+05:30";
+                }
+                else
+                {
+                    TZ_VAL = HttpContext.Current.Session["TimeZone_Value"].ToString();
+                }
+                if (HttpContext.Current.Session["USER_ID"] != null)
+                {
+                    USERID = HttpContext.Current.Session["USER_ID"].ToString();
+                }
+                cmd = new SqlCommand("DE_LOG_SP", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ACTION", ACTION);
+                cmd.Parameters.AddWithValue("@USERID", USERID);
+                cmd.Parameters.AddWithValue("@User_Name", User_Name);
+                cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
+                cmd.Parameters.AddWithValue("@FROMDATE", FROMDATE);
+                cmd.Parameters.AddWithValue("@TODATE", TODATE);
+                cmd.Parameters.AddWithValue("@USERNAME", USERNAME);
+                cmd.Parameters.AddWithValue("@TABLENAME", TABLENAME);
+                cmd.Parameters.AddWithValue("@ID", ID);
+
+                adp = new SqlDataAdapter(cmd);
+                adp.Fill(ds);
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                cmd = null;
+                adp = null;
+                con.Close();
+            }
+            return ds;
+        }
     }
 
 }

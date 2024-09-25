@@ -182,7 +182,16 @@ namespace SpecimenTracking
             GET_DEFINE_CRIT();
             CLEAR_Field();
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Define Criteria Inserted Successfully.', 'success');", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Define Criteria Inserted Successfully.', 'success');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Define Criteria Inserted Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });", true);
+
         }
 
         private void INSERT_CRIT()
@@ -876,7 +885,17 @@ namespace SpecimenTracking
             GET_DEFINE_CRIT();
             CLEAR_Field();
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Define Criteria Updated Successfully.', 'success');", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Define Criteria Updated Successfully.', 'success');", true);
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Define Criteria Updated Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });", true);
+
         }
 
         private void UPDATE_CRIT()
@@ -1628,7 +1647,18 @@ namespace SpecimenTracking
                                       ID: ID
                                       );
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Define Criteria Deleted Successfully.', 'success');", true);
+                // ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Define Criteria Deleted Successfully.', 'success');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                                swal({
+                                    title: 'Success!',
+                                    text: 'Define Criteria Deleted Successfully.',
+                                    icon: 'success',
+                                    button: 'OK'
+                                }).then(function(){
+                                     window.location.href = window.location.href; });
+                            ", true);
+
+
             }
             catch (Exception ex)
             {
