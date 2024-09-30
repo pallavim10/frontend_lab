@@ -54,15 +54,48 @@ namespace SpecimenTracking
         {
             try
             {
-                if (Check_ALIQUOT("UPDATE"))
+                //if (Check_ALIQUOT("UPDATE"))
 
+                //{
+
+                //    UPDATE_ALIQUOT();
+                //}
+                //else
+                //{
+                //    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Already Exists.','warning');", true);
+                //}
+                // First, check if the sequence number exists
+                bool sequenceNumberExists = Check_SequenceNumber();
+
+                if (!sequenceNumberExists)
                 {
-                    UPDATE_ALIQUOT();
-                    //Response.Redirect(Request.Url.AbsoluteUri);
+                    // Next, check if the aliquot exists using your current Check_ALIQUOT logic
+                    if (Check_ALIQUOT("UPDATE"))
+                    {
+                        // Check if Sequence From and Sequence To are valid (no overlap)
+                        bool sequenceValid = Convert.ToBoolean(Check_AliquotSEQUENCE());  // Return a boolean value from this method
+
+                        if (sequenceValid)
+                        {
+                            // All checks passed, proceed with the update
+                            UPDATE_ALIQUOT();
+                        }
+                        else
+                        {
+                            // Sequence validation failed, no need to update
+                            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Sequence From and To overlap or are invalid.','warning');", true);
+                        }
+                    }
+                    else
+                    {
+                        // Aliquot check failed, show a warning
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Already Exists.','warning');", true);
+                    }
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Already Exists.','warning');", true);
+                    // Sequence number already exists, no need to check further
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Sequence Number Already Exists.','warning');", true);
                 }
             }
             catch (Exception ex)
@@ -81,7 +114,6 @@ namespace SpecimenTracking
                 string ALIQUOTID = GrdAliquots.DataKeys[grdrow.RowIndex].Value.ToString();
                 DELETE_ALIQUOT(ALIQUOTID);
                 GET_ALIQUOTMASTER();
-                Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception ex)
             {
@@ -166,18 +198,19 @@ namespace SpecimenTracking
         }
         private void UPDATE_ALIQUOT()
         {
-
+           
             DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(
                 ACTION: "UPDATE_ALIQUOT",
                 ID: ViewState["ID"].ToString(),
                 ALIQUOTID: txtaliquotID.Text,
                 SEQNO: txtSeqtNo.Text,
                 ALIQUOTTYPE: txtaliquottype.Text,
-                ALIQUOTNUM:txtaliquotnum.Text,
-                ALIQUOTFROM:allocatefrom.Text,
-                ALIQUOTSEQTO:allocateto.Text
+                ALIQUOTNUM: txtaliquotnum.Text,
+                ALIQUOTFROM: allocatefrom.Text,
+                ALIQUOTSEQTO: allocateto.Text
                 );
             
+
             ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
@@ -199,19 +232,16 @@ namespace SpecimenTracking
             {
                
                 DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "DELETE_ALIQUOT", ID: ALIQUOTRECID);
-                //string result = ds.Tables[0].Rows[0].ToString();
-                
+
                 ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
-                    swal({
-                        title: 'Success!',
-                        text: 'Aliquot Deleted Successfully.',
-                        icon: 'success',
-                        button: 'OK'
-                    }).then(function(){
+                                swal({
+                                    title: 'Success!',
+                                    text: 'Aliquot Deleted Successfully.',
+                                    icon: 'success',
+                                    button: 'OK'
+                                }).then(function(){
                                      window.location.href = window.location.href; });
-                ", true);
-
-
+                            ", true);
 
             }
             catch (Exception ex)
@@ -317,6 +347,63 @@ namespace SpecimenTracking
                 else
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "focusNext", "document.getElementById('" + allocatefrom.ClientID + "').focus();", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace.ToString());
+            }
+        }
+        protected void Check_AliquotSEQUENCE()
+        {
+            try
+            {
+                string SEQFROM = allocatefrom.Text.Trim();
+                string SEQTO = allocateto.Text.Trim();
+                bool isValid = true; // To track if all checks pass
+
+                // First, check if both Sequence From and Sequence To are the same
+                if (SEQFROM == SEQTO && !string.IsNullOrWhiteSpace(SEQFROM) && !string.IsNullOrWhiteSpace(SEQTO))
+                {
+                    // Show warning if the sequences are the same
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Sequence From and Sequence To cannot be the same.', 'warning');", true);
+                    isValid = false;
+                    allocatefrom.Text = string.Empty; // Clear the 'From' field
+                    allocateto.Text = string.Empty;   // Clear the 'To' field
+                }
+
+                // Proceed with checking overlaps only if SEQFROM and SEQTO are not the same
+                if (isValid && (!string.IsNullOrWhiteSpace(SEQFROM) || !string.IsNullOrWhiteSpace(SEQTO)))
+                {
+                    // If SEQFROM is provided, check for overlaps
+                    if (!string.IsNullOrWhiteSpace(SEQFROM))
+                    {
+                        DataSet dsFrom = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQALLOC", ALIQUOTFROM: SEQFROM, ALIQUOTSEQTO: null);
+                        if (dsFrom != null && dsFrom.Tables.Count > 0 && dsFrom.Tables[0].Rows.Count > 0)
+                        {
+                            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Aliquot Sequence From Already Exists or Overlaps.', 'warning');", true);
+                            allocatefrom.Text = string.Empty;
+                            isValid = false; // Set to false if there's an overlap
+                        }
+                    }
+
+                    // If SEQTO is provided, check for overlaps
+                    if (!string.IsNullOrWhiteSpace(SEQTO))
+                    {
+                        DataSet dsTo = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQALLOC", ALIQUOTFROM: null, ALIQUOTSEQTO: SEQTO);
+                        if (dsTo != null && dsTo.Tables.Count > 0 && dsTo.Tables[0].Rows.Count > 0)
+                        {
+                            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Aliquot Sequence To Already Exists or Overlaps.', 'warning');", true);
+                            allocateto.Text = string.Empty;
+                            isValid = false; // Set to false if there's an overlap
+                        }
+                    }
+
+                    // If both checks are valid, proceed with your logic
+                    if (isValid)
+                    {
+                        Console.WriteLine("No overlapping sequences found for both Sequence From and Sequence To.");
+                    }
                 }
             }
             catch (Exception ex)
@@ -483,7 +570,7 @@ namespace SpecimenTracking
                 gridAddedAliquot.DataSource = string.Empty;
                 gridAddedAliquot.DataBind();
             }
-            GET_ALIQUOTMASTER();
+            this.GET_ALIQUOTMASTER();
         }
         protected void btn_Add_Click(object sender, EventArgs e)
         {

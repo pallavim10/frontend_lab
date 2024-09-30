@@ -20,5 +20,43 @@
                 </div>
             </div>
         </div>
+         <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="form-group has-warning">
+                            <asp:Label ID="lblErrorMsg" runat="server"></asp:Label>
+                        </div>
+                        <div class="data-original-title">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row" id="div4" runat="server">
+                                    <asp:ListView ID="lstm" runat="server" AutoGenerateColumns="false" OnItemDataBound="lstm_ItemDataBound">
+                                        <GroupTemplate>
+                                            <div class="col-lg-3 col-xs-6">
+                                                <asp:LinkButton ID="itemPlaceholder" runat="server" />
+                                            </div>
+                                        </GroupTemplate>
+                                        <ItemTemplate>
+                                            <a id="main" runat="server" href='<%# Eval("NavigationURL")%>' title='<%# Eval("FunctionName") %>' style="color: white; text-align: left">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon" style='<%# "text-align: left;background-color:" + DataBinder.Eval(Container.DataItem, "Color") + ";" %>'><i id="ICONCLASS" runat="server" class='<%# Eval("Icon") %>'></i></span>
+                                                    <div class="info-box-content">
+                                                        <span id="FunctionName" runat="server" class="info-box-text text-md colorText"><%# Eval("FunctionName") %></span>
+                                                        <span class="info-box-number text-lg textcoutcolor">
+                                                            <asp:Label ID="lbltotal" runat="server"></asp:Label></span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </ItemTemplate>
+                                    </asp:ListView>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </asp:Content>

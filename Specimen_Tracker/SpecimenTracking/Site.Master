@@ -452,6 +452,7 @@
     <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
     <!-- jQuery Knob Chart -->
     <script src="CommanFunctionJs/TextBox_Options.js"></script>
+    <script src="Scripts/moment.js" type="text/javascript"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- Summernote -->
@@ -477,7 +478,6 @@
     <script src="CommonFunctionsJs/RadioCheck.js"></script>
 
     <link href="Style/pikaday.css" rel="stylesheet" type="text/css" />
-    <script src="Scripts/moment.js" type="text/javascript"></script>
     <script src="Scripts/pikaday.js" type="text/javascript"></script>
     <script src="Scripts/pikaday.jquery.js" type="text/javascript"></script>
     <script src="plugins/inputmask/jquery.inputmask.bundle.js"></script>

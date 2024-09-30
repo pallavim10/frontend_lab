@@ -215,12 +215,35 @@ namespace SpecimenTracking
                 DataSet ds = new DataSet();
                 if (ACTIONS == "INSERT")
                 {
-                    ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text);
+                    if (txtVistName.Text != hdnVisitName.Value && txtVistNo.Text != hdnVisitNum.Value)
+                    {
+                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text);
+                    }
+                    else if (txtVistNo.Text != hdnVisitNum.Value)
+                    {
+                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNUM: txtVistNo.Text);
+                    }
+                    else 
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Visit Already Exists.','warning');", true);
+                    }
                     //ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text);
                 }
                 else if (ACTIONS == "UPDATE") 
                 {
-                    ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITID_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text, ID: ViewState["ID"].ToString());
+                    //ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITID_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text, ID: ViewState["ID"].ToString());
+                    if (txtVistName.Text != hdnVisitName.Value)
+                    {
+                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text);
+                    }
+                    else if (txtVistNo.Text != hdnVisitNum.Value)
+                    {
+                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNUM: txtVistNo.Text);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Visit Already Exists.','warning');", true);
+                    }
                 }
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count >0)
                 {
@@ -273,7 +296,7 @@ namespace SpecimenTracking
                 {
                     //vsname = false;
                     ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Visit Name Already Exists.','warning');", true);
-                    txtVistName.Text = string.Empty;
+                    txtVistName.Text = "";
                     //lblErrorMsg.Text = visitname + " the visit name Already Exists.";
                     //lblErrorMsg.Visible = true;
                 }
@@ -299,11 +322,6 @@ namespace SpecimenTracking
                     txtVistNo.Text = string.Empty;
                     //lblNumError.Text = visitno + " the visit number Already Exists.";
                     //lblNumError.Visible = true;
-                }
-                else 
-                {
-                    // Some processing, followed by setting focus on the next field
-                    ScriptManager.RegisterStartupScript(this, GetType(), "focusNext", "document.getElementById('" +txtVistName.ClientID + "').focus();", true);
                 }
             }
             catch (Exception ex)

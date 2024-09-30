@@ -90,12 +90,14 @@
                                                      <asp:HiddenField ID="hfIconData" runat="server" />
                                                     <span class="info-box-icon elevation-1 bg-secondary">
                                                         <i class="nav-icon fa fa-user" runat="server" id="iconElement"></i></span>
+                                                      <%--<span class="info-box-icon elevation-1" style='<%# "text-align: left;background-color:" + DataBinder.Eval(Container.DataItem, "Color") + ";" %>'><i id="ICONCLASS" runat="server" class='<%# Eval("Icon") %>'></i></span> --%>
 
                                                     <div class="info-box-content">
                                                         <span class="info-box-text">
                                                             <asp:Label ID="Label1" runat="server" Font-Bold="true" Text='<%# Bind("COUNTS") %>' Font-Size="XX-Large"></asp:Label></span>
                                                         <span class="info-box-number">
-                                                            <asp:Label ID="lblName" runat="server" Text='<%# Bind("NAME") %>' Font-Size="Small" CssClass="font-weight-bold"></asp:Label>
+                                                            <asp:Label ID="lblName" runat="server" Text='<%# Bind("NAME") %>' Font-Size="Small" CssClass="info-box-text text-md colorText"></asp:Label>
+                                                            <%--  <span id="FunctionName" runat="server" class="info-box-text text-md colorText"><%# Eval("FunctionName") %></span> --%>
                                                         </span>
                                                     </div>
                                                     <!-- /.info-box-content -->
