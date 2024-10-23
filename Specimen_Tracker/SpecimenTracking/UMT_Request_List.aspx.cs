@@ -27,7 +27,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -52,7 +52,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -75,7 +75,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -87,7 +87,7 @@ namespace SpecimenTracking
                 string header = "Request Users Details";
 
                 DataSet ds = dal_UMT.UMT_USERS_SP(
-                    ACTION: "GET_USERS_REQUESTS"
+                    ACTION: "GET_USERS_REQUESTS_EXPORT"
                     );
 
 
@@ -96,7 +96,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -169,7 +169,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -182,7 +182,8 @@ namespace SpecimenTracking
                 int index = row.RowIndex;
                 string PWD = "";
                 Label USERNAME = (Label)gvUserRequests.Rows[index].FindControl("lblUserName");
-                Label USERID = (Label)gvUserRequests.Rows[index].FindControl("lblSiteId");
+                Label SITEID = (Label)gvUserRequests.Rows[index].FindControl("lblSiteID");
+                Label USERID = (Label)gvUserRequests.Rows[index].FindControl("lblUserID");
                 Label STUDYROLE = (Label)gvUserRequests.Rows[index].FindControl("lblStudyRole");
                 Label User_EmailID = (Label)gvUserRequests.Rows[index].FindControl("lblEmail");
 
@@ -204,11 +205,13 @@ namespace SpecimenTracking
                 {
                     User_LOCK(ID);
                     SEND_MAIL_UNLOCK(USERNAME.Text, USERID.Text, STUDYROLE.Text, User_EmailID.Text);
+                    USER_RESEND_PWD_MAIL_SECOND(USERID.Text, User_EmailID.Text);
                     GET_USERS_REQUESTS();
                 }
                 else if (e.CommandName == "REQUEST_PASSWORD")
                 {
                     Resend_Password(ID);
+                    SEND_MAIL_UNLOCK(USERNAME.Text, USERID.Text, STUDYROLE.Text, User_EmailID.Text);
                     USER_RESEND_PWD_MAIL_SECOND(USERID.Text, User_EmailID.Text);
                     GET_USERS_REQUESTS();
                 }
@@ -221,7 +224,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -264,7 +267,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void MAIL_SEND(string EMAILIDS, string CCEMAILIDS, string BCCEMAILIDS, string SUBJECT, string BODY)
@@ -281,7 +284,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void USER_ACTIVATION_MAIL_FIRST(string User_EmailID, string USERNAME, string STUDYROLE, string USERID)
@@ -326,7 +329,7 @@ namespace SpecimenTracking
                     BODY = BODY.Replace("[PROJECTID]", Session["PROJECTIDTEXT"].ToString());
                     BODY = BODY.Replace("[USERNAME]", USERNAME);
                     BODY = BODY.Replace("[STUDYROLE]", STUDYROLE);
-                    BODY = BODY.Replace("[URL]", HttpContext.Current.Request.Url.AbsoluteUri.ToString().Replace(Request.RawUrl.ToString(), "/Auth.aspx"));
+                    BODY = BODY.Replace("[URL]", HttpContext.Current.Request.Url.AbsoluteUri.ToString().Replace(Request.RawUrl.ToString(), "/LoginPage.aspx"));
                     BODY = BODY.Replace("[SYSTEM_LIST]", SYSTEM_LIST);
                     BODY = BODY.Replace("[USERNAME]", Session["User_Name"].ToString());
                     BODY = BODY.Replace("[DATETIME]", cf.GetCurrentDateTimeByTimezone().ToString("dd-MMM-yyyy HH:mm"));
@@ -338,7 +341,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void USER_ACTIVATION_MAIL_SECOND(string USERID, string User_EmailID)
@@ -374,7 +377,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -416,7 +419,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -465,7 +468,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -516,9 +519,10 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
+
         private void SEND_MAIL_UNLOCK(string USERNAME, string USERID, string STUDYROLE, string User_EmailID)
         {
             try
@@ -568,7 +572,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void ACTIVATION(string ID)
@@ -577,11 +581,20 @@ namespace SpecimenTracking
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "ACTIVATE", ID: ID
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Activated Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'User Activated Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href =  window.location.href });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Activated Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -591,11 +604,20 @@ namespace SpecimenTracking
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "DEACTIVATE", ID: ID
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Deactivated Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'User Deactivated Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href =  window.location.href });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Deactivated Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void User_LOCK(string ID)
@@ -604,11 +626,20 @@ namespace SpecimenTracking
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "LOCK", ID: ID
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Locked Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'User Unlocked Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href =  window.location.href });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Locked Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void ReSet_Question(string ID)
@@ -617,11 +648,20 @@ namespace SpecimenTracking
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "QUESTION", ID: ID
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Reset Security Question Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Reset Security Question Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href =  window.location.href });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Reset Security Question Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void Resend_Password(string ID)
@@ -630,11 +670,20 @@ namespace SpecimenTracking
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "PASSWORD", ID: ID
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Password Send Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Password Send Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href =  window.location.href });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Password Send Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 

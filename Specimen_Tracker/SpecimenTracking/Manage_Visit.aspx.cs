@@ -58,7 +58,7 @@ namespace SpecimenTracking
         {
             try
             {
-                if (Check_VISIT("UPDATE"))
+                if (Check_VISIT("UPDATE") && IsValid(txtVistNo.Text.Trim()))
 
                 {
                     UPDATE_VISIT();
@@ -207,10 +207,12 @@ namespace SpecimenTracking
             lbtnUpdate.Visible = false;
         }
 
-        private bool Check_VISIT(string ACTIONS) 
+       
+
+        private bool Check_VISIT(string ACTIONS)
         {
             bool res = true;
-            try 
+            try
             {
                 DataSet ds = new DataSet();
                 if (ACTIONS == "INSERT")
@@ -219,42 +221,55 @@ namespace SpecimenTracking
                     {
                         ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text);
                     }
-                    else if (txtVistNo.Text != hdnVisitNum.Value)
+                    else if (txtVistName.Text != hdnVisitName.Value) 
                     {
-                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNUM: txtVistNo.Text);
+                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITNAME_EXISTS", VISITNAME: txtVistName.Text);
                     }
-                    else 
+                    else if ((txtVistNo.Text.Trim() != hdnVisitNum.Value) && (txtVistNo.Text.Trim() != "0") && (txtVistNo.Text.Trim() != ""))
                     {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Visit Already Exists.','warning');", true);
-                    }
-                    //ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text);
-                }
-                else if (ACTIONS == "UPDATE") 
-                {
-                    //ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITID_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text, ID: ViewState["ID"].ToString());
-                    if (txtVistName.Text != hdnVisitName.Value)
-                    {
-                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text);
-                    }
-                    else if (txtVistNo.Text != hdnVisitNum.Value)
-                    {
-                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNUM: txtVistNo.Text);
+                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITNO_EXISTS", VISITNUM: txtVistNo.Text);
                     }
                     else
                     {
                         ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Visit Already Exists.','warning');", true);
                     }
                 }
-                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count >0)
+                else if (ACTIONS == "UPDATE")
+                {
+                    if (txtVistName.Text != hdnVisitName.Value)
+                    {
+                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITNAME_EXISTS", VISITNAME: txtVistName.Text);
+                    }
+                    else if (txtVistNo.Text.Trim() != hdnVisitNum.Value && (txtVistNo.Text != "0") && string.IsNullOrEmpty(txtVistNo.Text.Trim()) && string.IsNullOrWhiteSpace(txtVistNo.Text.Trim()))
+                    {
+                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITNO_EXISTS", VISITNUM: txtVistNo.Text);
+                    }
+                    else if ((txtVistName.Text != hdnVisitName.Value) && (txtVistNo.Text.Trim() != hdnVisitNum.Value) && IsValid(txtVistNo.Text.Trim()) && (txtVistName.Text.Trim() != "")) 
+                    {
+                        ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITDT_EXISTS", VISITNAME: txtVistName.Text, VISITNUM: txtVistNo.Text);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Visit Already Exists.','warning');", true);
+                    }
+                }
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     res = false;
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-              Console.WriteLine(ex.StackTrace.ToString());
+                Console.WriteLine(ex.StackTrace.ToString());
             }
             return res;
+        }
+
+        private bool IsValid(string visitnumber)
+        {
+            return !string.IsNullOrWhiteSpace(visitnumber) &&
+                   !string.IsNullOrEmpty(visitnumber) &&
+                   visitnumber != "0";
         }
         private void GET_VISITMASTER() 
         {
@@ -278,11 +293,7 @@ namespace SpecimenTracking
                 Console.WriteLine(ex.StackTrace.ToString());
             }
         }
-        protected void GrdVisits_PageIndexChanging(object sender, GridViewPageEventArgs e) 
-        {
-            GrdVisits.PageIndex = e.NewPageIndex;
-            this.GET_VISITMASTER();        
-        }
+        
 
         protected void VisitNameChanged(object sender, EventArgs e) 
         {
@@ -294,11 +305,10 @@ namespace SpecimenTracking
                 ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITNAME_EXISTS", VISITNAME: visitname);
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    //vsname = false;
+                    
                     ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Visit Name Already Exists.','warning');", true);
-                    txtVistName.Text = "";
-                    //lblErrorMsg.Text = visitname + " the visit name Already Exists.";
-                    //lblErrorMsg.Visible = true;
+                    txtVistName.Text = string.Empty;
+                    
                 }
 
             }
@@ -311,18 +321,18 @@ namespace SpecimenTracking
         {
             try
             {
-                //bool vsname = true;
+                
                 string visitno = txtVistNo.Text;
                 DataSet ds = new DataSet();
                 ds = DAL_SETUP.SETUP_VISIT_SP(ACTION: "CHECK_VISITNO_EXISTS", VISITNUM: visitno);
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    //vsname = false;
+                    
                     ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Visit Number Already Exists.','warning');", true);
                     txtVistNo.Text = string.Empty;
-                    //lblNumError.Text = visitno + " the visit number Already Exists.";
-                    //lblNumError.Visible = true;
+                    
                 }
+                
             }
             catch (Exception ex)
             {
@@ -349,7 +359,31 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
+
+        protected void GrdVisits_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                GridView gv = (GridView)sender;
+                if ((gv.ShowHeader == true && gv.Rows.Count > 0)
+                    || (gv.ShowHeaderWhenEmpty == true))
+                {
+                    //Force GridView to use <thead> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                if (gv.ShowFooter == true && gv.Rows.Count > 0)
+                {
+                    //Force GridView to use <tfoot> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.FooterRow.TableSection = TableRowSection.TableFooter;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogging.SendErrorToText(ex);
+                throw;
             }
         }
     }

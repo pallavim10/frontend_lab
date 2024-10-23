@@ -23,7 +23,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -116,7 +116,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -176,7 +176,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -238,7 +238,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -256,7 +256,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -295,7 +295,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
             return Result;
         }
@@ -313,7 +313,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -331,13 +331,14 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
             return Result;
         }
 
         protected void btnback_Click(object sender, EventArgs e)
         {
+            txtSECURITY_ANS.Text = "";
             Response.Redirect("LoginPage.aspx");
         }
     }

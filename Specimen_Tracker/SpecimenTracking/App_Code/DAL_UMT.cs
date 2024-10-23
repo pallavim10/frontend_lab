@@ -766,6 +766,117 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
+        public DataSet PROJECT_SP(string ACTION = null, string SPONSOR_NAME = null, string PROJECT_NAME = null)
+        {
+            DataSet ds = new DataSet();
+            SqlCommand cmd;
+            SqlDataAdapter adp;
+            try
+            {
+                string USERID = null, TZ_VAL = null, User_Name = null, UserGroup_ID = null;
+                if (HttpContext.Current.Session["USER_ID"] != null)
+                {
+                    USERID = HttpContext.Current.Session["USER_ID"].ToString();
+                }
 
+                if (HttpContext.Current.Session["User_Name"] != null)
+                {
+                    User_Name = HttpContext.Current.Session["User_Name"].ToString();
+                }
+
+                if (HttpContext.Current.Session["UserGroupID"] != null)
+                {
+                    UserGroup_ID = HttpContext.Current.Session["UserGroupID"].ToString();
+                }
+
+                if (HttpContext.Current.Session["TimeZone_Value"] == null)
+                {
+                    TZ_VAL = "+05:30";
+                }
+                else
+                {
+                    TZ_VAL = HttpContext.Current.Session["TimeZone_Value"].ToString();
+                }
+                cmd = new SqlCommand("PROJECT_SP", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ACTION", ACTION);
+                cmd.Parameters.AddWithValue("@SPONSOR_NAME", SPONSOR_NAME);
+                cmd.Parameters.AddWithValue("@PROJECT_NAME", PROJECT_NAME);
+                cmd.Parameters.AddWithValue("@USERID", USERID);
+                cmd.Parameters.AddWithValue("@User_Name", User_Name);
+                cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
+                cmd.CommandTimeout = 0;
+                con.Open();
+                adp = new SqlDataAdapter(cmd);
+                adp.Fill(ds);
+                cmd.Dispose();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            finally
+            {
+                con.Close();
+            }
+            return ds;
+        }
+
+        public DataSet UMT_LAB_SP(string ACTION = null, string ID = null, string LABNAME = null,string User_ID = null,string LabID = null)
+        {
+            DataSet ds = new DataSet();
+            SqlCommand cmd;
+            SqlDataAdapter adp;
+            try
+            {
+                string USERID = null, TZ_VAL = null, User_Name = null;
+                if (HttpContext.Current.Session["USER_ID"] != null)
+                {
+                    USERID = HttpContext.Current.Session["USER_ID"].ToString();
+                }
+
+                if (HttpContext.Current.Session["User_Name"] != null)
+                {
+                    User_Name = HttpContext.Current.Session["User_Name"].ToString();
+                }
+
+                if (HttpContext.Current.Session["TimeZone_Value"] == null)
+                {
+                    TZ_VAL = "+05:30";
+                }
+                else
+                {
+                    TZ_VAL = HttpContext.Current.Session["TimeZone_Value"].ToString();
+                }
+                cmd = new SqlCommand("UMT_LAB_SP", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ACTION", ACTION);
+                cmd.Parameters.AddWithValue("@ID", ID);
+                cmd.Parameters.AddWithValue("@LABNAME", LABNAME);
+                cmd.Parameters.AddWithValue("@USERID", USERID);
+                cmd.Parameters.AddWithValue("@User_ID", User_ID);
+                cmd.Parameters.AddWithValue("@LabID", LabID);
+                cmd.Parameters.AddWithValue("@User_Name", User_Name);
+                cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
+                cmd.CommandTimeout = 0;
+                con.Open();
+                adp = new SqlDataAdapter(cmd);
+                adp.Fill(ds);
+                cmd.Dispose();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                cmd = null;
+                adp = null;
+                con.Close();
+            }
+            return ds;
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void BIND_STUDYROLE()
@@ -49,7 +49,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void GET_TIMEZONE()
@@ -69,7 +69,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_USER()
@@ -94,7 +94,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_SYSTEM(string UserID)
@@ -120,7 +120,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void INSERT_SYSTEM()
@@ -137,23 +137,7 @@ namespace SpecimenTracking
                     TextBox txtSystemNotes = (TextBox)repeatSystem.Items[i].FindControl("txtSystemNotes");
 
 
-                    CheckBox chlReadOnlyeSource = (CheckBox)repeatSystem.Items[i].FindControl("chlReadOnlyeSource");
-                    Label LblReadOnly = (Label)repeatSystem.Items[i].FindControl("LblReadOnly");
-
                     string SubSytem = "";
-
-                    if (chlReadOnlyeSource.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = LblReadOnly.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + LblReadOnly.Text;
-                        }
-
-                    }
 
                     if (ChkSelect.Checked)
                     {
@@ -181,7 +165,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void INSERT_USER_DATA()
@@ -233,7 +217,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -264,7 +248,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
             return exists;
         }
@@ -291,7 +275,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void lbnUpdate_Click(object sender, EventArgs e)
@@ -324,7 +308,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void grdUserDetails_PreRender(object sender, EventArgs e)
@@ -346,7 +330,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -381,7 +365,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void DELETE_USER(string ID)
@@ -394,7 +378,7 @@ namespace SpecimenTracking
                 );
 
                 DataSet ds = dal_UMT.UMT_USERS_SP(
-                  ACTION: "DELETE_USER",
+                  ACTION: "DELETE_USER_EXT",
                   ID: ID
                   );
                 string script = @"
@@ -412,7 +396,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void EDIT_USER(string ID)
@@ -444,7 +428,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void lbtnCancel_Click(object sender, EventArgs e)
@@ -493,11 +477,6 @@ namespace SpecimenTracking
                     TextBox txtSystemNotes = (TextBox)e.Item.FindControl("txtSystemNotes");
                     txtSystemNotes.Attributes.Add("maxlength", "200");
 
-
-                    HtmlGenericControl divsubsyseSource = e.Item.FindControl("divsubsyseSource") as HtmlGenericControl;
-
-
-                    CheckBox chlReadOnlyeSource = (CheckBox)e.Item.FindControl("chlReadOnlyeSource");
                     HiddenField HiddenSubSytem = (HiddenField)e.Item.FindControl("HiddenSubSytem");
 
                     DataRowView rowView = e.Item.DataItem as DataRowView;
@@ -512,16 +491,6 @@ namespace SpecimenTracking
 
                             ChkSelect.Checked = true;
 
-                            if (lblSystemName.Text == "eSource")
-                            {
-                                divsubsyseSource.Visible = true;
-
-                                if (HiddenSubSytem.Value == "Read-Only")
-                                {
-
-                                    chlReadOnlyeSource.Checked = true;
-                                }
-                            }
                         }
                         else
                         {
@@ -533,7 +502,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -557,7 +526,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -573,8 +542,7 @@ namespace SpecimenTracking
                 TextBox txtSystemNotes = (TextBox)repeatSystem.Items[i].FindControl("txtSystemNotes");
 
 
-                HtmlGenericControl divsubsyseSource = repeatSystem.Items[i].FindControl("divsubsyseSource") as HtmlGenericControl;
-
+                
                 if (ChkSelect.Checked)
                 {
                     txtSystemNotes.Visible = true;
@@ -584,14 +552,6 @@ namespace SpecimenTracking
                     txtSystemNotes.Visible = false;
                 }
 
-                if (lblSystemName.Text == "eSource" && ChkSelect.Checked)
-                {
-                    divsubsyseSource.Visible = true;
-                }
-                else
-                {
-                    divsubsyseSource.Visible = false;
-                }
             }
         }
 
@@ -612,7 +572,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 

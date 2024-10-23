@@ -25,7 +25,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -52,7 +52,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -75,7 +75,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -120,7 +120,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -154,7 +154,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -171,12 +171,12 @@ namespace SpecimenTracking
                      icon: 'success',
                      button: 'OK'
                      
-                     });";
+                     }).then(function(){ window.location.href = window.location.href});";
                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void SEND_MAIL_DEACTIVATION(string SITEID, string SITENAME)
@@ -225,7 +225,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -275,7 +275,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void ACTIVATION()
@@ -291,12 +291,12 @@ namespace SpecimenTracking
                      text: 'Site Activated Successfully.',
                      icon: 'success',
                      button: 'OK'                     
-                     });";
+                     }).then(function(){ window.location.href = window.location.href});";
                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -321,7 +321,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 

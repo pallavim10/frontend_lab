@@ -10,8 +10,15 @@
         .select2-container--default .select2-selection--single {
             margin-top: 2px;
         }
+        .text_Center {
+            text-align:center !important;
+        }
     </style>
     <script type="text/javascript">
+        function pageLoad()
+        {
+            $('.select').select2();
+        }
         function showAuditTrail(element) {
 
             var ID = $(element).closest('tr').find('td').eq(0).text().trim();
@@ -41,61 +48,44 @@
 
             return false;
         }
-        function Check_SequenceNumber(element)
-        {
+        function Check_SequenceNumber(element) {
             event.preventDefault();
             $(element).closest('td').find("input[id*='txtSeqtNo_Changed']").click();
             __doPostBack('<%= txtSeqtNo.ClientID %>', 'TextChanged');
 
         }
 
-        function CheckAliquotID(element)
-        {
+        function CheckAliquotID(element) {
             event.preventDefault();
             $(element).closest('td').find("input[id*='txtaliquotID_Changed']").click();
             __doPostBack('<%= txtaliquotID.ClientID %>', 'TextChanged');
         }
 
-        function CheckAliquotNum(element)
-        {
+        function CheckAliquotNum(element) {
             event.preventDefault();
             $(element).closest('td').find("input[id*='txtaliquotnum_Changed']").click();
             __doPostBack('<%= txtaliquotnum.ClientID %>', 'TextChanged');
         }
 
-        function Check_AliquotSEQALLOC(element)
-        {
+        function Check_AliquotSEQALLOC(element) {
             event.preventDefault();
-            $(element).closest('td').find("input[id*='allocatefrom_Changed']").click();
-            __doPostBack('<%= allocatefrom.ClientID %>', 'TextChanged');
-            $(element).closest('td').find("input[id*='allocateto_Changed']").click();
-            __doPostBack('<%= allocateto.ClientID %>', 'TextChanged');
-            
-        }
+            var fromValue = document.getElementById('<%= allocatefrom.ClientID %>').value;
+            var toValue = document.getElementById('<%= allocateto.ClientID %>').value;
 
-        function confirm(event) {
-            event.preventDefault();
+            if (fromValue.trim() === "" || toValue.trim() === "") {
+                //alert("Both Aliquot From and Aliquot To fields are required.");
+                return false; 
+            }
+            else
+            {
+                $(element).closest('td').find("input[id*='allocatefrom_Changed']").click();
+                __doPostBack('<%= allocatefrom.ClientID %>', 'TextChanged');
+                $(element).closest('td').find("input[id*='allocateto_Changed']").click();
+                __doPostBack('<%= allocateto.ClientID %>', 'TextChanged');
+            }
 
-            swal({
-                title: "Warning!",
-                text: "Are you sure you want to delete this Record?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            }).then(function (isConfirm) {
-                if (isConfirm) {
-                    var linkButton = event.target;
-                    if (linkButton.tagName.toLowerCase() === 'i') {
-                        linkButton = linkButton.parentElement;
-                    }
-                    linkButton.onclick = null;
-                    linkButton.click();
-                } else {
-                    Response.redirect(this);
-                }
-            });
-            return false;
         }
+        
     </script>
 </asp:Content>
 
@@ -112,6 +102,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="SETUPDashboard.aspx">Setup</a></li>
                             <li class="breadcrumb-item active">Manage Aliquots</li>
                         </ol>
                     </div>
@@ -163,28 +154,28 @@
                                                         <div class="form-group">
                                                             <label>Enter Aliquot Number : &nbsp;</label>
                                                             <asp:Label ID="Label7" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                            <asp:TextBox ID="txtaliquotnum" runat="server" CssClass="form-control required w-100" AutoCompleteType="Disabled" AutoPostBack="true" OnTextChanged ="CheckAliquotNum" onChange="CheckAliquotNum(this);"></asp:TextBox>
+                                                            <asp:TextBox ID="txtaliquotnum" runat="server" CssClass="form-control required w-100" AutoCompleteType="Disabled" AutoPostBack="true" OnTextChanged="CheckAliquotNum" onChange="CheckAliquotNum(this);"></asp:TextBox>
                                                             <asp:HiddenField runat="server" ID="Hdnaliquotnum" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <asp:Label CssClass="font-weight-bold" style="font-size:14px;" runat="server">Sequence No. Allocation : &nbsp;</asp:Label>
+                                                        <asp:Label CssClass="font-weight-bold" Style="font-size: 14px;" runat="server">Sequence No. Allocation : &nbsp;</asp:Label>
                                                         <div class="form-group d-flex">
-                                                                    <div class="col-md-6">
-                                                                        <asp:Label ID="Label8" runat="server" Font-Size="Small" CssClass="font-weight-bold" ForeColor="Black">From :&nbsp;</asp:Label>
-                                                                        <asp:Label ID="Label10" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*" Visible="false"></asp:Label>
-                                                                        <asp:TextBox ID="allocatefrom" runat="server" CssClass="form-control numeric w-100"  AutoCompleteType="Disabled" AutoPostBack="true" OnTextChanged="Check_AliquotSEQALLOC" onChange="Check_AliquotSEQALLOC(this);"></asp:TextBox>
-                                                                        <asp:HiddenField runat="server" ID="allocatefrm" />
-                                                                    </div>
-                                                                    &nbsp;&nbsp;                                         
+                                                            <div class="col-md-6">
+                                                                <asp:Label ID="Label8" runat="server" Font-Size="Small" CssClass="font-weight-bold" ForeColor="Black">From :&nbsp;</asp:Label>
+                                                                <asp:Label ID="Label10" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*" Visible="false"></asp:Label>
+                                                                <asp:TextBox ID="allocatefrom" runat="server" CssClass="form-control numeric w-100" AutoCompleteType="Disabled" AutoPostBack="true" OnTextChanged="Check_AliquotSEQALLOC" onChange="Check_AliquotSEQALLOC(this);"></asp:TextBox>
+                                                                <asp:HiddenField runat="server" ID="allocatefrm" />
+                                                            </div>
+                                                            &nbsp;&nbsp;                                         
                                                                 <div class="col-md-6">
                                                                     <asp:Label ID="Label9" runat="server" Font-Size="Small" CssClass="font-weight-bold" ForeColor="Black">To : &nbsp;</asp:Label>
-                                                                    <asp:Label ID="Label11" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*" Visible ="false"></asp:Label>
-                                                                    <asp:TextBox ID="allocateto" runat="server" CssClass="form-control numeric w-100"  AutoCompleteType="Disabled" AutoPostBack="true" OnTextChanged="Check_AliquotSEQALLOC" onChange="Check_AliquotSEQALLOC(this);" ></asp:TextBox>
+                                                                    <asp:Label ID="Label11" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*" Visible="false"></asp:Label>
+                                                                    <asp:TextBox ID="allocateto" runat="server" CssClass="form-control numeric w-100" AutoCompleteType="Disabled" AutoPostBack="true" OnTextChanged="Check_AliquotSEQALLOC" onChange="Check_AliquotSEQALLOC(this);"></asp:TextBox>
                                                                     <asp:HiddenField runat="server" ID="allocatetwo" />
-                                                                    <asp:Button runat="server" ID="btnDATA_Changed" CssClass="d-none"  ></asp:Button>
+                                                                    <asp:Button runat="server" ID="btnDATA_Changed" CssClass="d-none"></asp:Button>
                                                                 </div>
-                                                                </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -218,7 +209,7 @@
                                             <div class="col-md-12">
                                                 <div style="width: 100%; height: 446px; overflow: auto;">
                                                     <div>
-                                                        <asp:GridView ID="GrdAliquots" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive grid" DataKeyNames="ID" EmptyDataText="No Data Found!" Width="100%" AllowPaging="true" PageSize="5" OnPageIndexChanging="GrdAliquots_PageIndexChanging" OnRowDataBound="GrdAliquot_RowDataBound">
+                                                        <asp:GridView ID="GrdAliquots" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped Datatable1"  Width="100%" OnRowDataBound="GrdAliquot_RowDataBound" OnPreRender="GrdAliquots_PreRender">
                                                             <Columns>
                                                                 <asp:TemplateField HeaderText="AliquotID" HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none">
                                                                     <ItemTemplate>
@@ -231,7 +222,7 @@
                                                                         <asp:LinkButton ID="lnkedit" runat="server" class="btn-info btn-sm" OnClick="lnkedit_Click"><i class="fas fa-edit"></i></asp:LinkButton>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
-                                                                
+
                                                                 <asp:TemplateField HeaderText="Sequence No" HeaderStyle-CssClass="text-center align-middle" ItemStyle-CssClass="text-center align-middle">
                                                                     <ItemTemplate>
                                                                         <asp:Label ID="lblSeqno" runat="server" Text='<%# Eval("SEQNO") %>'></asp:Label>
@@ -331,12 +322,12 @@
                                                                 <div class="col-md-12">
                                                                     <asp:GridView ID="grdviewAliquotVisit" runat="server" AutoGenerateColumns="False" class="table table-bordered table-striped responsive">
                                                                         <Columns>
-                                                                            <asp:TemplateField HeaderText="Select" HeaderStyle-Width="5%" ControlStyle-Width="5%" ItemStyle-HorizontalAlign="Center">
+                                                                            <asp:TemplateField HeaderText="Select" HeaderStyle-Width="5%" ControlStyle-Width="5%" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text_Center">
                                                                                 <ItemTemplate>
                                                                                     <asp:CheckBox ID="chkSelect" runat="server" />
                                                                                 </ItemTemplate>
                                                                             </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderText="Aliquot" ItemStyle-HorizontalAlign="Center">
+                                                                            <asp:TemplateField HeaderText="Aliquot" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text_Center">
                                                                                 <ItemTemplate>
                                                                                     <asp:HiddenField runat="server" ID="hfID" Value='<%# Eval("ID") %>'></asp:HiddenField>
                                                                                     <asp:Label runat="server" ID="lblAliquotName" Text='<%# Eval("ALIQUOTID") %>'></asp:Label>
@@ -381,12 +372,12 @@
                                                                 <div class="col-md-12">
                                                                     <asp:GridView ID="gridAddedAliquot" runat="server" AutoGenerateColumns="False" class="table table-bordered table-striped responsive">
                                                                         <Columns>
-                                                                            <asp:TemplateField HeaderText="Select" HeaderStyle-Width="5%" ControlStyle-Width="5%" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
+                                                                            <asp:TemplateField HeaderText="Select" HeaderStyle-Width="5%" ControlStyle-Width="5%" ItemStyle-HorizontalAlign="Center"  HeaderStyle-CssClass="text_Center">
                                                                                 <ItemTemplate>
                                                                                     <asp:CheckBox ID="chkSelect" runat="server" />
                                                                                 </ItemTemplate>
                                                                             </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderText="Aliquots" ItemStyle-HorizontalAlign="Center">
+                                                                            <asp:TemplateField HeaderText="Aliquots" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text_Center">
                                                                                 <ItemTemplate>
                                                                                     <asp:HiddenField runat="server" ID="hfID" Value='<%# Eval("ID") %>'></asp:HiddenField>
                                                                                     <asp:Label runat="server" ID="lblAddedAliquot" Text='<%# Eval("ALIQUOTID") %>'></asp:Label>
@@ -431,9 +422,10 @@
                 }
             });
 
-            $('.select').select2();
+            
 
         });
+
         // Function to confirm deletion with SweetAlert
         function confirmDelete(event) {
             event.preventDefault();

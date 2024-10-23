@@ -30,7 +30,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -50,7 +50,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -60,16 +60,17 @@ namespace SpecimenTracking
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "GETTIMEZONE");
 
-                ddlTimeZone.DataSource = ds;
-                ddlTimeZone.DataValueField = "ID";
-                ddlTimeZone.DataTextField = "TimeZone";
-                ddlTimeZone.DataBind();
-                ddlTimeZone.Items.Insert(0, new ListItem("--Select TimeZone--", "0"));
-                ddlTimeZone.SelectedValue = "87";
+                    ddlTimeZone.DataSource = ds;
+                    ddlTimeZone.DataValueField = "ID";
+                    ddlTimeZone.DataTextField = "TimeZone";
+                    ddlTimeZone.DataBind();
+                    ddlTimeZone.Items.Insert(0, new ListItem("--Select TimeZone--", "0"));
+                    ddlTimeZone.SelectedValue = "87";
+                
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -95,7 +96,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -122,7 +123,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -139,222 +140,8 @@ namespace SpecimenTracking
 
                     TextBox txtSystemNotes = (TextBox)repeatSystem.Items[i].FindControl("txtSystemNotes");
 
-                    CheckBox ChkSubsysIWRS = (CheckBox)repeatSystem.Items[i].FindControl("ChkSubsysIWRS");
-                    Label lblSubsystemIWRS = (Label)repeatSystem.Items[i].FindControl("lblSubsystemIWRS");
-
-                    CheckBox ChkSubSysPharma = (CheckBox)repeatSystem.Items[i].FindControl("ChkSubSysPharma");
-                    Label lblSubSysPharma = (Label)repeatSystem.Items[i].FindControl("lblSubSysPharma");
-                    //DM
-                    CheckBox chksubsysFreeze = (CheckBox)repeatSystem.Items[i].FindControl("chksubsysFreeze");
-                    Label lblsubsysFreeze = (Label)repeatSystem.Items[i].FindControl("lblsubsysFreeze");
-                    CheckBox chksubsysUnFreeze = (CheckBox)repeatSystem.Items[i].FindControl("chksubsysUnFreeze");
-                    Label lblsubsysUNFreeze = (Label)repeatSystem.Items[i].FindControl("lblsubsysUNFreeze");
-                    CheckBox chksubsysLock = (CheckBox)repeatSystem.Items[i].FindControl("chksubsysLock");
-                    Label lblsubsysLock = (Label)repeatSystem.Items[i].FindControl("lblsubsysLock");
-                    CheckBox chksubsysUnlock = (CheckBox)repeatSystem.Items[i].FindControl("chksubsysUnlock");
-                    Label lblsubsysunLock = (Label)repeatSystem.Items[i].FindControl("lblsubsysunLock");
-                    //eSource
-                    CheckBox ChksubsysSourceDataReview = (CheckBox)repeatSystem.Items[i].FindControl("ChksubsysSourceDataReview");
-                    Label lblsubsysSourceDataReview = (Label)repeatSystem.Items[i].FindControl("lblsubsysSourceDataReview");
-                    CheckBox chlReadOnlyeSource = (CheckBox)repeatSystem.Items[i].FindControl("chlReadOnlyeSource");
-                    Label LblReadOnly = (Label)repeatSystem.Items[i].FindControl("LblReadOnly");
-                    //Design bench
-                    CheckBox ChksubDesignbench = (CheckBox)repeatSystem.Items[i].FindControl("ChksubDesignbench");
-                    Label lblDesigner = (Label)repeatSystem.Items[i].FindControl("lblDesigner");
-                    CheckBox ChksubApprover = (CheckBox)repeatSystem.Items[i].FindControl("ChksubApprover");
-                    Label lblApprover = (Label)repeatSystem.Items[i].FindControl("lblApprover");
-                    //eTMF
-                    CheckBox chkArchivist = (CheckBox)repeatSystem.Items[i].FindControl("chkArchivist");
-                    Label lblchkArchivist = (Label)repeatSystem.Items[i].FindControl("lblchkArchivist");
-                    CheckBox chkConfiSpecialist = (CheckBox)repeatSystem.Items[i].FindControl("chkConfiSpecialist");
-                    Label lblConfiSpecialist = (Label)repeatSystem.Items[i].FindControl("lblConfiSpecialist");
-                    CheckBox ChkDocuSpecialist = (CheckBox)repeatSystem.Items[i].FindControl("ChkDocuSpecialist");
-                    Label lblDocuSpecialist = (Label)repeatSystem.Items[i].FindControl("lblDocuSpecialist");
-                    CheckBox chkContributor = (CheckBox)repeatSystem.Items[i].FindControl("chkContributor");
-                    Label lblContributor = (Label)repeatSystem.Items[i].FindControl("lblContributor");
-                    CheckBox ChkQC = (CheckBox)repeatSystem.Items[i].FindControl("ChkQC");
-                    Label lblQC = (Label)repeatSystem.Items[i].FindControl("lblQC");
-
-
                     string SubSytem = "";
-                    if (ChkSubsysIWRS.Checked)
-                    {
-                        SubSytem = lblSubsystemIWRS.Text;
-                    }
-                    if (ChkSubSysPharma.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblSubSysPharma.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblSubSysPharma.Text;
-                        }
-
-                    }
-                    if (chksubsysFreeze.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblsubsysFreeze.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblsubsysFreeze.Text;
-                        }
-
-                    }
-
-                    if (chksubsysUnFreeze.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblsubsysUNFreeze.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblsubsysUNFreeze.Text;
-                        }
-
-                    }
-                    if (chksubsysLock.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblsubsysLock.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblsubsysLock.Text;
-                        }
-
-                    }
-                    if (chksubsysUnlock.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblsubsysunLock.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblsubsysunLock.Text;
-                        }
-
-                    }
-
-                    if (ChksubsysSourceDataReview.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblsubsysSourceDataReview.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblsubsysSourceDataReview.Text;
-                        }
-
-                    }
-                    if (chlReadOnlyeSource.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = LblReadOnly.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + LblReadOnly.Text;
-                        }
-
-                    }
-
-                    if (ChksubDesignbench.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblDesigner.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblDesigner.Text;
-                        }
-
-                    }
-                    if (ChksubApprover.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblApprover.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblApprover.Text;
-                        }
-
-                    }
-
-                    if (chkArchivist.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblchkArchivist.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblchkArchivist.Text;
-                        }
-
-                    }
-                    if (chkConfiSpecialist.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblConfiSpecialist.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblConfiSpecialist.Text;
-                        }
-
-                    }
-                    if (ChkDocuSpecialist.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblDocuSpecialist.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblDocuSpecialist.Text;
-                        }
-
-                    }
-                    if (chkContributor.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblContributor.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblContributor.Text;
-                        }
-
-                    }
-                    if (ChkQC.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblQC.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblQC.Text;
-                        }
-
-                    }
-
-
+                    
                     if (ChkSelect.Checked)
                     {
                         DataSet ds = dal_UMT.UMT_USERS_SP(
@@ -381,7 +168,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -433,7 +220,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -464,7 +251,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
             return exists;
         }
@@ -490,7 +277,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -525,7 +312,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -548,7 +335,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -584,7 +371,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -618,7 +405,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -650,7 +437,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -702,34 +489,7 @@ namespace SpecimenTracking
 
                     TextBox txtSystemNotes = (TextBox)e.Item.FindControl("txtSystemNotes");
                     txtSystemNotes.Attributes.Add("maxlength", "200");
-
-                    HtmlGenericControl divSubsysIWRS = e.Item.FindControl("divSubsysIWRS") as HtmlGenericControl;
-                    HtmlGenericControl divSubSysPharma = e.Item.FindControl("divSubSysPharma") as HtmlGenericControl;
-                    HtmlGenericControl divsubsysDM = e.Item.FindControl("divsubsysDM") as HtmlGenericControl;
-                    HtmlGenericControl divsubsyseSource = e.Item.FindControl("divsubsyseSource") as HtmlGenericControl;
-                    HtmlGenericControl divsubsysDesignbench = e.Item.FindControl("divsubsysDesignbench") as HtmlGenericControl;
-                    HtmlGenericControl divsubsyseTMF = e.Item.FindControl("divsubsyseTMF") as HtmlGenericControl;
-
-                    CheckBox ChkSubsysIWRS = (CheckBox)e.Item.FindControl("ChkSubsysIWRS");
-                    CheckBox ChkSubSysPharma = (CheckBox)e.Item.FindControl("ChkSubSysPharma");
-                    //CheckBox chksubsysDM = (CheckBox)e.Item.FindControl("chksubsysDM");
-
-                    CheckBox ChksubsysSourceDataReview = (CheckBox)e.Item.FindControl("ChksubsysSourceDataReview");
-                    CheckBox chlReadOnlyeSource = (CheckBox)e.Item.FindControl("chlReadOnlyeSource");
-
-                    CheckBox chksubsysFreeze = (CheckBox)e.Item.FindControl("chksubsysFreeze");
-                    CheckBox chksubsysUnFreeze = (CheckBox)e.Item.FindControl("chksubsysUnFreeze");
-                    CheckBox chksubsysLock = (CheckBox)e.Item.FindControl("chksubsysLock");
-                    CheckBox chksubsysUnlock = (CheckBox)e.Item.FindControl("chksubsysUnlock");
-
-                    CheckBox ChksubDesignbench = (CheckBox)e.Item.FindControl("ChksubDesignbench");
-                    CheckBox ChksubApprover = (CheckBox)e.Item.FindControl("ChksubApprover");
-
-                    CheckBox chkArchivist = (CheckBox)e.Item.FindControl("chkArchivist");
-                    CheckBox chkConfiSpecialist = (CheckBox)e.Item.FindControl("chkConfiSpecialist");
-                    CheckBox ChkDocuSpecialist = (CheckBox)e.Item.FindControl("ChkDocuSpecialist");
-                    CheckBox chkContributor = (CheckBox)e.Item.FindControl("chkContributor");
-                    CheckBox ChkQC = (CheckBox)e.Item.FindControl("ChkQC");
+                       
 
 
 
@@ -746,100 +506,7 @@ namespace SpecimenTracking
                             txtSystemNotes.Text = rowView["Notes"].ToString();
 
                             ChkSelect.Checked = true;
-                            if (lblSystemName.Text == "IWRS")
-                            {
-                                divSubsysIWRS.Visible = false;
-                                if (HiddenSubSytem.Value == "Unblinding")
-                                {
-                                    ChkSubsysIWRS.Checked = false;
-                                }
-                            }
-                            else if (lblSystemName.Text == "Pharmacovigilance")
-                            {
-                                divSubSysPharma.Visible = true;
-
-                                if (HiddenSubSytem.Value == "Sign-Off")
-                                {
-                                    ChkSubSysPharma.Checked = false;
-                                }
-                            }
-                            else if (lblSystemName.Text == "Data Management")
-                            {
-                                divsubsysDM.Visible = true;
-                                if (HiddenSubSytem.Value.Split(',').Contains("Freeze"))
-                                {
-                                    chksubsysFreeze.Checked = true;
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("UnFreeze"))
-                                {
-                                    chksubsysUnFreeze.Checked = true;
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("Lock"))
-                                {
-                                    chksubsysLock.Checked = true;
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("Unlock"))
-                                {
-                                    chksubsysUnlock.Checked = true;
-                                }
-                            }
-                            else if (lblSystemName.Text == "eSource")
-                            {
-                                divsubsyseSource.Visible = true;
-                                if (HiddenSubSytem.Value.Split(',').Contains("Source Data Review"))
-                                {
-                                    ChksubsysSourceDataReview.Checked = true;
-
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("Read-Only"))
-                                {
-
-                                    chlReadOnlyeSource.Checked = true;
-                                }
-                            }
-                            else if (lblSystemName.Text == "Design Bench")
-                            {
-                                divsubsysDesignbench.Visible = true;
-                                if (HiddenSubSytem.Value.Split(',').Contains("Designer"))
-                                {
-                                    ChksubDesignbench.Checked = true;
-
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("Approver"))
-                                {
-
-                                    ChksubApprover.Checked = true;
-                                }
-                            }
-                            else if (lblSystemName.Text == "eTMF")
-                            {
-                                divsubsyseTMF.Visible = true;
-                                if (HiddenSubSytem.Value.Split(',').Contains("Archivist"))
-                                {
-                                    chkArchivist.Checked = true;
-
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("Configuration Specialist"))
-                                {
-
-                                    chkConfiSpecialist.Checked = true;
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("Document Specialist"))
-                                {
-
-                                    ChkDocuSpecialist.Checked = true;
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("Contributor"))
-                                {
-
-                                    chkContributor.Checked = true;
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("QC"))
-                                {
-
-                                    ChkQC.Checked = true;
-                                }
-                            }
+                            
                         }
                         else
                         {
@@ -851,7 +518,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -875,7 +542,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -890,13 +557,7 @@ namespace SpecimenTracking
 
                 TextBox txtSystemNotes = (TextBox)repeatSystem.Items[i].FindControl("txtSystemNotes");
 
-                HtmlGenericControl divSubsysIWRS = repeatSystem.Items[i].FindControl("divSubsysIWRS") as HtmlGenericControl;
-                HtmlGenericControl divSubSysPharma = repeatSystem.Items[i].FindControl("divSubSysPharma") as HtmlGenericControl;
-                HtmlGenericControl divsubsysDM = repeatSystem.Items[i].FindControl("divsubsysDM") as HtmlGenericControl;
-                HtmlGenericControl divsubsyseSource = repeatSystem.Items[i].FindControl("divsubsyseSource") as HtmlGenericControl;
-                HtmlGenericControl divsubsysDesignbench = repeatSystem.Items[i].FindControl("divsubsysDesignbench") as HtmlGenericControl;
-                HtmlGenericControl divsubsyseTMF = repeatSystem.Items[i].FindControl("divsubsyseTMF") as HtmlGenericControl;
-
+                
                 if (ChkSelect.Checked)
                 {
                     txtSystemNotes.Visible = true;
@@ -904,63 +565,6 @@ namespace SpecimenTracking
                 else
                 {
                     txtSystemNotes.Visible = false;
-                }
-
-                if (lblSystemName.Text == "IWRS" && ChkSelect.Checked && drpUnblind.SelectedValue == "Blinded")
-                {
-                    divSubsysIWRS.Visible = false;
-                }
-                else
-                {
-                    divSubsysIWRS.Visible = false;
-                }
-
-                if (lblSystemName.Text == "Pharmacovigilance" && ChkSelect.Checked)
-                {
-                    divSubSysPharma.Visible = false;
-
-                }
-                else
-                {
-                    divSubSysPharma.Visible = false;
-
-                }
-                if (lblSystemName.Text == "Data Management" && ChkSelect.Checked)
-                {
-                    divsubsysDM.Visible = true;
-
-                }
-                else
-                {
-                    divsubsysDM.Visible = false;
-
-                }
-                if (lblSystemName.Text == "eSource" && ChkSelect.Checked)
-                {
-                    divsubsyseSource.Visible = true;
-
-                }
-                else
-                {
-                    divsubsyseSource.Visible = false;
-                }
-                if (lblSystemName.Text == "Design Bench" && ChkSelect.Checked)
-                {
-                    divsubsysDesignbench.Visible = true;
-
-                }
-                else
-                {
-                    divsubsysDesignbench.Visible = false;
-                }
-                if (lblSystemName.Text == "eTMF" && ChkSelect.Checked)
-                {
-                    divsubsyseTMF.Visible = true;
-
-                }
-                else
-                {
-                    divsubsyseTMF.Visible = false;
                 }
             }
         }
@@ -982,7 +586,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
     }

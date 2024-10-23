@@ -1,11 +1,12 @@
 div.dataTables_length label {
-	font-weight: normal;
+	font-weight: bold;
+	font-size:small;
 	float: left;
 	text-align: left;
 }
 
 div.dataTables_length select {
-	width: 40px;
+	width: 60px;
 	background-color: #ffffff;
 background-image: none;
 border: 1px solid #cccccc;

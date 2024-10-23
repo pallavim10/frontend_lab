@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UMT_SiteUsersApproval.aspx.cs" Inherits="SpecimenTracking.UMT_SiteUsersApproval" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <script src="Scripts/btnSave_Required.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="Style/Select2.css" />
     <script src="Scripts/Select2.js" type="text/javascript"></script>
 
-     <style type="text/css">
+    <style type="text/css">
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             color: #0000ff;
         }
@@ -79,7 +80,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <div class="content-wrapper">
         <div class="content-header">
@@ -91,7 +92,9 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
-                            <li class="breadcrumb-item active">Create Site User</li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
+                            <li class="breadcrumb-item active">Manage Sites</li>
+                            <li class="breadcrumb-item active">Site Users</li>
                         </ol>
                     </div>
                 </div>
@@ -115,9 +118,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Site Users Details</h3>
                                 <div class="pull-right">
-                                    <%--<asp:LinkButton runat="server" ID="lbSiteUsersDetailsExport" Font-Size="14px" Style="margin-top: 3px;" OnClick="lbSiteUsersDetailsExport_Click" CssClass="btn btn-default" ForeColor="Black">
-			Export Site Users &nbsp;<span class="fas fa-download btn-xs"></span>
-                                    </asp:LinkButton>&nbsp;&nbsp;--%>
+
                                     <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                 </div>
                             </div>
@@ -138,7 +139,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Study Role :&nbsp;</label>
-                                                    <asp:Label  ID="lblStudyRole" runat="server" Font-Size="Small" CssClass=" form-control"></asp:Label>
+                                                    <asp:Label ID="lblStudyRole" runat="server" Font-Size="Small" CssClass=" form-control"></asp:Label>
                                                 </div>
                                             </div>
                                         </div>
@@ -157,7 +158,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Last Name :&nbsp;</label>
-                                                    <asp:Label ID="lblLastName" runat="server" Font-Size="Small" CssClass=" form-control" ></asp:Label>
+                                                    <asp:Label ID="lblLastName" runat="server" Font-Size="Small" CssClass=" form-control"></asp:Label>
                                                 </div>
                                             </div>
                                         </div>
@@ -189,13 +190,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Blinded/Unblinded :&nbsp;</label>
-                                                    <asp:Label  ID="lblUnblined" runat="server" Font-Size="Small" CssClass="form-control"></asp:Label>
+                                                    <asp:Label ID="lblUnblined" runat="server" Font-Size="Small" CssClass="form-control"></asp:Label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Notes (If any):&nbsp;</label>
-                                                    <asp:TextBox runat="server" ID="lblNotes" CssClass="form-control" TextMode="MultiLine" MaxLength="200"></asp:TextBox>
+                                                    <asp:Label runat="server" ID="lblNotes" CssClass="form-control" TextMode="MultiLine" MaxLength="200"></asp:Label>
                                                     <label>&nbsp;</label>
                                                 </div>
                                             </div>
@@ -208,7 +209,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label>Select Systems & Privileges: &nbsp;</label>
-                                                <asp:Label ID="Label3" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                                <asp:Label ID="Label3" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*" Visible="false"></asp:Label>
                                                 <div class="col-md-8">
                                                     <asp:UpdatePanel runat="server" ID="upnlSystems">
                                                         <ContentTemplate>
@@ -216,7 +217,7 @@
                                                                 <tr>
                                                                     <th class="col-md-4">Systems
                                                                     </th>
-                                                                    <th class="col-md-4">Privileges
+                                                                    <th class="col-md-4 d-none">Privileges
                                                                     </th>
                                                                     <th class="col-md-4">Notes (If any)
                                                                     </th>
@@ -231,37 +232,9 @@
                                                                                 <asp:Label ID="lblSystemID" runat="server" Text='<%# Bind("SystemID") %>' Visible="false"></asp:Label>
                                                                                 <asp:HiddenField runat="server" ID="HiddenSubSytem" Value='<%# Eval("SubSystem") %>' />
                                                                             </td>
+                                                                            <td class="col-md-4 d-none"></td>
                                                                             <td class="col-md-4">
-                                                                                <div runat="server" id="divSubsysIWRS" visible="false">
-                                                                                    <asp:CheckBox ID="ChkSubsysIWRS" runat="server" />
-                                                                                    &nbsp;
-                                                            <asp:Label ID="lblSubsystemIWRS" runat="server" Text='Unblinding'></asp:Label>
-                                                                                    <br />
-                                                                                </div>
-                                                                                <div runat="server" id="divSubSysPharma" visible="false">
-                                                                                    <asp:CheckBox ID="ChkSubSysPharma" runat="server" Enabled="false" />
-                                                                                    &nbsp;
-                                                           <asp:Label ID="lblSubSysPharma" runat="server" Text='Sign-Off'></asp:Label>
-                                                                                    <br />
-                                                                                </div>
-                                                                                <div runat="server" id="divsubsysDM" visible="false">
-                                                                                    <asp:CheckBox ID="chksubsysDM" runat="server" Enabled="false"/>
-                                                                                    &nbsp;
-                                                            <asp:Label ID="LblsubsysDM" runat="server" Text='Sign-Off'></asp:Label>
-                                                                                    <br />
-                                                                                </div>
-                                                                                <div runat="server" id="divsubsyseSource" visible="false">
-                                                                                    <asp:CheckBox ID="ChksubsyseSource" runat="server" Enabled="false" />
-                                                                                    &nbsp;
-                                                            <asp:Label ID="lblsubsyseSource" runat="server" Text='Sign-Off'></asp:Label>
-                                                                                    <br />
-                                                                                    <asp:CheckBox ID="chlReadOnlyeSource" runat="server" Enabled="false"/>
-                                                                                    &nbsp;
-                                                            <asp:Label ID="LblReadOnly" runat="server" Text='Read-Only'></asp:Label>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td class="col-md-4">
-                                                                                <asp:TextBox runat="server" ID="lblSystemNotes" CssClass="form-control" Width="100%" TextMode="MultiLine" MaxLength="200" Enabled="false"></asp:TextBox>
+                                                                                <asp:Label runat="server" ID="lblSystemNotes" CssClass="form-control w-100" TextMode="MultiLine" MaxLength="200" Enabled="false" Text='<%# Bind("Notes")%>'></asp:Label>
                                                                             </td>
                                                                         </tr>
                                                                     </ItemTemplate>
@@ -279,7 +252,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
-                                     <div class="col-md-6">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Action:&nbsp;</label>
                                                     <asp:Label ID="Label8" runat="server" Font-Size="Small" ForeColor="#FF3300"></asp:Label>
@@ -293,11 +266,11 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Comment :&nbsp;</label>
-                                                     <asp:TextBox runat="server" ID="txtComment" CssClass="form-control required" TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:TextBox runat="server" ID="txtComment" TextMode="MultiLine" CssClass="form-control required"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
-                                     </div>
+                                    </div>
                                 </div>
                                 <center>
                                     <asp:LinkButton runat="server" ID="lbtnSubmit" Text="Submit" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" OnClick="lbtnSubmit_Click"></asp:LinkButton>
@@ -343,4 +316,4 @@
 
 
     </script>
-    </asp:Content>
+</asp:Content>

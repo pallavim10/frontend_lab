@@ -147,7 +147,7 @@ namespace SpecimenTracking
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox lblNotes;
+        protected global::System.Web.UI.WebControls.Label lblNotes;
 
         /// <summary>
         /// grdAssignRolesAct control.

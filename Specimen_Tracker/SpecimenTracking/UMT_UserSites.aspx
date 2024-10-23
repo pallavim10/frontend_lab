@@ -49,6 +49,8 @@
                     <div class="col-sm-12">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
+                            <li class="breadcrumb-item active">Manage Users</li>
                             <li class="breadcrumb-item active">Assign Sites</li>
                         </ol>
                     </div>

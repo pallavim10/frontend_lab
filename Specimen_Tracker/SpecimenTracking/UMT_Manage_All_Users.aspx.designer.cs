@@ -10,7 +10,6 @@
 namespace SpecimenTracking
 {
 
-
     public partial class UMT_Manage_All_Users
     {
 

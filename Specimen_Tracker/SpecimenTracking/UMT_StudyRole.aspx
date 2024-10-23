@@ -73,6 +73,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
+                            <li class="breadcrumb-item active">Manage Roles</li>
                             <li class="breadcrumb-item active">Study Roles</li>
                         </ol>
                     </div>
@@ -87,7 +89,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Add Study Role</h3>
                                 <div class="pull-right">
-                                    <asp:LinkButton ID="lbStudyRoleExport" runat="server" Font-Size="14px" Style="margin-top: 3px;" CssClass="btn btn-default" OnClick="lbStudyRoleExport_Click" ForeColor="Black">Export Study Role&nbsp;<span class="fas fa-download btn-xs"></span></asp:LinkButton>
+                                    <asp:LinkButton ID="lbStudyRoleExport" runat="server" Font-Size="14px" Style="margin-top: 3px;" CssClass="btn btn-default" OnClick="lbStudyRoleExport_Click" ForeColor="Black">Export Study Roles&nbsp;<span class="fas fa-download btn-xs"></span></asp:LinkButton>
                                     &nbsp;&nbsp; 
                                     <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                 </div>
@@ -102,7 +104,7 @@
                                             </div>
                                             <div class="col-md-10">
                                                 <asp:TextBox Style="width: 250px;" ID="txtStudyRole" ValidationGroup="section" runat="server"
-                                                    CssClass="form-control required1"></asp:TextBox>
+                                                    CssClass="form-control required1 "></asp:TextBox>
                                             </div>
                                         </div>
                                         <br />
@@ -221,4 +223,13 @@
             </div>
         </section>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.noSpace').keypress(function (e) {
+                if (e.which === 32) {
+                    return false;
+                }
+            });
+        });
+    </script>
 </asp:Content>

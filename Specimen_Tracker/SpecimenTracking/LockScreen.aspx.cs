@@ -13,12 +13,13 @@ namespace SpecimenTracking
     {
 
         DAL_UMT dal_UMT = new DAL_UMT();
+        DAL_SETUP dal_SETUP = new DAL_SETUP();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CHECK_USER_EXIST();
-                if (Request.Cookies["Username"] != null)
+                if (Request.Cookies["Username"] != null && Request.Cookies["ProjectName"] != null)
                 {
                     lblUserName.Text = Server.HtmlEncode(Request.Cookies["Username"].Value);
                     lblFullName.Text = Server.HtmlEncode(Request.Cookies["FullName"].Value);
@@ -28,6 +29,10 @@ namespace SpecimenTracking
                 {
                     txtPassword.Attributes["value"] = Request.Cookies["Password"].Value;
                 }
+            }
+            if (hdn.Value != "1")
+            {
+                Session.Clear();
             }
         }
 
@@ -53,7 +58,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -171,7 +176,7 @@ namespace SpecimenTracking
           
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void Get_UserDetails()
@@ -196,7 +201,8 @@ namespace SpecimenTracking
                 Session["Authentication_ID"] = dr["Email_ID"].ToString().Trim();
                 Session["User_Name"] = dr["User_Name"].ToString().Trim();
                 Session["USER_ID"] = dr["UserID"].ToString().Trim();
-
+                Session["UserType"] = dr["UserType"].ToString().Trim();
+                Session["StudyRole"] = dr["StudyRole"].ToString().Trim();
 
 
                 Session["UMT"] = "YES";
@@ -205,17 +211,30 @@ namespace SpecimenTracking
 
                 usernameCookie.Values["WAI_Name"] = Session["User_Name"].ToString();
                 HttpContext.Current.Response.Cookies.Add(usernameCookie);
+
+                DataSet ds1 = dal_SETUP.SETUP_FIELD_SP(ACTION: "GET_SPECIMENID");
+
+                if (ds1.Tables[0].Rows.Count > 0)
+                {
+                    DataRow dr1 = ds1.Tables[0].Rows[0];
+                    Session["SID_ACTIVE"] = dr1["ISACTIVE"].ToString();
+                }
+                else
+                {
+                    Session["SID_ACTIVE"] = "True";
+                }
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void lbtnLoginAnuser_Click(object sender, EventArgs e)
         {
-            if (Request.Cookies["Username"] != null)
+            if (Request.Cookies["Username"] != null && Request.Cookies["ProjectName"] != null)
             {
                 Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-30);
+                Response.Cookies["ProjectName"].Expires = DateTime.Now.AddDays(-30);
                 Response.Redirect("LoginPage.aspx");
 
             }

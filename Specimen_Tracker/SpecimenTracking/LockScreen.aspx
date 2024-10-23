@@ -22,6 +22,7 @@
 </head>
 <body class="hold-transition lockscreen">
     <!-- Automatic element centering -->
+    
     <div class="lockscreen-wrapper">
         <div class="lockscreen-logo">
             <b>Login</b>
@@ -31,7 +32,7 @@
                 ForeColor="Red"></asp:Label>
         </div>
         <!-- User name -->
-
+       
         <div class="lockscreen-name" style="text-align-last: center">
             <asp:Label ID="lblFullName" runat="server" ForeColor="Black" Font-Bold="true"></asp:Label>
         </div>
@@ -49,6 +50,7 @@
 
             <!-- lockscreen credentials (contains the form) -->
             <form class="lockscreen-credentials" runat="server">
+                 <asp:HiddenField runat="server" ID="hdn" Value="0" />
                 <div class="input-group">
                     <asp:TextBox ID="txtPassword" runat="server" class="form-control form-control-lg" TextMode="Password" placeholder="Password"></asp:TextBox>
 

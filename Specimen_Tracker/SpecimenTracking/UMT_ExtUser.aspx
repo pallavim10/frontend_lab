@@ -14,6 +14,9 @@
         }
     </style>
     <script type="text/javascript">
+        function pageLoad() {
+            $('.select').select2();
+        }
         function showAuditTrail(element) {
 
             var ID = $(element).closest('tr').find('td').eq(0).text().trim();
@@ -45,15 +48,7 @@
             return false;
         }
     </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.noSpace').keypress(function (e) {
-                if (e.which === 32) {
-                    return false;
-                }
-            });
-        });
-    </script>
+    
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -69,7 +64,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
-                            <li class="breadcrumb-item active">Create External Users</li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
+                            <li class="breadcrumb-item active">Manage External Users</li>
                         </ol>
                     </div>
                 </div>
@@ -83,7 +79,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Create External Users</h3>
                                 <div class="pull-right">
-                                    <asp:LinkButton ID="lbtnExport" runat="server" Font-Size="14px" Style="margin-top: 3px;" CssClass="btn btn-default" OnClick="lblUserDetailsExport_Click" ForeColor="Black">Export Internal User&nbsp;<span class="fas fa-download btn-xs"></span></asp:LinkButton>
+                                    <asp:LinkButton ID="lbtnExport" runat="server" Font-Size="14px" Style="margin-top: 3px;" CssClass="btn btn-default" OnClick="lblUserDetailsExport_Click" ForeColor="Black">Export External Users&nbsp;<span class="fas fa-download btn-xs"></span></asp:LinkButton>
                                     &nbsp;&nbsp; 
                                     <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                 </div>
@@ -92,7 +88,7 @@
                                 <asp:HiddenField ID="hdnID" runat="server" />
                             </div>
                             <div class="card-body">
-                                <div class="rows">
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -106,7 +102,7 @@
                                     </div>
                                 </div>
                                 <br />
-                                <div class="rows">
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -127,7 +123,7 @@
                                     </div>
                                 </div>
                                 <br />
-                                <div class="rows">
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -182,7 +178,7 @@
                                                 <div class="form-group">
                                                     <label>TimeZone :&nbsp; </label>
                                                     <asp:Label ID="Label1" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="ddlTimeZone" runat="server" class="form-control drpControl required select" SelectionMode="Single">
+                                                    <asp:DropDownList ID="ddlTimeZone" runat="server" class="form-control drpControl required select2" SelectionMode="Single">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -201,7 +197,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <label>Select Systems & Privileges: </label>
-                                                <asp:Label ID="Label3" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                               
                                             </div>
                                             <div class="col-md-9">
                                                 <asp:UpdatePanel runat="server" ID="upnlSystems">
@@ -210,7 +206,7 @@
                                                             <tr>
                                                                 <th class="col-md-4">Systems
                                                                 </th>
-                                                                <th class="col-md-4">Privileges
+                                                                <th class="col-md-4 d-none">Privileges
                                                                 </th>
                                                                 <th class="col-md-4">Notes (If any)
                                                                 </th>
@@ -225,76 +221,8 @@
                                                                             <asp:Label ID="lblSystemID" runat="server" Text='<%# Bind("SystemID") %>' Visible="false"></asp:Label>
                                                                             <asp:HiddenField runat="server" ID="HiddenSubSytem" Value='<%# Eval("SubSystem") %>' />
                                                                         </td>
-                                                                        <td class="col-md-4">
-                                                                            <div runat="server" id="divSubsysIWRS" visible="false">
-                                                                                <asp:CheckBox ID="ChkSubsysIWRS" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblSubsystemIWRS" runat="server" Text='Unblinding'></asp:Label>
-                                                                                <br />
-                                                                            </div>
-                                                                            <div runat="server" id="divSubSysPharma" visible="false">
-                                                                                <asp:CheckBox ID="ChkSubSysPharma" runat="server" />
-                                                                                &nbsp;
-                                                           <asp:Label ID="lblSubSysPharma" runat="server" Text='Sign-Off'></asp:Label>
-                                                                                <br />
-                                                                            </div>
-                                                                            <div runat="server" id="divsubsysDM" visible="false">
-                                                                                <asp:CheckBox ID="chksubsysFreeze" runat="server" />
-                                                                                <br />
-                                                                                <asp:CheckBox ID="chksubsysUnFreeze" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblsubsysUNFreeze" runat="server" Text='UnFreeze'></asp:Label>
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblsubsysFreeze" runat="server" Text='Freeze'></asp:Label>
-                                                                                <br />
-                                                                                <asp:CheckBox ID="chksubsysLock" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblsubsysLock" runat="server" Text='Lock'></asp:Label>
-                                                                                <br />
-                                                                                <asp:CheckBox ID="chksubsysUnlock" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblsubsysunLock" runat="server" Text='Unlock'></asp:Label>
-                                                                                <br />
-                                                                            </div>
-                                                                            <div runat="server" id="divsubsyseSource" visible="false">
-                                                                                <asp:CheckBox ID="ChksubsysSourceDataReview" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblsubsysSourceDataReview" runat="server" Text='Source Data Review'></asp:Label>
-                                                                                <br />
-                                                                                <asp:CheckBox ID="chlReadOnlyeSource" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="LblReadOnly" runat="server" Text='Read-Only'></asp:Label>
-                                                                            </div>
-                                                                            <div runat="server" id="divsubsysDesignbench" visible="false">
-                                                                                <asp:CheckBox ID="ChksubDesignbench" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblDesigner" runat="server" Text='Designer'></asp:Label>
-                                                                                <br />
-                                                                                <asp:CheckBox ID="ChksubApprover" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblApprover" runat="server" Text='Approver'></asp:Label>
-                                                                            </div>
-                                                                            <div runat="server" id="divsubsyseTMF" visible="false">
-                                                                                <asp:CheckBox ID="chkArchivist" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblchkArchivist" runat="server" Text='Archivist'></asp:Label>
-                                                                                <br />
-                                                                                <asp:CheckBox ID="chkConfiSpecialist" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblConfiSpecialist" runat="server" Text='Configuration Specialist'></asp:Label>
-                                                                                <br />
-                                                                                <asp:CheckBox ID="ChkDocuSpecialist" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblDocuSpecialist" runat="server" Text='Document Specialist'></asp:Label>
-                                                                                <br />
-                                                                                <asp:CheckBox ID="chkContributor" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblContributor" runat="server" Text='Contributor'></asp:Label>
-                                                                                <br />
-                                                                                <asp:CheckBox ID="ChkQC" runat="server" />
-                                                                                &nbsp;
-                                                            <asp:Label ID="lblQC" runat="server" Text='QC'></asp:Label>
-                                                                            </div>
+                                                                        <td class="col-md-4 d-none">
+                                                                            
                                                                         </td>
                                                                         <td class="col-md-4">
                                                                             <asp:TextBox runat="server" ID="txtSystemNotes" CssClass="form-control" Width="100%" TextMode="MultiLine" MaxLength="200"></asp:TextBox>
@@ -319,6 +247,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
         </section>
         <br />
@@ -424,6 +353,34 @@
             </div>
         </section>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //only for numeric value
+            $('.numeric').keypress(function (event) {
+
+                if (event.keyCode == 8 || event.keyCode == 9 || event.charCode == 48 || event.charCode == 49 || event.charCode == 50 || event.charCode == 51
+                    || event.charCode == 52 || event.charCode == 52 || event.charCode == 53 || event.charCode == 54 || event.charCode == 55 || event.charCode == 56 || event.charCode == 57) {
+                    // let it happen, don't do anything
+                    return true;
+                }
+                else {
+                    event.preventDefault();
+                }
+            });
+
+            //$('.select').select2();
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.noSpace').keypress(function (e) {
+                if (e.which === 32) {
+                    return false;
+                }
+            });
+        });
+    </script>
     <script type="text/javascript">
 
         function confirm(event) {

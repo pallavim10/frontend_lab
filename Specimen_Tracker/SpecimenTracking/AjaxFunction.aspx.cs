@@ -16,6 +16,25 @@ namespace SpecimenTracking
 
         }
         [System.Web.Services.WebMethod]
+        public static string setNavigationPath(string NavigationPath)
+        {
+            try
+            {
+                HttpCookie nameCookie = new HttpCookie("NavigationPath");
+
+                nameCookie.Values["NavigationPath"] = NavigationPath;
+
+                HttpContext.Current.Response.Cookies.Add(nameCookie);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
+            return NavigationPath;
+        }
+
+        [System.Web.Services.WebMethod]
         public static string showAuditTrail(string TABLENAME, string ID)
         {
             string str = "";
@@ -73,6 +92,31 @@ namespace SpecimenTracking
             {
                 DAL_DE Dal_DE = new DAL_DE();
                 DataSet ds = Dal_DE.DE_LOG_SP(ACTION: "GET_AUDITTRAIL", TABLENAME: TABLENAME, ID: ID);
+
+                if (ds != null)
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        str = ConvertDataTableToHTML(ds);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+                throw;
+            }
+            return str;
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string SHOW_ALIQUOT_DATA(string ID)
+        {
+            string str = "";
+            try
+            {
+                DAL_DE Dal_DE = new DAL_DE();
+                DataSet ds = Dal_DE.DATA_ENTRYLIST_SP(ACTION: "GET_DATA_ALIQUOT_SDV", SID: ID);
 
                 if (ds != null)
                 {

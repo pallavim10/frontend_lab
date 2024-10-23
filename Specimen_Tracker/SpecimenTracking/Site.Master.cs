@@ -1,10 +1,12 @@
 ﻿using SpecimenTracking.App_Code;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -15,24 +17,45 @@ namespace SpecimenTracking
     {
 
         DAL_UMT dal_UMT = new DAL_UMT();
+
+        public void session_status()
+        {
+            int timeout = 0;
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            if (!this.IsPostBack)
+            {
+                Session["Reset"] = true;
+                Configuration config = WebConfigurationManager.OpenWebConfiguration("~/Web.Config");
+                SessionStateSection section = (SessionStateSection)config.GetSection("system.web/sessionState");
+                timeout = (int)section.Timeout.TotalMinutes * 1000 * 60;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "SessionAlert", "SessionExpireAlert(" + timeout + ");", true);
+            }
+        }
+
+        public Site()
+        {
+            this.Load += new EventHandler(Page_PreInit);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+
                 if (Session["User_ID"] == null)
                 {
                     Response.Redirect("~/SessionExpired.aspx", false);
                 }
                 else
                 {
-                    //UserName.InnerText = Session["User_Name"].ToString();
                     lblUserName.Text = Session["User_Name"].ToString();
+                    Lbl_User_Dept.Text = Session["StudyRole"].ToString();
                     if (!IsPostBack)
                     {
 
-
                         if (Session["PROJECTIDTEXT"] != null)
                         {
+                            lblPROJECT.Text = Session["PROJECTIDTEXT"].ToString();
                             anchorproj.InnerText = Session["PROJECTIDTEXT"].ToString();
                             anchorproj.HRef = "HomePage.aspx?menu=Home";
                             anchorproj.Style.Add("font-family", "Arial Rounded MT");
@@ -43,6 +66,7 @@ namespace SpecimenTracking
                             anchorproj.InnerText = "Home";
                             anchorproj.Style.Add("font-family", "Arial Rounded MT");
                         }
+
 
                         if (Request["val"] == "home")
                         {
@@ -59,8 +83,8 @@ namespace SpecimenTracking
                             {
                                 Session["menu"] = Request["menu"].ToString();
                             }
-
                         }
+
 
                         HttpCookie NavigationPath_Cookies = Request.Cookies["NavigationPath"];
                         string NavigationPath = NavigationPath_Cookies != null ? NavigationPath_Cookies.Value.Split('=')[1] : "undefined";
@@ -68,11 +92,11 @@ namespace SpecimenTracking
                         if (Session["menu"] != null && Session["menu"].ToString() != "Home")
                         {
                             PopulateMenuControlChildItem(Session["menu"].ToString());
-                            //lblnavmenu.Text = Session["menu"].ToString();
+                            // lblnavmenu.Text = Session["menu"].ToString();
 
                             if (NavigationPath != "" && NavigationPath != "undefined")
                             {
-                                // lblnavmenuuName.Text = NavigationPath;
+                                //lblnavmenuuName.Text = NavigationPath;
                             }
                         }
                         else
@@ -86,7 +110,7 @@ namespace SpecimenTracking
                             PopulateMenuControl();
                         }
 
-                       // Get_DashboardData();
+                        // Get_DashboardData();
                     }
                 }
             }
@@ -98,7 +122,23 @@ namespace SpecimenTracking
             }
         }
 
-
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                if ((Request.UserAgent.IndexOf("AppleWebKit") > 0) || (Request.UserAgent.IndexOf("Unknown") > 0) || (Request.UserAgent.IndexOf("Chrome") > 0))
+                {
+                    Request.Browser.Adapters.Clear();
+                }
+            }
+        }
+        public string GetCurrentPageName()
+        {
+            string sPath = Request.Url.AbsolutePath;
+            System.IO.FileInfo oInfo = new System.IO.FileInfo(sPath);
+            string sRet = oInfo.Name;
+            return sRet;
+        }
         private void PopulateMenuControl()
         {
             string CURRENT_SYSTEM = "";
@@ -177,11 +217,29 @@ namespace SpecimenTracking
                 lstsubmenu.DataSource = ds;
                 lstsubmenu.DataBind();
 
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    DataRow dr = ds.Tables[0].Rows[0];
+
+                    Session["UserGroup_ID"] = dr["RoleID"].ToString().Trim();
+                    Session["UserGroupID"] = dr["RoleID"].ToString().Trim();
+
+                    lblUserRole.Text = dr["RoleName"].ToString().Trim();
+                }
+
+                if (CURRENT_SYSTEM == "Home")
+                {
+                    lblUserRole.Text = "";
+                }
+
+                if (lblUserRole.Text != "")
+                {
+                    divUserRole.Visible = true;
+                }
 
             }
             else
             {
-
                 string MyValue = Session["User_ID"] as string;
                 DataSet ds = new DataSet();
                 SqlConnection Sqlcon = new SqlConnection();
@@ -206,7 +264,7 @@ namespace SpecimenTracking
                     DataTable dt = ds.Tables[0];
 
                     DataRow[] rows;
-                    DataRow[]  rows1;
+                    DataRow[] rows1;
                     DataRow[] rows2;
                     DataRow[] rows3;
                     DataRow[] rows4;
@@ -302,7 +360,7 @@ namespace SpecimenTracking
         }
 
         string NavPath_L1 = "", NavPath_L2 = "", NavPath_L3 = "", NavPath_L4 = "";
-      
+
         protected void lstsubmenu_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             if (e.Item.ItemType == ListViewItemType.DataItem)
@@ -310,7 +368,7 @@ namespace SpecimenTracking
                 DataRowView dr = (DataRowView)DataBinder.GetDataItem(e.Item);
                 LinkButton lbtnmenu = (LinkButton)e.Item.FindControl("lbtnmenu");
                 ListView lstsubmenu1 = (ListView)e.Item.FindControl("lstsubmenu1");
-                HtmlAnchor a1 = (HtmlAnchor)e.Item.FindControl("a1");
+                HtmlGenericControl ul1 = (HtmlGenericControl)e.Item.FindControl("ul1");
                 HtmlGenericControl lisub = (HtmlGenericControl)e.Item.FindControl("lisub");
                 HtmlControl i1 = (HtmlControl)e.Item.FindControl("i1");
                 HiddenField hdnPath = (HiddenField)e.Item.FindControl("hdnPath");
@@ -344,6 +402,10 @@ namespace SpecimenTracking
                     {
                         lisub.Attributes.Add("class", "nav-item has-treeview");
                         i1.Attributes.Add("class", "fas fa-angle-left right pull-right");
+                    }
+                    else
+                    {
+                        ul1.Attributes.Add("class", "d-none");
                     }
                 }
                 else
@@ -400,13 +462,11 @@ namespace SpecimenTracking
             }
         }
 
-       
-
         protected void lstsubmenu1_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             LinkButton lbtnmenu1 = (LinkButton)e.Item.FindControl("lbtnmenu1");
             ListView lstsubmenu2 = (ListView)e.Item.FindControl("lstsubmenu2");
-            HtmlAnchor a2 = (HtmlAnchor)e.Item.FindControl("a2");
+            HtmlGenericControl ul2 = (HtmlGenericControl)e.Item.FindControl("ul2");
             HtmlGenericControl li2 = (HtmlGenericControl)e.Item.FindControl("li2");
             HtmlControl i2 = (HtmlControl)e.Item.FindControl("i2");
             HiddenField hdnPath1 = (HiddenField)e.Item.FindControl("hdnPath1");
@@ -439,6 +499,10 @@ namespace SpecimenTracking
                 {
                     li2.Attributes.Add("class", "nav-item has-treeview");
                     i2.Attributes.Add("class", "fas fa-angle-left right pull-right");
+                }
+                else
+                {
+                    ul2.Attributes.Add("class", "d-none");
                 }
             }
             else
@@ -479,7 +543,7 @@ namespace SpecimenTracking
         {
             LinkButton lbtnmenu2 = (LinkButton)e.Item.FindControl("lbtnmenu2");
             ListView lstsubmenu3 = (ListView)e.Item.FindControl("lstsubmenu3");
-            HtmlAnchor a3 = (HtmlAnchor)e.Item.FindControl("a3");
+            HtmlGenericControl ul3 = (HtmlGenericControl)e.Item.FindControl("ul3");
             HtmlGenericControl li3 = (HtmlGenericControl)e.Item.FindControl("li3");
             HtmlControl i3 = (HtmlControl)e.Item.FindControl("i3");
             HiddenField hdnPath2 = (HiddenField)e.Item.FindControl("hdnPath2");
@@ -512,6 +576,10 @@ namespace SpecimenTracking
                 {
                     li3.Attributes.Add("class", "nav-item  has-treeview");
                     i3.Attributes.Add("class", "fas fa-angle-left right pull-right");
+                }
+                else
+                {
+                    ul3.Attributes.Add("class", "d-none");
                 }
             }
             else
@@ -554,11 +622,7 @@ namespace SpecimenTracking
 
             NavPath_L4 = lbtnmenu3.Text.Trim();
             hdnPath3.Value = NavPath_L1 + " > " + NavPath_L2 + " > " + NavPath_L3 + " > " + NavPath_L4;
-
-
         }
-
-        
 
     }
 }

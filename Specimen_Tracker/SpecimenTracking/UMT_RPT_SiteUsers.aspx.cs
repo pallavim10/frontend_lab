@@ -29,16 +29,18 @@ namespace SpecimenTracking
                 {
                     grdData.DataSource = ds;
                     grdData.DataBind();
+                    DivRecord.Visible = true;
                 }
                 else
                 {
                     grdData.DataSource = null;
                     grdData.DataBind();
+                    DivRecord.Visible = false;
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -50,7 +52,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -73,7 +75,7 @@ namespace SpecimenTracking
             catch (Exception ex)
             {
                 lblErrorMsg.Text = "";
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
 
             }
         }
@@ -86,7 +88,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -104,38 +106,39 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
-        protected void btnPDF_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToPDF();
-            }
-            catch (Exception ex)
-            {
-                lblErrorMsg.Text = ex.Message.ToString();
-            }
-        }
+        //protected void btnPDF_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        ExportToPDF();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ExceptionLogging.SendErrorToText(ex);
+        //    }
+        //}
 
-        private void ExportToPDF()
-        {
-            try
-            {
-                DataSet ds = dal_UMT.UMT_REPORT_SP(ACTION: "GET_SITE_USERS",
-                    FromDate: txtDateFrom.Text,
-                    ToDate: txtDateTo.Text
-                    );
+        //private void ExportToPDF()
+        //{
+        //    try
+        //    {
+        //        DataSet ds = dal_UMT.UMT_REPORT_SP(ACTION: "GET_SITE_USERS",
+        //            FromDate: txtDateFrom.Text,
+        //            ToDate: txtDateTo.Text
+        //            );
 
-                ds.Tables[0].TableName = lblHeader.Text;
-                Multiple_Export_Excel.ExportToPDF(ds.Tables[0], lblHeader.Text, Page.Response);
-            }
-            catch (Exception ex)
-            {
-                lblErrorMsg.Text = ex.Message.ToString();
-            }
-        }
+        //        ds.Tables[0].TableName = lblHeader.Text;
+        //        Multiple_Export_Excel.ExportToPDF(ds.Tables[0], lblHeader.Text, Page.Response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ExceptionLogging.SendErrorToText(ex);
+        //    }
+        //}
+
     }
 }

@@ -17,17 +17,19 @@ namespace SpecimenTracking
     public partial class LoginPage : System.Web.UI.Page
     {
         DAL_UMT dal_UMT = new DAL_UMT();
+        DAL_SETUP dal_SETUP = new DAL_SETUP();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-
                 Session.Clear();
+
                 CHECK_USER_EXIST();
+
                 FillCapctha();
                 // Assuming 'username' is the username you want to store
-               
-                if (Request.Cookies["Username"] != null)
+
+                if (Request.Cookies["Username"] != null && Request.Cookies["ProjectName"] != null)
                 {
                     txtUserName.Text = Server.HtmlEncode(Request.Cookies["Username"].Value);
                     // Use the username as needed
@@ -47,7 +49,7 @@ namespace SpecimenTracking
             try
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "CHECK_USER_EXIST");
-                if (ds.Tables[0].Rows[0]["Count"].ToString()=="0")
+                if (ds.Tables[0].Rows[0]["Count"].ToString() == "0")
                 {
                     string script = @"
                          swal({
@@ -64,9 +66,9 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
-            
+
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -91,22 +93,32 @@ namespace SpecimenTracking
 
                             case "Account Locked":
                                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Your account has been locked.', 'warning');", true);
+                                FillCapctha();
+                                txtCaptcha.Text = "";
                                 break;
 
                             case "Invalid Credentials, Account Locked":
                                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Invalid credentials, Your account has been locked.', 'warning');", true);
+                                FillCapctha();
+                                txtCaptcha.Text = "";
                                 break;
 
                             case "Invalid Credentials":
                                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Invalid credentials.', 'warning');", true);
+                                FillCapctha();
+                                txtCaptcha.Text = "";
                                 break;
 
                             case "Invalid User ID":
                                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Invalid User ID.', 'warning');", true);
+                                FillCapctha();
+                                txtCaptcha.Text = "";
                                 break;
 
                             case "Account is Inactive":
                                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Your account has been deactivated.', 'warning');", true);
+                                FillCapctha();
+                                txtCaptcha.Text = "";
                                 break;
 
                             case "First Login":
@@ -195,7 +207,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void Get_UserDetails()
@@ -220,19 +232,35 @@ namespace SpecimenTracking
                 Session["Authentication_ID"] = dr["Email_ID"].ToString().Trim();
                 Session["User_Name"] = dr["User_Name"].ToString().Trim();
                 Session["USER_ID"] = dr["UserID"].ToString().Trim();
+                Session["UserType"] = dr["UserType"].ToString().Trim();
 
+                Session["StudyRole"] = dr["StudyRole"].ToString().Trim();
 
 
                 Session["UMT"] = "YES";
+
+
 
                 HttpCookie usernameCookie = new HttpCookie("WAI_Name");
 
                 usernameCookie.Values["WAI_Name"] = Session["User_Name"].ToString();
                 HttpContext.Current.Response.Cookies.Add(usernameCookie);
+
+                DataSet ds1 = dal_SETUP.SETUP_FIELD_SP(ACTION: "GET_SPECIMENID");
+
+                if (ds1.Tables[0].Rows.Count > 0)
+                {
+                    DataRow dr1 = ds1.Tables[0].Rows[0];
+                    Session["SID_ACTIVE"] = dr1["ISACTIVE"].ToString();
+                }
+                else
+                {
+                    Session["SID_ACTIVE"] = "True";
+                }
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -286,7 +314,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -299,7 +327,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
     }

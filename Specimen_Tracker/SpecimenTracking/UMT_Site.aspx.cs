@@ -27,7 +27,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void FILL_COUNTRY()
@@ -46,7 +46,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -59,7 +59,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void ddlstate_SelectedIndexChanged(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_SITE()
@@ -95,7 +95,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void INSERT_SITE()
@@ -104,31 +104,31 @@ namespace SpecimenTracking
             {
                 if (txtSiteId.Text.Trim() == "")
                 {                   
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Site Id')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Site Id', 'warning');", true);
                     return;
                 }
 
                 if (txtSiteName.Text.Trim() == "")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Site Name')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Site Name', 'warning');", true);
                     return;
                 }
 
                 if (txtEmailid.Text.Trim() == "")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Email Id')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Email Id', 'warning');", true);
                     return;
                 }
 
                 if (txtContactNo.Text.Trim() == "")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Contact No')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Contact No', 'warning');", true);
                     return;
                 }
 
                 if (txtAddress.Text.Trim() == "")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Address')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Address', 'warning');", true);
                     return;
                 }
 
@@ -151,14 +151,15 @@ namespace SpecimenTracking
                      text: 'Site Created Successfully',
                      icon: 'success',
                      button: 'OK'                      
-                     });";
+                     }) .then(function(){
+                                     window.location.href = window.location.href});";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", script, true);
                 GET_SITE();
                 CLEAR();
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -192,7 +193,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void FILL_STATE()
@@ -213,7 +214,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -233,7 +234,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -248,12 +249,12 @@ namespace SpecimenTracking
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this,GetType(),"showalert", $"swal('Warning!','Site Id " + txtSiteId.Text + " is already available.')", true);
+                    ScriptManager.RegisterStartupScript(this,GetType(),"showalert", $"swal('Warning!','Site Id " + txtSiteId.Text + " is already available.', 'warning');", true);
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -280,7 +281,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
             return res;
         }
@@ -295,12 +296,12 @@ namespace SpecimenTracking
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Site Id " + txtSiteId.Text + " is already available.')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Site Id " + txtSiteId.Text + " is already available.', 'warning');", true);
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -310,31 +311,31 @@ namespace SpecimenTracking
             {
                 if (txtSiteId.Text.Trim() == "")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Site Id')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Site Id', 'warning');", true);
                     return;
                 }
 
                 if (txtSiteName.Text.Trim() == "")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Site Name')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Site Name', 'warning');", true);
                     return;
                 }
 
                 if (txtEmailid.Text.Trim() == "")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Email Id')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Email Id', 'warning');", true);
                     return;
                 }
 
                 if (txtContactNo.Text.Trim() == "")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Contact No')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Contact No', 'warning');", true);
                     return;
                 }
 
                 if (txtAddress.Text.Trim() == "")
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Address')", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Please Enter Address', 'warning');", true);
                     return;
                 }
 
@@ -367,7 +368,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -381,7 +382,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -405,7 +406,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -423,13 +424,13 @@ namespace SpecimenTracking
                      text: 'Site Deleted Successfully',
                      icon: 'success',
                      button: 'OK'                     
-                     });";
+                     }).then(function(){window.location.href = window.location.href});";
                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
                 GET_SITE();
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -475,7 +476,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -498,7 +499,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -524,7 +525,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -548,7 +549,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
     }

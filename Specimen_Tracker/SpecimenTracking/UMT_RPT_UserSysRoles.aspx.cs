@@ -29,16 +29,18 @@ namespace SpecimenTracking
                 {
                     grdData.DataSource = ds;
                     grdData.DataBind();
+                    DivRecord.Visible = true;
                 }
                 else
                 {
                     grdData.DataSource = null;
                     grdData.DataBind();
+                    DivRecord.Visible = false;
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -50,7 +52,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -73,7 +75,7 @@ namespace SpecimenTracking
             catch (Exception ex)
             {
                 lblErrorMsg.Text = "";
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
 
             }
         }
@@ -85,7 +87,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -93,7 +95,7 @@ namespace SpecimenTracking
         {
             try
             {
-                DataSet ds = dal_UMT.UMT_REPORT_SP(ACTION: "GET_LOGIN_LOGS",
+                DataSet ds = dal_UMT.UMT_REPORT_SP(ACTION: "GET_UserSysRoles_LOG",
                 FromDate: txtDateFrom.Text,
                 ToDate: txtDateTo.Text
                 );
@@ -103,7 +105,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -115,7 +117,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void ExportToPDF()
@@ -132,7 +134,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 

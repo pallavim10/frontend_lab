@@ -24,7 +24,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_STUDYROLE_USER()
@@ -49,7 +49,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void INSERT_STUDYROLE_USER()
@@ -63,7 +63,9 @@ namespace SpecimenTracking
                 }
                 if (chkInternal.Checked || chkSite.Checked || chkSponsor.Checked || chkExternal.Checked)
                 {
-                    DataSet da = dal_UMT.UMT_STUDYROLE_SP(
+                    if(txtStudyRole.Text.Trim() != "")
+                    {
+                        DataSet da = dal_UMT.UMT_STUDYROLE_SP(
                                             ACTION: "INSERT_STUDYROLE_USER",
                                             StudyRole: txtStudyRole.Text,
                                             Internal: chkInternal.Checked,
@@ -72,10 +74,11 @@ namespace SpecimenTracking
                                             OtherExternal: chkExternal.Checked
                                         );
 
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!','Study role  created successfully.', 'success');", true);
-                    
-                    GET_STUDYROLE_USER();
-                    CLEAR();
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!','Study role  created successfully.', 'success');", true);
+
+                        GET_STUDYROLE_USER();
+                        CLEAR();
+                    }
                 }
                 else
                 {
@@ -84,7 +87,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void CLEAR()
@@ -103,7 +106,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void UPDATE_STUDYROLE_USER()
@@ -118,7 +121,9 @@ namespace SpecimenTracking
 
                 if (chkInternal.Checked || chkSite.Checked || chkSponsor.Checked || chkExternal.Checked)
                 {
-                    DataSet da = dal_UMT.UMT_STUDYROLE_SP(
+                    if (txtStudyRole.Text.Trim() != "")
+                    {
+                        DataSet da = dal_UMT.UMT_STUDYROLE_SP(
                                             ACTION: "UPDATE_STUDYROLE_USER",
                                             ID: ViewState["ID"].ToString(),
                                             StudyRole: txtStudyRole.Text,
@@ -128,11 +133,12 @@ namespace SpecimenTracking
                                             OtherExternal: chkExternal.Checked
                                         );
 
-                    GET_STUDYROLE_USER();
-                    CLEAR();
+                        GET_STUDYROLE_USER();
+                        CLEAR();
 
 
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!','Study Role Updated Successfully', 'success');", true);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!','Study Role Updated Successfully', 'success');", true);
+                    }
                 }
                 else
                 {
@@ -143,7 +149,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void btnUpdate_Click(object sender, EventArgs e)
@@ -154,7 +160,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -182,7 +188,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -206,7 +212,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void DELETE_STUDYROLE_USER(string ID)
@@ -223,7 +229,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void EDIT_STUDYROLE_USER(string ID)
@@ -285,7 +291,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -310,7 +316,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -386,7 +392,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
     }

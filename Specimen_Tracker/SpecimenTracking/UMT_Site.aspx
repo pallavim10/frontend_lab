@@ -3,7 +3,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <link href="Style/Select2.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/Select2.js" type="text/javascript"></script>
-    <script src="Scripts/btnSave_Required.js"   type="text/javascript"></script>
+   <script type="text/javascript" src="Scripts/btnSave_Required.js"></script>
     <style type="text/css">
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             color: #0000ff;
@@ -14,27 +14,8 @@
         }
     </style>
     <script type="text/javascript">
-        function pageLoad() {
-            $(".numeric").on("keypress keyup blur", function (event) {
-                $(this).val($(this).val().replace(/[^\d].+/, ""));
-                if ((event.which < 48 || event.which > 57)) {
-                    event.preventDefault();
-                }
-            });
-
-            //only for numeric value
-            $('.numeric').keypress(function (event) {
-
-                if (event.keyCode == 8 || event.keyCode == 9 || event.charCode == 48 || event.charCode == 49 || event.charCode == 50 || event.charCode == 51
-                    || event.charCode == 52 || event.charCode == 52 || event.charCode == 53 || event.charCode == 54 || event.charCode == 55 || event.charCode == 56 || event.charCode == 57) {
-                    // let it happen, don't do anything
-                    return true;
-                }
-                else {
-                    event.preventDefault();
-                }
-            });
-
+        function pageLoad()
+        {
             $('.select').select2();
         }
         function showAuditTrail(element) {
@@ -68,29 +49,7 @@
         }
 
 
-        function confirm(event) {
-            event.preventDefault();
-
-            swal({
-                title: "Warning!",
-                text: "Are you sure you want to delete this Record?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            }).then(function (isConfirm) {
-                if (isConfirm) {
-                    var linkButton = event.target;
-                    if (linkButton.tagName.toLowerCase() === 'i') {
-                        linkButton = linkButton.parentElement;
-                    }
-                    linkButton.onclick = null;
-                    linkButton.click();
-                } else {
-                    Response.redirect(this);
-                }
-            });
-            return false;
-        }
+        
     </script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -106,6 +65,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
+                            <li class="breadcrumb-item active">Manage Sites</li>
                             <li class="breadcrumb-item active">Create Site</li>
                         </ol>
                     </div>
@@ -190,7 +151,7 @@
                                                 <div class="form-group">
                                                     <label>Country : &nbsp;</label>
                                                     <asp:Label ID="Label7" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" class="form-control drpControl required select" SelectionMode="Single"
+                                                    <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" CssClass="form-control drpControl required select2" SelectionMode="Single"
                                                         OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" >
                                                     </asp:DropDownList>
                                                 </div>
@@ -199,7 +160,7 @@
                                                 <div class="form-group">
                                                     <label>State :&nbsp;</label>
                                                     <asp:Label ID="Label14" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="ddlstate" runat="server" AutoPostBack="true" class="form-control drpControl required select" SelectionMode="Single"
+                                                    <asp:DropDownList ID="ddlstate" runat="server" AutoPostBack="true" CssClass="form-control drpControl required select2" SelectionMode="Single"
                                                         OnSelectedIndexChanged="ddlstate_SelectedIndexChanged" >
                                                     </asp:DropDownList>
                                                 </div>
@@ -215,7 +176,7 @@
                                                 <div class="form-group">
                                                     <label>City : &nbsp;</label>
                                                     <asp:Label ID="Label8" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="ddlcity" runat="server" AutoPostBack="true" class="form-control drpControl required select" SelectionMode="Single">
+                                                    <asp:DropDownList ID="ddlcity" runat="server" AutoPostBack="true" CssClass="form-control drpControl required select2" SelectionMode="Single">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -223,7 +184,7 @@
                                                 <div class="form-group">
                                                     <label>TimeZone :&nbsp;</label>
                                                     <asp:Label ID="Label10" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="ddlTimeZone" runat="server" class="form-control drpControl required select" SelectionMode="Single">
+                                                    <asp:DropDownList ID="ddlTimeZone" runat="server" CssClass="form-control drpControl required select2" SelectionMode="Single">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -359,4 +320,45 @@
             </div>
         </section>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //only for numeric value
+            $('.numeric').keypress(function (event) {
+
+                if (event.keyCode == 8 || event.keyCode == 9 || event.charCode == 48 || event.charCode == 49 || event.charCode == 50 || event.charCode == 51
+                    || event.charCode == 52 || event.charCode == 52 || event.charCode == 53 || event.charCode == 54 || event.charCode == 55 || event.charCode == 56 || event.charCode == 57) {
+                    // let it happen, don't do anything
+                    return true;
+                }
+                else {
+                    event.preventDefault();
+                }
+            });
+
+            
+        });
+        function confirm(event) {
+            event.preventDefault();
+
+            swal({
+                title: "Warning!",
+                text: "Are you sure you want to delete this Record?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                    var linkButton = event.target;
+                    if (linkButton.tagName.toLowerCase() === 'i') {
+                        linkButton = linkButton.parentElement;
+                    }
+                    linkButton.onclick = null;
+                    linkButton.click();
+                } else {
+                    Response.redirect(this);
+                }
+            });
+            return false;
+        }
+    </script>
 </asp:Content>

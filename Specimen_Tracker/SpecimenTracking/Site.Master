@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Specimen Tracking | Dashboard</title>
+    <title>Specimen Tracking System</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Font Awesome -->
@@ -14,7 +14,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
     <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
+    <%--<link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />--%>
     <!-- iCheck -->
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
     <!-- JQVMap -->
@@ -37,6 +37,10 @@
     <!-- SweetAlert Message Box for Alert Box Popup -->
     <script src="plugins/jquery/jquery.js" type="text/javascript"></script>
     <!-- SweetAlert Message Box for Alert Box Popup -->
+    <script src="plugins/sweetalert2/sweetalert2.all.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="dist/js/sweetalert.min.js" type="text/javascript"></script>
     <script src="plugins/jquery-ui/jquery-ui.js" type="text/javascript"></script>
     <link href="plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
@@ -79,6 +83,16 @@
         }
     </script>
     <style type="text/css">
+        .modalBackground {
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+        }
+
         .Body {
             margin-left: 7%;
         }
@@ -103,6 +117,10 @@
 
         .fontBold {
             font-weight: bold;
+        }
+
+        .custom-select-sm {
+            font-size: 125%;
         }
 
         .color {
@@ -252,10 +270,242 @@
             font-weight: bold;
             color: #333;
         }
-    </style>
+        .overlay {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            background: rgba(255,255,255,0.8) url("/dist/img/loader.gif") center no-repeat;
+        }
 
+        body.loading {
+            overflow: hidden;
+        }
+            /* Make spinner image visible when body element has the loading class */
+            body.loading .overlay {
+                display: block;
+            }
+
+        body {
+            overflow-y: scroll; /* Show vertical scrollbar */
+            overflow-x: scroll; /* Show horizontal scrollbar */
+        }
+
+    </style>
+    <script type="text/javascript">
+        function DisableWindow() {
+            $("body").addClass("loading");
+        }
+
+        window.onbeforeunload = DisableWindow;
+
+        function jsShowHideProgress() {
+
+            setTimeout(function () { $("body").addClass("loading"); }, 200);
+            deleteCookie();
+
+            var timeInterval = 500; // milliseconds (checks the cookie for every half second )
+
+            var loop = setInterval(function () {
+                if (IsCookieValid()) {
+                    $("body").removeClass("loading");
+                    clearInterval(loop)
+                }
+
+            }, timeInterval);
+        }
+
+        
+        function deleteCookie() {
+            var cook = getCookie('ExcelDownloadFlag');
+            if (cook != "") {
+                document.cookie = "ExcelDownloadFlag=;Path = /; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            }
+
+            var cook1 = getCookie('sessionTimeout');
+            if (cook1 != "") {
+                document.cookie = "sessionTimeout=;Path = /; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            }
+        }
+
+        function IsCookieValid() {
+            var cook = getCookie('ExcelDownloadFlag');
+            return cook != '';
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).on("click", ".dropdown-item", function () {
+
+            setTimeout(function () { $("body").addClass("loading"); }, 200);
+            deleteCookie();
+
+            var timeInterval = 500; // milliseconds (checks the cookie for every half second )
+
+            var loop = setInterval(function () {
+                if (IsCookieValid()) {
+                    $("body").removeClass("loading");
+                    clearInterval(loop)
+                }
+
+            }, timeInterval);
+        });
+
+        $(document).on("click", ".btn", function () {
+
+            if ($(this).val().includes("Export") || $(this).text().includes("Export") || $(this).find("span").hasClass("glyphicon-download") || $(this).find("i").hasClass("glyphicon-download") || $(this).find("i").hasClass("fa fa-download") || $(this).find("span").hasClass("fa fa-download")) {
+                setTimeout(function () { $("body").addClass("loading"); }, 200);
+                deleteCookie();
+
+                var timeInterval = 500; // milliseconds (checks the cookie for every half second )
+
+                var loop = setInterval(function () {
+                    if (IsCookieValid()) {
+                        $("body").removeClass("loading");
+                        clearInterval(loop)
+                    }
+                    else {
+                        $("body").removeClass("loading");
+                        clearInterval(loop)
+                    }
+
+                }, timeInterval);
+            }
+        });
+
+    </script>
+    <script type="text/javascript">
+
+        document.onkeypress = function () {
+            document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+            checkSession();
+        };
+
+        document.onmouseup = function () {
+            document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+            checkSession();
+        };
+
+        function getCookieUsername(name) {
+            let value = `; ${document.cookie}`;
+            let parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function checkUserSession() {
+
+            var cookieName = '<%=Session["PROJECTIDTEXT"] %>' + "_WAI_Name";
+
+            var UserName = getCookieUsername('WAI_Name').split('=')[1];
+
+            if (UserName != undefined && UserName != '' && $('#Lbl_User_Info').text() != UserName) {
+                alert('Another user logged in after you. Any unsaved changes may be lost. Please close this tab.');
+                window.location.href = 'about:blank';
+            }
+
+            // Set a timer to check the session timeout every minute
+            setTimeout(checkUserSession, 1000);
+        }
+
+        function checkSession() {
+            // Get the session timeout value from the server-side
+            var sessionTimeout = "<%= Session.Timeout %>";
+
+            // Convert the session timeout value to milliseconds
+            var sessionTimeoutInMilliseconds = sessionTimeout * 60 * 1000;
+
+            // Check if a session cookie exists
+            var sessionCookie = document.cookie.match('(^|;) ?sessionTimeout=([^;]*)(;|$)');
+            if (sessionCookie != null) {
+                var sessionStartTime = new Date(sessionCookie[2]);
+                var remainingTime = sessionTimeoutInMilliseconds - (new Date().getTime() - sessionStartTime.getTime());
+
+                // Update the session time remaining display
+                $("#lblTimeRemaining").html(msToTime(remainingTime));
+
+                // Check if the remaining time is less than 5 minutes (300 seconds)
+                if (remainingTime <= 2 * 60 * 1000 && remainingTime > 0) {
+
+                    if ($(".swal2-show").length == 0) {
+
+                        // Show SweetAlert confirmation when the session is about to expire
+                        Swal.fire({
+                            title: 'Session Timeout Warning',
+                            text: 'Your session is about to expire. Do you want to continue?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Continue Session',
+                            cancelButtonText: 'Log Out'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+
+                                document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+
+
+                                remainingTime = sessionTimeoutInMilliseconds - (new Date().getTime() - new Date(document.cookie.match('(^|;) ?sessionTimeout=([^;]*)(;|$)')[2]).getTime());
+
+
+                                $("#lblTimeRemaining").html(msToTime(remainingTime));
+                            } else {
+
+                                deleteCookie();
+                                window.location.href = "LoginPage.aspx";
+                            }
+                        });
+
+                    }
+                }
+
+                if (remainingTime <= 0) {
+                    deleteCookie();
+                    window.location.href = "SessionExpired.aspx";
+                }
+            } else {
+                // Set a new session cookie if not already set
+                document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+            }
+
+            // Check the session every second
+            setTimeout(checkSession, 1000);
+        }
+
+        function deleteCookie() {
+            document.cookie = "sessionTimeout=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+
+        function msToTime(duration) {
+
+            var seconds = parseInt((duration / 1000) % 60)
+                , minutes = parseInt((duration / (1000 * 60)) % 60);
+
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            return minutes + ":" + seconds;
+        }
+
+    </script>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed small">
+<body class="hold-transition sidebar-mini layout-fixed small" onload="checkSession();">
     <form id="form1" runat="server">
         <div>
             <div class="wrapper">
@@ -270,7 +520,16 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <asp:Label ID="lblSessionTimeout" runat="server" CssClass="text-lightblue text-bold text-lg mr-1" Text="Session Timeout:"></asp:Label>
+                            <h2>
+                                <b>
+                                    <asp:Label ID="lblPROJECT" runat="server" Text=""></asp:Label>
+                                </b>
+                            </h2>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <asp:Label ID="lblSessionTimeout" runat="server" CssClass="text-lightblue text-bold text-md mr-1" Text="Session Timeout:"></asp:Label>
                             <asp:Label ID="lblTimeRemaining" runat="server" ForeColor="Red" Font-Size="X-Large" Text=""></asp:Label>
                         </li>
                         <li class="nav-item dropdown">
@@ -282,11 +541,16 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="min-width: 100px;">
 
-                                <asp:HyperLink ID="HyperLink1" runat="server" class="dropdown-item text-lg-center btn btn-primary"
-                                    NavigateUrl="~/Change_Password.aspx" Font-Underline="False" ForeColor="Black" Text="" Style="background: #008000cc;"><i class='fa fa-key'></i>&nbsp;&nbsp; Change Password&nbsp;&nbsp;</asp:HyperLink>
-
-                                <asp:HyperLink ID="HyperLink4" runat="server" class="dropdown-item text-lg-center mt-2 btn btn-primary"
-                                    NavigateUrl="~/LockScreen.aspx" Font-Underline="False" ForeColor="Black" Text="" Style="background: antiquewhite;"><i class='text-red fas fa-sign-out-alt'></i>&nbsp;&nbsp; Log Out&nbsp;&nbsp;</asp:HyperLink>
+                                <asp:HyperLink ID="HyperLink2" runat="server" class="dropdown-item text-lg-center btn btn-primary mt-0"
+                                    Font-Underline="False" ForeColor="Black" Text="">
+                                    <asp:Label ID="Lbl_User_Dept" runat="server" Text=" "></asp:Label>
+                                </asp:HyperLink>
+                                <hr class="mt-0 mb-0" />
+                                <asp:HyperLink ID="HyperLink1" runat="server" class="dropdown-item text-lg-center btn btn-primary mt-0"
+                                    NavigateUrl="~/Change_Password.aspx" Font-Underline="False" ForeColor="Black" Text=""><i class='fa fa-key'></i>&nbsp;&nbsp; Change Password&nbsp;&nbsp;</asp:HyperLink>
+                                <hr class="mt-0 mb-0" />
+                                <asp:HyperLink ID="HyperLink4" runat="server" class="dropdown-item text-lg-center mt-2 btn btn-primary mt-0 mb-0"
+                                    NavigateUrl="~/LockScreen.aspx" Font-Underline="False" ForeColor="Black" Text=""><i class='text-red fas fa-sign-out-alt'></i>&nbsp;&nbsp; Log Out&nbsp;&nbsp;</asp:HyperLink>
 
                             </div>
                         </li>
@@ -295,7 +559,7 @@
                 <aside class="main-sidebar sidebar-dark-info elevation-4">
                     <div class="d-none">
                         <div class="image" style="height: auto; width: 3.1rem;">
-                            <img src="dist/img/tracking-icon.jpg" alt="SpecimenTracking Logo" class="brand-image img-circle elevation-5"
+                            <img src="dist/img/tracking-icon.jpg" alt="" class="brand-image img-circle elevation-5"
                                 style="opacity: .8; width: 3.1rem;">
                         </div>
                         <div class="info text-sm">
@@ -304,13 +568,23 @@
                     </div>
                     <div>
                         <a href="HomePage.aspx?menu=Home" class="brand-link">
-                            <img src="dist/img/tracking-icon.jpg" alt="SpecimenTracking Logo" class="brand-image img-circle elevation-5"
-                                style="opacity: .8">
-                            <span class="brand-text font-weight-normal">Specimen Tracker</span>
+                            <span class="brand-text font-weight-normal">Specimen Tracking System</span>
                         </a>
                     </div>
                     <div class="sidebar">
                         <nav class="mt-2">
+                            <div runat="server" id="divUserRole" visible="false" class="user-panel mt-0 pb-0 mb-2">
+                                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                    <li class="nav-item has-treeview">
+                                        <a class="nav-link">
+                                            <p style="font-size: 16px; color: #c2c7d0;">
+                                                Role :  
+                                                <asp:Label runat="server" ID="lblUserRole" Text=""></asp:Label>
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                             <div id="mainmenu" runat="server">
                                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                     <asp:ListView runat="server" ID="lstmenu" OnItemCommand="lstmenu_ItemCommand" OnItemDataBound="lstmenu_ItemDataBound">
@@ -343,10 +617,12 @@
                                                     Text='<%# Eval("FunctionName") %>' runat="server">
                                                 </asp:LinkButton>
                                                 <asp:HiddenField runat="server" ID="hdnPath" />
-                                                <ul class="nav-treeview" style="padding: 0px; margin-inline-start: 10px;">
+                                                <ul class="nav-treeview" style="padding: 0px; margin-inline-start: 10px;"
+                                                    runat="server" id="ul1">
                                                     <asp:ListView runat="server" ID="lstsubmenu1" OnItemDataBound="lstsubmenu1_ItemDataBound">
                                                         <ItemTemplate>
-                                                            <li id="li2" class="nav-item has-treeview" runat="server"><a id="a2" runat="server" style="cursor: pointer; margin-top: 3px; margin-bottom: 3px;" href='<%# Eval("NavigationURL")%>' class="nav-link">
+                                                            <li id="li2" class="nav-item has-treeview" runat="server"><a id="a2" runat="server" style="cursor: pointer; margin-top: 3px; margin-bottom: 3px;"
+                                                                href='<%# Eval("NavigationURL")%>' class="nav-link">
                                                                 <i class="far fa-circle nav-icon" style="font-size: large;"></i>
                                                                 <i id="i2" runat="server"></i>
                                                                 <span commandargument='<%# Eval("FunctionName") %>' style="font-size: small"><%# Eval("FunctionName") %></span>
@@ -354,7 +630,7 @@
                                                                 <asp:LinkButton ID="lbtnmenu1" Visible="false" Text='<%# Eval("FunctionName") %>'
                                                                     CommandName="menu" CommandArgument='<%# Eval("FunctionName") %>' runat="server"></asp:LinkButton>
                                                                 <asp:HiddenField runat="server" ID="hdnPath1" />
-                                                                <ul class="nav-treeview" style="padding: 10px;">
+                                                                <ul class="nav-treeview" style="padding: 10px;" runat="server" id="ul2">
                                                                     <asp:ListView runat="server" ID="lstsubmenu2" OnItemDataBound="lstsubmenu2_ItemDataBound">
                                                                         <ItemTemplate>
                                                                             <li id="li3" class="nav-item has-treeview" runat="server"><a id="a3" runat="server" style="cursor: pointer;" href='<%# Eval("NavigationURL")%>'>
@@ -363,14 +639,16 @@
                                                                                 <asp:LinkButton ID="lbtnmenu2" Visible="false" Text='<%# Eval("FunctionName") %>'
                                                                                     CommandName="menu" CommandArgument='<%# Eval("FunctionName") %>' runat="server"></asp:LinkButton>
                                                                                 <asp:HiddenField runat="server" ID="hdnPath2" />
-                                                                                <ul class="nav-item has-treeview">
+                                                                                <ul class="nav-item has-treeview" runat="server" id="ul3">
                                                                                     <asp:ListView runat="server" ID="lstsubmenu3" OnItemDataBound="lstsubmenu3_ItemDataBound">
                                                                                         <ItemTemplate>
-                                                                                            <li id="li4" class="nav-item" runat="server"><a id="a4" runat="server" style="cursor: pointer; margin-top: 3px; margin-bottom: 3px;" href='<%# Eval("NavigationURL")%>'>
+                                                                                            <li id="li4" class="nav-item" runat="server"><a id="a4" runat="server" style="cursor: pointer; margin-top: 3px; margin-bottom: 3px;"
+                                                                                                href='<%# Eval("NavigationURL")%>'>
                                                                                                 <span>
                                                                                                     <%# Eval("FunctionName") %></span> <i id="i4" runat="server"></i></a>
                                                                                                 <asp:LinkButton ID="lbtnmenu3" Text='<%# Eval("FunctionName") %>' Visible="false"
-                                                                                                    CommandName="menu" CommandArgument='<%# Eval("FunctionName") %>' runat="server"><i class="fa fa-angle-left pull-right" style="color:white; cursor: pointer;"></i> </asp:LinkButton>
+                                                                                                    CommandName="menu" CommandArgument='<%# Eval("FunctionName") %>' runat="server"><i class="fa fa-angle-left pull-right" style="        color: white;
+        cursor: pointer;"></i> </asp:LinkButton>
                                                                                                 <asp:HiddenField runat="server" ID="hdnPath3" />
                                                                                             </li>
                                                                                         </ItemTemplate>
@@ -402,14 +680,14 @@
                 </asp:ContentPlaceHolder>
                 <div class="modal fade" id="modal-lg" tabindex="-1" role="dialog" aria-labelledby="modal-lg-label" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content" style="width: fit-content; height: 500px;">
+                        <div class="modal-content" style="width: 95%; height: 500px;">
                             <div class="modal-header" style="background-color: gold;">
                                 <h4 class="modal-title" id="modal-lg-label">Audit Trail</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div style="height: 590px; width: fit-content; overflow: auto;">
+                            <div style="height: 590px; overflow: auto;">
                                 <div class="modal-body" id="DivAuditTrail">
                                 </div>
                             </div>
@@ -452,9 +730,8 @@
     <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
     <!-- jQuery Knob Chart -->
     <script src="CommanFunctionJs/TextBox_Options.js"></script>
-    <script src="Scripts/moment.js" type="text/javascript"></script>
     <!-- Tempusdominus Bootstrap 4 -->
-    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <%--<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>--%>
     <!-- Summernote -->
     <script src="plugins/summernote/summernote-bs4.min.js"></script>
     <!-- overlayScrollbars -->
@@ -462,7 +739,7 @@
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard.js"></script>
+    <%--<script src="dist/js/pages/dashboard.js"></script>--%>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
     <script src="plugins/flot/jquery.flot.js"></script>
@@ -470,14 +747,18 @@
     <script src="plugins/flot/plugins/jquery.flot.resize.js"></script>
     <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
     <script src="plugins/flot/plugins/jquery.flot.pie.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="Style/datatables/dataTables.bootstrap.css" />
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <!--OLD-->
 
     <script src="CommonFunctionsJs/RadioCheck.js"></script>
 
+    <script src="Scripts/MaxLength.min.js"></script>
+    <script src="Scripts/MaxLength_Limit.js"></script>
+
     <link href="Style/pikaday.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/moment.js" type="text/javascript"></script>
     <script src="Scripts/pikaday.js" type="text/javascript"></script>
     <script src="Scripts/pikaday.jquery.js" type="text/javascript"></script>
     <script src="plugins/inputmask/jquery.inputmask.bundle.js"></script>
@@ -564,7 +845,6 @@
 
     </script>
     <script>
-
         $(document).ready(function () {
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 20) {
@@ -593,8 +873,8 @@
     <script>
         $(function () {
             $(".Datatable").DataTable({
-                "bSort": true,
-                "ordering": true,
+                "bSort": false,
+                "ordering": false,
                 "bDestroy": false,
                 stateSave: false
             });
@@ -603,47 +883,14 @@
     <script>
         $(function () {
             $(".Datatable1").DataTable({
-                "bSort": true,
-                "ordering": true,
+                "bSort": false,
+                "ordering": false,
                 "bDestroy": false,
                 stateSave: false
             });
         });
     </script>
 
-    <script type="text/javascript">
-        var sessionTimeout = 20;
-
-        var sessionTimeoutMs = sessionTimeout * 60 * 1000;
-
-        var countdown = sessionTimeoutMs / 1000;
-
-        function formatTime(seconds) {
-            var minutes = Math.floor(seconds / 60);
-            var seconds = seconds % 60;
-            return (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-        }
-
-        function updateCountdown() {
-            countdown--;
-            if (countdown <= 0) {
-
-                window.location.href = '<%= ResolveUrl("~/SessionExpired.aspx") %>';
-            } else {
-
-                $('#<%= lblTimeRemaining.ClientID %>').text(formatTime(countdown));
-                setTimeout(updateCountdown, 1000);
-            }
-        }
-
-        $(document).ready(function () {
-
-            updateCountdown();
-        });
-
-
-
-    </script>
     <script>
         $(document).ready(function () {
             // Apply hover effect to nav-item
@@ -656,6 +903,5 @@
             });
         });
     </script>
-
 </body>
 </html>

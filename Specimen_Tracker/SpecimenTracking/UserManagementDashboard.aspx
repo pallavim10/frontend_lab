@@ -46,13 +46,14 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">User Dashboard</h1>
+                        <h1 class="m-0 text-dark">Dashboard</h1>
                     </div>
                     <!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="UserManagementDashboard.aspx">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v3</li>
+                            <li class="breadcrumb-item"><a href="HomePage.aspx?menu=Home">Home</a></li>
+                            <li class="breadcrumb-item">User Management</li>
+                            <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
                     <!-- /.col -->
@@ -73,14 +74,6 @@
                             <!-- Each Card should be in a column -->
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="card">
-                                    <div class="card-header border-0">
-                                        <div class="d-flex justify-content-between">
-                                            <h3 class="card-title"></h3>
-                                            <div class="pull-right">
-                                                <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <p class="d-flex flex-column">
@@ -90,14 +83,12 @@
                                                      <asp:HiddenField ID="hfIconData" runat="server" />
                                                     <span class="info-box-icon elevation-1 bg-secondary">
                                                         <i class="nav-icon fa fa-user" runat="server" id="iconElement"></i></span>
-                                                      <%--<span class="info-box-icon elevation-1" style='<%# "text-align: left;background-color:" + DataBinder.Eval(Container.DataItem, "Color") + ";" %>'><i id="ICONCLASS" runat="server" class='<%# Eval("Icon") %>'></i></span> --%>
 
                                                     <div class="info-box-content">
                                                         <span class="info-box-text">
                                                             <asp:Label ID="Label1" runat="server" Font-Bold="true" Text='<%# Bind("COUNTS") %>' Font-Size="XX-Large"></asp:Label></span>
                                                         <span class="info-box-number">
-                                                            <asp:Label ID="lblName" runat="server" Text='<%# Bind("NAME") %>' Font-Size="Small" CssClass="info-box-text text-md colorText"></asp:Label>
-                                                            <%--  <span id="FunctionName" runat="server" class="info-box-text text-md colorText"><%# Eval("FunctionName") %></span> --%>
+                                                            <asp:Label ID="lblName" runat="server" Text='<%# Bind("NAME") %>' Font-Size="Small" CssClass="font-weight-bold"></asp:Label>
                                                         </span>
                                                     </div>
                                                     <!-- /.info-box-content -->
@@ -128,54 +119,7 @@
 
     </div>
     <script type="text/javascript">
-        //function GenerateGraph_Bar(hfElement) {
-        //    // Get the JSON data from the hidden field
-        //    var jsonData = $(hfElement).val();
-
-        //    // Ensure the data is valid before proceeding
-        //    if (jsonData) {
-        //        // Parse the JSON data from the hidden field
-        //        var chartData = JSON.parse(jsonData);
-
-        //        // Extract labels and data points for the bar chart
-        //        var labels = chartData.labels;  // Example: ["Red", "Blue", "Yellow", ...]
-        //        var dataPoints = chartData.data;  // Example: [12, 19, 3, 5, 2, 3]
-        //        console.log("Labels  " + labels + "datapoints  " +dataPoints);
-
-        //        // Find the corresponding chart div to render the chart inside it
-        //        var chartDiv = $(hfElement).closest('.box').find('.chartdiv');
-
-        //        // Generate a unique ID for the canvas to avoid conflicts
-        //        var canvasId = 'visitors-chart' + $(hfElement).index();
-        //        chartDiv.html('<canvas id="' + canvasId + '" width="400" height="300"></canvas>');
-
-        //        // Get the canvas context
-        //        var ctx = document.getElementById(canvasId).getContext('2d');
-
-        //        // Create a new bar chart using Chart.js
-        //        new Chart(ctx, {
-        //            type: 'bar',
-        //            data: {
-        //                labels: labels, // Use the labels from the hidden field data
-        //                datasets: [{
-        //                    label: "[[VALUE]]", // Customize this label
-        //                    data: dataPoints, // Use the data points from the hidden field
-        //                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Custom colors
-        //                    borderColor: 'rgba(75, 192, 192, 1)',
-        //                    borderWidth: 1
-        //                }]
-        //            },
-        //            options: {
-        //                scales: {
-        //                    y: {
-        //                        beginAtZero: true
-        //                    }
-        //                }
-        //            }
-        //        });
-        //    }
-        //}
-
+       
         function GenerateGraph_Bar(hfElement, index) {
 
             if ($(hfElement).val() != '') {

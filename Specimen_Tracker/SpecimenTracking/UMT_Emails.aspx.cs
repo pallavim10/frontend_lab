@@ -30,7 +30,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -48,7 +48,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_USER_ACTIVATION()
@@ -67,7 +67,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void btnSubmitUserActEmails_Click(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -100,12 +100,12 @@ namespace SpecimenTracking
                 }
                 catch (Exception ex)
                 {
-                     ex.Message.ToString();
+                     ExceptionLogging.SendErrorToText(ex);
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_USER_UNLOCK()
@@ -124,7 +124,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void btnSubmitUserUnlockEmails_Click(object sender, EventArgs e)
@@ -137,7 +137,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -157,12 +157,12 @@ namespace SpecimenTracking
                 }
                 catch (Exception ex)
                 {
-                     ex.Message.ToString();
+                     ExceptionLogging.SendErrorToText(ex);
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_ASSIGN_USER_ROLE()
@@ -181,7 +181,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void btnSubmitUserRoleEmails_Click(object sender, EventArgs e)
@@ -194,7 +194,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -214,12 +214,12 @@ namespace SpecimenTracking
                 }
                 catch (Exception ex)
                 {
-                     ex.Message.ToString();
+                     ExceptionLogging.SendErrorToText(ex);
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_USER_ROLE_CHANGE()
@@ -240,12 +240,12 @@ namespace SpecimenTracking
                 }
                 catch (Exception ex)
                 {
-                     ex.Message.ToString();
+                     ExceptionLogging.SendErrorToText(ex);
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void btnSubmitUserRoleChangeEmails_Click(object sender, EventArgs e)
@@ -258,7 +258,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -278,12 +278,12 @@ namespace SpecimenTracking
                 }
                 catch (Exception ex)
                 {
-                     ex.Message.ToString();
+                     ExceptionLogging.SendErrorToText(ex);
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_SITE_ACTIVATION()
@@ -304,12 +304,12 @@ namespace SpecimenTracking
                 }
                 catch (Exception ex)
                 {
-                     ex.Message.ToString();
+                     ExceptionLogging.SendErrorToText(ex);
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -323,7 +323,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -336,7 +336,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -359,7 +359,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -373,7 +373,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void INSERT_SECURITY_QUESTION()
@@ -392,12 +392,12 @@ namespace SpecimenTracking
                 }
                 catch (Exception ex)
                 {
-                     ex.Message.ToString();
+                     ExceptionLogging.SendErrorToText(ex);
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_SECURITY_QUESTION()
@@ -418,12 +418,12 @@ namespace SpecimenTracking
                 }
                 catch (Exception ex)
                 {
-                     ex.Message.ToString();
+                     ExceptionLogging.SendErrorToText(ex);
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -437,7 +437,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void INSERT_SITE_USER_APPROVAL()
@@ -454,7 +454,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_SITE_USER_APPROVAL()
@@ -475,12 +475,12 @@ namespace SpecimenTracking
                 }
                 catch (Exception ex)
                 {
-                     ex.Message.ToString();
+                     ExceptionLogging.SendErrorToText(ex);
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -493,7 +493,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -506,7 +506,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -519,7 +519,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -532,7 +532,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -545,7 +545,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -558,7 +558,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
     }

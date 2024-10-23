@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage_Visit.aspx.cs" Inherits="SpecimenTracking.Manage_Visit" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.min.css" />
-    <script type="text/javascript" src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
     <script src="Scripts/btnSave_Required.js" type="text/javascript"></script>
     <style type="text/css">
         .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -14,15 +12,7 @@
         }
     </style>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(".Datatable").DataTable({
-                "bSort": false,
-                "ordering": false,
-                "bDestroy": true,
-                stateSave: true
-            });
-            $(".Datatable").parent().parent().addClass('fixTableHead');
-        });
+        
         function showAuditTrail(element) {
 
             var ID = $(element).closest('tr').find('td').eq(0).text().trim();
@@ -90,8 +80,7 @@
             // Example of an immediate action on input change
             $(element).closest('td').find("input[id*='txtVistNo']").click();
             __doPostBack('<%= txtVistNo.ClientID %>', 'TextChanged');
-            var index = $("input[id*='txtVistName']").index(this);
-            $("input[id*='txtVistName']").eq(index + 1).focus();
+            //$("input[id*='txtVistName']").eq(index + 1).focus();
         }
 
         function VisitNameChangedOnInput(element) {
@@ -119,6 +108,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="SETUPDashboard.aspx">Setup</a></li>
                             <li class="breadcrumb-item active">Manage Visit</li>
                         </ol>
                     </div>
@@ -195,7 +185,7 @@
                                     <div class="card-body">
                                         <div class="rows">
                                             <div class="col-md-12">
-                                                <asp:GridView ID="GrdVisits" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive grid" DataKeyNames="ID" EmptyDataText="No Data Found!" Width="100%" AllowPaging="true" AllowSorting="true" PageSize ="5" OnPageIndexChanging="GrdVisits_PageIndexChanging"  OnRowCommand="GrdVisits_RowCommand">
+                                                <asp:GridView ID="GrdVisits" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped Datatable1"  Width="100%" OnRowCommand="GrdVisits_RowCommand" OnPreRender="GrdVisits_PreRender">
                                                     <Columns>
                                                         <asp:TemplateField HeaderText="Visit_ID" HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none">
                                                             <ItemTemplate>
@@ -227,7 +217,7 @@
                                                             <ItemTemplate>
 
                                                                 <asp:LinkButton ID="lnkdelete" runat="server" class="btn-danger btn-sm" CommandName="DeleteVisit" CommandArgument='<%# Eval("ID") %>'  OnClientClick="return confirmDelete(event);"><i class="fas fa-trash"></i></asp:LinkButton>
-                                                                <%-- OnClick="lnkDelete_Click" --%>
+                                                               
                                                                  </ItemTemplate>
                                                         </asp:TemplateField>
                                                     </Columns>

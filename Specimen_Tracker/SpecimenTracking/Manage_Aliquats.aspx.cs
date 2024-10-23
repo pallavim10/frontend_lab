@@ -35,12 +35,10 @@ namespace SpecimenTracking
                 if (Check_ALIQUOT("INSERT"))
                 {
                     INSERT_ALIQUOT();
-                    //Response.Redirect(Request.Url.AbsoluteUri);
                 }
                 else
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Already Exists.','warning');", true);
-
                 }
             }
             catch (Exception ex)
@@ -54,48 +52,13 @@ namespace SpecimenTracking
         {
             try
             {
-                //if (Check_ALIQUOT("UPDATE"))
-
-                //{
-
-                //    UPDATE_ALIQUOT();
-                //}
-                //else
-                //{
-                //    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Already Exists.','warning');", true);
-                //}
-                // First, check if the sequence number exists
-                bool sequenceNumberExists = Check_SequenceNumber();
-
-                if (!sequenceNumberExists)
+                if (Check_ALIQUOT("UPDATE"))
                 {
-                    // Next, check if the aliquot exists using your current Check_ALIQUOT logic
-                    if (Check_ALIQUOT("UPDATE"))
-                    {
-                        // Check if Sequence From and Sequence To are valid (no overlap)
-                        bool sequenceValid = Convert.ToBoolean(Check_AliquotSEQUENCE());  // Return a boolean value from this method
-
-                        if (sequenceValid)
-                        {
-                            // All checks passed, proceed with the update
-                            UPDATE_ALIQUOT();
-                        }
-                        else
-                        {
-                            // Sequence validation failed, no need to update
-                            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Sequence From and To overlap or are invalid.','warning');", true);
-                        }
-                    }
-                    else
-                    {
-                        // Aliquot check failed, show a warning
-                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Already Exists.','warning');", true);
-                    }
+                    UPDATE_ALIQUOT();
                 }
                 else
                 {
-                    // Sequence number already exists, no need to check further
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Sequence Number Already Exists.','warning');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Already Exists.','warning');", true);
                 }
             }
             catch (Exception ex)
@@ -111,9 +74,11 @@ namespace SpecimenTracking
             {
                 LinkButton lnkbtn = sender as LinkButton;
                 GridViewRow grdrow = lnkbtn.NamingContainer as GridViewRow;
-                string ALIQUOTID = GrdAliquots.DataKeys[grdrow.RowIndex].Value.ToString();
+                Label lblID = (grdrow.FindControl("lblAliquotRecID") as Label);
+                string ALIQUOTID = lblID.Text;
                 DELETE_ALIQUOT(ALIQUOTID);
                 GET_ALIQUOTMASTER();
+
             }
             catch (Exception ex)
             {
@@ -141,8 +106,8 @@ namespace SpecimenTracking
                 ALIQUOTID: txtaliquotID.Text,
                 ALIQUOTTYPE: txtaliquottype.Text,
                 ALIQUOTNUM: txtaliquotnum.Text,
-                ALIQUOTFROM: allocatefrom.Text, 
-                ALIQUOTSEQTO: allocateto.Text);
+                ALIQUOTFROM: allocatefrom.Text.Trim(),
+                ALIQUOTSEQTO: allocateto.Text.Trim());
             ;
             // Redirect to a different page or the same page            
             ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
@@ -156,15 +121,19 @@ namespace SpecimenTracking
                 ", true);
             GET_ALIQUOTMASTER();
             CLEAR_ALIQUOTDT();
-            
+
         }
         protected void lnkedit_Click(object sender, EventArgs e)
         {
             LinkButton lnkedit = sender as LinkButton;
             GridViewRow gridView = lnkedit.NamingContainer as GridViewRow;
-            string AliquotRecID = GrdAliquots.DataKeys[gridView.RowIndex].Value.ToString();
+            Label lblID = (gridView.FindControl("lblAliquotRecID") as Label);
 
-            ViewState["ID"] = AliquotRecID;
+            string AliquotRecID = lblID.Text;
+            if (AliquotRecID != "")
+            {
+                ViewState["ID"] = AliquotRecID;
+            }
             try
             {
                 DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "EDIT_ALIQUOT", ID: AliquotRecID);
@@ -198,7 +167,7 @@ namespace SpecimenTracking
         }
         private void UPDATE_ALIQUOT()
         {
-           
+
             DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(
                 ACTION: "UPDATE_ALIQUOT",
                 ID: ViewState["ID"].ToString(),
@@ -209,7 +178,6 @@ namespace SpecimenTracking
                 ALIQUOTFROM: allocatefrom.Text,
                 ALIQUOTSEQTO: allocateto.Text
                 );
-            
 
             ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
@@ -230,18 +198,21 @@ namespace SpecimenTracking
 
             try
             {
-               
+
                 DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "DELETE_ALIQUOT", ID: ALIQUOTRECID);
+                //string result = ds.Tables[0].Rows[0].ToString();
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
-                                swal({
-                                    title: 'Success!',
-                                    text: 'Aliquot Deleted Successfully.',
-                                    icon: 'success',
-                                    button: 'OK'
-                                }).then(function(){
+                    swal({
+                        title: 'Success!',
+                        text: 'Aliquot Deleted Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
                                      window.location.href = window.location.href; });
-                            ", true);
+                ", true);
+
+
 
             }
             catch (Exception ex)
@@ -269,11 +240,40 @@ namespace SpecimenTracking
                 DataSet ds = new DataSet();
                 if (ACTIONS == "INSERT")
                 {
-                    ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "CHECK_ALIQUOTDT_EXISTS", SEQNO: txtSeqtNo.Text, ALIQUOTID: txtaliquotID.Text, ALIQUOTTYPE: txtaliquottype.Text,ALIQUOTNUM:txtaliquotnum.Text, ALIQUOTFROM: allocatefrom.Text ,ALIQUOTSEQTO:allocateto.Text);
+                    if ((!string.IsNullOrEmpty(txtSeqtNo.Text.Trim())) && (!string.IsNullOrWhiteSpace(txtSeqtNo.Text.Trim())) && (!string.IsNullOrEmpty(txtaliquotID.Text.Trim())) && (!string.IsNullOrWhiteSpace(txtaliquotID.Text.Trim())) && (!string.IsNullOrEmpty(txtaliquottype.Text.Trim())) && (!string.IsNullOrWhiteSpace(txtaliquottype.Text.Trim())) && (!string.IsNullOrEmpty(txtaliquotnum.Text.Trim())) && (!string.IsNullOrWhiteSpace(txtaliquotnum.Text.Trim())))
+                    {
+                        ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "CHECK_ALIQUOTDT_EXISTS", SEQNO: txtSeqtNo.Text, ALIQUOTID: txtaliquotID.Text, ALIQUOTTYPE: txtaliquottype.Text, ALIQUOTNUM: txtaliquotnum.Text, ALIQUOTFROM: allocatefrom.Text, ALIQUOTSEQTO: allocateto.Text);
+                    }
                 }
                 else if (ACTIONS == "UPDATE")
                 {
-                    ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "CHECK_ALIQUOTDT_EXISTS", SEQNO: txtSeqtNo.Text, ALIQUOTID: txtaliquotID.Text, ALIQUOTTYPE: txtaliquottype.Text, ID: ViewState["ID"].ToString(), ALIQUOTNUM: txtaliquotnum.Text, ALIQUOTFROM: allocatefrom.Text, ALIQUOTSEQTO: allocateto.Text);
+                    
+                        if (txtSeqtNo.Text != hdnSeqno.Value) 
+                        {
+                            ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_SequenceNumber", SEQNO: txtSeqtNo.Text);
+                        }
+                        else if (txtaliquotID.Text != hdnAliquotID.Value) 
+                        {
+                            ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotID", ALIQUOTID: txtaliquotID.Text);                        
+                        }
+                        else if (txtaliquottype.Text != hdnAliquotType.Value) 
+                        {
+                            ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotType", ALIQUOTTYPE: txtaliquottype.Text, ID: ViewState["ID"].ToString());
+                        }
+                        else if (txtaliquotnum.Text != Hdnaliquotnum.Value) 
+                        {
+                            ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotNumber", ALIQUOTNUM: txtaliquotnum.Text);
+                        }
+                        else if (txtSeqtNo.Text != hdnSeqno.Value && allocatefrom.Text != allocatefrm.Value && allocateto.Text != allocatetwo.Value && allocatefrom.Text != "0" && allocatefrm.Value != "0" && allocateto.Text != "0" && allocatetwo.Value != "0") 
+                        {
+                            ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQALLOC", SEQNO: txtSeqtNo.Text, ID: ViewState["ID"].ToString(), ALIQUOTFROM: allocatefrom.Text, ALIQUOTSEQTO: allocateto.Text);
+                        }
+                       
+                    else if (txtSeqtNo.Text != hdnSeqno.Value && txtaliquotID.Text != hdnAliquotID.Value && txtaliquottype.Text != hdnAliquotType.Value && txtaliquotnum.Text != Hdnaliquotnum.Value && allocatefrom.Text != allocatefrm.Value && allocateto.Text != allocatetwo.Value && (allocatefrom.Text != "0") && (allocateto.Text != "0") && (!string.IsNullOrEmpty(allocatefrom.Text)) && (!string.IsNullOrEmpty(allocateto.Text)))
+                        {
+                            ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "CHECK_ALIQUOTDT_EXISTS", SEQNO: txtSeqtNo.Text, ALIQUOTID: txtaliquotID.Text, ALIQUOTTYPE: txtaliquottype.Text, ID: ViewState["ID"].ToString(), ALIQUOTNUM: txtaliquotnum.Text, ALIQUOTFROM: allocatefrom.Text, ALIQUOTSEQTO: allocateto.Text);
+                        }
+                 
                 }
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -286,9 +286,9 @@ namespace SpecimenTracking
             }
             return res;
         }
-        protected void Check_SequenceNumber(object sender, EventArgs e) 
+        protected void Check_SequenceNumber(object sender, EventArgs e)
         {
-            try 
+            try
             {
                 string AliquotSeq = txtSeqtNo.Text.Trim();
                 DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_SequenceNumber", SEQNO: AliquotSeq);
@@ -298,12 +298,12 @@ namespace SpecimenTracking
                     txtSeqtNo.Text = string.Empty;
                     ScriptManager.RegisterStartupScript(this, GetType(), "focusNext", "document.getElementById('" + txtSeqtNo.ClientID + "').focus();", true);
                 }
-                else 
+                else
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "focusNext", "document.getElementById('" + txtaliquotID.ClientID + "').focus();", true);
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace.ToString());
             }
@@ -354,118 +354,90 @@ namespace SpecimenTracking
                 Console.WriteLine(ex.StackTrace.ToString());
             }
         }
-        protected void Check_AliquotSEQUENCE()
+
+        protected void Check_AliquotSEQALLOC(object sender, EventArgs e)
         {
             try
             {
-                string SEQFROM = allocatefrom.Text.Trim();
-                string SEQTO = allocateto.Text.Trim();
-                bool isValid = true; // To track if all checks pass
-
-                // First, check if both Sequence From and Sequence To are the same
-                if (SEQFROM == SEQTO && !string.IsNullOrWhiteSpace(SEQFROM) && !string.IsNullOrWhiteSpace(SEQTO))
-                {
-                    // Show warning if the sequences are the same
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Sequence From and Sequence To cannot be the same.', 'warning');", true);
-                    isValid = false;
-                    allocatefrom.Text = string.Empty; // Clear the 'From' field
-                    allocateto.Text = string.Empty;   // Clear the 'To' field
-                }
-
-                // Proceed with checking overlaps only if SEQFROM and SEQTO are not the same
-                if (isValid && (!string.IsNullOrWhiteSpace(SEQFROM) || !string.IsNullOrWhiteSpace(SEQTO)))
-                {
-                    // If SEQFROM is provided, check for overlaps
-                    if (!string.IsNullOrWhiteSpace(SEQFROM))
-                    {
-                        DataSet dsFrom = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQALLOC", ALIQUOTFROM: SEQFROM, ALIQUOTSEQTO: null);
-                        if (dsFrom != null && dsFrom.Tables.Count > 0 && dsFrom.Tables[0].Rows.Count > 0)
-                        {
-                            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Aliquot Sequence From Already Exists or Overlaps.', 'warning');", true);
-                            allocatefrom.Text = string.Empty;
-                            isValid = false; // Set to false if there's an overlap
-                        }
-                    }
-
-                    // If SEQTO is provided, check for overlaps
-                    if (!string.IsNullOrWhiteSpace(SEQTO))
-                    {
-                        DataSet dsTo = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQALLOC", ALIQUOTFROM: null, ALIQUOTSEQTO: SEQTO);
-                        if (dsTo != null && dsTo.Tables.Count > 0 && dsTo.Tables[0].Rows.Count > 0)
-                        {
-                            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Aliquot Sequence To Already Exists or Overlaps.', 'warning');", true);
-                            allocateto.Text = string.Empty;
-                            isValid = false; // Set to false if there's an overlap
-                        }
-                    }
-
-                    // If both checks are valid, proceed with your logic
-                    if (isValid)
-                    {
-                        Console.WriteLine("No overlapping sequences found for both Sequence From and Sequence To.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace.ToString());
-            }
-        }
-
-        protected void Check_AliquotSEQALLOC(object sender, EventArgs e)
-            {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(allocatefrom.Text) && !string.IsNullOrWhiteSpace(allocateto.Text))
+                if ((!string.IsNullOrWhiteSpace(allocatefrom.Text)) && (!string.IsNullOrWhiteSpace(allocateto.Text)) && (allocatefrom.Text != "0") && (allocateto.Text != "0") )
                 {
                     string SEQFROM = allocatefrom.Text.Trim();
                     string SEQTO = allocateto.Text.Trim();
-                    DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQALLOC", ALIQUOTFROM: SEQFROM, ALIQUOTSEQTO: SEQTO);
-                    //if (ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
-                    //{
-                    if (ds != null && ds.Tables.Count > 0)
-                    {
-                        DataTable dt = ds.Tables[0];
 
-                        // Ensure the table has rows
-                        if (dt.Rows.Count > 0)
-                        {
-                            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Please Enter Aliquot Sequence in the Correct Format.', 'warning');", true);
-                            allocatefrom.Text = string.Empty;
-                            allocateto.Text = string.Empty;
-                            
-                        }
-                        else
-                        {
-                            // Handle no results scenario
-                            Console.WriteLine("No overlapping sequences found.");
-                        }
+                    if ((int.Parse(allocatefrom.Text) >= int.Parse(allocateto.Text)) && (int.Parse(allocateto.Text) <= int.Parse(allocatefrom.Text))) 
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Please Enter Aliquot Sequence in the Correct Format.', 'warning');", true);
+                        allocatefrom.Text = string.Empty;
+                        allocateto.Text = string.Empty;
                     }
                     else
                     {
-                        // Handle case where no table exists in the dataset
-                        Console.WriteLine("No table returned in the dataset.");
+                        string idValue = ViewState["ID"]?.ToString() ?? string.Empty;
+                        DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQALLOC", ID = idValue, ALIQUOTFROM: SEQFROM, ALIQUOTSEQTO: SEQTO);
+
+                        if (ds != null && ds.Tables.Count > 0)
+                        {
+                            DataTable dt = ds.Tables[0];
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                // Conflicting sequence found, display warning
+                                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Please Enter Aliquot Sequence in the Correct Format.', 'warning');", true);
+                                allocatefrom.Text = string.Empty;
+                                allocateto.Text = string.Empty;
+                            }
+                            else
+                            {
+                                // No conflict, proceed with update
+                                Console.WriteLine("No overlapping sequences found.");
+                            }
+                        }
+                        else
+                        {
+                            // Dataset is empty, which means no conflict
+                            Console.WriteLine("No table returned in the dataset.");
+                        }
                     }
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!','Aliquot Sequence Already Exists.','warning');", true);
-                    //allocatefrom.Text = string.Empty;
-                    //allocateto.Text = string.Empty;
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "focusNext", "document.getElementById('" + allocateto.ClientID + "').focus();", true);
                 }
-                else {
+                else
+                {
                     ScriptManager.RegisterStartupScript(this, GetType(), "focusNext", "document.getElementById('" + allocateto.ClientID + "').focus();", true);
                 }
-                //}
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace.ToString());
             }
         }
-
-        protected void GrdAliquots_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        private bool IsValidAllocation(string from, string to)
         {
-            GrdAliquots.PageIndex = e.NewPageIndex;
-            GET_ALIQUOTMASTER();
+            return !string.IsNullOrWhiteSpace(from) &&
+                   !string.IsNullOrWhiteSpace(to) &&
+                   from != "0" &&
+                   to != "0";
+        }
+
+        protected bool VAL_CHECK(string ID, string AliquotSeqNumber, string AliquotID, string AliquotType, string AliquotNumber, string SeqAllocateFrm, string SeqAllocateTo)
+        {
+            bool Aliquot_Val = true;
+
+            if (!string.IsNullOrEmpty(AliquotSeqNumber) && !string.IsNullOrWhiteSpace(AliquotSeqNumber) && !string.IsNullOrEmpty(AliquotID) && !string.IsNullOrWhiteSpace(AliquotID) && !string.IsNullOrEmpty(AliquotType) && !string.IsNullOrWhiteSpace(AliquotType) && !string.IsNullOrEmpty(AliquotNumber) && !string.IsNullOrWhiteSpace(AliquotNumber) && !string.IsNullOrEmpty(SeqAllocateFrm) && !string.IsNullOrWhiteSpace(SeqAllocateFrm) && !string.IsNullOrEmpty(SeqAllocateTo) && !string.IsNullOrWhiteSpace(SeqAllocateTo))
+            {
+                if ((allocatefrom.Text != allocatefrm.Value) && (allocateto.Text != allocatetwo.Value))
+                {
+                   DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotSEQALLOC", ALIQUOTFROM: allocatefrom.Text, ALIQUOTSEQTO: allocateto.Text);
+                    if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        Aliquot_Val = true;
+                    }
+                    else 
+                    {
+                        Aliquot_Val = false;  
+                    }
+                }
+            }
+
+            return Aliquot_Val;
         }
         private void GET_ALIQUOTMASTER()
         {
@@ -473,14 +445,14 @@ namespace SpecimenTracking
             {
                 DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(
                     ACTION: "GET_ALIQUOTS");
-                if (ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     GrdAliquots.DataSource = ds.Tables[0];
                     GrdAliquots.DataBind();
                 }
                 else
                 {
-                    GrdAliquots.DataSource = string.Empty;
+                    GrdAliquots.DataSource = null;
                     GrdAliquots.DataBind();
                 }
             }
@@ -490,9 +462,9 @@ namespace SpecimenTracking
             }
         }
 
-        protected void BindVisits() 
+        protected void BindVisits()
         {
-            try 
+            try
             {
                 DataSet ds = DAL_SETUP.Visit_Aliquot_Mapping(ACTION: "GET_VISITS");
                 if (ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
@@ -506,25 +478,25 @@ namespace SpecimenTracking
                 }
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 ex.StackTrace.ToString();
             }
         }
 
-        protected void dropdown_visit_SelectedIndexChanged(object sender, EventArgs e) 
+        protected void dropdown_visit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try 
+            try
             {
 
                 string SelectedVisitID = dropdown_visits.SelectedValue;
-                
+
                 if (SelectedVisitID != "0" && !string.IsNullOrEmpty(SelectedVisitID))
                 {
                     Bind_NotMatchingCheckBoxList(SelectedVisitID);
                     MapAliquot.Visible = true;
                 }
-                else 
+                else
                 {
                     grdviewAliquotVisit.DataSource = string.Empty;
                     grdviewAliquotVisit.DataBind();
@@ -534,13 +506,13 @@ namespace SpecimenTracking
                     MapAliquot.Visible = false;
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace.ToString());
             }
-            
+
         }
-        private void Bind_NotMatchingCheckBoxList(string SelectedVisitID) 
+        private void Bind_NotMatchingCheckBoxList(string SelectedVisitID)
         {
             DataSet ds = new DataSet();
             ds = DAL_SETUP.Visit_Aliquot_Mapping(ACTION: "GET_ALIQUOT_FOR_MAPPING", VISITID: SelectedVisitID.ToString());
@@ -561,8 +533,8 @@ namespace SpecimenTracking
                     gridAddedAliquot.DataBind();
                 }
             }
-            else 
-            
+            else
+
             {
                 grdviewAliquotVisit.DataSource = string.Empty;
                 grdviewAliquotVisit.DataBind();
@@ -574,26 +546,46 @@ namespace SpecimenTracking
         }
         protected void btn_Add_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
-                foreach (GridViewRow row in grdviewAliquotVisit.Rows ) 
+                bool isAnyChecked = false; // Flag to check if any checkbox is selected
+                foreach (GridViewRow row in grdviewAliquotVisit.Rows)
                 {
                     CheckBox checkBox = (CheckBox)row.FindControl("chkSelect");
                     if (checkBox.Checked)
                     {
-                            HiddenField hfID = (HiddenField)row.FindControl("hfID");
-                            DAL_SETUP.Visit_Aliquot_Mapping(
-                             ACTION: "ADD_ALIQUOT",
-                             VISITID: dropdown_visits.SelectedValue,
-                             ALIQUOTID:hfID.Value,
-                             ADDED: true
-                                );
+                        HiddenField hfID = (HiddenField)row.FindControl("hfID");
+                        DAL_SETUP.Visit_Aliquot_Mapping(
+                         ACTION: "ADD_ALIQUOT",
+                         VISITID: dropdown_visits.SelectedValue,
+                         ALIQUOTID: hfID.Value
+                            );
+
+                        isAnyChecked = true;
                     }
+
+                }
+                
+                if (!isAnyChecked)
+                {
                     
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Please select at least one Aliquot.', 'warning');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", @"
+                     swal({
+                             title: 'Success!',
+                             text: 'Aliquots have been added successfully.',
+                             icon: 'success'
+                                  }).then((value) => {
+                              if (value) { location.reload(true); }
+                           });", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!', 'Aliquots have been added successfully.', 'success');", true);
                 }
                 Bind_NotMatchingCheckBoxList(dropdown_visits.SelectedValue);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace.ToString());
             }
@@ -603,21 +595,40 @@ namespace SpecimenTracking
         {
             try
             {
+                bool isAnyChecked = false; 
                 foreach (GridViewRow row in gridAddedAliquot.Rows)
                 {
                     CheckBox checkBox = (CheckBox)row.FindControl("chkSelect");
-                    if (checkBox.Checked) 
+                    if (checkBox.Checked)
                     {
                         HiddenField hdnfield = (HiddenField)row.FindControl("hfID");
-                        DAL_SETUP.Visit_Aliquot_Mapping(ACTION: "REMOVE_ALIQUOT", VISITID: dropdown_visits.SelectedValue, hdnfield.Value, ADDED: false);
+                        DAL_SETUP.Visit_Aliquot_Mapping(ACTION: "REMOVE_ALIQUOT", VISITID: dropdown_visits.SelectedValue, hdnfield.Value);
+                        isAnyChecked = true;
                     }
                 }
                 
+                if (!isAnyChecked)
+                {
+                    
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Please select at least one Aliquot.', 'warning');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", @"
+                     swal({
+                             title: 'Success!',
+                             text: 'Aliquots have been removed successfully.',
+                             icon: 'success'
+                                  }).then((value) => {
+                              if (value) { location.reload(true); }
+                           });", true);
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!', 'Aliquots have been removed successfully.', 'success');", true);
+                }
                 Bind_NotMatchingCheckBoxList(dropdown_visits.SelectedValue);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.StackTrace.ToString()); 
+                Console.WriteLine(ex.StackTrace.ToString());
             }
         }
 
@@ -635,10 +646,10 @@ namespace SpecimenTracking
                     DataSet ds = DAL_SETUP.SETUP_ALIQUOT_SP(ACTION: "Check_AliquotExistInMapping", ID: AliquotID, ALIQUOTID: dropdown_visits.SelectedValue);
                     if (ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
                     {
-                        // Check if the first value is TRUE, indicating the record exists
+                        
                         if (ds.Tables[0].Rows[0][0].ToString().Equals("TRUE", StringComparison.OrdinalIgnoreCase))
                         {
-                            // Hide the delete button if record exists
+                            
                             lnkDelete.Visible = false;
                         }
 
@@ -668,7 +679,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -692,7 +703,31 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
+
+        protected void GrdAliquots_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                GridView gv = (GridView)sender;
+                if ((gv.ShowHeader == true && gv.Rows.Count > 0)
+                    || (gv.ShowHeaderWhenEmpty == true))
+                {
+                    //Force GridView to use <thead> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                if (gv.ShowFooter == true && gv.Rows.Count > 0)
+                {
+                    //Force GridView to use <tfoot> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.FooterRow.TableSection = TableRowSection.TableFooter;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogging.SendErrorToText(ex);
+                throw;
             }
         }
     }

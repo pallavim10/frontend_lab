@@ -2,8 +2,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <link href="Style/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-
-    <link rel="stylesheet" type="text/css" href="Style/datatables/dataTables.bootstrap.css" />
     <style type="text/css">
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             color: #0000ff;
@@ -93,7 +91,9 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
-                            <li class="breadcrumb-item active">Assign Roles</li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
+                            <li class="breadcrumb-item active">Manage Users</li>
+                            <li class="breadcrumb-item active">Assign User Roles</li>
                         </ol>
                     </div>
                 </div>

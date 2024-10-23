@@ -23,7 +23,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -43,7 +43,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -76,7 +76,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -105,7 +105,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -127,7 +127,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -135,7 +135,7 @@ namespace SpecimenTracking
         {
             try
             {
-
+                Boolean statusadd = false;
                 for (int i = 0; i < grdUsers.Rows.Count; i++)
                 {
                     CheckBox ChkSITEID = (CheckBox)grdUsers.Rows[i].FindControl("ChkSITEID");
@@ -149,17 +149,47 @@ namespace SpecimenTracking
                              User_ID: DrpUser.SelectedValue,
                              SiteID: lblSiteID.Text
                           );
-
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Site Assigned Successfully');", true);
-
+                        statusadd = true;
                     }
+
                 }
-                GET_SITEID_SITES();
-                GET_ADDED_USERS_SITES();
+                if (statusadd == true && DrpUser.SelectedValue != "0")
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Site Assigned Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                    //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Site Assigned Successfully');", true);
+
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                            swal({
+                                title: 'Warning!',
+                                text: 'Please Select a Site.',
+                                icon: 'warning',
+                                button: 'OK'
+                            }).then(function(){
+                                             window.location.href = window.location.href; });
+                        ", true);
+                }
+
+
+                if (DrpUser.SelectedValue != "0")
+                {
+                    GET_SITEID_SITES();
+                    GET_ADDED_USERS_SITES();
+                }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -167,7 +197,7 @@ namespace SpecimenTracking
         {
             try
             {
-
+                Boolean status = false;
                 for (int i = 0; i < grdAddedUsers.Rows.Count; i++)
                 {
                     CheckBox chkAddedSiteID = (CheckBox)grdAddedUsers.Rows[i].FindControl("chkAddedSiteID");
@@ -180,17 +210,45 @@ namespace SpecimenTracking
                              ACTION: "DELETED_ADDED_USERS_SITES",
                              SiteID: lblSiteID.Text
                           );
+                        status = true;
 
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Site Removed Successfully');", true);
 
                     }
+                    
                 }
-                GET_SITEID_SITES();
-                GET_ADDED_USERS_SITES();
+                if (status == true)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                            swal({
+                                title: 'Success!',
+                                text: 'Site Removed Successfully.',
+                                icon: 'success',
+                                button: 'OK'
+                            }).then(function(){
+                                             window.location.href = window.location.href; });
+                        ", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                            swal({
+                                title: 'Warning!',
+                                text: 'Please Select a Site.',
+                                icon: 'warning',
+                                button: 'OK'
+                            }).then(function(){
+                                             window.location.href = window.location.href; });
+                        ", true);
+                }
+                if (DrpUser.SelectedValue != "0")
+                {
+                    GET_SITEID_SITES();
+                    GET_ADDED_USERS_SITES();
+                }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -213,7 +271,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
     }

@@ -23,7 +23,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -50,7 +50,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -73,7 +73,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -109,7 +109,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void lbtnSubmit_Click(object sender, EventArgs e)
@@ -131,12 +131,20 @@ namespace SpecimenTracking
                         System_UserID: drpInternalUser.SelectedValue
                     );
                 }
-
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Master User Updated Successfully');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Master User Updated Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Master User Updated Successfully');", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -162,7 +170,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 

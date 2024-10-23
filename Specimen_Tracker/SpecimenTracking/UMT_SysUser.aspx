@@ -11,6 +11,9 @@
         .select2-container--default .select2-selection--single {
             margin-top: 2px;
         }
+        .font-Sys {
+            font-size: medium !important;
+        }
     </style>
     <script type="text/javascript">
         function pageLoad() {
@@ -91,7 +94,9 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
-                            <li class="breadcrumb-item active">Assign Roles</li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
+                            <li class="breadcrumb-item active">Manage Users</li>
+                            <li class="breadcrumb-item active">Assign Master Users</li>
                         </ol>
                     </div>
                 </div>
@@ -128,13 +133,12 @@
                                                 <asp:GridView ID="grdSysUser" runat="server" AutoGenerateColumns="false"
                                                     CssClass="table table-bordered table-striped" OnRowDataBound="grdSysUser_RowDataBound">
                                                     <Columns>
-                                                        <asp:TemplateField HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none"
-                                                            HeaderText="ID">
+                                                        <asp:TemplateField HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none" HeaderText="ID">
                                                             <ItemTemplate>
-                                                                <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                                                                <asp:Label ID="lblID" runat="server" Text='<%# Bind("SysMasterID") %>'></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Systems" ItemStyle-HorizontalAlign="Center">
+                                                        <asp:TemplateField HeaderText="Systems" ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="text_center font-Sys" HeaderStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text_center font-Sys">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblSystem" runat="server" Text='<%# Bind("SystemName") %>' />
                                                             </ItemTemplate>
@@ -144,12 +148,12 @@
                                                                 <asp:Label ID="lblSystemID" Text='<%# Bind("SystemID") %>' runat="server"></asp:Label>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Select User" ItemStyle-HorizontalAlign="Center">
+                                                        <asp:TemplateField HeaderText="Select User" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text_center font-Sys">
                                                             <ItemTemplate>
                                                                 <asp:DropDownList ID="drpInternalUser" runat="server" class="form-control drpControl select" SelectionMode="Single" Width="50%"></asp:DropDownList>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Audit Trail" ItemStyle-HorizontalAlign="Center">
+                                                        <asp:TemplateField HeaderText="Audit Trail" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text_center font-Sys">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="lbtnAudttrail" runat="server" OnClientClick="return showAuditTrail(this);" CssClass="btn-info btn-sm" ToolTip="Audit Trail"><i class="fa fa-history"></i></asp:LinkButton>
                                                             </ItemTemplate>

@@ -30,7 +30,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -129,7 +129,7 @@ namespace SpecimenTracking
                         BIND_DRP_COLS(drpSequenceNo, dtExcelSheet);
                         BIND_DRP_COLS(drpslotno, dtExcelSheet);
                         BIND_DRP_COLS(drpBoxno, dtExcelSheet);
-                        
+
 
                         ViewState["BoxList"] = excelData;
                         drpBoxno.Focus();
@@ -139,7 +139,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -147,15 +147,14 @@ namespace SpecimenTracking
         {
             try
             {
-                //ddlcolumnSID.Items.Clear();
-                //ddlcolumnSite.Items.Clear();
-                ddlcolumnSID.ClearSelection();
-                ddlcolumnSite.ClearSelection();
+                ddlcolumnSID.Items.Clear();
+                ddlcolumnSite.Items.Clear();
+
                 ViewState["Specimen"] = null;
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -166,13 +165,12 @@ namespace SpecimenTracking
             {
                 ddlSubjectID.Items.Clear();
                 ddlSiteID.Items.Clear();
-                ddlSubjectID.ClearSelection();
-                ddlSiteID.ClearSelection();
+
                 ViewState["Subject"] = null;
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -189,7 +187,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -219,7 +217,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -244,7 +242,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -257,7 +255,6 @@ namespace SpecimenTracking
         {
             try
             {
-                bool Specimen = false;
                 if (ViewState["Specimen"] != null)
                 {
                     DataTable dataTable = (DataTable)ViewState["Specimen"];
@@ -272,19 +269,18 @@ namespace SpecimenTracking
                                     SID: SID,
                                     SITEID: SITEID);
 
-                        Specimen = true;
+                        dr["Upload result"] = ds.Tables[0].Rows[0]["Results"].ToString();
 
                     }
-                    if (Specimen == true)
-                    {
-                        Export_SpecimenID();                       
+                    CLEAR_Specimen();
 
-                    }
+                    Multiple_Export_Excel.ToExcel(dataTable, "Uploaded Specimen IDs.xlsx", Page.Response);
+
                 }
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -293,12 +289,11 @@ namespace SpecimenTracking
             try
             {
                 UPLOAD_SPECIMEN();
-                CLEAR_Specimen();
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Specimen IDs Upload Successfully.', 'success');", true);
+               
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -325,22 +320,20 @@ namespace SpecimenTracking
                                     ACTION: "UPLOAD_SUBJECTID",
                                     SITEID: SITEID,
                                     SUBJECTID: SUBJID);
-                        Subject = true;
-                    }
 
-                    if (Subject == true)
-                    {
-                        Export_SubjectID();
-                       
-
-                        
+                        dr["Upload result"] = ds.Tables[0].Rows[0]["Results"].ToString();
 
                     }
+                    CLEAR_Subject();
+
+                    Multiple_Export_Excel.ToExcel(dataTable, "Uploaded Subject IDs.xlsx", Page.Response);
+
+
                 }
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -349,12 +342,11 @@ namespace SpecimenTracking
             try
             {
                 UPLOAD_SUBJECT();
-                CLEAR_Subject();
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Subject IDs Upload Successfully.', 'success');", true);
+                
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -372,7 +364,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -385,15 +377,14 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
         protected void btnBoxUpload_Click(object sender, EventArgs e)
         {
             UPLOAD_BOXLIST();
-            CLEAR_BOXLIST();
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Box List Upload Successfully.', 'success');", true);
+            
         }
 
         private void UPLOAD_BOXLIST()
@@ -418,21 +409,19 @@ namespace SpecimenTracking
                                     SLOTNO: SLOTNO,
                                     BOXNO: BOXNO,
                                     SITEID: SITEID);
-                        boxlist = true;
-                    }
 
-                    if (boxlist == true)
-                    {
-                        Export_BOXLIST();
-                        
-                        
+                        dr["Upload result"] = ds.Tables[0].Rows[0]["Results"].ToString();
 
                     }
+                    CLEAR_BOXLIST();
+
+                    Multiple_Export_Excel.ToExcel(dataTable, "Uploaded Box Lists.xlsx", Page.Response);
+
                 }
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -467,7 +456,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -478,15 +467,13 @@ namespace SpecimenTracking
                 drpSequenceNo.Items.Clear();
                 drpBoxno.Items.Clear();
                 drpslotno.Items.Clear();
-                drpSequenceNo.ClearSelection();
-                drpBoxno.ClearSelection();
-                drpslotno.ClearSelection();
+
                 ViewState["BoxList"] = null;
             }
             catch (Exception ex)
             {
 
-                ex.Message.ToString(); 
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -499,7 +486,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
     }

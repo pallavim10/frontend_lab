@@ -2,16 +2,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(".Datatable").DataTable({
-                "bSort": false,
-                "ordering": false,
-                "bDestroy": true,
-                stateSave: true
-            });
-            $(".Datatable").parent().parent().addClass('fixTableHead');
-        });
-
         $(".numeric").on("keypress keyup blur", function (event) {
             $(this).val($(this).val().replace(/[^\d].+/, ""));
             if ((event.which < 48 || event.which > 57)) {
@@ -199,6 +189,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="SETUPDashboard.aspx">Setup</a></li>
                             <li class="breadcrumb-item active">Manage Criteria</li>
                         </ol>
                     </div>
@@ -461,8 +452,7 @@
                                             <div class="col-md-12">
                                                 <div style="width: 100%; overflow: auto;">
                                                     <div>
-                                                        <asp:GridView ID="GrdCRIT" runat="server" AllowSorting="True" AutoGenerateColumns="false"
-                                                            CssClass="table table-bordered table-striped" OnRowCommand="GrdCRIT_RowCommand">
+                                                        <asp:GridView ID="GrdCRIT" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-striped Datatable" OnRowCommand="GrdCRIT_RowCommand" OnPreRender="GrdCRIT_PreRender">
                                                             <Columns>
                                                                 <asp:TemplateField HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none" HeaderText="ID">
                                                                     <ItemTemplate>

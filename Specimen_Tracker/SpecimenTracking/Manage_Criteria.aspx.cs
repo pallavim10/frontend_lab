@@ -26,7 +26,7 @@ namespace SpecimenTracking
             catch (Exception ex)
             {
 
-                ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -44,7 +44,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -87,7 +87,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -104,7 +104,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -117,7 +117,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -130,7 +130,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -143,7 +143,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -157,7 +157,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -171,7 +171,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -182,7 +182,6 @@ namespace SpecimenTracking
             GET_DEFINE_CRIT();
             CLEAR_Field();
 
-            //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Define Criteria Inserted Successfully.', 'success');", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
@@ -832,7 +831,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -874,7 +873,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -1536,7 +1535,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -1569,7 +1568,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -1634,7 +1633,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -1662,7 +1661,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -1687,7 +1686,31 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
+
+        protected void GrdCRIT_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                GridView gv = (GridView)sender;
+                if ((gv.ShowHeader == true && gv.Rows.Count > 0)
+                    || (gv.ShowHeaderWhenEmpty == true))
+                {
+                    //Force GridView to use <thead> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                if (gv.ShowFooter == true && gv.Rows.Count > 0)
+                {
+                    //Force GridView to use <tfoot> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.FooterRow.TableSection = TableRowSection.TableFooter;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogging.SendErrorToText(ex);
+                throw;
             }
         }
     }

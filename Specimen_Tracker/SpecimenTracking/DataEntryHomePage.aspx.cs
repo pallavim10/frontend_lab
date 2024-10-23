@@ -53,9 +53,9 @@ namespace SpecimenTracking
 
                 switch (span.InnerText)
                 {
-                    case "L1 - New Entry":
+                    case "Master Upload":
 
-                       // lbl.Text = "10";
+                        lbl.Text = "10";
                         break;
 
                     case "L1 - Update Entry":
@@ -66,6 +66,10 @@ namespace SpecimenTracking
 
                     case "L2 - Update Entry":
                         break;
+
+                    case "Manage Aliquots":
+                        break;
+
 
                 }
             }

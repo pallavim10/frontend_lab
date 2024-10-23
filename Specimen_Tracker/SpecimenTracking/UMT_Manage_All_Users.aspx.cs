@@ -22,6 +22,7 @@ namespace SpecimenTracking
                 GET_STUDYROLE();
             }
         }
+
         private void GET_USERTYPE()
         {
             try
@@ -37,7 +38,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -56,7 +57,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -237,7 +238,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -312,7 +313,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -355,7 +356,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -398,7 +399,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -426,7 +427,7 @@ namespace SpecimenTracking
                 {
                     SYSTEM_LIST += "<li>" + dr["System Name"].ToString() + "</li>";
                 }
-                URL = HttpContext.Current.Request.Url.AbsoluteUri.ToString().Replace(Request.RawUrl.ToString(), "/Login.aspx");
+                URL = HttpContext.Current.Request.Url.AbsoluteUri.ToString().Replace(Request.RawUrl.ToString(), "/LoginPage.aspx");
                 SUBJECT = "User Activation";
                 dsEmail = dal.UMT_EMAIL_SP(ACTION: "GET_EMAIL_TEMPLATE", Email_Code: "USER_ACTIVATION_MAIL_FIRST");
 
@@ -456,7 +457,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -493,7 +494,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -536,7 +537,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -585,7 +586,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -632,7 +633,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -680,7 +681,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -694,7 +695,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -712,7 +713,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -721,11 +722,20 @@ namespace SpecimenTracking
             try
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "User_ACTIVATE", ID: id);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Activated Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'User Activated Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Activated Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -734,11 +744,20 @@ namespace SpecimenTracking
             try
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "User_DEACTIVATE", ID: id);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Deactivated Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'User Deactived Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Deactivated Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -747,11 +766,20 @@ namespace SpecimenTracking
             try
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "User_LOCK", ID: id);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Unlocked Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'User Unlocked Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User Unlocked Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -760,11 +788,20 @@ namespace SpecimenTracking
             try
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "ReSet_Question", ID: id);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Reset Security Question Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Reset Security Question Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Reset Security Question Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -773,11 +810,20 @@ namespace SpecimenTracking
             try
             {
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "Resend_Password", ID: id);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Password Send Successfully')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Password Send Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Password Send Successfully')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -785,18 +831,25 @@ namespace SpecimenTracking
         {
             try
             {
-                string header = "All Users Details";
+                string xlname = "All Users Details";
 
                 DataSet ds = dal_UMT.UMT_USERS_SP(
-                    ACTION: "GET_ALL_USERS"
+                    ACTION: "GET_ALL_USERS_EXPORT"
                     );
 
-                ds.Tables[0].TableName = header;
-                Multiple_Export_Excel.ToExcel(ds, header + ".xls", Page.Response);
+                DataSet dsExport = new DataSet();
+
+                for (int i = 1; i < ds.Tables.Count; i++)
+                {
+                    ds.Tables[i].TableName = ds.Tables[i - 1].Rows[0][0].ToString();
+                    dsExport.Tables.Add(ds.Tables[i].Copy());
+                    i++;
+                }
+                Multiple_Export_Excel.ToExcel(dsExport, xlname, Page.Response);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -808,7 +861,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -833,7 +886,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 

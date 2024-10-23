@@ -21,7 +21,7 @@ namespace SpecimenTracking.App_Code
             return ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         }
 
-        public DataSet DATA_ENTRY_SP(string ACTION = null, string SITEID = null, string VISITNUM = null, string VISIT = null, string SID = null, string SUBJID = null, string VARIABLENAME = null, string INSERTQUERY = null, string UPDATEQUERY = null, string ALQID = null, string ALIQUOTID = null, string ALIQUOTTYPE = null, string ALIQUOTNO_CONCAT = null, string ALIQUOTNO = null, string BOXNO = null, string SLOTNO = null, string SPECTYP = null)
+        public DataSet DATA_ENTRY_SP(string ACTION = null, string ID = null, string SITEID = null, string VISITNUM = null, string VISIT = null, string SID = null, string SUBJID = null, string VARIABLENAME = null, string INSERTQUERY = null, string UPDATEQUERY = null, string ALQID = null, string ALIQUOTID = null, string ALIQUOTTYPE = null, string ALIQUOTNO_CONCAT = null, string ALIQUOTNO = null, string BOXNO = null, string SLOTNO = null, string SPECTYP = null, string FIELDNAME = null, string COLUMNNAME = null, string OLDVAL = null, string NEWVAL = null, string Reason = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -49,6 +49,8 @@ namespace SpecimenTracking.App_Code
                 cmd = new SqlCommand("DATA_ENTRY_SP", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ACTION", ACTION);
+                cmd.Parameters.AddWithValue("@ID", ID);
+
                 cmd.Parameters.AddWithValue("@SITEID", SITEID);
                 cmd.Parameters.AddWithValue("@VISITNUM", VISITNUM);
                 cmd.Parameters.AddWithValue("@VISIT", VISIT);
@@ -66,6 +68,12 @@ namespace SpecimenTracking.App_Code
                 cmd.Parameters.AddWithValue("@BOXNO", BOXNO);
                 cmd.Parameters.AddWithValue("@SLOTNO", SLOTNO);
                 cmd.Parameters.AddWithValue("@SPECTYP", SPECTYP);
+
+                cmd.Parameters.AddWithValue("@FIELDNAME", FIELDNAME);
+                cmd.Parameters.AddWithValue("@COLUMNNAME", COLUMNNAME);
+                cmd.Parameters.AddWithValue("@OLDVAL", OLDVAL);
+                cmd.Parameters.AddWithValue("@NEWVAL", NEWVAL);
+                cmd.Parameters.AddWithValue("@Reason", Reason);
 
                 cmd.Parameters.AddWithValue("@UserID", UserID);
                 cmd.Parameters.AddWithValue("@User_Name", User_Name);
@@ -144,7 +152,7 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
-        public DataSet CRITERIA_SP(string ACTION = null, string Condition = null, string CritName = null)
+        public DataSet CRITERIA_SP(string ACTION = null, string Condition = null, string DESCRIPTION = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -155,7 +163,7 @@ namespace SpecimenTracking.App_Code
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ACTION", ACTION);
                 cmd.Parameters.AddWithValue("@Condition", Condition);
-                cmd.Parameters.AddWithValue("@CritName", CritName);
+                cmd.Parameters.AddWithValue("@DESCRIPTION", DESCRIPTION);
                 adp = new SqlDataAdapter(cmd);
                 adp.Fill(ds);
                 cmd.Dispose();
@@ -171,7 +179,7 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
-        public DataSet DATA_ENTRYLIST_SP(string ACTION = null, string SITEID = null, string VISITNUM = null, string SID = null, string SUBJID = null, string VARIABLENAME = null)
+        public DataSet DATA_ENTRYLIST_SP(string ACTION = null, string SITEID = null, string VISITNUM = null, string SID = null, string SUBJID = null, string VARIABLENAME = null, string ACKNOWLEDGEMENT = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -204,7 +212,7 @@ namespace SpecimenTracking.App_Code
                 cmd.Parameters.AddWithValue("@SID", SID);
                 cmd.Parameters.AddWithValue("@SUBJID", SUBJID);
                 cmd.Parameters.AddWithValue("@VARIABLENAME", VARIABLENAME);
-
+                cmd.Parameters.AddWithValue("@ACKNOWLEDGEMENT", ACKNOWLEDGEMENT);
                 cmd.Parameters.AddWithValue("@UserID", UserID);
                 cmd.Parameters.AddWithValue("@User_Name", User_Name);
                 cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);

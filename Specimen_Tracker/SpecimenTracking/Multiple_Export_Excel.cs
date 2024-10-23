@@ -214,15 +214,17 @@ namespace SpecimenTracking
                     newDT.ImportRow(row);
                 }
 
+                newDT.TableName = dsInput.Tables[0].TableName;
+
                 dsInput = new DataSet();
 
                 dsInput.Tables.Add(newDT);
             }
 
-            //if (!filename.Contains(HttpContext.Current.Session["PROJECTIDTEXT"].ToString()))
-            //{
-            //    filename = HttpContext.Current.Session["PROJECTIDTEXT"].ToString() + "_" + filename.Replace(".xls", "") + "_" + DateTime.Now.ToString("yyyyMMdd") + ".xls";
-            //}
+            if (!filename.Contains(HttpContext.Current.Session["PROJECTIDTEXT"].ToString()))
+            {
+                filename = HttpContext.Current.Session["PROJECTIDTEXT"].ToString() + "_" + filename.Replace(".xls", "") + "_" + DateTime.Now.ToString("yyyyMMdd") + ".xls";
+            }
 
             filename = filename.Replace(".xls", "");
 

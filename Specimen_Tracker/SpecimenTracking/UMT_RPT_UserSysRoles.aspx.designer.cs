@@ -42,6 +42,15 @@ namespace SpecimenTracking
         protected global::System.Web.UI.WebControls.Label lblErrorMsg;
 
         /// <summary>
+        /// LinkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+
+        /// <summary>
         /// hdnID control.
         /// </summary>
         /// <remarks>
@@ -78,22 +87,13 @@ namespace SpecimenTracking
         protected global::System.Web.UI.WebControls.Button btnGet;
 
         /// <summary>
-        /// divDownload control.
+        /// DivRecord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDownload;
-
-        /// <summary>
-        /// btnExport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnExport;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivRecord;
 
         /// <summary>
         /// grdData control.

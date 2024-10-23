@@ -35,7 +35,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -130,7 +130,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -147,7 +147,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -189,7 +189,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -229,7 +229,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -265,7 +265,8 @@ namespace SpecimenTracking
 
                 if (RoleExists != "")
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Selected functions are already assigned to Role " + RoleExists + ".');", true);
+                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Selected functions are already assigned to Role " + RoleExists + ".');", true);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "showalert", "swal('Warning!','Selected functions are already assigned to Role " + RoleExists + "','warning');", true);
                 }
                 else
                 {
@@ -275,7 +276,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -362,16 +363,34 @@ namespace SpecimenTracking
 
                 if (chkSeleect1 == true || chkSeleect2 == true || chkSeleect3 == true)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User role rights added successfully.');", true);
+                //    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                //    swal({
+                //        title: 'Success!',
+                //        text: 'User role rights added successfully.',
+                //        icon: 'success',
+                //        button: 'OK'
+                //    }).then(function(){
+                //                     window.location.href = window.location.href; });
+                //", true);
+                   // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User role rights added successfully.');", true);
                 }
                 else
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User role rights removed successfully.');", true);
+                //    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                //    swal({
+                //        title: 'Success!',
+                //        text: 'User role role rights removed successfully.',
+                //        icon: 'success',
+                //        button: 'OK'
+                //    }).then(function(){
+                //                     window.location.href = window.location.href; });
+                //", true);
+                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('User role rights removed successfully.');", true);
                 }
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -425,7 +444,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
             return RoleName;
         }

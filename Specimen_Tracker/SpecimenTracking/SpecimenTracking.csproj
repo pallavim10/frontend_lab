@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +56,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.1.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17" />
     <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
     </Reference>
@@ -74,9 +76,9 @@
     <Reference Include="Microsoft.Exchange.WebServices.Auth, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.Auth.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.1.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4420.1017\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
       <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
@@ -166,6 +168,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ACKNOWLEDGEMENT.aspx" />
     <Content Include="AjaxFunction.aspx" />
     <Content Include="AnalyzingLaboratoryDashboard.aspx" />
     <Content Include="AnalyzingLaboratoryHomePage.aspx" />
@@ -177,7 +180,11 @@
     <Content Include="DataEntryDashboard.aspx" />
     <Content Include="DataEntryHomePage.aspx" />
     <Content Include="DATA_ENTRY.aspx" />
+    <Content Include="DATA_ENTRY_l2.aspx" />
+    <Content Include="DE_EDIT_ENTRYLIST_L2.aspx" />
     <Content Include="DE_EDIT_L1.aspx" />
+    <Content Include="DE_EDIT_L2.aspx" />
+    <Content Include="DE_ENTRYLIST_L2.aspx" />
     <Content Include="dist\css\adminlte.css" />
     <Content Include="dist\css\adminlte.min.css" />
     <Content Include="dist\css\alt\adminlte.components.css" />
@@ -214,6 +221,7 @@
     <Content Include="dist\img\HD2.png" />
     <Content Include="dist\img\icons.png" />
     <Content Include="dist\img\imgcaptcha.jpg" />
+    <Content Include="dist\img\loader.gif" />
     <Content Include="dist\img\photo1.png" />
     <Content Include="dist\img\photo2.png" />
     <Content Include="dist\img\photo3.jpg" />
@@ -521,8 +529,6 @@
     <Content Include="dist\js\confirm.js" />
     <Content Include="dist\js\demo.js" />
     <Content Include="dist\js\Demo\login-v2.demo.js" />
-    <Content Include="dist\js\jquery-ui-1.10.3.js" />
-    <Content Include="dist\js\jquery-ui-1.10.3.min.js" />
     <Content Include="dist\js\jquery-ui.min.js" />
     <Content Include="dist\js\pages\dashboard.js" />
     <Content Include="dist\js\pages\dashboard2.js" />
@@ -2094,6 +2100,7 @@
     <Content Include="Manage_Boxn_Slots.aspx" />
     <Content Include="Manage_Criteria.aspx" />
     <Content Include="Manage_Feilds.aspx" />
+    <Content Include="MANAGE_FEILDS_DATA.aspx" />
     <Content Include="Manage_Visit.aspx" />
     <Content Include="Master_Upload.aspx" />
     <Content Include="plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
@@ -2486,22 +2493,6 @@
     <Content Include="plugins\datatables\jquery.dataTables.css" />
     <Content Include="plugins\datatables\jquery.dataTables.js" />
     <Content Include="plugins\datatables\jquery.dataTables.min.js" />
-    <Content Include="plugins\daterangepicker\daterangepicker.css" />
-    <Content Include="plugins\daterangepicker\daterangepicker.js" />
-    <Content Include="plugins\daterangepicker\drp.png" />
-    <Content Include="plugins\daterangepicker\example\amd\index.html" />
-    <Content Include="plugins\daterangepicker\example\amd\main.js" />
-    <Content Include="plugins\daterangepicker\example\amd\require.js" />
-    <Content Include="plugins\daterangepicker\example\browserify\bundle.js" />
-    <Content Include="plugins\daterangepicker\example\browserify\index.html" />
-    <Content Include="plugins\daterangepicker\example\browserify\main.js" />
-    <Content Include="plugins\daterangepicker\moment.min.js" />
-    <Content Include="plugins\daterangepicker\package.js" />
-    <Content Include="plugins\daterangepicker\website.css" />
-    <Content Include="plugins\daterangepicker\website.js" />
-    <Content Include="plugins\daterangepicker\website\index.html" />
-    <Content Include="plugins\daterangepicker\website\website.css" />
-    <Content Include="plugins\daterangepicker\website\website.js" />
     <Content Include="plugins\dropzone\basic.css" />
     <Content Include="plugins\dropzone\dropzone-amd-module.js" />
     <Content Include="plugins\dropzone\dropzone.css" />
@@ -4119,16 +4110,9 @@
     <Content Include="dist\js\amcharts\plugins\responsive\package.json" />
     <Content Include="dist\js\amcharts\plugins\responsive\readme.md" />
     <Content Include="dist\js\amcharts\plugins\responsive\responsive.min.js.map" />
-    <Content Include="ExcelData\Aliquot.xlsx" />
-    <Content Include="ExcelData\Box List %281%29.xlsx" />
-    <Content Include="ExcelData\Box List %282%29.xlsx" />
-    <Content Include="ExcelData\Box List.xlsx" />
     <Content Include="ExcelData\BOXLIST.xlsx" />
     <Content Include="ExcelData\SIDMASTER.xlsx" />
-    <Content Include="ExcelData\Site Details.xlsx" />
-    <Content Include="ExcelData\SqlExport.xlsx" />
     <Content Include="ExcelData\SUBJECTMASTER.xlsx" />
-    <Content Include="ExcelData\Visit.xlsx" />
     <Content Include="fonts\New Font Awesome\less\brands.less" />
     <Content Include="fonts\New Font Awesome\less\fontawesome.less" />
     <Content Include="fonts\New Font Awesome\less\regular.less" />
@@ -4181,10 +4165,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\ionicons.eot" />
     <Content Include="fonts\ionicons.ttf" />
+    <Content Include="ExcelData\SID Master.xlsx" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="RegisterSuperUser.aspx" />
     <Content Include="ReportAndListingDashboard.aspx" />
     <Content Include="ReportAndListingHomePage.aspx" />
+    <Content Include="RPT_ACKNOWLEDGEMENT.aspx" />
+    <Content Include="RPT_ACKNOWLEDGE_DETAILS.aspx" />
+    <Content Include="RPT_ALIQUOT_DETAILS.aspx" />
+    <Content Include="RPT_SDV_DETAILS.aspx" />
+    <Content Include="RPT_SHIPMENT_DETAILS.aspx" />
+    <Content Include="RPT_SPECIMEN_DETAILS.aspx" />
     <Content Include="Scripts\btnSave_Required.js" />
     <Content Include="Scripts\Datatable.1.10.15.UI.js" />
     <Content Include="Scripts\Datatable1.10.15.js" />
@@ -4193,16 +4184,23 @@
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <Content Include="Scripts\MaxLength.min.js" />
+    <Content Include="Scripts\MaxLength_Limit.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\pikaday.jquery.js" />
     <Content Include="Scripts\pikaday.js" />
     <Content Include="Scripts\Select2.js" />
+    <Content Include="SDVHomePage.aspx" />
+    <Content Include="SDVPage.aspx" />
+    <Content Include="SDVREPORT.aspx" />
     <Content Include="SessionExpired.aspx" />
     <Content Include="SETUPDashboard.aspx" />
     <Content Include="SETUPHomePage.aspx" />
     <Content Include="SET_SecurityQue.aspx" />
     <Content Include="ShipmentManifestDashboard.aspx" />
     <Content Include="ShipmentManifestHomePage.aspx" />
+    <Content Include="SHIPMENT_DETAILS.aspx" />
+    <Content Include="SHIPMENT_SHIPPED.aspx" />
     <Content Include="Style\datatables\dataTables.bootstrap.css" />
     <Content Include="Style\DatatableUi1.css" />
     <Content Include="Style\DatatbleUi2.css" />
@@ -4211,11 +4209,14 @@
     <Content Include="UMT_Active_Deactive.aspx" />
     <Content Include="UMT_AssignRoleAct.aspx" />
     <Content Include="UMT_AssignRoles.aspx" />
+    <Content Include="UMT_ASSIGN_LABS.aspx" />
     <Content Include="UMT_ChangeRole.aspx" />
+    <Content Include="UMT_CREATE_LAB.aspx" />
     <Content Include="UMT_Emails.aspx" />
     <Content Include="UMT_ExtUser.aspx" />
     <Content Include="UMT_HomePage.aspx" />
     <Content Include="UMT_Manage_All_Users.aspx" />
+    <Content Include="UMT_PROJECT.aspx" />
     <Content Include="UMT_Request_List.aspx" />
     <Content Include="UMT_Role.aspx" />
     <Content Include="UMT_RoleRights.aspx" />
@@ -4243,6 +4244,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACKNOWLEDGEMENT.aspx.cs">
+      <DependentUpon>ACKNOWLEDGEMENT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ACKNOWLEDGEMENT.aspx.designer.cs">
+      <DependentUpon>ACKNOWLEDGEMENT.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AjaxFunction.aspx.cs">
       <DependentUpon>AjaxFunction.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4298,12 +4306,40 @@
     <Compile Include="DATA_ENTRY.aspx.designer.cs">
       <DependentUpon>DATA_ENTRY.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DATA_ENTRY_l2.aspx.cs">
+      <DependentUpon>DATA_ENTRY_l2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DATA_ENTRY_l2.aspx.designer.cs">
+      <DependentUpon>DATA_ENTRY_l2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DE_EDIT_ENTRYLIST_L2.aspx.cs">
+      <DependentUpon>DE_EDIT_ENTRYLIST_L2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DE_EDIT_ENTRYLIST_L2.aspx.designer.cs">
+      <DependentUpon>DE_EDIT_ENTRYLIST_L2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DE_EDIT_L1.aspx.cs">
       <DependentUpon>DE_EDIT_L1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DE_EDIT_L1.aspx.designer.cs">
       <DependentUpon>DE_EDIT_L1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DE_EDIT_L2.aspx.cs">
+      <DependentUpon>DE_EDIT_L2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DE_EDIT_L2.aspx.designer.cs">
+      <DependentUpon>DE_EDIT_L2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DE_ENTRYLIST_L2.aspx.cs">
+      <DependentUpon>DE_ENTRYLIST_L2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DE_ENTRYLIST_L2.aspx.designer.cs">
+      <DependentUpon>DE_ENTRYLIST_L2.aspx</DependentUpon>
     </Compile>
     <Compile Include="EMAIL_INTEGRATION.aspx.cs">
       <DependentUpon>EMAIL_INTEGRATION.aspx</DependentUpon>
@@ -4312,6 +4348,7 @@
     <Compile Include="EMAIL_INTEGRATION.aspx.designer.cs">
       <DependentUpon>EMAIL_INTEGRATION.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ExceptionLogging.cs" />
     <Compile Include="Forgot_Password.aspx.cs">
       <DependentUpon>Forgot_Password.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4389,6 +4426,13 @@
     <Compile Include="Manage_Feilds.aspx.designer.cs">
       <DependentUpon>Manage_Feilds.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MANAGE_FEILDS_DATA.aspx.cs">
+      <DependentUpon>MANAGE_FEILDS_DATA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MANAGE_FEILDS_DATA.aspx.designer.cs">
+      <DependentUpon>MANAGE_FEILDS_DATA.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Manage_Visit.aspx.cs">
       <DependentUpon>Manage_Visit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4425,6 +4469,69 @@
     </Compile>
     <Compile Include="ReportAndListingHomePage.aspx.designer.cs">
       <DependentUpon>ReportAndListingHomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RPT_ACKNOWLEDGEMENT.aspx.cs">
+      <DependentUpon>RPT_ACKNOWLEDGEMENT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RPT_ACKNOWLEDGEMENT.aspx.designer.cs">
+      <DependentUpon>RPT_ACKNOWLEDGEMENT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RPT_ACKNOWLEDGE_DETAILS.aspx.cs">
+      <DependentUpon>RPT_ACKNOWLEDGE_DETAILS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RPT_ACKNOWLEDGE_DETAILS.aspx.designer.cs">
+      <DependentUpon>RPT_ACKNOWLEDGE_DETAILS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RPT_ALIQUOT_DETAILS.aspx.cs">
+      <DependentUpon>RPT_ALIQUOT_DETAILS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RPT_ALIQUOT_DETAILS.aspx.designer.cs">
+      <DependentUpon>RPT_ALIQUOT_DETAILS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RPT_SDV_DETAILS.aspx.cs">
+      <DependentUpon>RPT_SDV_DETAILS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RPT_SDV_DETAILS.aspx.designer.cs">
+      <DependentUpon>RPT_SDV_DETAILS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RPT_SHIPMENT_DETAILS.aspx.cs">
+      <DependentUpon>RPT_SHIPMENT_DETAILS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RPT_SHIPMENT_DETAILS.aspx.designer.cs">
+      <DependentUpon>RPT_SHIPMENT_DETAILS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RPT_SPECIMEN_DETAILS.aspx.cs">
+      <DependentUpon>RPT_SPECIMEN_DETAILS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RPT_SPECIMEN_DETAILS.aspx.designer.cs">
+      <DependentUpon>RPT_SPECIMEN_DETAILS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SDVHomePage.aspx.cs">
+      <DependentUpon>SDVHomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SDVHomePage.aspx.designer.cs">
+      <DependentUpon>SDVHomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SDVPage.aspx.cs">
+      <DependentUpon>SDVPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SDVPage.aspx.designer.cs">
+      <DependentUpon>SDVPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SDVREPORT.aspx.cs">
+      <DependentUpon>SDVREPORT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SDVREPORT.aspx.designer.cs">
+      <DependentUpon>SDVREPORT.aspx</DependentUpon>
     </Compile>
     <Compile Include="SessionExpired.aspx.cs">
       <DependentUpon>SessionExpired.aspx</DependentUpon>
@@ -4468,6 +4575,20 @@
     <Compile Include="ShipmentManifestHomePage.aspx.designer.cs">
       <DependentUpon>ShipmentManifestHomePage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SHIPMENT_DETAILS.aspx.cs">
+      <DependentUpon>SHIPMENT_DETAILS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SHIPMENT_DETAILS.aspx.designer.cs">
+      <DependentUpon>SHIPMENT_DETAILS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SHIPMENT_SHIPPED.aspx.cs">
+      <DependentUpon>SHIPMENT_SHIPPED.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SHIPMENT_SHIPPED.aspx.designer.cs">
+      <DependentUpon>SHIPMENT_SHIPPED.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4496,12 +4617,26 @@
     <Compile Include="UMT_AssignRoles.aspx.designer.cs">
       <DependentUpon>UMT_AssignRoles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UMT_ASSIGN_LABS.aspx.cs">
+      <DependentUpon>UMT_ASSIGN_LABS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UMT_ASSIGN_LABS.aspx.designer.cs">
+      <DependentUpon>UMT_ASSIGN_LABS.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UMT_ChangeRole.aspx.cs">
       <DependentUpon>UMT_ChangeRole.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UMT_ChangeRole.aspx.designer.cs">
       <DependentUpon>UMT_ChangeRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UMT_CREATE_LAB.aspx.cs">
+      <DependentUpon>UMT_CREATE_LAB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UMT_CREATE_LAB.aspx.designer.cs">
+      <DependentUpon>UMT_CREATE_LAB.aspx</DependentUpon>
     </Compile>
     <Compile Include="UMT_Emails.aspx.cs">
       <DependentUpon>UMT_Emails.aspx</DependentUpon>
@@ -4530,6 +4665,13 @@
     </Compile>
     <Compile Include="UMT_Manage_All_Users.aspx.designer.cs">
       <DependentUpon>UMT_Manage_All_Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UMT_PROJECT.aspx.cs">
+      <DependentUpon>UMT_PROJECT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UMT_PROJECT.aspx.designer.cs">
+      <DependentUpon>UMT_PROJECT.aspx</DependentUpon>
     </Compile>
     <Compile Include="UMT_Request_List.aspx.cs">
       <DependentUpon>UMT_Request_List.aspx</DependentUpon>
@@ -4732,8 +4874,6 @@
     <Content Include="plugins\bs-stepper\css\bs-stepper.min.css.map" />
     <Content Include="plugins\bs-stepper\js\bs-stepper.js.map" />
     <Content Include="plugins\bs-stepper\js\bs-stepper.min.js.map" />
-    <Content Include="plugins\daterangepicker\bower.json" />
-    <Content Include="plugins\daterangepicker\example\browserify\README.md" />
     <Content Include="plugins\dropzone\dropzone.js.map" />
     <Content Include="plugins\ekko-lightbox\ekko-lightbox.js.map" />
     <Content Include="plugins\ekko-lightbox\ekko-lightbox.min.js.map" />

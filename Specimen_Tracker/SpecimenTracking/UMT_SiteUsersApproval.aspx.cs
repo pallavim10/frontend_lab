@@ -26,7 +26,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex) 
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -49,6 +49,7 @@ namespace SpecimenTracking
                     lblContactNo.Text = ds.Tables[0].Rows[0]["ContactNo"].ToString();
                     lblUnblined.Text = ds.Tables[0].Rows[0]["Blind"].ToString();
                     hdnUserID.Value = ds.Tables[0].Rows[0]["UserID"].ToString();
+                    lblNotes.Text = ds.Tables[0].Rows[0]["Notes"].ToString();
                     GET_SYSTEM_DETAILS();
                 }
                 else
@@ -60,11 +61,12 @@ namespace SpecimenTracking
                     lblEmailID.Text = "";
                     lblContactNo.Text = "";
                     lblUnblined.Text = "";
+                    lblNotes.Text = "";
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -92,7 +94,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -113,17 +115,7 @@ namespace SpecimenTracking
 
                     Label lblSystemName = (Label)e.Item.FindControl("lblSystemName");
 
-                    HtmlGenericControl divSubsysIWRS = e.Item.FindControl("divSubsysIWRS") as HtmlGenericControl;
-                    HtmlGenericControl divSubSysPharma = e.Item.FindControl("divSubSysPharma") as HtmlGenericControl;
-                    HtmlGenericControl divsubsysDM = e.Item.FindControl("divsubsysDM") as HtmlGenericControl;
-                    HtmlGenericControl divsubsyseSource = e.Item.FindControl("divsubsyseSource") as HtmlGenericControl;
-
-                    CheckBox ChkSubsysIWRS = (CheckBox)e.Item.FindControl("ChkSubsysIWRS");
-                    CheckBox ChkSubSysPharma = (CheckBox)e.Item.FindControl("ChkSubSysPharma");
-                    CheckBox chksubsysDM = (CheckBox)e.Item.FindControl("chksubsysDM");
-                    CheckBox ChksubsyseSource = (CheckBox)e.Item.FindControl("ChksubsyseSource");
-                    CheckBox chlReadOnlyeSource = (CheckBox)e.Item.FindControl("chlReadOnlyeSource");
-                    HiddenField HiddenSubSytem = (HiddenField)e.Item.FindControl("HiddenSubSytem");
+                    Label lblSystemNotes = (Label)e.Item.FindControl("lblSystemNotes");
 
                     DataRowView rowView = e.Item.DataItem as DataRowView;
                     if (rowView != null)
@@ -133,29 +125,19 @@ namespace SpecimenTracking
                         if (IsSelected == "True")
                         {
                             ChkSelect.Checked = true;
-                            if (lblSystemName.Text == "IWRS")
-                            {
-                                divSubsysIWRS.Visible = true;
-                                if (HiddenSubSytem.Value == "Unblinding")
-                                {
-                                    ChkSubsysIWRS.Checked = true;
-                                }
-                                else
-                                {
-                                    divSubsysIWRS.Visible = false;
-                                }
-                            }                  
+                            lblSystemNotes.Visible = true;
                         }
                         else
                         {
                             ChkSelect.Checked = false;
+                            lblSystemNotes.Visible = false;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void UPDATE_SITE_USER_APPROVAL()
@@ -175,18 +157,35 @@ namespace SpecimenTracking
                 if (drpAction.SelectedValue == "Approve")
                 {
                     SEND_MAIL_APPROVAL_DISAPPROVAL(USERNAME, STUDYROLE, APPROVAL_ACTION, APPROVAL_COMMENT);
-
-                    Response.Write("<script> alert('Site User Details Approved Successfully.'); window.location.href = 'UMT_SiteUsersList.aspx';</script>");
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Site User Details Approved Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = 'UMT_SiteUsersList.aspx'; });
+                ", true);
+                    //Response.Write("<script> alert('Site User Details Approved Successfully.'); window.location.href = 'UMT_SiteUsersList.aspx';</script>");
                 }
                 if (drpAction.SelectedValue == "Disapprove")
                 {
                     SEND_MAIL_APPROVAL_DISAPPROVAL(USERNAME, STUDYROLE, APPROVAL_ACTION, APPROVAL_COMMENT);
-                    Response.Write("<script> alert('Site User Details Disapproved Successfully.'); window.location.href = 'UMT_SiteUsersList.aspx';</script>");
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Site User Details Disapproved Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = 'UMT_SiteUsersList.aspx'; });
+                ", true);
+                    //Response.Write("<script> alert('Site User Details Disapproved Successfully.'); window.location.href = 'UMT_SiteUsersList.aspx';</script>");
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -240,7 +239,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -252,7 +251,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void lbtnCancel_Click(object sender, EventArgs e)
@@ -264,9 +263,8 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
-
     }
 }

@@ -20,11 +20,12 @@ namespace SpecimenTracking
                 if (!Page.IsPostBack)
                 {
                     GET_SHIPMENT_MANIFEST();
+                    GET_EXCEL_MANIFEST();
                 }
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void GET_SHIPMENT_MANIFEST()
@@ -47,7 +48,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void lbtnUpload_Click(object sender, EventArgs e)
@@ -56,9 +57,20 @@ namespace SpecimenTracking
             if (fileName.Trim() !="")
             {
                 UPLOAD_SHIPMENT_MANIFEST();
+                GET_SHIPMENT_MANIFEST();
             }
-           
-            GET_SHIPMENT_MANIFEST();
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Warning!',
+                        text: 'Please Select Word File.',
+                        icon: 'warning',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+            }
         }
         private void UPLOAD_SHIPMENT_MANIFEST()
         {
@@ -80,20 +92,20 @@ namespace SpecimenTracking
 
                     }
                 }
-                if (fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".docm" || fileExtension == ".xlx" || fileExtension == "..xlsx" || fileExtension == ".csv")
+                if (fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".docm")
                 {
                     DataSet ds = Dal_Setup.SETUP_SHIPMENT_MANIFEST_SP(ACTION: "UPLOAD_SHIPMENT_MANIFEST",
                         FILENAME: fileName,
                         CONTENT_TYPE: contentType,
                         DATA_TYPE: fileData,
+                        FILE_EXTENSION : fileExtension,
                         SIZE: fileSize.ToString()
                         );
 
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'file Uploaded Successfully.', 'success');", true);
                     ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
-                        text: 'file Uploaded Successfully.',
+                        text: 'Word file Uploaded Successfully.',
                         icon: 'success',
                         button: 'OK'
                     }).then(function(){
@@ -102,7 +114,6 @@ namespace SpecimenTracking
                 }
                 else
                 {
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Please Select Word File Only.', 'warning');", true);
                     ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Warning!',
@@ -117,7 +128,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void lbtnCancel_Click(object sender, EventArgs e)
@@ -159,7 +170,124 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
+
+        protected void btnSubexcel_Click(object sender, EventArgs e)
+        {
+            string fileName = FileUploadExcel.FileName;
+            if (fileName.Trim() != "")
+            {
+                UPLOAD_EXCEL_MANIFEST();
+                GET_EXCEL_MANIFEST();
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Warning!',
+                        text: 'Please Select Excel File.',
+                        icon: 'warning',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+            }
+        }
+        private void GET_EXCEL_MANIFEST()
+        {
+            try
+            {
+                DataSet ds = Dal_Setup.SETUP_SHIPMENT_MANIFEST_SP(
+                        ACTION: "GET_EXCEL_MANIFEST"
+                        );
+                if (ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                {
+                    grd_data.DataSource = ds.Tables[0];
+                    grd_data.DataBind();
+                }
+                else
+                {
+                    grd_data.DataSource = null;
+                    grd_data.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
+        private void UPLOAD_EXCEL_MANIFEST()
+        {
+            try
+            {
+
+                string fileName = FileUploadExcel.FileName;
+                string contentType = FileUploadExcel.PostedFile.ContentType;
+                string fileExtension = Path.GetExtension(fileName).ToLower();
+                int fileSize = FileUploadExcel.PostedFile.ContentLength;
+
+                byte[] fileData;
+                using (Stream stream = FileUploadExcel.FileContent)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        stream.CopyTo(ms);
+                        fileData = ms.ToArray();
+
+                    }
+                }
+                if (fileExtension == ".xlx" || fileExtension == ".xlsx" || fileExtension == ".csv")
+                {
+                    DataSet ds = Dal_Setup.SETUP_SHIPMENT_MANIFEST_SP(ACTION: "UPLOAD_EXCEL_MANIFEST",
+                        FILENAME: fileName,
+                        CONTENT_TYPE: contentType,
+                        DATA_TYPE: fileData,
+                        FILE_EXTENSION: fileExtension,
+                        SIZE: fileSize.ToString()
+                        );
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Excel file Uploaded Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Warning!',
+                        text: 'Please Select Excel File Only.',
+                        icon: 'warning',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
+        protected void btnCalexcel_Click(object sender, EventArgs e)
+        {
+            FileUploadExcel.Attributes.Clear();
+        }
+
+        protected void grd_data_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            string ID = e.CommandArgument.ToString();
+            if (e.CommandName.ToString() == "Download")
+            {
+                DOWNLOAD(ID);
             }
         }
     }

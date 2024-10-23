@@ -26,8 +26,15 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
+        }
+
+        protected void FocusWithoutScroll(Control control)
+        {
+            string script = @"document.getElementById('" + control.ClientID + @"').focus({preventScroll:true});";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FocusWithoutScroll", script, true);
         }
 
         private void GET_FIELDS()
@@ -53,7 +60,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -80,7 +87,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         protected void lbtnSubmit_Click(object sender, EventArgs e)
@@ -91,28 +98,19 @@ namespace SpecimenTracking
 
                 GET_CLEAR();
 
-                //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field created successfully.', 'success');", true);
-                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
-                    swal({
-                        title: 'Success!',
-                        text: 'Field created successfully.',
-                        icon: 'success',
-                        button: 'OK'
-                    }).then(function(){
-                                     window.location.href = window.location.href; });
-                ", true);
+                
                 GET_FIELDS();
 
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
         private void INSERT_FIELDS()
         {
-            if (rbtnFirst.Checked || rbtnSecond.Checked)
+            if (rbtnFirst.Checked || rbtnSecond.Checked || rbtnAliquotPre.Checked)
             {
                 DataSet ds = Dal_Setup.SETUP_FIELD_SP(
                                        ACTION: "INSERT_FIELDS",
@@ -122,14 +120,25 @@ namespace SpecimenTracking
                                        CONTROLTYPE: drpControlType.SelectedValue,
                                        FIRSTENTRY: rbtnFirst.Checked,
                                        SECONDENTRY: rbtnSecond.Checked,
+                                       ALIQUOTPREP:rbtnAliquotPre.Checked,
                                        REPEAT: chkRepeat.Checked,
                                        REQUIRED: chkRequired.Checked,
                                        MAXLENGHT: txtmaxlength.Text
                                        );
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Field created successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
             }
             else
             {
-                //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Please Select Entry Type.', 'warning');", true);
+                
                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", @"
                     swal({
                         title: 'Warning!',
@@ -191,6 +200,7 @@ namespace SpecimenTracking
                                       CONTROLTYPE: drpControlType.SelectedValue,
                                        FIRSTENTRY: rbtnFirst.Checked,
                                        SECONDENTRY: rbtnSecond.Checked,
+                                       ALIQUOTPREP: rbtnAliquotPre.Checked,
                                        REPEAT: chkRepeat.Checked,
                                        REQUIRED: chkRequired.Checked,
                                        MAXLENGHT: txtmaxlength.Text,
@@ -199,7 +209,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
 
@@ -235,7 +245,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -254,7 +264,8 @@ namespace SpecimenTracking
                     HiddenField HdnControlType = (HiddenField)e.Row.FindControl("HdnControlType");
                     HiddenField VariableName = (HiddenField)e.Row.FindControl("HdnVariableName");
                     TextBox txtFieldName = (e.Row.FindControl("txtFieldName") as TextBox);
-                    LinkButton lbtAddOptionr = (e.Row.FindControl("lbtAddOptionr") as LinkButton);
+                    LinkButton lbtAddOption = (e.Row.FindControl("lbtAddOption") as LinkButton);
+                    LinkButton lbtManageFields = (e.Row.FindControl("lbtManageFields") as LinkButton);
 
                     LinkButton lbtRepeatYes = (e.Row.FindControl("lbtRepeatYes") as LinkButton);
                     LinkButton lbtRepeatNo = (e.Row.FindControl("lbtRepeatNo") as LinkButton);
@@ -277,31 +288,38 @@ namespace SpecimenTracking
                         drplevel.SelectedValue = "0";
                     }
 
-                    if(VariableName.Value == "SCANALQ")
-                    {
-                        drplevel.Enabled = false;
-                    }
                     string ControlType = HdnControlType.Value.Trim();
                     if (Active.Value == "True")
                     {
                         lbtEnable.Visible = true;
                         lbtDisable.Visible = false;
-
+                        drplevel.Enabled = true;
+                        if(VariableName.Value == "SCANALQ" || VariableName.Value == "SID" || VariableName.Value == "SUBJID")
+                        {
+                            drplevel.Enabled = false;
+                            lbtManageFields.Visible = true;
+                        }
                     }
                     else
                     {
                         lbtEnable.Visible = false;
                         lbtDisable.Visible = true;
                         txtFieldName.Enabled = false;
-
+                        drplevel.Enabled = false;
+                        lbtManageFields.Visible = false;
                     }
 
                     if (Repeat.Value == "True")
                     {
                         lbtRepeatYes.Visible = true;
                         lbtRepeatNo.Visible = false;
-
                         if (ControlType == "TABLE")
+                        {
+                            lbtRepeatYes.Visible = false;
+                            lbtRepeatNo.Visible = false;
+                            txtFieldName.Enabled = false;
+                        }
+                        if (VariableName.Value == "SCANALQ" || VariableName.Value == "SID" || VariableName.Value == "SUBJID")
                         {
                             lbtRepeatYes.Visible = false;
                             lbtRepeatNo.Visible = false;
@@ -314,7 +332,13 @@ namespace SpecimenTracking
                         lbtRepeatYes.Visible = false;
                         lbtRepeatNo.Visible = true;
 
-                        if (ControlType == "TABLE")
+                        if(ControlType == "TABLE")
+                        {
+                            lbtRepeatYes.Visible = false;
+                            lbtRepeatNo.Visible = false;
+                            txtFieldName.Enabled = false;
+                        }
+                        if (VariableName.Value == "SCANALQ" || VariableName.Value == "SID" || VariableName.Value == "SUBJID")
                         {
                             lbtRepeatYes.Visible = false;
                             lbtRepeatNo.Visible = false;
@@ -327,23 +351,36 @@ namespace SpecimenTracking
                     {
                         if (Active.Value == "True")
                         {
-                            lbtAddOptionr.Visible = true;
+                            lbtAddOption.Visible = true;
+                            if (VariableName.Value == "SCANALQ" || VariableName.Value == "SID" || VariableName.Value == "SUBJID")
+                            {
+                                lbtAddOption.Visible = false;
+                            }
                         }
                         else
                         {
-                            lbtAddOptionr.Visible = false;
+                            lbtAddOption.Visible = false;
                         }
                     }
                     else
                     {
-                        lbtAddOptionr.Visible = false;
+                        lbtAddOption.Visible = false;
+                    }
+
+                    if(VariableName.Value == "SIDALQ")
+                    {
+                        lbtRepeatYes.Visible = false;
+                        lbtRepeatNo.Visible = false;
+                        lbtAddOption.Visible = false;
+                        drplevel.Enabled = false;
+                        lbtManageFields.Visible = false;
                     }
 
                 }
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -397,6 +434,15 @@ namespace SpecimenTracking
                         rbtnSecond.Checked = false;
                     }
 
+                    if (ds.Tables[0].Rows[0]["ALIQUOTPREP"].ToString() == "True")
+                    {
+                        rbtnAliquotPre.Checked = true;
+                    }
+                    else
+                    {
+                        rbtnAliquotPre.Checked = false;
+                    }
+
                     if (ds.Tables[0].Rows[0]["REPEAT"].ToString() == "True")
                     {
                         chkRepeat.Checked = true;
@@ -418,7 +464,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -429,7 +475,7 @@ namespace SpecimenTracking
                                       ID: ID
                                       );
 
-            //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field Deleted Successfully.', 'success');", true);
+            
             ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                                 swal({
                                     title: 'Success!',
@@ -463,30 +509,7 @@ namespace SpecimenTracking
                     {
                         lbtAddOption.Visible = false;
                     }
-
-                    HtmlControl iconFIRSTENTRY = (HtmlControl)e.Row.FindControl("iconFIRSTENTRY");
-                    if (dr["FIRSTENTRY"].ToString() == "True")
-                    {
-                        iconFIRSTENTRY.Attributes.Add("class", "fa fa-check");
-                        iconFIRSTENTRY.Attributes.Add("style", "color: darkgreen;");
-                    }
-                    else
-                    {
-                        iconFIRSTENTRY.Attributes.Add("class", "fa fa-times");
-                        iconFIRSTENTRY.Attributes.Add("style", "color: red;");
-                    }
-                    HtmlControl iconSECONDENTRY = (HtmlControl)e.Row.FindControl("iconSECONDENTRY");
-                    if (dr["SECONDENTRY"].ToString() == "True")
-                    {
-                        iconSECONDENTRY.Attributes.Add("class", "fa fa-check");
-                        iconSECONDENTRY.Attributes.Add("style", "color: darkgreen;");
-                    }
-                    else
-                    {
-                        iconSECONDENTRY.Attributes.Add("class", "fa fa-times");
-                        iconSECONDENTRY.Attributes.Add("style", "color: red;");
-                    }
-
+                   
                     HtmlControl iconREPEAT = (HtmlControl)e.Row.FindControl("iconREPEAT");
                     if (dr["REPEAT"].ToString() == "True")
                     {
@@ -515,7 +538,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -551,41 +574,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
-            }
-        }
-
-        protected void DATA_Changed1(object sender, EventArgs e)
-        {
-            VARIABLENAME_EXIST();
-        }
-
-        private void VARIABLENAME_EXIST()
-        {
-            try
-            {
-                string VARIABLENAME = "";
-                VARIABLENAME = txtVariableName.Text;
-                DataSet ds = Dal_Setup.SETUP_FIELD_SP(ACTION: "VARIABLENAME_EXIST", VARIABLENAME: VARIABLENAME);
-                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                {
-                    txtVariableName.Text = "";
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'VariableName already exists.', 'warning');", true);
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", @"
-                    swal({
-                        title: 'Warning!',
-                        text: 'VariableName already exists.',
-                        icon: 'warning',
-                        button: 'OK'
-                    }).then(function(){
-                                     window.location.href = window.location.href; });
-                ", true);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -677,7 +666,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -689,27 +678,31 @@ namespace SpecimenTracking
             if (row.RowType == DataControlRowType.DataRow)
             {
                 Label lblID = (row.FindControl("lblID") as Label);
+                Label lblVariable = (row.FindControl("lblVariable") as Label);
+                string VARIABLENAME = lblVariable.Text;
                 string ID = lblID.Text;
                 string drplevel = ddl.SelectedValue;
 
                 if (drplevel == "Level 1")
                 {
+                    
                     DataSet ds = Dal_Setup.SETUP_FIELD_SP(
                                               ACTION: "LEVEL_ONE",
                                               FIRSTENTRY: true,
                                               SECONDENTRY: false,
+                                              VARIABLENAME: VARIABLENAME,
                                               ID: ID
                                               );
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Applicable for Level 1 successfully.', 'success');", true);
+                    
                     ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
                         text: 'Applicable for Level 1 successfully.',
                         icon: 'success',
                         button: 'OK'
-                    }).then(function(){
+                        }).then(function(){
                                      window.location.href = window.location.href; });
-                ", true);
+                    ", true);
                     GET_OPTION();
                 }
                 else if (drplevel == "Level 2")
@@ -718,23 +711,66 @@ namespace SpecimenTracking
                                               ACTION: "LEVEL_TWO",
                                               SECONDENTRY: true,
                                               FIRSTENTRY: false,
+                                              VARIABLENAME: VARIABLENAME,
                                               ID: ID
                                               );
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Applicable for Level 2 successfully.', 'success');", true);
+                    
                     ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
-                    swal({
-                        title: 'Success!',
-                        text: 'Applicable for Level 2 successfully.',
-                        icon: 'success',
-                        button: 'OK'
-                    }).then(function(){
+                        swal({
+                            title: 'Success!',
+                            text: 'Applicable for Level 2 successfully.',
+                            icon: 'success',
+                            button: 'OK'
+                        }).then(function(){
                                      window.location.href = window.location.href; });
-                ", true);
+                    ", true);
                     GET_OPTION();
                 }
             }
         }
 
-        
+        protected void grdMngOptFields_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                GridView gv = (GridView)sender;
+                if ((gv.ShowHeader == true && gv.Rows.Count > 0)
+                    || (gv.ShowHeaderWhenEmpty == true))
+                {
+                    //Force GridView to use <thead> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                if (gv.ShowFooter == true && gv.Rows.Count > 0)
+                {
+                    //Force GridView to use <tfoot> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.FooterRow.TableSection = TableRowSection.TableFooter;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogging.SendErrorToText(ex);
+                throw;
+            }
+        }
+
+        protected void txtVariableName_TextChanged(object sender, EventArgs e)
+        {
+            string VARIABLENAME = "";
+            VARIABLENAME = txtVariableName.Text;
+            DataSet ds = Dal_Setup.SETUP_FIELD_SP(ACTION: "VARIABLENAME_EXIST", VARIABLENAME: VARIABLENAME);
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                txtVariableName.Text = "";
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'VariableName already exists.', 'warning');", true);
+
+                FocusWithoutScroll(txtVariableName);
+                txtVariableName.Focus();
+            }
+            else
+            {
+                FocusWithoutScroll(txtSeqNo);
+            }
+        }
     }
 }

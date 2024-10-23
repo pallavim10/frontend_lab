@@ -18,15 +18,13 @@ namespace SpecimenTracking
             if (!this.IsPostBack)
             {
                 GET_SETUP_SYSTEM();
-
             }
-
         }
 
         private void GET_SETUP_SYSTEM()
         {
             DataSet ds = dal_UMT.SYS_FUNCTIONS_SP(
-                        ACTION: "GET_SETUP_SYSTEM", PARENT: "Set-Up"
+                        ACTION: "GET_SETUP_SYSTEM", PARENT: "Set-Up",SYSTEM: "Set-Up"
                         );
 
             if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -74,5 +72,6 @@ namespace SpecimenTracking
                 }
             }
         }
+    
     }
 }

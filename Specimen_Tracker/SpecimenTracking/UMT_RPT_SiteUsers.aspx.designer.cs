@@ -87,13 +87,13 @@ namespace SpecimenTracking
         protected global::System.Web.UI.WebControls.Button btnGet;
 
         /// <summary>
-        /// lbtnExport control.
+        /// DivRecord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnExport;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivRecord;
 
         /// <summary>
         /// grdData control.

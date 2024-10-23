@@ -25,7 +25,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -40,7 +40,9 @@ namespace SpecimenTracking
                 }
                 else
                 {
-                    dal_UMT.UMT_ROLE_SP(
+                    if(txtRoleName.Text.Trim() !="")
+                    {
+                        dal_UMT.UMT_ROLE_SP(
                        ACTION: "INSERT_UMT_ROLES",
                        SystemID: drpSystem.SelectedValue,
                        RoleName: txtRoleName.Text,
@@ -55,14 +57,20 @@ namespace SpecimenTracking
                        CRA_eSource: Check_CRA.Checked
                         );
 
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!','User Role Added Successfully', 'success');", true);
-                    GET_ROLES();
-                    Clear();
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!','User Role Added Successfully', 'success');", true);
+                        GET_ROLES();
+                        Clear();
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Please Enter Role Name.', 'warning');", true);
+                    }
+                    
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -82,7 +90,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -109,7 +117,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -163,7 +171,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -189,7 +197,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -208,7 +216,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -308,7 +316,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -322,7 +330,10 @@ namespace SpecimenTracking
                 }
                 else
                 {
-                    dal_UMT.UMT_ROLE_SP(
+
+                    if (txtRoleName.Text.Trim() != "")
+                    {
+                        dal_UMT.UMT_ROLE_SP(
                         ACTION: "UPDATE_ROLES",
                          ID: ViewState["ID"].ToString(),
                          SystemID: drpSystem.SelectedValue,
@@ -337,15 +348,20 @@ namespace SpecimenTracking
                          Admin_eSource: Check_eSourceAdmin.Checked,
                          CRA_eSource: Check_CRA.Checked
                         );
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!','User Role Updated Successfully', 'success');", true);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!','User Role Updated Successfully', 'success');", true);
 
-                    GET_ROLES();
-                    Clear();
+                        GET_ROLES();
+                        Clear();
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Warning!', 'Please Enter Role Name.', 'warning');", true);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -370,7 +386,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -378,127 +394,20 @@ namespace SpecimenTracking
         {
             try
             {
-                switch (drpSystem.SelectedItem.Text)
-                {
-                    case "IWRS":
-                        DivROLE.Visible = true;
-                        divBlinded.Visible = true;
-                        DiveSourceReadonly.Visible = false;
-                        DivMedicalAuth.Visible = false;
-                        lblSignoff.Visible = false;
-                        divesource.Visible = false;
-                        divPharmacovigilance.Visible = false;
-                        diveCRF.Visible = false;
-
-                        break;
-
-                    case "Pharmacovigilance":
-                        DivROLE.Visible = true;
-                        divBlinded.Visible = true;
-                        DiveSourceReadonly.Visible = false;
-                        DivMedicalAuth.Visible = true;
-                        lblSignoff.Visible = true;
-                        divesource.Visible = false;
-                        divPharmacovigilance.Visible = true;
-                        diveCRF.Visible = false;
-
-                        break;
-                    case "Medical Monitoring":
-                        DivROLE.Visible = true;
-                        divBlinded.Visible = true;
-                        DiveSourceReadonly.Visible = false;
-                        DivMedicalAuth.Visible = false;
-                        lblSignoff.Visible = false;
-                        divesource.Visible = false;
-                        divPharmacovigilance.Visible = false;
-                        diveCRF.Visible = false;
-
-                        break;
-                    case "Data Management":
-                        DivROLE.Visible = true;
-                        divBlinded.Visible = true;
-                        DiveSourceReadonly.Visible = false;
-                        DivMedicalAuth.Visible = true;
-                        lblSignoff.Visible = true;
-                        divesource.Visible = false;
-                        divPharmacovigilance.Visible = false;
-                        diveCRF.Visible = true;
-
-                        break;
-                    case "eSource":
-                        DivROLE.Visible = true;
-                        divBlinded.Visible = true;
-                        DiveSourceReadonly.Visible = true;
-                        DivMedicalAuth.Visible = true;
-                        lblSignoff.Visible = true;
-                        divesource.Visible = true;
-                        divPharmacovigilance.Visible = false;
-                        diveCRF.Visible = false;
-
-                        break;
-                    case "eTMF":
-                        DivROLE.Visible = true;
-                        divBlinded.Visible = true;
-                        DiveSourceReadonly.Visible = false;
-                        DivMedicalAuth.Visible = false;
-                        lblSignoff.Visible = false;
-                        divesource.Visible = false;
-                        divPharmacovigilance.Visible = false;
-                        diveCRF.Visible = false;
-
-                        break;
-                    case "Coding":
-                        DivROLE.Visible = true;
-                        divBlinded.Visible = false;
-                        DiveSourceReadonly.Visible = false;
-                        DivMedicalAuth.Visible = false;
-                        lblSignoff.Visible = false;
-                        divesource.Visible = false;
-                        divPharmacovigilance.Visible = false;
-                        diveCRF.Visible = false;
-
-                        break;
-                    case "Design Bench":
-                        DivROLE.Visible = true;
-                        divBlinded.Visible = false;
-                        DiveSourceReadonly.Visible = false;
-                        DivMedicalAuth.Visible = false;
-                        lblSignoff.Visible = false;
-                        divesource.Visible = false;
-                        divPharmacovigilance.Visible = false;
-                        diveCRF.Visible = false;
-
-                        break;
-                    case "User Management":
-
-                        DivROLE.Visible = true;
-                        divBlinded.Visible = false;
-                        DiveSourceReadonly.Visible = false;
-                        DivMedicalAuth.Visible = false;
-                        lblSignoff.Visible = false;
-                        divesource.Visible = false;
-                        divPharmacovigilance.Visible = false;
-                        diveCRF.Visible = false;
-                        break;
-
-                    default:
-                        DivROLE.Visible = false;
-                        divBlinded.Visible = false;
-                        DiveSourceReadonly.Visible = false;
-                        DivMedicalAuth.Visible = false;
-                        lblSignoff.Visible = false;
-                        divesource.Visible = false;
-                        divPharmacovigilance.Visible = false;
-                        diveCRF.Visible = false;
-
-                        break;
-                }
+                DivROLE.Visible = true;
+                divBlinded.Visible = false;
+                DiveSourceReadonly.Visible = false;
+                DivMedicalAuth.Visible = false;
+                lblSignoff.Visible = false;
+                divesource.Visible = false;
+                divPharmacovigilance.Visible = false;
+                diveCRF.Visible = false;
 
                 GET_ROLES();
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -618,7 +527,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -645,11 +554,11 @@ namespace SpecimenTracking
 
                 if (ACTION == "UPDATE")
                 {
-                    ds = dal_UMT.UMT_ROLE_SP(ACTION: "CHECK_ROLE_EXISTS", SystemID: drpSystem.SelectedValue, RoleName: txtRoleName.Text, ID: ViewState["ID"].ToString());
+                    ds = dal_UMT.UMT_ROLE_SP(ACTION: "CHECK_ROLE_EXISTS", SystemID: drpSystem.SelectedValue, RoleName: txtRoleName.Text.Trim(), ID: ViewState["ID"].ToString());
                 }
                 else
                 {
-                    ds = dal_UMT.UMT_ROLE_SP(ACTION: "CHECK_ROLE_EXISTS", SystemID: drpSystem.SelectedValue, RoleName: txtRoleName.Text);
+                    ds = dal_UMT.UMT_ROLE_SP(ACTION: "CHECK_ROLE_EXISTS", SystemID: drpSystem.SelectedValue, RoleName: txtRoleName.Text.Trim());
                 }
 
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -659,7 +568,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
             return exists;
         }

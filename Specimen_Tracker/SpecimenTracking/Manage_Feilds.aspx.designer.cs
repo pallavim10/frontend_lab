@@ -33,15 +33,6 @@ namespace SpecimenTracking
         protected global::System.Web.UI.WebControls.GridView grdMngOptFields;
 
         /// <summary>
-        /// UpdatePanel2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-
-        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -76,15 +67,6 @@ namespace SpecimenTracking
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVariableName;
-
-        /// <summary>
-        /// btnDATA_Changed1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDATA_Changed1;
 
         /// <summary>
         /// Label4 control.
@@ -166,6 +148,15 @@ namespace SpecimenTracking
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbtnSecond;
+
+        /// <summary>
+        /// rbtnAliquotPre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnAliquotPre;
 
         /// <summary>
         /// chkRepeat control.

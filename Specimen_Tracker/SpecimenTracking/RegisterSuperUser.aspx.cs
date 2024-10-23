@@ -1,6 +1,7 @@
 ﻿using SpecimenTracking.App_Code;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -25,19 +26,13 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
         private void CHECK_USER_EXIST()
         {
-            string serverName = "192.168.200.30";
-            string dbName = "SPECIMENTRACKER";
-            string userName = "sa";
-            string password = "Opus#Db@2019";
-            string connectionString = "Data Source=" + serverName + ";Initial Catalog=" + dbName + ";User Id=" + userName + ";Password=" + password + ";";
-
-            SqlConnection SqlConn = new SqlConnection(connectionString);
+            SqlConnection SqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings["constr"].ConnectionString);
 
             DataSet ds = UMT_USERS_SP(SqlConn, ACTION: "CHECK_USER_EXIST");
             if (ds.Tables[0].Rows[0]["Count"].ToString() != "0")
@@ -56,13 +51,10 @@ namespace SpecimenTracking
             }
 
         }
+
         protected void lbtnSubmit_Click(object sender, EventArgs e)
         {
-            string serverName = "192.168.200.30";
-            string dbName = "SPECIMENTRACKER";
-            string userName = "sa";
-            string password = "Opus#Db@2019";
-            if (txtFirstName.Text.Trim() != "" && txtLastName.Text.Trim() != "" && txtEmailID.Text.Trim() != "" && txtContactNo.Text.Trim() != "")
+            if (txtSponsor.Text.Trim() != "" && txtPROJECT.Text.Trim() != "" && txtFirstName.Text.Trim() != "" && txtLastName.Text.Trim() != "" && txtEmailID.Text.Trim() != "" && txtContactNo.Text.Trim() != "")
             {
                 if (!int.TryParse(txtContactNo.Text.Trim(), out _))
                 {
@@ -70,7 +62,7 @@ namespace SpecimenTracking
                 }
                 else
                 {
-                    CREATE_SuperUser(serverName, dbName, userName, password);
+                    CREATE_SuperUser();
 
                     string script = @"
                          swal({
@@ -86,6 +78,14 @@ namespace SpecimenTracking
 
 
 
+            }
+            else if (txtSponsor.Text.Trim() == "")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Please Enter Sponsor Name.', 'warning');", true);
+            }
+            else if (txtPROJECT.Text.Trim() == "")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', 'Please Enter Project Name.', 'warning');", true);
             }
             else if (txtFirstName.Text.Trim() == "")
             {
@@ -106,12 +106,10 @@ namespace SpecimenTracking
 
         }
 
-        private void CREATE_SuperUser(string serverName, string dbName, string userName, string password)
+        private void CREATE_SuperUser()
         {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["constr"].ConnectionString);
 
-            string connectionString = "Data Source=" + serverName + ";Initial Catalog=" + dbName + ";User Id=" + userName + ";Password=" + password + ";";
-
-            SqlConnection con = new SqlConnection(connectionString);
             DataSet ds = new DataSet();
             SqlCommand cmd;
             SqlDataAdapter adp;
@@ -124,6 +122,8 @@ namespace SpecimenTracking
                 cmd.Parameters.AddWithValue("@Lname", txtLastName.Text);
                 cmd.Parameters.AddWithValue("@EmailID", txtEmailID.Text);
                 cmd.Parameters.AddWithValue("@ContactNo", txtContactNo.Text);
+                cmd.Parameters.AddWithValue("@PROJECT", txtPROJECT.Text);
+                cmd.Parameters.AddWithValue("@SPONSOR", txtSponsor.Text);
 
                 adp = new SqlDataAdapter(cmd);
                 adp.Fill(ds);
@@ -173,7 +173,7 @@ namespace SpecimenTracking
                 {
                     SYSTEM_LIST += "<li>" + dr["System Name"].ToString() + "</li>";
                 }
-                URL = "/Login.aspx";
+                URL = HttpContext.Current.Request.Url.AbsoluteUri.ToString().Replace(Request.RawUrl.ToString(), "/LoginPage.aspx");
                 SUBJECT = "User Activation";
                 dsEmail = UMT_EMAIL_SP(con: SqlConn, ACTION: "GET_EMAIL_TEMPLATE", Email_Code: "USER_ACTIVATION_MAIL_FIRST");
 
@@ -203,7 +203,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -242,7 +242,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -285,7 +285,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -303,7 +303,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 

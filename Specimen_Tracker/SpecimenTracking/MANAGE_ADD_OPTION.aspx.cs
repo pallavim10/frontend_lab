@@ -11,6 +11,7 @@ namespace SpecimenTracking
 {
     public partial class MANAGE_ADD_OPTION : System.Web.UI.Page
     {
+
         DAL_SETUP Dal_Setup = new DAL_SETUP();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,7 +19,6 @@ namespace SpecimenTracking
             {
                 GET_ADDED_OPTION(Request.QueryString["ID"].ToString());
             }
-           
         }
         protected void btnaddOption_Click(object sender, EventArgs e)
         {
@@ -81,7 +81,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
         private void ClearOption()
@@ -99,7 +99,7 @@ namespace SpecimenTracking
             btnaddOption.Visible = true;
             btnUpdateOption.Visible = false;
             ClearOption();
-            //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Option Updated Successfully.', 'success');", true);
+            
             ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
@@ -127,7 +127,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -154,7 +154,7 @@ namespace SpecimenTracking
             {
 
                 DELETE_OPTION(Option_ID);
-                //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Option Deleted Successfully.', 'success');", true);
+                
                 ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
@@ -187,7 +187,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
 
             }
         }
@@ -203,7 +203,7 @@ namespace SpecimenTracking
             }
             catch(Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 
 
             }

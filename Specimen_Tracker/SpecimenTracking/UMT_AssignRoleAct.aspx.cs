@@ -26,7 +26,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -62,11 +62,14 @@ namespace SpecimenTracking
                     {
                         divExternal.Visible = true;
                         lblDiv.Text = "Company Name";
+                        lblDiv.CssClass = "ExternalName";
                     }
                     else if (lblUserType.Text == "Sponsor")
                     {
                         divExternal.Visible = true;
                         lblDiv.Text = "Sponsor Company Name";
+                        lblDiv.CssClass = "SponsorName";
+
                     }
                 }
                 else
@@ -84,7 +87,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -107,7 +110,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -134,7 +137,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -175,7 +178,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -214,24 +217,50 @@ namespace SpecimenTracking
 
                 if (Request.QueryString["Type"] == "Assign")
                 {
-
-                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('User Role Assigned Successfully.'); window.location.href = 'UMT_AssignRoles.aspx' ", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'User Role Assigned Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = 'UMT_AssignRoles.aspx'; });
+                ", true);
+                    //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('User Role Assigned Successfully.'); window.location.href = 'UMT_AssignRoles.aspx' ", true);
 
                 }
                 else if (Request.QueryString["Type"] == "Change")
                 {
-                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('User Role Updated Successfully.');  window.location.href = 'UMT_ChangeRole.aspx' ", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'User Role Updated Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = 'UMT_ChangeRole.aspx'; });
+                ", true);
+                    //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('User Role Updated Successfully.');  window.location.href = 'UMT_ChangeRole.aspx' ", true);
 
                 }
                 else if (Request.QueryString["Type"] == "Mng")
                 {
-                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('User Role Updated Successfully.');  window.location.href = 'UMT_Manage_All_Users.aspx' ", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'User Role Updated Successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = 'UMT_Manage_All_Users.aspx'; });
+                ", true);
+                    //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('User Role Updated Successfully.');  window.location.href = 'UMT_Manage_All_Users.aspx' ", true);
 
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -286,7 +315,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -304,7 +333,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 

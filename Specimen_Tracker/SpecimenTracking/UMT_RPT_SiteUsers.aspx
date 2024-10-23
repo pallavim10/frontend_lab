@@ -50,6 +50,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
                             <li class="breadcrumb-item">Reports</li>
                             <li class="breadcrumb-item active">Site Users Report</li>
                         </ol>
@@ -74,7 +75,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">Site Users Report</h3>
                                 <div class="pull-right">
-                                    <asp:LinkButton runat="server" ID="btnExport" OnClick="btnExport_Click" CssClass="btn btn-default" Style="color: #333333; font-size: 14px;">Export Site Users Report<span class="fa fa-download btn-xs"></span></asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="btnExport" OnClick="btnExport_Click" CssClass="btn btn-default" Style="color: #333333; font-size: 14px; font-weight:500;">Export Site Users Report<span class="fa fa-download btn-xs"></span></asp:LinkButton>
                                     <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                 </div>
                             </div>
@@ -116,13 +117,13 @@
         </section>
         <section class="content">
             <div class="container-fluid">
+                <div class="row" id="DivRecord" runat="server" visible="false">
+                    <div class="col-md-12">
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Records</h3>
                         <div class="pull-right">
-                            <asp:LinkButton ID="lbtnExport" runat="server" Font-Size="14px" Style="margin-top: 3px;" CssClass="btn btn-default" OnClick="lbtnExport_Click" ForeColor="Black">Export Visits &nbsp;<span class="fas fa-download btn-xs"></span></asp:LinkButton>
-                            &nbsp;&nbsp;
-                                            <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                            <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -140,6 +141,8 @@
                     </div>
                 </div>
             </div>
+                    </div>
+                </div>
         </section>
     </div>
 

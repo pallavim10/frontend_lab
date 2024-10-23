@@ -11,6 +11,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
+                            <li class="breadcrumb-item active">UMT Setup</li>
                             <li class="breadcrumb-item active">Mailbox Configuration</li>
                         </ol>
                     </div>
@@ -57,7 +59,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>
-                                            Port Number.:</label>
+                                            Port Number :</label>
                                     </div>
                                     <div class="col-md-9">
                                         <asp:TextBox ID="txtPortNo" Style="width: 100%;" runat="server"

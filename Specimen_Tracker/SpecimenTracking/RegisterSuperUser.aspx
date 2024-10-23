@@ -79,17 +79,35 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Sponsor Name :</label>
+                                            <asp:Label ID="Label5" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                            <asp:TextBox runat="server" ID="txtSponsor" CssClass="form-control required"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Project Name :</label>
+                                            <asp:Label ID="lblPROJECT" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                            <asp:TextBox runat="server" ID="txtPROJECT" CssClass="form-control required"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>First Name :</label>
-                                             <asp:Label ID="Label1" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                            <asp:Label ID="Label1" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
                                             <asp:TextBox runat="server" ID="txtFirstName" CssClass="form-control required"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Last Name :</label>
-                                             <asp:Label ID="Label2" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                            <asp:Label ID="Label2" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
                                             <asp:TextBox runat="server" ID="txtLastName" CssClass="form-control required"></asp:TextBox>
                                         </div>
                                     </div>
@@ -98,7 +116,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Email Address :</label>
-                                             <asp:Label ID="Label3" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                            <asp:Label ID="Label3" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
                                             <asp:TextBox runat="server" ID="txtEmailID" CssClass="form-control required"></asp:TextBox>
                                             <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmailID" ForeColor="Red" ErrorMessage="Invalid Email Format"></asp:RegularExpressionValidator>
                                         </div>
@@ -106,14 +124,14 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Contact Number :</label>
-                                             <asp:Label ID="Label4" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                            <asp:Label ID="Label4" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
                                             <asp:TextBox runat="server" ID="txtContactNo" CssClass="form-control numeric" MaxLength="10"></asp:TextBox>
                                             <asp:RegularExpressionValidator
                                                 runat="server"
                                                 ID="revContactNo"
                                                 ControlToValidate="txtContactNo"
                                                 ErrorMessage="Invalid Contact Number."
-                                                ValidationExpression="^\d+$"
+                                                ValidationExpression="^[0-9]{10}$"
                                                 ForeColor="Red" />
                                         </div>
                                     </div>

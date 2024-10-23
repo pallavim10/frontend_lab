@@ -9,13 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css" />
-    <!-- Ionicons -->
+    
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-    <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
-    <!-- iCheck -->
+    
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
     <!-- JQVMap -->
     <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css" />
@@ -33,13 +29,10 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
 
-    <!-- SweetAlert Message Box for Alert Box Popup -->
-
-
     <script src="plugins/jquery/jquery.min.js" type="text/javascript"></script>
-    <!-- jQuery UI 1.11.4 -->
+    
     <script src="plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    
     <script type="text/javascript">
         $.widget.bridge('uibutton', $.ui.button)
     </script>
@@ -47,17 +40,7 @@
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <!-- Select2 -->
     <script src="plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
-    <!-- ChartJS -->
-    <!-- <script src="plugins/chart.js/Chart.min.js"></script>-->
-    <!-- Sparkline -->
-    <!-- jQuery Knob Chart -->
-    <!-- daterangepicker -->
-    <script src="plugins/moment/moment.min.js" type="text/javascript"></script>
-
-    <script src="plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js" type="text/javascript"></script>
-    <!-- Summernote -->
+    
     <script src="plugins/summernote/summernote-bs4.min.js" type="text/javascript"></script>
     <!-- overlayScrollbars -->
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js" type="text/javascript"></script>
@@ -70,10 +53,7 @@
     <script src="plugins/flot/plugins/jquery.flot.resize.js" type="text/javascript"></script>
     <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
     <script src="plugins/flot/plugins/jquery.flot.pie.js" type="text/javascript"></script>
-
-    <script src="plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
-
+    <script src="dist/js/sweetalert.min.js" type="text/javascript"></script>
     <style type="text/css">
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             color: #0000ff;
@@ -322,13 +302,7 @@
 
     </script>
     <script type="text/javascript">
-        //$(".numeric").on("keypress keyup blur", function (event) {
-        //    $(this).val($(this).val().replace(/[^\d].+/, ""));
-        //    if ((event.which < 48 || event.which > 57)) {
-        //        event.preventDefault();
-        //    }
-        //});
-
+        
         //only for numeric value
         $('.numeric').keypress(function (event) {
 
@@ -407,9 +381,9 @@
                                                             <center>
                                                                 <asp:LinkButton runat="server" ID="btnaddOption" Text="Submit" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" OnClick="btnaddOption_Click"></asp:LinkButton>
                                                                 &nbsp;&nbsp;&nbsp;
-                                                                                <asp:LinkButton runat="server" ID="btnUpdateOption" Text="Update" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" Visible="false" OnClick="btnUpdateOption_Click"></asp:LinkButton>
+                                                                <asp:LinkButton runat="server" ID="btnUpdateOption" Text="Update" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" Visible="false" OnClick="btnUpdateOption_Click"></asp:LinkButton>
                                                                 &nbsp;&nbsp;&nbsp;
-                                                                                <asp:LinkButton runat="server" ID="btnCancelOption" Text="Cancel" ForeColor="White" CssClass="btn btn-primary btn-sm" OnClick="btnCancelOption_Click"></asp:LinkButton>
+                                                                 <asp:LinkButton runat="server" ID="btnCancelOption" Text="Cancel" ForeColor="White" CssClass="btn btn-primary btn-sm" OnClick="btnCancelOption_Click"></asp:LinkButton>
                                                             </center>
                                                         </div>
                                                     </div>
@@ -471,14 +445,14 @@
                                         </div>
                                         <div class="modal fade" id="modal-lg" tabindex="-1" role="dialog" aria-labelledby="modal-lg-label" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content" style="width:fit-content; height: 500px;">
+                                                <div class="modal-content" style="width:95%; height: 500px;">
                                                     <div class="modal-header" style="background-color: gold;">
                                                         <h4 class="modal-title" id="modal-lg-label">Audit Trail</h4>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">×</span>
                                                         </button>
                                                     </div>
-                                                    <div style="height: 590px; width:fit-content; overflow: auto;">
+                                                    <div style="height: 590px; overflow: auto;">
                                                         <div class="modal-body" id="DivAuditTrail">
                                                         </div>
                                                     </div>

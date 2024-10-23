@@ -30,7 +30,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
@@ -58,7 +58,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -75,71 +75,9 @@ namespace SpecimenTracking
 
                     TextBox txtSystemNotes = (TextBox)repeatSystem.Items[i].FindControl("txtSystemNotes");
 
-                    CheckBox ChkSubsysIWRS = (CheckBox)repeatSystem.Items[i].FindControl("ChkSubsysIWRS");
-                    Label lblSubsystemIWRS = (Label)repeatSystem.Items[i].FindControl("lblSubsystemIWRS");
-                    CheckBox ChkSubSysPharma = (CheckBox)repeatSystem.Items[i].FindControl("ChkSubSysPharma");
-                    Label lblSubSysPharma = (Label)repeatSystem.Items[i].FindControl("lblSubSysPharma");
-                    CheckBox chksubsysDM = (CheckBox)repeatSystem.Items[i].FindControl("chksubsysDM");
-                    Label LblsubsysDM = (Label)repeatSystem.Items[i].FindControl("LblsubsysDM");
-                    CheckBox ChksubsyseSource = (CheckBox)repeatSystem.Items[i].FindControl("ChksubsyseSource");
-                    Label lblsubsyseSource = (Label)repeatSystem.Items[i].FindControl("lblsubsyseSource");
-                    CheckBox chlReadOnlyeSource = (CheckBox)repeatSystem.Items[i].FindControl("chlReadOnlyeSource");
-                    Label LblReadOnly = (Label)repeatSystem.Items[i].FindControl("LblReadOnly");
-
+                    
                     string SubSytem = "";
-                    if (ChkSubsysIWRS.Checked)
-                    {
-                        SubSytem = lblSubsystemIWRS.Text;
-                    }
-                    if (ChkSubSysPharma.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblSubSysPharma.Text;
-                        }
-                        else
-                        {
-                            SubSytem = "," + lblSubSysPharma.Text;
-                        }
-
-                    }
-                    if (chksubsysDM.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = LblsubsysDM.Text;
-                        }
-                        else
-                        {
-                            SubSytem = "," + LblsubsysDM.Text;
-                        }
-
-                    }
-                    if (ChksubsyseSource.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = lblsubsyseSource.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + lblsubsyseSource.Text;
-                        }
-
-                    }
-                    if (chlReadOnlyeSource.Checked)
-                    {
-                        if (SubSytem == "")
-                        {
-                            SubSytem = LblReadOnly.Text;
-                        }
-                        else
-                        {
-                            SubSytem += "," + LblReadOnly.Text;
-                        }
-
-                    }
-
+                    
                     if (ChkSelect.Checked)
                     {
                         DataSet ds = dal_UMT.UMT_SITE_USER_SP(
@@ -167,7 +105,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -189,7 +127,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -209,7 +147,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -237,7 +175,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -265,23 +203,49 @@ namespace SpecimenTracking
             {
                 if (CHECK_USER_EXISTS("INSERT"))
                 {
-                    Response.Write("<script language=javascript>alert('User already exists with this Name and Email ID');</script>");
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','User already exists with this Name and Email ID','warning');", true);
+                    //Response.Write("<script language=javascript>alert('User already exists with this Name and Email ID');</script>");
+                    txtFirstName.Text = "";
+                    txtLastName.Text = "";
+                    txtEmailid.Text = "";
+                    txtContactNo.Text = "";
+                    txtNotes.Text = "";
+                    drpStudyRole.SelectedIndex = 0;
+                    drpUnblind.SelectedIndex = 0;
+                    drpSITEPI.SelectedIndex = 0;
+                    GET_SYSTEM("");
                 }
                 else if (drpSITEPI.SelectedValue == "Yes" && CHECK_SITE_PI("INSERT"))
                 {
-                    Response.Write("<script language=javascript>alert('Same site can not have multiple Principal Investigators');</script>");
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Same site can not have multiple Principal Investigators','warning');", true);
+                    //Response.Write("<script language=javascript>alert('Same site can not have multiple Principal Investigators');</script>");
+                    txtFirstName.Text = "";
+                    txtLastName.Text = "";
+                    txtEmailid.Text = "";
+                    txtContactNo.Text = "";
+                    txtNotes.Text = "";
+                    drpStudyRole.SelectedIndex = 0;
+                    drpUnblind.SelectedIndex = 0;
+                    drpSITEPI.SelectedIndex = 0;
+                    GET_SYSTEM("");
                 }
                 else
                 {
                     INSERT_SITE_USER();
                     INSERT_SYSTEM();
-
-                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Site User Created Successfully');  window.location.href = 'UMT_SiteUser.aspx';", true);
+                    string script = @"
+                     swal({
+                     title: 'Success!',
+                     text: 'Site User Created Successfully',
+                     icon: 'success',
+                     button: 'OK'
+                     }).then(function(){window.location.href = window.location.href});";
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "showalert", script, true);
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -312,7 +276,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
             return exists;
         }
@@ -340,7 +304,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
             return exists;
         }
@@ -367,7 +331,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -377,23 +341,32 @@ namespace SpecimenTracking
             {
                 if (CHECK_USER_EXISTS("UPDATE"))
                 {
-                    Response.Write("<script language=javascript>alert('User already exists with this Name and Email ID');</script>");
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','User already exists with this Name and Email ID','warning');", true);
+                    //Response.Write("<script language=javascript>alert('User already exists with this Name and Email ID');</script>");
                 }
                 else if (drpSITEPI.SelectedValue == "Yes" && CHECK_SITE_PI("UPDATE"))
                 {
-                    Response.Write("<script language=javascript>alert('Same site can not have multiple Principal Investigators');</script>");
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!','Same site can not have multiple Principal Investigators','warning');", true);
+                    //Response.Write("<script language=javascript>alert('Same site can not have multiple Principal Investigators');</script>");
                 }
                 else
                 {
                     UPDATE_SITE_USER();
                     INSERT_SYSTEM();
-
-                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Site User Updated Successfully');  window.location.href = 'UMT_SiteUser.aspx';", true);
+                    string script = @"
+                     swal({
+                     title: 'Success!',
+                     text: 'Site User Updated Successfully',
+                     icon: 'success',
+                     button: 'OK'
+                     }).then(function(){window.location.href = window.location.href});";
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "showalert", script, true);
+                    CLEAR();
                 }
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -416,7 +389,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
                 throw;
             }
         }
@@ -477,7 +450,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -488,11 +461,20 @@ namespace SpecimenTracking
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "REQUEST_USER_ACTIVATE", SiteUserID: UserID,
                      REQ_DESC: "ACTIVATION"
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Request Generated for Activation')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Request Generated for Activation.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "showalert", $"swal('Warning!','Request Generated for Activation','warning');", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -504,11 +486,20 @@ namespace SpecimenTracking
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "REQUEST_USER_DEACTIVATE", SiteUserID: UserID,
                      REQ_DESC: "DEACTIVATION"
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Request Generated for Deactivation')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Request Generated for Deactivation.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "showalert", $"swal('Warning!','Request Generated for Deactivation')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -519,11 +510,20 @@ namespace SpecimenTracking
                 DataSet ds = dal_UMT.UMT_USERS_SP(ACTION: "REQUEST_USER_LOCK", SiteUserID: UserID,
                      REQ_DESC: "UNLOCK"
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Request Generated for Unlock')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Request Generated for Unlock.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "showalert", $"swal('Warning!','Request Generated for Unlock')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -536,11 +536,20 @@ namespace SpecimenTracking
                     REQ_DESC: "SECURITY QUESTION"
 
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert(' Request Generated for Security Question')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Request Generated for Security Question.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "showalert", $"swal('Warning!',' Request Generated for Security Question')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -552,11 +561,20 @@ namespace SpecimenTracking
                      SiteUserID: UserID,
                      REQ_DESC: "RESET PASSWORD"
                    );
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Request Generated for Password')", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Request Generated for Password.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href = window.location.href; });
+                ", true);
+                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "showalert", $"swal('Warning!','Request Generated for Password')", true);
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -573,13 +591,19 @@ namespace SpecimenTracking
                   ACTION: "DELETE_SITE_USER",
                   ID: ID
                   );
-
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Site User Deleted Successfully.')", true);
+                string script = @"
+                     swal({
+                     title: 'Success!',
+                     text: 'Site User Deleted Successfully',
+                     icon: 'success',
+                     button: 'OK'
+                     }).then(function(){window.location.href = window.location.href});";
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "showalert", script, true);
                 GET_SITE_USER();
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -613,7 +637,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -642,7 +666,7 @@ namespace SpecimenTracking
             drpStudyRole.SelectedIndex = 0;
             drpUnblind.SelectedIndex = 0;
             drpSiteID.SelectedIndex = 0;
-
+            drpSITEPI.SelectedIndex = 0;
             GET_SYSTEM("");
         }
 
@@ -664,18 +688,7 @@ namespace SpecimenTracking
                     TextBox txtSystemNotes = (TextBox)e.Item.FindControl("txtSystemNotes");
                     txtSystemNotes.Attributes.Add("maxlength", "200");
 
-                    HtmlGenericControl divSubsysIWRS = e.Item.FindControl("divSubsysIWRS") as HtmlGenericControl;
-                    HtmlGenericControl divSubSysPharma = e.Item.FindControl("divSubSysPharma") as HtmlGenericControl;
-                    HtmlGenericControl divsubsysDM = e.Item.FindControl("divsubsysDM") as HtmlGenericControl;
-                    HtmlGenericControl divsubsyseSource = e.Item.FindControl("divsubsyseSource") as HtmlGenericControl;
-
-                    CheckBox ChkSubsysIWRS = (CheckBox)e.Item.FindControl("ChkSubsysIWRS");
-                    CheckBox ChkSubSysPharma = (CheckBox)e.Item.FindControl("ChkSubSysPharma");
-                    CheckBox chksubsysDM = (CheckBox)e.Item.FindControl("chksubsysDM");
-                    CheckBox ChksubsyseSource = (CheckBox)e.Item.FindControl("ChksubsyseSource");
-                    CheckBox chlReadOnlyeSource = (CheckBox)e.Item.FindControl("chlReadOnlyeSource");
-                    HiddenField HiddenSubSytem = (HiddenField)e.Item.FindControl("HiddenSubSytem");
-
+                   
                     DataRowView rowView = e.Item.DataItem as DataRowView;
                     if (rowView != null)
                     {
@@ -687,46 +700,7 @@ namespace SpecimenTracking
                             txtSystemNotes.Text = rowView["Notes"].ToString();
 
                             ChkSelect.Checked = true;
-                            if (lblSystemName.Text == "IWRS")
-                            {
-                                divSubsysIWRS.Visible = true;
-
-                                if (HiddenSubSytem.Value == "Unblinding")
-                                {
-                                    ChkSubsysIWRS.Checked = true;
-                                }
-                            }
-                            else if (lblSystemName.Text == "Pharmacovigilance")
-                            {
-                                divSubSysPharma.Visible = true;
-
-                                if (HiddenSubSytem.Value == "Sign-Off")
-                                {
-                                    ChkSubSysPharma.Checked = true;
-                                }
-                            }
-                            else if (lblSystemName.Text == "Data Management")
-                            {
-                                divsubsysDM.Visible = true;
-                                if (HiddenSubSytem.Value == "Sign-Off")
-                                {
-                                    chksubsysDM.Checked = true;
-                                }
-                            }
-                            else if (lblSystemName.Text == "eSource")
-                            {
-                                divsubsyseSource.Visible = true;
-                                if (HiddenSubSytem.Value.Split(',').Contains("Sign-Off"))
-                                {
-                                    ChksubsyseSource.Checked = true;
-
-                                }
-                                if (HiddenSubSytem.Value.Split(',').Contains("Read-Only"))
-                                {
-
-                                    chlReadOnlyeSource.Checked = true;
-                                }
-                            }
+                            
                         }
                         else
                         {
@@ -738,7 +712,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -763,7 +737,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -920,7 +894,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -935,10 +909,7 @@ namespace SpecimenTracking
 
                 TextBox txtSystemNotes = (TextBox)repeatSystem.Items[i].FindControl("txtSystemNotes");
 
-                HtmlGenericControl divSubsysIWRS = repeatSystem.Items[i].FindControl("divSubsysIWRS") as HtmlGenericControl;
-                HtmlGenericControl divSubSysPharma = repeatSystem.Items[i].FindControl("divSubSysPharma") as HtmlGenericControl;
-                HtmlGenericControl divsubsysDM = repeatSystem.Items[i].FindControl("divsubsysDM") as HtmlGenericControl;
-                HtmlGenericControl divsubsyseSource = repeatSystem.Items[i].FindControl("divsubsyseSource") as HtmlGenericControl;
+                
 
                 if (ChkSelect.Checked)
                 {
@@ -949,57 +920,29 @@ namespace SpecimenTracking
                     txtSystemNotes.Visible = false;
                 }
 
-                if (lblSystemName.Text == "IWRS" && ChkSelect.Checked && drpUnblind.SelectedValue == "Blinded")
-                {
-                    divSubsysIWRS.Visible = true;
-                }
-                else
-                {
-                    divSubsysIWRS.Visible = false;
-                }
-
-                if (lblSystemName.Text == "Pharmacovigilance" && ChkSelect.Checked)
-                {
-                    divSubSysPharma.Visible = true;
-
-                }
-                else
-                {
-                    divSubSysPharma.Visible = false;
-
-                }
-                if (lblSystemName.Text == "Data Management" && ChkSelect.Checked)
-                {
-                    divsubsysDM.Visible = true;
-
-                }
-                else
-                {
-                    divsubsysDM.Visible = false;
-
-                }
-                if (lblSystemName.Text == "eSource" && ChkSelect.Checked)
-                {
-                    divsubsyseSource.Visible = true;
-
-                }
-                else
-                {
-                    divsubsyseSource.Visible = false;
-
-                }
             }
         }
 
         protected void drpSiteID_SelectedIndexChanged(object sender, EventArgs e)
+
         {
             try
             {
                 GET_SITE_USER();
+                txtFirstName.Text = "";
+                txtLastName.Text = "";
+                txtEmailid.Text = "";
+                txtContactNo.Text = "";
+                txtNotes.Text = "";
+                drpStudyRole.SelectedIndex = 0;
+                drpUnblind.SelectedIndex = 0;
+                drpSITEPI.SelectedIndex = 0;
+                GET_SYSTEM("");
+
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 

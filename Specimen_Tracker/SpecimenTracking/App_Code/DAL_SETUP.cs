@@ -182,7 +182,7 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
-        public DataSet SETUP_FIELD_SP(string ACTION = null, string ID = null, string SEQNO = null, string VARIABLENAME = null, string FIELDNAME = null, string CONTROLTYPE = null, bool ISACTIVE = false, bool ISDEFAULT = false,bool FIRSTENTRY = false, bool SECONDENTRY = false, bool REPEAT = false, bool REQUIRED = false, string MAXLENGHT = null)
+        public DataSet SETUP_FIELD_SP(string ACTION = null, string ID = null, string SEQNO = null, string VARIABLENAME = null, string FIELDNAME = null, string CONTROLTYPE = null, bool ISACTIVE = false, bool ISDEFAULT = false,bool FIRSTENTRY = false, bool SECONDENTRY = false, bool REPEAT = false, bool REQUIRED = false, string MAXLENGHT = null,bool ALIQUOTPREP = false)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -219,6 +219,7 @@ namespace SpecimenTracking.App_Code
                 cmd.Parameters.AddWithValue("@ISDEFAULT", ISDEFAULT);
                 cmd.Parameters.AddWithValue("@FIRSTENTRY", FIRSTENTRY);
                 cmd.Parameters.AddWithValue("@SECONDENTRY", SECONDENTRY);
+                cmd.Parameters.AddWithValue("@ALIQUOTPREP", ALIQUOTPREP);
                 cmd.Parameters.AddWithValue("@MAXLENGHT", MAXLENGHT);
                 cmd.Parameters.AddWithValue("@REPEAT", REPEAT);
                 cmd.Parameters.AddWithValue("@REQUIRED", REQUIRED);
@@ -244,7 +245,7 @@ namespace SpecimenTracking.App_Code
         }
         // 
 
-        public DataSet SETUP_FIELDOPTION_SP(string ACTION = null, string ID = null, string FIELD_ID = null, string FIELDNAME = null,string VARIABLENAME = null,string SEQNO = null,string CONTROLTYPE = null,bool ISACTIVE = false,bool ISDEFAULT = false,string OPTION = null)
+        public DataSet SETUP_FIELDOPTION_SP(string ACTION = null, string ID = null, string FIELD_ID = null, string FIELDNAME = null,string VARIABLENAME = null,string SEQNO = null,string CONTROLTYPE = null,bool ISACTIVE = false,bool ISDEFAULT = false,string OPTION = null,string MAXLEN = null, string ISVERIFY = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -281,6 +282,8 @@ namespace SpecimenTracking.App_Code
                 cmd.Parameters.AddWithValue("@ISACTIVE", ISACTIVE);
                 cmd.Parameters.AddWithValue("@ISDEFAULT", ISDEFAULT);
                 cmd.Parameters.AddWithValue("@OPTION", OPTION);
+                cmd.Parameters.AddWithValue("@MAXLEN", MAXLEN);
+                cmd.Parameters.AddWithValue("@ISVERIFY", ISVERIFY);
                 cmd.Parameters.AddWithValue("@UserID", UserID);
                 cmd.Parameters.AddWithValue("@User_Name", User_Name);
                 cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
@@ -360,7 +363,7 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
-        public DataSet SETUP_SHIPMENT_MANIFEST_SP(string ACTION = null, string ID = null, string FILENAME = null, string CONTENT_TYPE = null, byte[] DATA_TYPE = null, string SIZE =null)
+        public DataSet SETUP_SHIPMENT_MANIFEST_SP(string ACTION = null, string ID = null, string FILENAME = null, string CONTENT_TYPE = null, byte[] DATA_TYPE = null, string SIZE =null,string FILE_EXTENSION = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -393,6 +396,7 @@ namespace SpecimenTracking.App_Code
                 cmd.Parameters.AddWithValue("@CONTENT_TYPE", CONTENT_TYPE);
                 cmd.Parameters.AddWithValue("@DATA_TYPE", DATA_TYPE);
                 cmd.Parameters.AddWithValue("@SIZE", SIZE);
+                cmd.Parameters.AddWithValue("@FILE_EXTENSION", FILE_EXTENSION);
                 cmd.Parameters.AddWithValue("@UserID", UserID);
                 cmd.Parameters.AddWithValue("@User_Name", User_Name);
                 cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
@@ -518,7 +522,7 @@ namespace SpecimenTracking.App_Code
             
 
         //}
-        public DataSet Visit_Aliquot_Mapping(string ACTION, string VISITID = null, string ALIQUOTID = null, bool ADDED = false) 
+        public DataSet Visit_Aliquot_Mapping(string ACTION, string VISITID = null, string ALIQUOTID = null) 
         {
             try
             {
@@ -549,7 +553,9 @@ namespace SpecimenTracking.App_Code
                     cmd.Parameters.AddWithValue("@Action", ACTION);
                     cmd.Parameters.AddWithValue("@VisitID", VISITID);
                     cmd.Parameters.AddWithValue("@AliquotID", ALIQUOTID);
-                    cmd.Parameters.AddWithValue("@Added", ADDED);
+                    cmd.Parameters.AddWithValue("@UserID", UserID);
+                    cmd.Parameters.AddWithValue("@User_Name", User_Name);
+                    cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
                     adp = new SqlDataAdapter(cmd);
                     
                         adp.Fill(ds);

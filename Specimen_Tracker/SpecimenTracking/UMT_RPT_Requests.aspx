@@ -44,12 +44,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3><asp:Label runat="server" ID="lblHeader" Text="User Request Logs"></asp:Label></h3>
+                        <h3>
+                            <asp:Label runat="server" ID="lblHeader" Text="User Request Logs"></asp:Label></h3>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
-                            <li class="breadcrumb-item">Reports</li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
                             <li class="breadcrumb-item">Logs</li>
                             <li class="breadcrumb-item active">User Request Logs</li>
                         </ol>
@@ -74,10 +75,10 @@
                             <div class="card-header">
                                 <h3 class="card-title">User Request Logs</h3>
                                 <div class="pull-right">
-                                     <asp:LinkButton runat="server" ID="btnExport" OnClick="btnExport_Click" ToolTip="Export to Excel" CssClass="btn btn-default" Style="color: #333333; font-size:14px;">Export User Request Logs<span class="fa fa-download btn-xs"></span></asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="btnExport" OnClick="btnExport_Click" ToolTip="Export to Excel" CssClass="btn btn-default" Style="color: #333333; font-size: 14px;">Export User Request Logs<span class="fa fa-download btn-xs"></span></asp:LinkButton>
                                     <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                 </div>
-                                
+
                             </div>
                             <div>
                                 <asp:HiddenField ID="hdnID" runat="server" />
@@ -100,34 +101,53 @@
                                             </div>
                                             <div class="col-md-4 align-content-center">
                                                 <div class="d-inline-flex align-items-center">
-                                                    <asp:Button ID="btnGet" runat="server" Text="Get Data" CssClass="btn btn-primary btn-sm cls-btnSave" 
-                                                        OnClick="btnGet_Click" />
-                                                    
-                                                </div>
-                                                </div>
-                                          
-                                                
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div style="width: 100%; overflow: auto;">
-                                                        <div>
-                                                            <asp:GridView ID="grdData" HeaderStyle-CssClass="txt_center" runat="server" AutoGenerateColumns="true"
-                                                                Width="100%" OnPreRender="grd_data_PreRender" CssClass="table table-bordered Datatable table-striped">
-                                                            </asp:GridView>
-                                                        </div>
-                                                    </div>
+                                                    <asp:Button ID="btnGet" runat="server" Text="Get Data" CssClass="btn btn-primary btn-sm cls-btnSave" OnClick="btnGet_Click" />
                                                 </div>
                                             </div>
-                                            <br />
                                         </div>
                                     </div>
                                 </div>
+                                <br />
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row" id="DivRecord" runat="server" visible="false">
+                    <div class="col-md-12">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Records</h3>
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                </div>
+
+                            </div>
+                            <div>
+                                <asp:HiddenField ID="HiddenField1" runat="server" />
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                                <div style="width: 100%; height:700px; overflow: auto;">
+                                                    <div>
+                                                         <asp:GridView ID="grdData" HeaderStyle-CssClass="txt_center" runat="server" AutoGenerateColumns="true"
+                                            Width="100%" OnPreRender="grd_data_PreRender" CssClass="table table-bordered Datatable table-striped">
+                                        </asp:GridView>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
     </div>
 </asp:Content>
 

@@ -47,7 +47,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -66,20 +66,36 @@ namespace SpecimenTracking
                     PASSWORD: txtPassword.Text,
                     IPADDRESS: GetIpAddress()
                     );
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
+                    swal({
+                        title: 'Success!',
+                        text: 'Mailbox configured successfully.',
+                        icon: 'success',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href =  window.location.href });
+                ", true);
 
-                    
-                   
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Success!','Mailbox configured successfully', 'success');", true);
-                    //////ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "alert('Mailbox configured successfully'); window.location.href = '" + Request.RawUrl.ToString() + "'; ", true);
+                    //ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "alert('Mailbox configured successfully'); window.location.href = '" + Request.RawUrl.ToString() + "'; ", true);
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Error!','Invalid configuration', 'Error');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", @"
+                    swal({
+                        title: 'Error!',
+                        text: 'Invalid configuration.',
+                        icon: 'error',
+                        button: 'OK'
+                    }).then(function(){
+                                     window.location.href =  window.location.href });
+                ", true);
+                    
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal('Error!','Invalid configuration', 'Error');", true);
                 }
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
         }
 
@@ -107,7 +123,7 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                 ex.Message.ToString();
+                 ExceptionLogging.SendErrorToText(ex);
             }
             return _output;
         }

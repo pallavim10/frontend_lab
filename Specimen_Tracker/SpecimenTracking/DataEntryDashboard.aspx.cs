@@ -18,14 +18,13 @@ namespace SpecimenTracking
             if (!this.IsPostBack)
             {
                 GET_SETUP_SYSTEM();
-
             }
         }
 
         private void GET_SETUP_SYSTEM()
         {
             DataSet ds = dal_UMT.SYS_FUNCTIONS_SP(
-                        ACTION: "GET_SETUP_SYSTEM", PARENT: "Data Entry"
+                        ACTION: "GET_SETUP_SYSTEM", PARENT: "Data Entry",SYSTEM: "Data Entry"
                         );
 
             if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -40,7 +39,6 @@ namespace SpecimenTracking
             }
 
         }
-
         protected void lstm_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             if (e.Item.ItemType == ListViewItemType.DataItem)
@@ -49,22 +47,6 @@ namespace SpecimenTracking
                 Label lbl = (Label)e.Item.FindControl("lbltotal");
                 HtmlGenericControl span = (HtmlGenericControl)e.Item.FindControl("FunctionName");
 
-
-                switch (span.InnerText)
-                {
-                    case "L1 - New Entry":
-                        // lbl.Text = "10";
-                        break;
-
-                    case "L1 - Update Entry":
-                        break;
-
-                    case "L2 - New Entry":
-                        break;
-
-                    case "L2 - Update Entry":
-                        break;
-                }
             }
         }
     }

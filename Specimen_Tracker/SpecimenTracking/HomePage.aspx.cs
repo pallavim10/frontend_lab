@@ -13,7 +13,7 @@ namespace SpecimenTracking
 {
     public partial class HomePage : System.Web.UI.Page
     {
-      
+
         DAL_UMT dal_UMT = new DAL_UMT();
 
         public int col = 0;
@@ -33,16 +33,19 @@ namespace SpecimenTracking
                     //Added by Neeraj
                     HttpCookie cookie = new HttpCookie("Username");
                     cookie.Value = Session["USER_ID"].ToString();
-                    // Optionally, set expiration and other properties
-                    cookie.Expires = DateTime.Now.AddDays(30); // Example: cookie expires in 1 day
+                    cookie.Expires = DateTime.Now.AddDays(30); 
                     Response.Cookies.Add(cookie);
 
 
                     HttpCookie CookkieFullName = new HttpCookie("FullName");
                     CookkieFullName.Value = Session["User_Name"].ToString();
-                    // Optionally, set expiration and other properties
                     CookkieFullName.Expires = DateTime.Now.AddDays(30); // Example: cookie expires in 1 day
                     Response.Cookies.Add(CookkieFullName);
+
+                    HttpCookie CookieProject = new HttpCookie("ProjectName");
+                    CookieProject.Value = Session["PROJECTIDTEXT"].ToString();
+                    CookieProject.Expires = DateTime.Now.AddDays(30); // Example: cookie expires in 1 day
+                    Response.Cookies.Add(CookieProject);
 
                     this.GET_SYSTEM();
 
@@ -50,12 +53,149 @@ namespace SpecimenTracking
             }
             catch (Exception ex)
             {
-                lblErrorMsg.Text = ex.ToString();
+                ExceptionLogging.SendErrorToText(ex);
             }
 
         }
 
-       
+        private void PopulateMenuControl()
+        {
+            string CURRENT_SYSTEM = "";
+
+            if (Session["UMT"] != null && Session["UMT"].ToString() == "YES")
+            {
+                if (Session["menu"] != null && Session["menu"].ToString() != "")
+                {
+                    CURRENT_SYSTEM = Session["menu"].ToString();
+                }
+                else
+                {
+                    CURRENT_SYSTEM = "Home";
+                }
+
+                DataSet ds = dal_UMT.SYS_FUNCTIONS_SP(
+                        ACTION: "GET_FUNCTIONS",
+                        SYSTEM: CURRENT_SYSTEM,
+                        PARENT: CURRENT_SYSTEM
+                        );
+
+            }
+            else
+            {
+                DataSet ds = new DataSet();
+                SqlConnection Sqlcon = new SqlConnection();
+                Sqlcon = new SqlConnection(dal_UMT.getconstr());
+                Sqlcon.Open();
+                SqlDataAdapter da = new SqlDataAdapter("spQry_01_UserFunction", Sqlcon);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                if (Session["PROJECTID"] != null)
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@ProjectID", Session["PROJECTID"].ToString());
+                }
+                else
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@ProjectID", "0");
+                }
+                da.SelectCommand.Parameters.AddWithValue("@UserId", Session["User_ID"].ToString());
+                da.SelectCommand.Parameters.AddWithValue("@LevelID", "1");
+
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+
+                
+                Sqlcon.Close();
+                
+            }
+
+        }
+
+        public void PopulateMenuControlChildItem(string strParentItem)
+        {
+            string CURRENT_SYSTEM = "";
+
+            if (Session["UMT"] != null && Session["UMT"].ToString() == "YES")
+            {
+                if (Session["menu"] != null && Session["menu"].ToString() != "")
+                {
+                    CURRENT_SYSTEM = Session["menu"].ToString();
+                }
+                else
+                {
+                    CURRENT_SYSTEM = "Home";
+                }
+
+                DataSet ds = dal_UMT.SYS_FUNCTIONS_SP(
+                        ACTION: "GET_FUNCTIONS",
+                        SYSTEM: CURRENT_SYSTEM,
+                        PARENT: strParentItem
+                        );
+               
+
+            }
+            else
+            {
+
+                string MyValue = Session["User_ID"] as string;
+                DataSet ds = new DataSet();
+                SqlConnection Sqlcon = new SqlConnection();
+                Sqlcon = new SqlConnection(dal_UMT.getconstr());
+                Sqlcon.Open();
+                SqlDataAdapter da = new SqlDataAdapter("spQry_01_UserFunction", Sqlcon);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                if (Session["PROJECTID"] != null)
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@ProjectID", Session["PROJECTID"].ToString());
+                }
+                else
+                {
+                    da.SelectCommand.Parameters.AddWithValue("@ProjectID", "0");
+                }
+                da.SelectCommand.Parameters.AddWithValue("@UserId", Session["User_ID"].ToString());
+                da.SelectCommand.Parameters.AddWithValue("@Parent", strParentItem);
+
+                da.Fill(ds);
+                if (Session["PROJECTID"] == null)
+                {
+                    DataTable dt = ds.Tables[0];
+
+                    DataRow[] rows;
+                    DataRow[] rows1;
+                    DataRow[] rows2;
+                    DataRow[] rows3;
+                    DataRow[] rows4;
+                    DataRow[] rows5;
+                    DataRow[] rows6;
+                    DataRow[] rows7;
+                    DataRow[] rows8;
+                    DataRow[] rows9;
+                    rows = dt.Select("FunctionName = 'Country Details'");  //'UserName' is ColumnName
+                    foreach (DataRow row in rows)
+                        dt.Rows.Remove(row);
+                    rows3 = dt.Select("FunctionName = 'Lab Details'");  //'UserName' is ColumnName
+                    foreach (DataRow row in rows3)
+                        dt.Rows.Remove(row);
+                    rows5 = dt.Select("FunctionName = 'Feasibility'");  //'UserName' is ColumnName
+                    foreach (DataRow row in rows5)
+                        dt.Rows.Remove(row);
+                    rows6 = dt.Select("FunctionName = 'Visit Details'");  //'UserName' is ColumnName
+                    foreach (DataRow row in rows6)
+                        dt.Rows.Remove(row);
+                    rows7 = dt.Select("FunctionName = 'Page Details'");  //'UserName' is ColumnName
+                    foreach (DataRow row in rows7)
+                        dt.Rows.Remove(row);
+                    rows8 = dt.Select("FunctionName = 'Subject Details'");  //'UserName' is ColumnName
+                    foreach (DataRow row in rows8)
+                        dt.Rows.Remove(row);
+                    rows9 = dt.Select("FunctionName = 'Inclusion Exclusion Criteria'");  //'UserName' is ColumnName
+                    foreach (DataRow row in rows9)
+                        dt.Rows.Remove(row);
+                }
+                
+                Sqlcon.Close();
+            }
+
+        }
+
 
         protected void btnPwdExpiryYes_Click(object sender, EventArgs e)
         {
@@ -79,72 +219,38 @@ namespace SpecimenTracking
             }
 
         }
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            if (lstm.Items.Count == 1)
-            {
-                div4.Attributes.Add("class", "row single-tile"); // Apply single-tile class if only 1 item
-              
-            }
-            else
-            {
-                div4.Attributes.Add("class", "row"); // Apply regular class if more than 1 item
-              
-            }
-        }
-        //protected void lstmenu_ItemCommand(object sender, ListViewCommandEventArgs e)
-        //{
-        //    string menu = e.CommandArgument.ToString();
-        //    if (e.CommandName == "menu")
-        //    {
-        //        if (menu == "Home")
-        //        {
-        //            mainmenu.Visible = true;
-        //            sub.Visible = false;
-        //            PopulateMenuControl();
-        //            Session["menu"] = menu;
-        //        }
-        //        else
-        //        {
-        //            mainmenu.Visible = false;
-        //            sub.Visible = true;
-        //            Session["menu"] = menu;
-        //            PopulateMenuControlChildItem(menu);
-
-        //        }
-
-        //    }
-        //}
-
+        
         protected void lstm_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             if (e.Item.ItemType == ListViewItemType.DataItem)
             {
                 // Find the Label control inside the current ListView item
                 Label lbl = (Label)e.Item.FindControl("lbltotal");
-                //HtmlGenericControl span = (HtmlGenericControl)e.Item.FindControl("FunctionName");
-                HtmlGenericControl itemTemplateDiv = (HtmlGenericControl)e.Item.FindControl("itemTemplateDiv");
+                HtmlGenericControl span = (HtmlGenericControl)e.Item.FindControl("FunctionName");
 
-                // Modify the class of itemTemplateDiv based on condition
-                if (itemTemplateDiv != null)
+
+                switch (span.InnerText)
                 {
-                    // Check the number of items in the ListView
-                    if (lstm.Items.Count == 1)
-                    {
-                        // If there is only one tile, make it full width
-                        itemTemplateDiv.Attributes["class"] = "col-lg-12"; // Full width for one tile
-                        
-                    }
-                    else
-                    {
-                        // If there are multiple tiles, apply the original classes
-                        itemTemplateDiv.Attributes["class"] = "col-lg-3 col-xs-6"; // Regular classes
-                    }
+                    case "Shipment Manifest":
+
+                        //lbl.Text = "10";
+                        break;
+
+                    case "Reports And Listings":
+                        break;
+
+                    case "Analyzing Laboratory":
+                        break;
+
+                    case "User Management":
+                        break;
+
+                    case "Data Entry":
+                        break;
+
+
                 }
-                
             }
         }
-
-
     }
 }

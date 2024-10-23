@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UMT_Role.aspx.cs" Inherits="SpecimenTracking.UMT_Role" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <script src="Scripts/btnSave_Required.js"></script>
+    <script src="Scripts/btnSave_Required.js" type="text/javascript"></script>
+    
      <script type="text/javascript">
          function showAuditTrail(element) {
 
@@ -49,6 +50,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home </a></li>
+                            <li class="breadcrumb-item active"><a href="UserManagementDashboard.aspx">User Management</a></li>
+                            <li class="breadcrumb-item active">Manage Roles</li>
                             <li class="breadcrumb-item active">User Roles</li>
                         </ol>
                     </div>
@@ -263,7 +266,15 @@
             </div>
         </section>
     </div>
-   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.noSpace').keypress(function (e) {
+                if (e.which === 32) {
+                    return false;
+                }
+            });
+        });
+    </script>
      <script type="text/javascript">
 
          function confirm(event) {

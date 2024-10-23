@@ -3756,11 +3756,11 @@ input[type="button"].btn-block {
 }
 
 .custom-select-sm {
-  height: calc(1.8125rem + 2px);
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.5rem;
-  font-size: 75%;
+    height: calc(1.8125rem + 2px);
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    font-size: 125%;
 }
 
 .custom-select-lg {
@@ -4808,7 +4808,7 @@ input[type="button"].btn-block {
 .badge {
   display: inline-block;
   padding: 0.25em 0.4em;
-  font-size: 75%;
+  font-size: 125%;
   font-weight: 700;
   line-height: 1;
   text-align: center;

@@ -3,6 +3,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <link href="Style/Select2.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/Select2.js" type="text/javascript"></script>
+    <script src="Scripts/btnSave_Required.js"></script>
     <style type="text/css">
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             color: #0000ff;
@@ -61,7 +62,8 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="HomePage.aspx">Home</a></li>
-                            <li class="breadcrumb-item active">Update Entry L1</li>
+                            <li class="breadcrumb-item"><a href="DataEntryDashboard.aspx">Data Entry</a></li>
+                            <li class="breadcrumb-item active">L1 Update Entry</li>
                         </ol>
                     </div>
                 </div>
@@ -73,7 +75,7 @@
                     <div class="col-md-12">
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">Details Entry L1</h3>
+                                <h3 class="card-title">Search Specimen ID</h3>
                                 <div class="pull-right">
                                     <button type="button" class="btn btn-tool pull-right" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                 </div>
@@ -86,7 +88,7 @@
                                                 <div class="form-group">
                                                     <label>Select Site ID : &nbsp;</label>
                                                     <asp:Label ID="Label5" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="drpSite" runat="server" AutoPostBack="true" class="form-control drpControl w-75 required select" SelectionMode="Single" OnSelectedIndexChanged="drpSite_SelectedIndexChanged">
+                                                    <asp:DropDownList ID="drpSite" runat="server" AutoPostBack="true" class="form-control drpControl w-75 required select2" SelectionMode="Single" OnSelectedIndexChanged="drpSite_SelectedIndexChanged">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -94,21 +96,20 @@
                                                 <div class="form-group">
                                                     <label>Select Subject ID : &nbsp;</label>
                                                     <asp:Label ID="Label1" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="drpSubject" runat="server" AutoPostBack="false" class="form-control drpControl w-75 required select" SelectionMode="Single">
+                                                    <asp:DropDownList ID="drpSubject" runat="server" AutoPostBack="false" class="form-control drpControl w-75 select2" SelectionMode="Single">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" id="divSID" runat="server">
                                                 <div class="form-group">
                                                     <label>Specimen ID : &nbsp;</label>
                                                     <asp:Label ID="Label2" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:TextBox ID="txtSpecimenID" runat="server" CssClass="form-control required numeric w-75"></asp:TextBox>
+                                                    <asp:TextBox ID="txtSpecimenID" runat="server" CssClass="form-control numeric w-75"></asp:TextBox>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="mt-4">
-                                                    <asp:LinkButton runat="server" ID="lbtnGETDATA" Text="Get Data" ForeColor="White" CssClass="btn btn-primary btn-sm" OnClick="lbtnGETDATA_Click"></asp:LinkButton>
-
+                                                    <asp:LinkButton runat="server" ID="lbtnGETDATA" Text="Get Data" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" OnClick="lbtnGETDATA_Click"></asp:LinkButton>
                                                 </div>
                                             </div>
                                         </div>
@@ -136,17 +137,17 @@
                                     <div style="width: 100%; overflow: auto;">
                                         <div>
                                             <asp:GridView ID="Grid_Data" runat="server" AllowSorting="True" AutoGenerateColumns="false"
-                                                CssClass="table table-bordered table-striped Datatable1" OnPreRender="GridData_PreRender">
+                                                CssClass="table table-bordered table-striped Datatable1" OnPreRender="GridData_PreRender" OnRowCommand="Grid_Data_RowCommand" OnRowDataBound="Grid_Data_RowDataBound">
                                                 <Columns>
                                                     <asp:TemplateField HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none"
                                                         HeaderText="ID">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="lblID" runat="server" Text='<%#Eval("SID")%>'></asp:Label>
+                                                            <asp:Label ID="lblID" runat="server" Text='<%#Eval("ID")%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Edit" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="lbtEdit" runat="server" class="btn-info btn-sm" CommandArgument='<%# Bind("SID") %>'
+                                                            <asp:LinkButton ID="lbtEdit" runat="server" class="btn-info btn-sm" CommandArgument='<%# Bind("ID") %>'
                                                                 CommandName="EDITED" ToolTip="Edit"><i class="fa fa-edit"></i></asp:LinkButton>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
