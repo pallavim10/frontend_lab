@@ -210,34 +210,36 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField ItemStyle-Width="0%">
                                                     <ItemTemplate>
-                                                        <tr>
-                                                            <td colspan="100%" style="padding: 2px; padding-left: 4%; background-color: white; text-align: left;">
-                                                                <h6><u>Additional Fields</u>:</h6>
-                                                                <div runat="server" id="divALIQUOT" style="position: relative; overflow: auto;">
-                                                                    <div class="col-md-12 d-inline-flex">
-                                                                        <asp:Repeater runat="server" ID="rptALIQUOT">
-                                                                            <ItemTemplate>
-                                                                                <div class="col-md-4 d-inline-flex">
-                                                                                    <div class="col-md-4">
-                                                                                        <label>
-                                                                                            <asp:Label runat="server" ID="lblFIELDNAME" Text='<%# Eval("FIELDNAME") %>'></asp:Label>
-                                                                                            :</label>
+                                                        <div runat="server" id="divFIELDS">
+                                                            <tr>
+                                                                <td colspan="100%" style="padding: 2px; padding-left: 4%; background-color: white; text-align: left;">
+                                                                    <h6><u>Additional Fields</u>:</h6>
+                                                                    <div runat="server" id="divALIQUOT" style="position: relative; overflow: auto;">
+                                                                        <div class="col-md-12 d-inline-flex">
+                                                                            <asp:Repeater runat="server" ID="rptALIQUOT">
+                                                                                <ItemTemplate>
+                                                                                    <div class="col-md-4 d-inline-flex">
+                                                                                        <div class="col-md-4">
+                                                                                            <label>
+                                                                                                <asp:Label runat="server" ID="lblFIELDNAME" Text='<%# Eval("FIELDNAME") %>'></asp:Label>
+                                                                                                :</label>
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <asp:HiddenField runat="server" ID="hdnINDEX" Value='<%# Container.ItemIndex %>'></asp:HiddenField>
+                                                                                            <asp:HiddenField runat="server" ID="hdnOldDATA" />
+                                                                                            <asp:TextBox ID="txtDATA" runat="server" CssClass="form-control required" autocomplete="off" AutoPostBack="true" OnTextChanged="txtDATA_TextChanged">
+                                                                                            </asp:TextBox>
+                                                                                            <asp:HiddenField runat="server" ID="hdnVARIABLENAME" Value='<%# Eval("VARIABLENAME") %>' />
+                                                                                        </div>
                                                                                     </div>
-                                                                                    <div class="col-md-6">
-                                                                                        <asp:HiddenField runat="server" ID="hdnINDEX" Value='<%# Container.ItemIndex %>'></asp:HiddenField>
-                                                                                        <asp:HiddenField runat="server" ID="hdnOldDATA" />
-                                                                                        <asp:TextBox ID="txtDATA" runat="server" CssClass="form-control" autocomplete="off" AutoPostBack="true" OnTextChanged="txtDATA_TextChanged">
-                                                                                        </asp:TextBox>
-                                                                                        <asp:HiddenField runat="server" ID="hdnVARIABLENAME" Value='<%# Eval("VARIABLENAME") %>' />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </ItemTemplate>
-                                                                        </asp:Repeater>
+                                                                                </ItemTemplate>
+                                                                            </asp:Repeater>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <br />
-                                                            </td>
-                                                        </tr>
+                                                                    <br />
+                                                                </td>
+                                                            </tr>
+                                                        </div>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
@@ -311,7 +313,7 @@
                                         <br />
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <label>Entere Reason:</label>
+                                                <label>Enter Reason:</label>
                                             </div>
                                             <div class="col-md-8">
                                                 <asp:TextBox runat="server" ID="txtReason" CssClass="form-control required2" TextMode="MultiLine" MaxLength="200"></asp:TextBox>

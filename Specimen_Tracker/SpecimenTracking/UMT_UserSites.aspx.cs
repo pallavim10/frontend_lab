@@ -208,7 +208,8 @@ namespace SpecimenTracking
 
                         DataSet ds = dal_UMT.UMT_SITE_SP(
                              ACTION: "DELETED_ADDED_USERS_SITES",
-                             SiteID: lblSiteID.Text
+                             SiteID: lblSiteID.Text,
+                             User_ID: DrpUser.SelectedValue
                           );
                         status = true;
 

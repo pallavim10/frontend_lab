@@ -1,4 +1,6 @@
-﻿using SpecimenTracking.App_Code;
+﻿using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using SpecimenTracking.App_Code;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -54,7 +56,7 @@ namespace SpecimenTracking
         protected void lbtnUpload_Click(object sender, EventArgs e)
         {
             string fileName = Manifestfilename.FileName;
-            if (fileName.Trim() !="")
+            if (fileName.Trim() != "")
             {
                 UPLOAD_SHIPMENT_MANIFEST();
                 GET_SHIPMENT_MANIFEST();
@@ -72,10 +74,84 @@ namespace SpecimenTracking
                 ", true);
             }
         }
+
+        private string GET_MANIFEST_COLUMNS(WordprocessingDocument copyDoc)
+        {
+            string RESULT = "";
+
+            string targetTagName = "SHIPMENT_DATA";
+
+            List<SdtElement> sdtElements = new List<SdtElement>();
+
+            List<SdtElement> sdtElements_Main = copyDoc.MainDocumentPart.Document
+                .Descendants<SdtElement>()
+                .Where(sdt => sdt.SdtProperties != null &&
+                sdt.SdtProperties.GetFirstChild<Tag>()?.Val?.Value == targetTagName).ToList();
+
+            sdtElements.AddRange(sdtElements_Main);
+
+            foreach (var headerPart in copyDoc.MainDocumentPart.HeaderParts)
+            {
+                List<SdtElement> sdtElements_Header = headerPart.Header
+                    .Descendants<SdtElement>()
+                    .Where(sdt => sdt.SdtProperties != null &&
+                    sdt.SdtProperties.GetFirstChild<Tag>()?.Val?.Value == targetTagName).ToList();
+
+                sdtElements.AddRange(sdtElements_Header);
+            }
+
+            foreach (var footerPart in copyDoc.MainDocumentPart.FooterParts)
+            {
+                List<SdtElement> sdtElements_Footer = footerPart.Footer
+                    .Descendants<SdtElement>()
+                    .Where(sdt => sdt.SdtProperties != null &&
+                    sdt.SdtProperties.GetFirstChild<Tag>()?.Val?.Value == targetTagName).ToList();
+
+                sdtElements.AddRange(sdtElements_Footer);
+            }
+
+            foreach (SdtElement sdt in sdtElements)
+            {
+                var clonedSDT = (SdtElement)sdt.CloneNode(true);
+
+                if (clonedSDT != null)
+                {
+                    List<Text> textElements = clonedSDT.Descendants<Text>().ToList();
+
+                    foreach (Text element in textElements)
+                    {
+                        if (element != null)
+                        {
+                            if (RESULT != "")
+                            {
+                                RESULT = RESULT + "," + element.Text;
+                            }
+                            else
+                            {
+                                RESULT = element.Text;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return RESULT;
+        }
+
         private void UPLOAD_SHIPMENT_MANIFEST()
         {
             try
             {
+                string folderPath = Server.MapPath("~/Shipment Manifest/");
+
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                string filePath = Path.Combine(Server.MapPath("~/Shipment Manifest/"), Manifestfilename.FileName);
+
+                Manifestfilename.SaveAs(filePath);
 
                 string fileName = Manifestfilename.FileName;
                 string contentType = Manifestfilename.PostedFile.ContentType;
@@ -94,12 +170,20 @@ namespace SpecimenTracking
                 }
                 if (fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".docm")
                 {
+                    string SHIPMENT_COLUMNS = "";
+
+                    using (WordprocessingDocument copyDoc = WordprocessingDocument.Open(filePath, false))
+                    {
+                        SHIPMENT_COLUMNS = GET_MANIFEST_COLUMNS(copyDoc);
+                    }
+
                     DataSet ds = Dal_Setup.SETUP_SHIPMENT_MANIFEST_SP(ACTION: "UPLOAD_SHIPMENT_MANIFEST",
                         FILENAME: fileName,
                         CONTENT_TYPE: contentType,
                         DATA_TYPE: fileData,
-                        FILE_EXTENSION : fileExtension,
-                        SIZE: fileSize.ToString()
+                        FILE_EXTENSION: fileExtension,
+                        SIZE: fileSize.ToString(),
+                        SHIPMENT_COLUMNS: SHIPMENT_COLUMNS
                         );
 
                     ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
@@ -139,7 +223,7 @@ namespace SpecimenTracking
         protected void GrdShipment_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             string ID = e.CommandArgument.ToString();
-            if(e.CommandName.ToString() == "Download")
+            if (e.CommandName.ToString() == "Download")
             {
                 DOWNLOAD(ID);
             }

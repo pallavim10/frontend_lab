@@ -34,6 +34,10 @@ namespace SpecimenTracking
                         hdnEditID.Value = "";
                     }
 
+                    
+                    lblSUBSCRID.Text = Session["Subject ID"].ToString();
+                    
+
                     GET_SITE();
                     GET_SID();
                     GET_SpecimenType();
@@ -2373,6 +2377,7 @@ namespace SpecimenTracking
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
+                    Control divFIELDS = (Control)e.Row.FindControl("divFIELDS");
                     Control divALIQUOT = (Control)e.Row.FindControl("divALIQUOT");
                     Repeater rptALIQUOT = (Repeater)e.Row.FindControl("rptALIQUOT");
 
@@ -2380,12 +2385,14 @@ namespace SpecimenTracking
 
                     if (dtALIQUOTFIELDS.Rows.Count > 0)
                     {
+                        divFIELDS.Visible = true;
                         divALIQUOT.Visible = true;
                         rptALIQUOT.DataSource = dtALIQUOTFIELDS;
                         rptALIQUOT.DataBind();
                     }
                     else
                     {
+                        divFIELDS.Visible = false;
                         divALIQUOT.Visible = false;
                         rptALIQUOT.DataSource = null;
                         rptALIQUOT.DataBind();

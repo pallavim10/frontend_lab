@@ -94,7 +94,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label>Select Subject ID : &nbsp;</label>
+                                                    <label>Select <asp:Label runat="server" ID="lblSUBSCRID" Text=''></asp:Label> : &nbsp;</label>
                                                     <asp:Label ID="Label1" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
                                                     <asp:DropDownList ID="drpSubject" runat="server" AutoPostBack="false" class="form-control drpControl w-75 select2" SelectionMode="Single">
                                                     </asp:DropDownList>
@@ -157,7 +157,7 @@
                                                             <asp:Label ID="lblsiteid" runat="server" Text='<%#Eval("SITEID")%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Subject ID" HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
+                                                    <asp:TemplateField HeaderText=" " HeaderStyle-CssClass="text-center  align-middle" ItemStyle-CssClass="text-center align-middle">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblsubid" runat="server" Text='<%#Eval("SUBJID")%>'></asp:Label>
                                                         </ItemTemplate>

@@ -794,6 +794,7 @@ namespace SpecimenTracking
                     gv.HeaderRow.Cells[2].Visible = false;
                     e.Row.Cells[2].Visible = false;
                 }
+                gv.HeaderRow.Cells[3].Text = Session["Subject ID"].ToString();
             }
         }
 

@@ -49,7 +49,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Select Subject ID : &nbsp;</label>
+                                                    <label>Select <asp:Label runat="server" ID="lblSUBSCRID" Text=''></asp:Label> : &nbsp;</label>
                                                     <asp:DropDownList ID="drpSubject" runat="server" AutoPostBack="false" class="form-control drpControl select2" SelectionMode="Single">
                                                     </asp:DropDownList>
                                                 </div>

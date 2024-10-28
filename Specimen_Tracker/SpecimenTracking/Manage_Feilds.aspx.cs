@@ -298,6 +298,10 @@ namespace SpecimenTracking
                         {
                             drplevel.Enabled = false;
                             lbtManageFields.Visible = true;
+                            if (VariableName.Value == "SUBJID")
+                            {
+                                txtFieldName.Enabled = true;
+                            }
                         }
                     }
                     else
@@ -324,6 +328,10 @@ namespace SpecimenTracking
                             lbtRepeatYes.Visible = false;
                             lbtRepeatNo.Visible = false;
                             txtFieldName.Enabled = false;
+                            if (VariableName.Value == "SUBJID")
+                            {
+                                txtFieldName.Enabled = true;
+                            }
 
                         }
                     }
@@ -343,6 +351,10 @@ namespace SpecimenTracking
                             lbtRepeatYes.Visible = false;
                             lbtRepeatNo.Visible = false;
                             txtFieldName.Enabled = false;
+                            if (VariableName.Value == "SUBJID")
+                            {
+                                txtFieldName.Enabled = true;
+                            }
                         }
 
                     }
@@ -548,7 +560,6 @@ namespace SpecimenTracking
             {
 
                 string FIELDNAME = "", ID = "";
-
                 GridViewRow row = (sender as Button).NamingContainer as GridViewRow;
 
                 FIELDNAME = (row.FindControl("txtFieldName") as TextBox).Text;
@@ -560,7 +571,7 @@ namespace SpecimenTracking
                                       ID: ID
                                       );
 
-                //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Fieldname changed successfully.', 'success');", true);
+                
                 ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
@@ -592,7 +603,7 @@ namespace SpecimenTracking
                                           ISACTIVE: false,
                                           ID: ID
                                           );
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field disable successfully.', 'success');", true);
+                    
                     ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
@@ -611,7 +622,7 @@ namespace SpecimenTracking
                                            ISACTIVE: true,
                                            ID: ID
                                            );
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Field enable successfully.', 'success');", true);
+                    
                     ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
@@ -630,7 +641,7 @@ namespace SpecimenTracking
                                           REPEAT: false,
                                           ID: ID
                                           );
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Repeat disable successfully.', 'success');", true);
+                    
                     ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',
@@ -649,7 +660,7 @@ namespace SpecimenTracking
                                            REPEAT: true,
                                            ID: ID
                                            );
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Success!', 'Repeat enable successfully.', 'success');", true);
+                    
                     ScriptManager.RegisterStartupScript(this, GetType(), "showSuccess", @"
                     swal({
                         title: 'Success!',

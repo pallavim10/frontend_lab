@@ -81,13 +81,6 @@
 
         }
 
-
-        function DATA_Changed(element) {
-
-            $(element).closest('td').find("input[id*='btnDATA_Changed']").click();
-
-        }
-
         function showAuditTrail(element) {
             var ID = $(element).closest('tr').find('td').eq(0).text().trim();
             var TABLENAME = 'FIELD_MASTER';
@@ -116,7 +109,13 @@
 
             return false;
         }
-        
+
+        function DATA_Changed(element) {
+
+            $(element).next().click();
+
+        }
+
         function AddOptions(element) {
             var ID = $(element).closest('tr').find('td:eq(0)').find('span').html();
             var test = "MANAGE_ADD_OPTION.aspx?ID=" + ID;

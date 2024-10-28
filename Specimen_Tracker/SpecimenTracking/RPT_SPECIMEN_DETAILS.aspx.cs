@@ -28,7 +28,7 @@ namespace SpecimenTracking
                     {
                         divSID.Visible = false;
                     }
-
+                    lblSUBSCRID.Text = Session["Subject ID"].ToString();
                     GET_SITE();
                     GET_SUBJECT();
                 }
@@ -170,10 +170,24 @@ namespace SpecimenTracking
                    ToDate: txtDateTo.Text);
 
                 DataSet dsExport = new DataSet();
+
                 for (int i = 1; i < ds.Tables.Count; i++)
                 {
                     ds.Tables[i].TableName = ds.Tables[i - 1].Rows[0][0].ToString();
-                    dsExport.Tables.Add(ds.Tables[i].Copy());
+                    DataTable copiedTable = ds.Tables[i].Copy();
+                    if (copiedTable.Columns.Contains("Subject ID"))
+                    {
+                        copiedTable.Columns["Subject ID"].ColumnName = Session["Subject ID"].ToString();
+                    }
+                    if (Session["SID_ACTIVE"].ToString() == "False")
+                    {
+                        if (copiedTable.Columns.Contains("Specimen ID"))
+                        {
+                            copiedTable.Columns.Remove("Specimen ID");
+                        }
+                    }
+
+                    dsExport.Tables.Add(copiedTable);
                     i++;
                 }
                 Multiple_Export_Excel.ToExcel(dsExport, xlname, Page.Response);
@@ -234,6 +248,8 @@ namespace SpecimenTracking
                     gv.HeaderRow.Cells[7].Visible = false;
                     e.Row.Cells[7].Visible = false;
                 }
+
+                gv.HeaderRow.Cells[6].Text = Session["Subject ID"].ToString();
 
             }
         }

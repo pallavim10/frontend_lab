@@ -27,6 +27,7 @@ namespace SpecimenTracking
                     {
                         divSID.Visible = false;
                     }
+                    lblSUBSCRID.Text = Session["Subject ID"].ToString();
                     GET_SITE();
                     GET_SUBJECT();
                 }
@@ -159,12 +160,13 @@ namespace SpecimenTracking
                 DataRowView dr = e.Row.DataItem as DataRowView;
 
                 GridView gv = (sender as GridView);
-
+                gv.HeaderRow.Cells[3].Text = Session["Subject ID"].ToString();
                 if (Session["SID_ACTIVE"].ToString() == "False")
                 {
                     gv.HeaderRow.Cells[5].Visible = false;
                     e.Row.Cells[5].Visible = false;
                 }
+
 
             }
         }

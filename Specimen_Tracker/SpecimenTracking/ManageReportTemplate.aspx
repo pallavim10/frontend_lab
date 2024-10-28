@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <script type="text/javascript">
-        
+
         function showAuditTrail(element) {
 
             var ID = $(element).closest('tr').find('td').eq(0).text().trim();
@@ -108,7 +108,7 @@
                                             <div style="width: 100%; max-height: 352px; overflow: auto;">
                                                 <div>
                                                     <asp:GridView ID="GrdShipment" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive" EmptyDataText="No Data Found!" Width="100%" OnRowCommand="GrdShipment_RowCommand">
-                                                      
+
                                                         <Columns>
                                                             <asp:TemplateField HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none" HeaderText="ID">
                                                                 <ItemTemplate>
@@ -117,12 +117,12 @@
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="File Name">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblFileName" runat="server" Text='<%# Bind("FILENAME") %>'></asp:Label>
+                                                                    <asp:Label ID="lblFileName" runat="server" ToolTip='<%# Eval("SHIPMENT_COLUMNS") %>' Text='<%# Bind("FILENAME") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Download" ItemStyle-HorizontalAlign="Center">
                                                                 <ItemTemplate>
-                                                                    <asp:LinkButton ID="lbtnDownload" runat="server" CommandName="Download" CommandArgument='<%# Bind("ID") %>' class="btn-info btn-sm"  ToolTip="Download"><i class="fa fa-download"></i></asp:LinkButton>
+                                                                    <asp:LinkButton ID="lbtnDownload" runat="server" CommandName="Download" CommandArgument='<%# Bind("ID") %>' class="btn-info btn-sm" ToolTip="Download"><i class="fa fa-download"></i></asp:LinkButton>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Audit Trail" ItemStyle-HorizontalAlign="Center">
@@ -199,7 +199,7 @@
                                             <div style="width: 100%; max-height: 352px; overflow: auto;">
                                                 <div>
                                                     <asp:GridView ID="grd_data" AutoGenerateColumns="false" runat="server" class="table table-bordered table-striped responsive" EmptyDataText="No Data Found!" Width="100%" OnRowCommand="grd_data_RowCommand">
-                                                      
+
                                                         <Columns>
                                                             <asp:TemplateField HeaderStyle-CssClass="d-none" ItemStyle-CssClass="d-none" HeaderText="ID">
                                                                 <ItemTemplate>
@@ -213,7 +213,7 @@
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Download" ItemStyle-HorizontalAlign="Center">
                                                                 <ItemTemplate>
-                                                                    <asp:LinkButton ID="lbtnDownload" runat="server" CommandName="Download" CommandArgument='<%# Bind("ID") %>' class="btn-info btn-sm"  ToolTip="Download"><i class="fa fa-download"></i></asp:LinkButton>
+                                                                    <asp:LinkButton ID="lbtnDownload" runat="server" CommandName="Download" CommandArgument='<%# Bind("ID") %>' class="btn-info btn-sm" ToolTip="Download"><i class="fa fa-download"></i></asp:LinkButton>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Audit Trail" ItemStyle-HorizontalAlign="Center">

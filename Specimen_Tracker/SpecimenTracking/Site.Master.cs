@@ -17,7 +17,7 @@ namespace SpecimenTracking
     {
 
         DAL_UMT dal_UMT = new DAL_UMT();
-
+        DAL_SETUP Dal_Setup = new DAL_SETUP();
         public void session_status()
         {
             int timeout = 0;
@@ -52,6 +52,10 @@ namespace SpecimenTracking
                     Lbl_User_Dept.Text = Session["StudyRole"].ToString();
                     if (!IsPostBack)
                     {
+                        DataSet data = Dal_Setup.SETUP_FIELD_SP(ACTION: "GETSUBJD");
+                        Session["Subject ID"] = data.Tables[0].Rows[0]["FIELDNAME"].ToString();
+
+
 
                         if (Session["PROJECTIDTEXT"] != null)
                         {

@@ -22,7 +22,7 @@ namespace SpecimenTracking.App_Code
         }
 
 
-        public DataSet SETUP_VISIT_SP(string ACTION = null, string ID = null,string VISITNUM = null, string VISITNAME = null)
+        public DataSet SETUP_VISIT_SP(string ACTION = null, string ID = null, string VISITNUM = null, string VISITNAME = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -126,7 +126,7 @@ namespace SpecimenTracking.App_Code
             }
             return ds;
         }
-        public DataSet SETUP_ALIQUOT_SP(string ACTION = null, string ID = null, string SEQNO = null, string ALIQUOTID = null, string ALIQUOTTYPE = null,string ALIQUOTNUM = null, string ALIQUOTFROM = null, string ALIQUOTSEQTO = null )
+        public DataSet SETUP_ALIQUOT_SP(string ACTION = null, string ID = null, string SEQNO = null, string ALIQUOTID = null, string ALIQUOTTYPE = null, string ALIQUOTNUM = null, string ALIQUOTFROM = null, string ALIQUOTSEQTO = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -158,9 +158,9 @@ namespace SpecimenTracking.App_Code
                 cmd.Parameters.AddWithValue("@SEQNO", SEQNO);
                 cmd.Parameters.AddWithValue("@ALIQUOTID", ALIQUOTID);
                 cmd.Parameters.AddWithValue("@ALIQUOTTYPE", ALIQUOTTYPE);
-                cmd.Parameters.AddWithValue("@ALIQUOTNUM",ALIQUOTNUM);
+                cmd.Parameters.AddWithValue("@ALIQUOTNUM", ALIQUOTNUM);
                 cmd.Parameters.AddWithValue("@ALIQUOTFROM", ALIQUOTFROM);
-                cmd.Parameters.AddWithValue("@ALIQUOTSEQTO",ALIQUOTSEQTO);
+                cmd.Parameters.AddWithValue("@ALIQUOTSEQTO", ALIQUOTSEQTO);
                 cmd.Parameters.AddWithValue("@UserID", UserID);
                 cmd.Parameters.AddWithValue("@User_Name", User_Name);
                 cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
@@ -182,7 +182,7 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
-        public DataSet SETUP_FIELD_SP(string ACTION = null, string ID = null, string SEQNO = null, string VARIABLENAME = null, string FIELDNAME = null, string CONTROLTYPE = null, bool ISACTIVE = false, bool ISDEFAULT = false,bool FIRSTENTRY = false, bool SECONDENTRY = false, bool REPEAT = false, bool REQUIRED = false, string MAXLENGHT = null,bool ALIQUOTPREP = false)
+        public DataSet SETUP_FIELD_SP(string ACTION = null, string ID = null, string SEQNO = null, string VARIABLENAME = null, string FIELDNAME = null, string CONTROLTYPE = null, bool ISACTIVE = false, bool ISDEFAULT = false, bool FIRSTENTRY = false, bool SECONDENTRY = false, bool REPEAT = false, bool REQUIRED = false, string MAXLENGHT = null, bool ALIQUOTPREP = false)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -245,7 +245,7 @@ namespace SpecimenTracking.App_Code
         }
         // 
 
-        public DataSet SETUP_FIELDOPTION_SP(string ACTION = null, string ID = null, string FIELD_ID = null, string FIELDNAME = null,string VARIABLENAME = null,string SEQNO = null,string CONTROLTYPE = null,bool ISACTIVE = false,bool ISDEFAULT = false,string OPTION = null,string MAXLEN = null, string ISVERIFY = null)
+        public DataSet SETUP_FIELDOPTION_SP(string ACTION = null, string ID = null, string FIELD_ID = null, string FIELDNAME = null, string VARIABLENAME = null, string SEQNO = null, string CONTROLTYPE = null, bool ISACTIVE = false, bool ISDEFAULT = false, string OPTION = null, string MAXLEN = null, string ISVERIFY = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -305,7 +305,7 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
-        public DataSet SETUP_UPLOADMASTER_SP(string ACTION = null, string ID = null, string SID = null, string SUBJECTID = null,string SITEID = null,string SEQNO = null, string SLOTNO = null, string BOXNO = null)
+        public DataSet SETUP_UPLOADMASTER_SP(string ACTION = null, string ID = null, string SID = null, string SUBJECTID = null, string SITEID = null, string SEQNO = null, string SLOTNO = null, string BOXNO = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -363,7 +363,7 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
-        public DataSet SETUP_SHIPMENT_MANIFEST_SP(string ACTION = null, string ID = null, string FILENAME = null, string CONTENT_TYPE = null, byte[] DATA_TYPE = null, string SIZE =null,string FILE_EXTENSION = null)
+        public DataSet SETUP_SHIPMENT_MANIFEST_SP(string ACTION = null, string ID = null, string FILENAME = null, string CONTENT_TYPE = null, byte[] DATA_TYPE = null, string SIZE = null, string FILE_EXTENSION = null, string SHIPMENT_COLUMNS = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -397,6 +397,8 @@ namespace SpecimenTracking.App_Code
                 cmd.Parameters.AddWithValue("@DATA_TYPE", DATA_TYPE);
                 cmd.Parameters.AddWithValue("@SIZE", SIZE);
                 cmd.Parameters.AddWithValue("@FILE_EXTENSION", FILE_EXTENSION);
+                cmd.Parameters.AddWithValue("@SHIPMENT_COLUMNS", SHIPMENT_COLUMNS);
+
                 cmd.Parameters.AddWithValue("@UserID", UserID);
                 cmd.Parameters.AddWithValue("@User_Name", User_Name);
                 cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
@@ -418,7 +420,7 @@ namespace SpecimenTracking.App_Code
             return ds;
         }
 
-        public DataSet SETUP_CRIT_SP(string ACTION = null, string ID = null, string SEQNO = null,string DESCRIPTION = null, string VARIABLENAME = null, string FIELDNAME = null, string AndOr1 = null, string AndOr2 = null, string AndOr3 = null, string AndOr4 = null,string Condition1 = null, string Condition2 = null, string Condition3 = null, string Condition4 = null, string Condition5 = null,string CritCode = null, string Criteria = null,  string Field1 = null,string Field2 = null, string Field3 = null, string Field4 = null, string Field5 = null, string Value1 = null, string Value2 = null, string Value3 = null, string Value4 = null, string Value5 = null)
+        public DataSet SETUP_CRIT_SP(string ACTION = null, string ID = null, string SEQNO = null, string DESCRIPTION = null, string VARIABLENAME = null, string FIELDNAME = null, string AndOr1 = null, string AndOr2 = null, string AndOr3 = null, string AndOr4 = null, string Condition1 = null, string Condition2 = null, string Condition3 = null, string Condition4 = null, string Condition5 = null, string CritCode = null, string Criteria = null, string Field1 = null, string Field2 = null, string Field3 = null, string Field4 = null, string Field5 = null, string Value1 = null, string Value2 = null, string Value3 = null, string Value4 = null, string Value5 = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -519,10 +521,10 @@ namespace SpecimenTracking.App_Code
         //            return dt;
         //        }
 
-            
+
 
         //}
-        public DataSet Visit_Aliquot_Mapping(string ACTION, string VISITID = null, string ALIQUOTID = null) 
+        public DataSet Visit_Aliquot_Mapping(string ACTION, string VISITID = null, string ALIQUOTID = null)
         {
             try
             {
@@ -557,17 +559,17 @@ namespace SpecimenTracking.App_Code
                     cmd.Parameters.AddWithValue("@User_Name", User_Name);
                     cmd.Parameters.AddWithValue("@TZ_VAL", TZ_VAL);
                     adp = new SqlDataAdapter(cmd);
-                    
-                        adp.Fill(ds);
+
+                    adp.Fill(ds);
                     cmd.Dispose();
                 }
                 return ds;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-               string error = ex.StackTrace.ToString();
+                string error = ex.StackTrace.ToString();
                 return ds;
-                
+
             }
             finally
             {

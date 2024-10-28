@@ -1593,6 +1593,7 @@ namespace SpecimenTracking
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
+                    Control divFIELDS = (Control)e.Row.FindControl("divFIELDS");
                     Control divALIQUOT = (Control)e.Row.FindControl("divALIQUOT");
                     Repeater rptALIQUOT = (Repeater)e.Row.FindControl("rptALIQUOT");
 
@@ -1600,12 +1601,14 @@ namespace SpecimenTracking
 
                     if (dtALIQUOTFIELDS.Rows.Count > 0)
                     {
+                        divFIELDS.Visible = true;
                         divALIQUOT.Visible = true;
                         rptALIQUOT.DataSource = dtALIQUOTFIELDS;
                         rptALIQUOT.DataBind();
                     }
                     else
                     {
+                        divFIELDS.Visible = false;
                         divALIQUOT.Visible = false;
                         rptALIQUOT.DataSource = null;
                         rptALIQUOT.DataBind();

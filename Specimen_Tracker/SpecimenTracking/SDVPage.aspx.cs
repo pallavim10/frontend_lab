@@ -27,7 +27,7 @@ namespace SpecimenTracking
                     {
                         divSID.Visible = false;
                     }
-
+                    lblSUBSCRID.Text = Session["Subject ID"].ToString();
                     GET_SITE();
                     GET_SUBJECT();
                 }
@@ -209,7 +209,7 @@ namespace SpecimenTracking
 
                 gv.HeaderRow.Cells[7].Visible = false;
                 e.Row.Cells[7].Visible = false;
-
+                gv.HeaderRow.Cells[9].Text = Session["Subject ID"].ToString();
                 if (Session["SID_ACTIVE"].ToString() == "False")
                 {
                     gv.HeaderRow.Cells[10].Visible = false;
