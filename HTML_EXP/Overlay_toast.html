@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Form FTUE with Bootstrap Toasts</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+    /* Basic styling for the login form */
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="text"],
+    input[type="password"],
+    button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        box-sizing: border-box;
+    }
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome to Our Platform</h2>
+    <p>Please enter your login details:</p>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username or Email">
+        <input type="password" id="password" placeholder="Password">
+        <button type="submit" id="loginBtn" disabled>Login</button>
+    </form>
+</div>
+
+<!-- Bootstrap Toast Container -->
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container top-0 end-0 p-3">
+        <!-- First Toast: Highlight Username Field -->
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">FTUE</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Enter the username
+            </div>
+        </div>
+        <!-- Second Toast: Highlight Password Field -->
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">FTUE</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Enter the password
+            </div>
+        </div>
+        <!-- Third Toast: Highlight Login Button -->
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">FTUE</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                After filling the username and password, click on Login
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Function to handle form submission
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Here, you can perform login validation and redirection
+        alert('Login successful! Redirecting...');
+        // For demonstration purposes, I'm just showing an alert
+    });
+
+    // Enable login button when both username/email and password fields are filled
+    document.getElementById('username').addEventListener('input', function() {
+        checkFormValidity();
+    });
+
+    document.getElementById('password').addEventListener('input', function() {
+        checkFormValidity();
+    });
+
+    function checkFormValidity() {
+        var username = document.getElementById('username').value.trim();
+        var password = document.getElementById('password').value.trim();
+        var loginBtn = document.getElementById('loginBtn');
+        
+        if (username && password) {
+            loginBtn.removeAttribute('disabled');
+        } else {
+            loginBtn.setAttribute('disabled', 'disabled');
+        }
+    }
+
+    // Display the first toast (highlight username field) when the page loads
+    $(document).ready(function() {
+        $('.toast-container').find('.toast').eq(0).toast('show');
+    });
+
+    // Handle the closing of each toast and show the next one
+    $('.toast-container').on('hidden.bs.toast', function() {
+        var $nextToast = $(this).find('.toast.show').next();
+        if ($nextToast.length > 0) {
+            $nextToast.toast('show');
+        }
+    });
+</script>
+</body>
+</html>

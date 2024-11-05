@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Toggle Example</title>
+    <style>
+        /* CSS for the help content */
+        #help-content {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            z-index: 9999;
+        }
+    </style>
+	<script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Application</h1>
+    
+    <!-- Help Toggle Button -->
+    <button id="help-toggle">Toggle Help</button>
+    
+    <!-- Help Content -->
+    <div id="help-content">
+        <h2>Help</h2>
+        <p>Here is some information about how to use this application...</p>
+        <ul>
+            <li>Feature 1: Lorem ipsum dolor sit amet.</li>
+            <li>Feature 2: Consectetur adipiscing elit.</li>
+            <li>Feature 3: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+        </ul>
+		<button id="okay-button">Ok</button>
+    </div>
+
+    <!-- <script> -->
+        <!-- // JavaScript to toggle the display of help content -->
+        <!-- const helpToggle = document.getElementById('help-toggle'); -->
+        <!-- const helpContent = document.getElementById('help-content'); -->
+
+        <!-- helpToggle.addEventListener('click', () => { -->
+            <!-- if (helpContent.style.display === 'none') { -->
+                <!-- helpContent.style.display = 'block'; -->
+            <!-- } else { -->
+                <!-- helpContent.style.display = 'none'; -->
+            <!-- } -->
+        <!-- }); -->
+    <!-- </script> -->
+	
+	    <script>
+        // JavaScript to show the help content on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const helpContent = document.getElementById('help-content');
+            helpContent.style.display = 'block';
+		$(document).ready(function() {
+            $('#okay-button').on('click', function() {
+                $('#help-content').hide();
+            });
+        });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Form FTUE with Bootstrap Toasts</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    /* Basic styling for the login form */
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="text"],
+    input[type="password"],
+    button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        box-sizing: border-box;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome to Our Platform</h2>
+    <p>Please enter your login details:</p>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username or Email">
+        <input type="password" id="password" placeholder="Password">
+        <button type="submit" id="loginBtn" disabled>Login</button>
+    </form>
+</div>
+
+<!-- Toast for Help Content -->
+<div class="toast" id="toast-help" role="alert" aria-live="assertive" aria-atomic="true" data-delay="0">
+    <div class="toast-header">
+        <strong class="mr-auto">Help</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body">
+        <span id="toast-message">Enter the username</span>
+        <button type="button" class="btn btn-primary btn-sm float-right" id="toast-okay">Ok</button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Function to handle form submission
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Here, you can perform login validation and redirection
+        alert('Login successful! Redirecting...');
+        // For demonstration purposes, I'm just showing an alert
+    });
+
+    // Enable login button when both username/email and password fields are filled
+    document.getElementById('username').addEventListener('input', function() {
+        checkFormValidity();
+    });
+
+    document.getElementById('password').addEventListener('input', function() {
+        checkFormValidity();
+    });
+
+    function checkFormValidity() {
+        var username = document.getElementById('username').value.trim();
+        var password = document.getElementById('password').value.trim();
+        var loginBtn = document.getElementById('loginBtn');
+        
+        if (username && password) {
+            loginBtn.removeAttribute('disabled');
+        } else {
+            loginBtn.setAttribute('disabled', 'disabled');
+        }
+    }
+
+    // Show Help Toast when the page loads
+    $('#toast-help').toast('show');
+
+    // Handle click event for 'Ok' button in the toast
+    document.getElementById('toast-okay').addEventListener('click', function() {
+        var message = document.getElementById('toast-message').innerText;
+        switch (message) {
+            case 'Enter the username':
+                $('#username').focus();
+                document.getElementById('toast-message').innerText = 'Enter the password';
+                break;
+            case 'Enter the password':
+                $('#password').focus();
+                document.getElementById('toast-message').innerText = 'After filling the username and password click on Login';
+                break;
+            case 'After filling the username and password click on Login':
+                $('#loginBtn').focus();
+                $('#toast-help').toast('hide'); // Hide toast after 'Ok' click
+                break;
+            default:
+                break;
+        }
+    });
+</script>
+
+</body>
+</html>

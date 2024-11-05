@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .login-form {
+        margin: 50px auto;
+        max-width: 400px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="login-form">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <button id="loginBtn" type="button" class="btn btn-primary">Login</button>
+    </div>
+</div>
+
+<!-- Bootstrap Toast for username -->
+<div id="usernameToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+    <div class="toast-header">
+        <strong class="me-auto">Username</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"> X </button>
+    </div>
+    <div class="toast-body">
+        Enter your username here.
+    </div>
+</div>
+
+<!-- Bootstrap Toast for password -->
+<div id="passwordToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+    <div class="toast-header">
+        <strong class="me-auto">Password</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"> X </button>
+    </div>
+    <div class="toast-body">
+        Enter your password here.
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    const usernameToast = new bootstrap.Toast(document.getElementById('usernameToast'));
+    const passwordToast = new bootstrap.Toast(document.getElementById('passwordToast'));
+
+    document.querySelectorAll('[data-bs-dismiss="toast"]').forEach(function (element) {
+        element.addEventListener('click', function () {
+            const toastElement = this.closest('.toast');
+            const toastInstance = new bootstrap.Toast(toastElement);
+            toastInstance.hide();
+	
+
+        });
+    });
+<!-- 	forEach((btn) => {btn.addEventListener('click', () => { const toast = btn.closest('.toast'); const bootstrapToast = bootstrap.Toast.getInstance(toast);  bootstrapToast.hide(); -->
+    // Show the username toast
+    usernameToast.show();
+
+    // Show the password toast
+    passwordToast.show();
+</script>
+
+</body>
+</html>

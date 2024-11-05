@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name ='viewport' content="width=device-width, initial-scale=1.0">    
+        <title>Registration Form</title>    
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+		 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <link  href="..//Task/sample_registrationform.css" rel="stylesheet"></link>
+		       <script src="..//Task/sample_registrationform.js"></script>
+       
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Function to add a toast dynamically
+        function addToast() {
+            var toastContainer = document.createElement('div');
+            toastContainer.setAttribute('aria-live', 'polite');
+            toastContainer.setAttribute('aria-atomic', 'true');
+            toastContainer.style.position = 'relative';	
+				toastContainer.style.minHeight = '200px';
+            toastContainer.style.zIndex='1000';
+            var toastContent = `
+                <div style="position: fixed; top: 0; right: 0;">
+                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                        <div class="toast-header">
+                            <strong class="mr-auto" id="toastheading">Registration Form</strong>
+                            <button type="button" class="btn btn-secondary btn-sm ml-2 mb-1" data-dismiss="toast" id="toastclose">
+                                Close
+                            </button>
+                        </div>
+                        <div class="toast-body" id="toastcontent">
+                            Welcome to our registration form! Please fill in the required details to proceed.
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            toastContainer.innerHTML = toastContent;
+            document.body.appendChild(toastContainer);
+            $('.toast').toast('show');
+        }
+	 // Call the function to add the toast when the document is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            addToast();
+        });
+	$(document).ready(function () {
+	$('#profile').hide();
+        $('#home-tab').click(function (e) {
+            e.preventDefault();
+            $('#home').show();
+			$('#profile').hide();
+        });
+
+        $('#profile-tab').click(function (e) {
+            e.preventDefault();
+            $('#profile').show();
+			$('#home').hide();
+        });
+    });
+	        
+</script>
+
+    </head>
+    <body>
+        <div class="container registration" id="registration">
+          <div class="row">
+		  <!--Left-->
+            <div class="col-md-3 registration-left" id="registration-left">
+              <img/>
+              <h3>WELCOME</h3>
+              <p>Never Miss a Job Update! Login into the world of Opportunities.</p>
+              <input type="Submit" name="btn_submit" value="Login">
+            </div>
+			 <!--Right-->
+            <div class="col-md-9 registration-right" id="registration-right">
+              <!--Nav Tab-->
+			  <ul class="nav nav-tabs nav-justified" id="nav_tab"role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>
+				</li>
+			  </ul>
+			  
+			  <!--tab-content-->
+			  <div class="tab-content" id="tab_content">
+				  <!--Tab Pane Left-->
+				  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					  <h3 class="register-heading">Apply as an Employee</h3>
+					  <div class="row register-form" id="register-form">
+						<div class="col-md-6">
+						<div class="form-group" id="form-group">
+								<!-- <div class="input-group"> -->
+								<!-- <div class="input-group-prepend"> -->
+								<!-- <span class="input-group-text br-15"><i class="fas fa-user-graduate"></i></span> -->
+								<!-- </div> -->
+								<!-- <input type="text" placeholder="Student Name" class="form-control"/> -->
+								<!-- </div> -->
+							<input type="text" class="form-control" id="FirstName" placeholder="First Name*" />
+							</div>	
+							
+							<div class="form-group">
+								<input type="password" class="form-control" id="password" placeholder="Password *" />
+							</div>
+							<div class="form-group">
+								<input type="email" class="form-control" id="EmailID" placeholder="Email *" />
+							</div>
+						</div>
+						<div class="col-md-6">
+						<div class="form-group">
+								<input type="text" class="form-control" id="LastName" placeholder="Last Name*" />
+								</div>
+							<div class="form-group">
+							<input type="password" class="form-control" id="Conpassword" placeholder="Confirm Password *" />
+							</div>
+							<div class="form-group">
+								<div class="max1">
+								<label class="radio inline">
+								<input type="radio" name="gender" id="male" value="male" checked/><span> Male</span></label>
+								<label class="radio inline">
+								<input type="radio" name="gender" id="female" value="female"><span> Female</span></label>
+								</div>
+							</div>
+													
+							<input type="submit" class="btn_registration" id="btn_registration" value="Registration">					
+						</div>
+						
+				  </div>
+				  </div>
+				  <!--Tab Pane Right-->
+				  <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						 <h3 class="register-heading">Apply as an Hirer</h3>
+						 <div class="row register-form" id="register-form">
+							<div class="col-md-6">
+							<div class="form-group">
+							<input type="text" class="form-control" id="HFirstName" placeholder="First Name*" />
+								</div>	
+								
+								<div class="form-group">
+									<input type="password" class="form-control" id="HPassword" placeholder="Password *" />
+								</div>
+								<div class="form-group">
+									<input type="email" class="form-control" id="HEmailID" placeholder="Email *" />
+								</div>
+							</div>
+							<div class="col-md-6">
+							<div class="form-group">
+									<input type="text" class="form-control" id="HLastName" placeholder="Last Name*" />
+									</div>
+								<div class="form-group">
+								<input type="password" class="form-control" id="HConPassword" placeholder="Confirm Password *" />
+								</div>
+								<div class="form-group">
+									<input type="phone" class="form-control" id="HPhoneNo" placeholder="phone *" />
+								</div>
+														
+								<input type="submit" class="btn_registration" id="btn_registration" value="Registration">					
+							</div>
+						
+						</div>
+						
+				  </div>
+			  </div>
+			  
+            </div>
+           </div>      
+        </div>
+      
+  <div id="overlay" class="overlay"></div>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shepherd.js Example</title>
+    <!-- Include Shepherd.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shepherd.js/7.1.2/css/shepherd.css" />
+
+</head>
+<body>
+    <h1>Welcome to My Website</h1>
+    <p>This is a demo page for Shepherd.js guided tour.</p>
+    <button id="startTour">Start Tour</button>
+
+    <!-- Include Shepherd.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shepherd.js/7.1.2/js/shepherd.js"></script>
+    <script>
+        document.getElementById('startTour').addEventListener('click', function() {
+            var tour = new Shepherd.Tour({
+                defaultStepOptions: {
+                    cancelIcon: {
+                        enabled: true
+                    }
+                }
+            });
+
+            tour.addStep({
+                id: 'step-1',
+                text: 'Welcome to My Website! This is the first step of the tour.',
+                attachTo: {
+                    element: 'button#startTour',
+                    on: 'bottom'
+                },
+                buttons: [
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep({
+                id: 'step-2',
+                text: 'This is the second step of the tour. You can add more steps like this.',
+                attachTo: {
+                    element: 'h1',
+                    on: 'bottom'
+                },
+                buttons: [
+                    {
+                        text: 'Finish',
+                        action: tour.complete
+                    }
+                ]
+            });
+
+            // Start the tour
+            tour.start();
+        });
+    </script>
+</body>
+</html>

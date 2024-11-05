@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Dots Functionality</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    /* Blue card overlay */
+    .overlay-card {
+        position: fixed;
+        top: 60px; /* Adjust top position as needed */
+        right: 10px; /* Adjust right position as needed */
+        width: 120px;
+        background-color: #007bff; /* Blue color */
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000; /* Ensure it's above the content */
+        cursor: pointer; /* Change cursor to pointer for better interaction */
+    }
+
+    /* Circle around three dots */
+    .circle {
+        position: fixed;
+        top: 50px; /* Adjust top position as needed */
+        right: 50px; /* Adjust right position as needed */
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #ff6f61; /* Different color for the circle */
+        opacity: 0.5;
+        z-index: 999; /* Ensure it's above the content */
+    }
+</style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Welcome to Our Page</h2>
+    <p>This is the main content of the page.</p>
+</div>
+
+<!-- Blue card overlay with click event -->
+<div class="overlay-card" id="liveToastBtn">
+    <p>Click here for settings</p>
+</div>
+
+<!-- Circle around three dots -->
+<div class="circle"></div>
+
+<!-- Bootstrap Toast with close button -->
+<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+    <div class="toast-body">
+        Clicking on the three dots icon will open the settings menu.
+        <div class="mt-2 pt-2 border-top">
+            <button type="button" class="btn btn-primary btn-sm">Take action</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    const toastTrigger = document.getElementById('liveToastBtn');
+    const toastLiveExample = document.getElementById('liveToast');
+
+    if (toastTrigger) {
+        const toastBootstrap = new bootstrap.Toast(toastLiveExample);
+        toastTrigger.addEventListener('click', () => {
+            toastBootstrap.show();
+        });
+    }
+
+    // Close button event listener to hide the toast
+    document.querySelectorAll('[data-bs-dismiss="toast"]').forEach(function (element) {
+        element.addEventListener('click', function () {
+            const toastElement = this.closest('.toast');
+            const toastInstance = new bootstrap.Toast(toastElement);
+            toastInstance.hide();
+        });
+    });
+</script>
+
+</body>
+</html>

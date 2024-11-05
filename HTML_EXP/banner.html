@@ -1,0 +1,68 @@
+<DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Banner Example</title>
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+            <style>
+                .container {
+  padding: 20px;
+}
+
+.banner-container {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+/*.banner-container:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}*/
+
+.banner-container.highlighted {
+  /* Styles for the highlighted state... */
+  background-color: #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.banner-text {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.fa-microphone {
+  font-size: 20px;
+  color: #333;
+}
+
+            </style>
+        </head>
+        <body>
+<div class="container">
+    <div class="banner-container">
+        <span class="banner-text">Use voice commands to search iMobile pay app</span>
+        <i class="fas fa-microphone"></i>
+      </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+  $('.banner-container').hover(function() {
+    $(this).addClass('highlighted');
+  }, function() {
+    $(this).removeClass('highlighted');
+  });
+});
+</script>
+</body>
+  </html>
+  

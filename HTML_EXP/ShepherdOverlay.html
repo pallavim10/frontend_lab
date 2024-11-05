@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shepherd.js Example</title>
+    <!-- Include Shepherd.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shepherd.js/7.1.2/css/shepherd.css" />
+
+    <style>
+        /* Overlay styles */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            z-index: 999; /* Ensure it's on top of everything */
+            display: none; /* Initially hidden */
+        }
+
+        #overlay.active {
+            display: block; /* Show overlay */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Website</h1>
+    <p>This is a demo page for Shepherd.js guided tour.</p>
+    <button id="startTour">Start Tour</button>
+
+    <!-- Overlay div -->
+    <div id="overlay"></div>
+
+    <!-- Include Shepherd.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shepherd.js/7.1.2/js/shepherd.js"></script>
+    <script>
+        document.getElementById('startTour').addEventListener('click', function() {
+            var overlay = document.getElementById('overlay');
+            overlay.classList.add('active'); // Show overlay
+
+            var tour = new Shepherd.Tour({
+                defaultStepOptions: {
+                    cancelIcon: {
+                        enabled: true
+                    }
+                },
+                // Remove overlay when tour is canceled or completed
+                onCanceled: function() {
+                    overlay.classList.remove('active'); // Hide overlay
+                },
+                onFinish: function() {
+                    overlay.classList.remove('active'); // Hide overlay
+                }
+            });
+
+            tour.addStep({
+                id: 'step-1',
+                text: 'Welcome to My Website! This is the first step of the tour.',
+                attachTo: {
+                    element: 'button#startTour',
+                    on: 'bottom'
+                },
+                buttons: [
+                    {
+                        text: 'Next',
+                        action: tour.next
+                    }
+                ]
+            });
+
+            tour.addStep({
+                id: 'step-2',
+                text: 'This is the second step of the tour. You can add more steps like this.',
+                attachTo: {
+                    element: 'h1',
+                    on: 'bottom'
+                },
+                buttons: [
+                    {
+                        text: 'Finish',
+                        action: function() {
+                            tour.complete();
+                            overlay.style.display = 'none'; // Hide overlay after tour is completed
+                        }
+                    }
+                ]
+            });
+
+            // Start the tour
+            tour.start();
+        });
+    </script>
+</body>
+</html>

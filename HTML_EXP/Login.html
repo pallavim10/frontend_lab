@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+		.formats
+		{
+		margin:0 px;
+		padding:0px;
+		box-sizing:border box;
+		}
+		#id2
+		{
+		text-align:center;
+		 border: 1px solid black;
+
+		}
+		#id3
+		{
+
+		}
+</style>
+<script>
+		function validate_null()
+		{
+			var username = document.getElementById('user_name').value;
+			var password = document.getElementById('pass_word').value;
+
+			if(username == "" || username == '' || username == null || username == undefined)
+			{
+				//alert("Please enter a username");
+				username = "";
+				document.getElementById('user_name').required = true;
+			}
+			if(password == "" || password == '' || password == null || password == undefined)
+			{
+				//alert("Please enter a password");
+				password = "";
+				document.getElementById('user_name').required = true;
+			}
+			if(password == "" && username == "")
+			{
+				alert("Please enter a username & password");
+			}
+			else if(password == "" && username != "" )
+			{
+				alert("Please enter a password");
+			}
+			else if(password != ""  && username == "" )
+			{
+				alert("Please enter a username");
+			}
+			if(password != "" && username !="")
+			{
+				alert("Your Username: "+username+" your password: "+password);
+				
+				location.href = "https://www.bing.com";
+			}
+		}
+</script>
+	</head>
+	<body class='formats'>
+		<div id='id1'>
+			<div id='id2' class="id2">
+			<h3 >Log in</h3>
+			<div id='id3' class="id3">
+			<label for="user_name">Username:&nbsp</label>
+			<input type="text" id="user_name"></br></br>
+			<label for="pass_word">Password:&nbsp</label>
+			<input type="password" id="pass_word"></br></br>
+			<input type="button" id="btn1" value="Login" onclick="validate_null()">
+			</div>
+			</div>
+		</div>
+	</body>
+</html>
