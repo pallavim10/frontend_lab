@@ -88,7 +88,7 @@
                                                 <div class="form-group">
                                                     <label>Select Site ID : &nbsp;</label>
                                                     <asp:Label ID="Label5" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="drpSite" runat="server" AutoPostBack="true" class="form-control drpControl w-75 required select2" SelectionMode="Single" OnSelectedIndexChanged="drpSite_SelectedIndexChanged">
+                                                    <asp:DropDownList ID="drpSite" runat="server" AutoPostBack="true" class="form-control drpControl w-100 required select2" SelectionMode="Single" OnSelectedIndexChanged="drpSite_SelectedIndexChanged">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -96,7 +96,7 @@
                                                 <div class="form-group">
                                                     <label>Select <asp:Label runat="server" ID="lblSUBSCRID" Text=''></asp:Label> : &nbsp;</label>
                                                     <asp:Label ID="Label1" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="drpSubject" runat="server" AutoPostBack="false" class="form-control drpControl w-75 select2" SelectionMode="Single">
+                                                    <asp:DropDownList ID="drpSubject" runat="server" AutoPostBack="false" class="form-control drpControl w-100 select2" SelectionMode="Single">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -104,11 +104,11 @@
                                                 <div class="form-group">
                                                     <label>Specimen ID : &nbsp;</label>
                                                     <asp:Label ID="Label2" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:TextBox ID="txtSpecimenID" runat="server" CssClass="form-control numeric w-75"></asp:TextBox>
+                                                    <asp:TextBox ID="txtSpecimenID" runat="server" CssClass="form-control numeric w-100"></asp:TextBox>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
-                                                <div class="mt-4">
+                                                <div class="form-group mt-4">
                                                     <asp:LinkButton runat="server" ID="lbtnGETDATA" Text="Get Data" ForeColor="White" CssClass="btn btn-primary btn-sm cls-btnSave" OnClick="lbtnGETDATA_Click"></asp:LinkButton>
                                                 </div>
                                             </div>

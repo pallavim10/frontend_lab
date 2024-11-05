@@ -66,7 +66,7 @@
                                     <br />
                                     <div class="col-md-12 d-inline-flex">
                                         <div class="col-md-3">
-                                            <label>Select Specimen Type:</label>
+                                            <label>Specimen Type:</label>
                                         </div>
                                         <div class="col-md-6">
                                             <asp:DropDownList ID="drpSpecimenType" runat="server" CssClass="form-control required" AutoPostBack="true" OnSelectedIndexChanged="drpSpecimenType_SelectedIndexChanged">
@@ -78,7 +78,7 @@
                                         <br />
                                         <div class="col-md-12 d-inline-flex">
                                             <div class="col-md-3">
-                                                <label>Enter Specimen ID:</label>
+                                                <label>Specimen ID:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <asp:HiddenField runat="server" ID="hdnSID_VERIFY" />
@@ -94,7 +94,8 @@
                                         <br />
                                         <div class="col-md-12 d-inline-flex">
                                             <div class="col-md-3">
-                                                <label>Select <asp:Label runat="server" ID="lblSUBSCRID" Text=''></asp:Label>:</label>
+                                                <label>
+                                                    <asp:Label runat="server" ID="lblSUBSCRID" Text=''></asp:Label>:</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <asp:HiddenField runat="server" ID="hdnSUBJID_VERIFY" />
@@ -109,7 +110,7 @@
                                     <br />
                                     <div class="col-md-12 mt-0 d-inline-flex">
                                         <div class="col-md-3">
-                                            <label>Select Visit:</label>
+                                            <label>Visit:</label>
                                         </div>
                                         <div class="col-md-6">
                                             <asp:DropDownList ID="drpVisit" runat="server" CssClass="form-control required" AutoPostBack="true" OnSelectedIndexChanged="drpVisit_SelectedIndexChanged">
@@ -164,10 +165,10 @@
                                     <br />
                                     <div class="col-md-12 d-inline-flex">
                                         <div class="col-md-3">
-                                            <label>Enter Comment:</label>
+                                            <label>Comment:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <asp:TextBox ID="txtComment" runat="server" CssClass="form-control" MaxLength="500" TextMode="MultiLine">
+                                            <asp:TextBox ID="txtComment" runat="server" CssClass="form-control" MaxLength="500" TextMode="MultiLine" AutoPostBack="true" OnTextChanged="txtComment_TextChanged">
                                             </asp:TextBox>
                                             <asp:HiddenField runat="server" ID="hdnOldComment" />
                                         </div>

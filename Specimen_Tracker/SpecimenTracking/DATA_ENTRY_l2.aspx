@@ -58,7 +58,7 @@
                                             <label>Site ID:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <asp:Label ID="lblsite" runat="server" CssClass="form-control">
+                                            <asp:Label ID="lblsite" runat="server" BackColor="#e9ecef" CssClass="form-control">
                                             </asp:Label>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                             <label>Specimen Type:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <asp:Label ID="lblSpecimenType" runat="server" CssClass="form-control">
+                                            <asp:Label ID="lblSpecimenType" runat="server" BackColor="#e9ecef"  CssClass="form-control">
                                             </asp:Label>
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
                                                 <label>Specimen ID:</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <asp:Label ID="lblSpecimen" runat="server" CssClass="form-control">
+                                                <asp:Label ID="lblSpecimen" runat="server" BackColor="#e9ecef" CssClass="form-control">
                                                 </asp:Label>
                                             </div>
                                         </div>
@@ -92,7 +92,7 @@
                                                 <label>Subject ID:</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <asp:Label ID="lblSubject" runat="server" CssClass="form-control">
+                                                <asp:Label ID="lblSubject" runat="server" BackColor="#e9ecef" CssClass="form-control">
                                                 </asp:Label>
                                             </div>
                                         </div>
@@ -103,7 +103,7 @@
                                             <label>Visit:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <asp:Label ID="lblVisit" runat="server" CssClass="form-control">
+                                            <asp:Label ID="lblVisit" runat="server" BackColor="#e9ecef" CssClass="form-control">
                                             </asp:Label>
                                             <asp:HiddenField ID="hdnVISITNUM" runat="server"></asp:HiddenField>
                                         </div>
@@ -155,10 +155,10 @@
                                     <br />
                                     <div class="col-md-12 d-inline-flex">
                                         <div class="col-md-3">
-                                            <label>Enter Comment:</label>
+                                            <label>Comment:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <asp:TextBox ID="txtComment" runat="server" CssClass="form-control" MaxLength="500" TextMode="MultiLine">
+                                            <asp:TextBox ID="txtComment" runat="server" CssClass="form-control" MaxLength="500" TextMode="MultiLine" AutoPostBack="true" OnTextChanged="txtComment_TextChanged">
                                             </asp:TextBox>
                                             <asp:HiddenField runat="server" ID="hdnOldComment" />
                                         </div>
@@ -337,4 +337,3 @@
         </asp:UpdatePanel>
     </div>
 </asp:Content>
-

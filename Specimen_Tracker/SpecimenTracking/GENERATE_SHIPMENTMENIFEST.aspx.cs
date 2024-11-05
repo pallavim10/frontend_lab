@@ -539,11 +539,6 @@ namespace SpecimenTracking
             {
                 ConvertTOPDF(filePath, PdfFilePath, Word.WdExportFormat.wdExportFormatPDF);
 
-                Response.ContentType = "application/pdf";
-                Response.AppendHeader("Content-Disposition", "attachment; filename=" + PDFFILENAME + "");
-                Response.TransmitFile(PdfFilePath);
-                Response.End();
-
                 Dal_MF.SHIPMENT_MENIFEST_SP(
                         ACTION: "INSERT_MANIFEST",
                         SITEID: drpsite.SelectedValue,
@@ -557,6 +552,11 @@ namespace SpecimenTracking
                         LABID: drpLab.SelectedValue,
                         LABNAME: drpLab.SelectedItem.Text
                         );
+
+                Response.ContentType = "application/pdf";
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + PDFFILENAME + "");
+                Response.TransmitFile(PdfFilePath);
+                Response.End();
 
                 Response.Redirect(HttpContext.Current.Request.Url.AbsoluteUri.Replace("GENERATE_SHIPMENTMENIFEST.aspx", "") + "Shipment Manifest/" + filename, false);
 

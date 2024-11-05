@@ -117,7 +117,7 @@
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="File Name">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblFileName" runat="server" ToolTip='<%# Eval("SHIPMENT_COLUMNS") %>' Text='<%# Bind("FILENAME") %>'></asp:Label>
+                                                                    <asp:Label ID="lblFileName" runat="server" ToolTip='<%# Bind("SHIPMENT_COLUMNS") %>' Text='<%# Bind("FILENAME") %>'></asp:Label>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Download" ItemStyle-HorizontalAlign="Center">

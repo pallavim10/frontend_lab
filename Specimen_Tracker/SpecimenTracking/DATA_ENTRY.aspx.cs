@@ -34,9 +34,9 @@ namespace SpecimenTracking
                         hdnEditID.Value = "";
                     }
 
-                    
+
                     lblSUBSCRID.Text = Session["Subject ID"].ToString();
-                    
+
 
                     GET_SITE();
                     GET_SID();
@@ -1184,15 +1184,40 @@ namespace SpecimenTracking
             }
         }
 
+        private string CHECK_ALIQUOTS()
+        {
+            string RESULTS = "";
+
+            foreach (GridViewRow row in gridAliquots.Rows)
+            {
+                Label lblALIQUOTNO_CONCAT = (Label)row.FindControl("lblALIQUOTNO_CONCAT");
+                TextBox txtALIQUOTNO = (TextBox)row.FindControl("txtALIQUOTNO");
+                HiddenField hdnOldALIQUOTNO = (HiddenField)row.FindControl("hdnOldALIQUOTNO");
+
+                if (txtALIQUOTNO.Text != "" && txtALIQUOTNO.Text != lblALIQUOTNO_CONCAT.Text && hdnALIQUOT_VERIFY.Value == "Yes")
+                {
+                    RESULTS = "Entered Aliquot no. (" + txtALIQUOTNO.Text + ") must be same as Aliquot no. (" + lblALIQUOTNO_CONCAT.Text + ") populated in the third column.";
+                }
+            }
+
+            return RESULTS;
+        }
+
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             try
             {
                 string MSG = CHECK_CRIETRIA();
 
+                string ALIQUOT_MSG = CHECK_ALIQUOTS();
+
                 if (MSG != "")
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', '" + MSG + "', 'warning');", true);
+                }
+                else if (ALIQUOT_MSG != "")
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', '" + ALIQUOT_MSG + "', 'warning');", true);
                 }
                 else
                 {
@@ -2255,8 +2280,6 @@ namespace SpecimenTracking
                 }
                 else
                 {
-
-
                     Dal_DE.DATA_ENTRY_SP(
                         ACTION: "UPDATE_SPECIMEN_DATA",
                         ID: hdnEditID.Value,
@@ -2398,6 +2421,28 @@ namespace SpecimenTracking
                         rptALIQUOT.DataBind();
                     }
 
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
+
+        protected void txtComment_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Convert.ToBoolean(hdnEditMode.Value) && txtComment.Text != hdnOldComment.Value)
+                {
+                    SHOW_MODAL_REASON(
+                        FIELDNAME: "Comment",
+                        VARIABLENAME: "COMMENTS",
+                        INDEX: "",
+                        OLDVAL: hdnOldComment.Value,
+                        NEWVAL: txtComment.Text);
+
+                    txtReason.Focus();
                 }
             }
             catch (Exception ex)

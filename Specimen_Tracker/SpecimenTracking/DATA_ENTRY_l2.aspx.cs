@@ -533,9 +533,15 @@ namespace SpecimenTracking
             {
                 string MSG = CHECK_CRIETRIA();
 
+                string ALIQUOT_MSG = CHECK_ALIQUOTS();
+
                 if (MSG != "")
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', '" + MSG + "', 'warning');", true);
+                }
+                else if (ALIQUOT_MSG != "")
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"swal('Warning!', '" + ALIQUOT_MSG + "', 'warning');", true);
                 }
                 else
                 {
@@ -841,6 +847,7 @@ namespace SpecimenTracking
 
                         Dal_DE.DATA_ENTRY_SP(
                         ACTION: "INSERT_ALIQUOT_DATA_Second",
+                        SITEID: lblsite.Text,
                         SID: lblSpecimen.Text,
                         SUBJID: lblSubject.Text,
                         VISITNUM: hdnVISITNUM.Value,
@@ -1168,6 +1175,25 @@ namespace SpecimenTracking
             string script = @"document.getElementById('" + control.ClientID + @"').focus({preventScroll:true});";
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "FocusWithoutScroll", script, true);
+        }
+
+        private string CHECK_ALIQUOTS()
+        {
+            string RESULTS = "";
+
+            foreach (GridViewRow row in gridAliquots.Rows)
+            {
+                Label lblALIQUOTNO_CONCAT = (Label)row.FindControl("lblALIQUOTNO_CONCAT");
+                TextBox txtALIQUOTNO = (TextBox)row.FindControl("txtALIQUOTNO");
+                HiddenField hdnOldALIQUOTNO = (HiddenField)row.FindControl("hdnOldALIQUOTNO");
+
+                if (txtALIQUOTNO.Text != "" && txtALIQUOTNO.Text != lblALIQUOTNO_CONCAT.Text && hdnALIQUOT_VERIFY.Value == "Yes")
+                {
+                    RESULTS = "Entered Aliquot no. (" + txtALIQUOTNO.Text + ") must be same as Aliquot no. (" + lblALIQUOTNO_CONCAT.Text + ") populated in the third column.";
+                }
+            }
+
+            return RESULTS;
         }
 
         protected void txtALIQUOTNO_TextChanged(object sender, EventArgs e)
@@ -1622,5 +1648,26 @@ namespace SpecimenTracking
             }
         }
 
+        protected void txtComment_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Convert.ToBoolean(hdnEditMode.Value) && txtComment.Text != hdnOldComment.Value)
+                {
+                    SHOW_MODAL_REASON(
+                        FIELDNAME: "Comment",
+                        VARIABLENAME: "COMMENTS",
+                        INDEX: "",
+                        OLDVAL: hdnOldComment.Value,
+                        NEWVAL: txtComment.Text);
+
+                    txtReason.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
     }
 }
