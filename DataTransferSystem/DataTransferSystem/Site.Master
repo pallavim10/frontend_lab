@@ -1,0 +1,603 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="DataTransferSystem.Site" %>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Data Transfer | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css"/>
+
+    <!-- Daterange picker -->
+   <%-- <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css"/>--%>
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+    <!-- Tempusdominus Bbootstrap 4 -->
+   <%-- <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"/>--%>
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css"/>
+    <!-- Select2 -->
+    <link rel="stylesheet" href="plugins/select2/css/select2.min.css"/>
+    <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css"/>
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>
+    <!-- summernote -->
+    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css"/>
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"/>
+
+
+    <!-- SweetAlert Message Box for Alert Box Popup -->
+    <script type="text/javascript" src="dist/js/sweetalert.min.js"></script>
+    
+    <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="dist/js/sweetalert.min.js" type="text/javascript"></script>    
+    <script src="plugins/jquery-ui/jquery-ui.js" type="text/javascript"></script>
+    <link href="plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <script src="plugins/jquery/jquery.min.js" type="text/javascript"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <!-- DataTables -->    
+    
+    <style type="text/css">
+        .Body {
+            margin-left: 7%;
+        }
+
+        .Margin7 {
+            margin-left: 7%;
+            margin-right: 7%;
+            font-size: larger;
+            margin-top: 1%;
+        }
+
+        .box {
+            margin-bottom: 0%;
+            margin-bottom: 0px;
+            width: auto;
+        }
+
+        .fontBold {
+            font-weight: bold;
+        }
+
+        .color {
+            color: #333333;
+        }
+
+        .colorRed {
+            color: #ff0000;
+        }
+
+        .hover-end {
+            padding: 0;
+            margin: 0;
+            font-size: 75%;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            opacity: 0.8;
+        }
+
+        .nav-tabs-custom > .deepak > .nav-tabs > li.active {
+            border-top-color: #3c8dbc;
+            border-top-style: solid;
+            border-top: 3px solid #3c8dbc;
+            margin-bottom: -2px;
+            margin-right: 5px;
+            position: relative;
+            list-style: none;
+        }
+
+        
+        .pull-right {
+            float: right !important;
+        }
+
+        .pull-left {
+            float: left !important;
+        }
+
+        .hide {
+            display: none !important;
+        }
+
+        .show {
+            display: block !important;
+        }
+
+        .invisible {
+            visibility: hidden;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        .fade-in-out {
+            /*
+            background-color: white;
+            opacity: 0;*/
+        }
+
+            .fade-in-out.animate {
+                animation: fadeInOut 0.7s forwards;
+            }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                background-color: #fff;
+            }
+
+            50% {
+                opacity: 0.7;
+                background-color: #17a2b85e;
+            }
+
+            100% {
+                opacity: 0;
+                background-color: #fff;
+            }
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .gallery-item {
+            flex: 0 0 auto; /* Prevent items from shrinking */
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .thumbnail-image {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .tooltip {
+            position: absolute;
+            display: none;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+
+
+        /*.dataTables_wrapper .dataTables_filter {
+            float: right;
+        }
+
+        .dataTables_wrapper .dataTables_length {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            float: right;
+        }
+
+        .dataTables_wrapper .dt-buttons {
+            float: left;
+            margin-bottom: 10px;
+        }
+        .nav-pills .nav-link{
+            color:aliceblue;
+        }*/
+
+        /* Apply Bootstrap info class styling to ColVis dropdown items */
+        /*.dt-button-collection .dropdown-menu .dropdown-item {
+            background-color: #17a2b8;*/ /* Bootstrap info color */
+            /*color: white;
+            font-size: 0.875rem;*/ /* Font size small (Bootstrap 4 uses this for 'small') */
+        /*}
+
+            .dt-button-collection .dropdown-menu .dropdown-item:hover {
+                background-color: #138496;*/ /* Darker shade for hover effect */
+                /*color: white;
+                font-size: 1rem;
+            }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0 8px;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            margin: 0;
+        }*/
+    </style>
+    <style type="text/css">
+        .hide {
+            display: none;
+        }
+
+        .brd-1px-redimp {
+            border: solid 1px !important;
+            border-color: Red !important;
+        }
+
+        .brd-1px-maroonimp {
+            border: solid !important;
+            border-color: Maroon !important;
+        }
+    </style>
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed small">
+    <form id="form1" runat="server">
+        <div>
+            <div class="wrapper">
+
+                <!-- Navbar -->
+                <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                    <!-- Left navbar links -->
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                        </li>
+                        <li class="nav-item d-none d-sm-inline-block">
+                           
+                        </li>
+                        <li class="nav-item d-none d-sm-inline-block">
+                           
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <asp:Label ID="lblSessionTimeout" runat="server" CssClass="text-lightblue text-bold text-lg mr-1" Text="Session Timeout:"></asp:Label>
+                            <asp:Label ID="lblTimeRemaining" runat="server" ForeColor="Red" Font-Size="X-Large" Text=""></asp:Label>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" data-toggle="dropdown" href="#">
+                                <span class="d-none d-md-inline">
+                                    <asp:Label ID="lbwlc" Text="Welcome" runat="server" CssClass="text-lightblue text-bold text-md mr-1"></asp:Label>
+                                    <asp:Label ID="lblUserName" runat="server" CssClass="text-dark text-bold text-sm  mr-2" ForeColor="Black" Font-Bold="true"></asp:Label></span>
+                                <i class="fas fa-user-alt text-lg text-lightblue"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="min-width: 100px;">
+                                <asp:HyperLink ID="HyperLink4" runat="server" class="dropdown-item text-lg-center"
+                                    NavigateUrl="~/LockScreen.aspx" Font-Underline="False" ForeColor="Black" Text="">Log Out <i class='text-red fas fa-sign-out-alt col-1'></i></asp:HyperLink>
+                            </div>
+                        </li>
+
+                    </ul>
+                </nav>
+                <aside class="main-sidebar sidebar-dark-info elevation-4">
+                    <a href="HomePage.aspx" class="brand-link">
+                        <i class="nav-icon fas fa-database"></i>&nbsp;
+                        <span class="brand-text font-weight-normal">Data Transfer System</span>
+                    </a>
+                    <div class="sidebar">
+                        <div class=" mt-2 pb-2 mb-3 d-flex">
+                            <div class="image">
+                            </div>
+                            <div class="info text-sm">
+                            </div>
+                        </div>
+                        <nav class="mt-2">
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                
+                                <li class="nav-item has-treeview">
+                                    <a id="Dashboard" runat="server" href="HomePage.aspx" class="nav-link ">
+                                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                                        <p>
+                                            Dashboard
+                                        </p>
+                                    </a>
+
+                                </li>
+                                <li id="MngUsers" runat="server" class="nav-item has-treeview" >
+                                    <a id="ServerMaster" runat="server" href="SERVER_MASTER.aspx" class="nav-link ">
+                                        <i class="nav-icon fa fa-users"></i>
+                                        <p>
+                                            Server Master 
+                                        </p>
+                                    </a>
+
+                                </li>
+                                <li id="MngUploadTemplate" runat="server" class="nav-item has-treeview" >
+                                    <a id="UploadTemplate" runat="server" href="UploadTemplate.aspx" class="nav-link ">
+                                        <i class="nav-icon fas fa-file-upload"></i>
+                                        <p>
+                                            Upload Template 
+                                        </p>
+                                    </a>
+
+                                </li>
+                                <li id="MngStudy" runat="server" class="nav-item has-treeview" >
+                                    <a id="StudyMaster" runat="server" href="STUDY_MASTER.aspx" class="nav-link ">
+                                        <i class="nav-icon fas fa-book"></i>
+                                        <p>
+                                            Study Master 
+                                        </p>
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                </asp:ContentPlaceHolder>
+                <div class="modal fade" id="modal-lg" tabindex="-1" role="dialog" aria-labelledby="modal-lg-label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content" style="width: 95%; height: 500px;">
+                            <div class="modal-header" style="background-color: gold;">
+                                <h4 class="modal-title" id="modal-lg-label">Audit Trail</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div style="height: 590px; overflow: auto;">
+                                <div class="modal-body" id="DivAuditTrail">
+                                </div>
+                            </div>
+                            <div class="modal-footer pull-right">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <footer class="main-footer">
+                    <a id="back-to-top" href="#" class="btn btn-info back-to-top" role="button" aria-label="Scroll to top" data-abc="true">
+                        <i class="fas fa-chevron-up"></i>
+                    </a>
+                </footer>
+                   <aside class="control-sidebar control-sidebar-dark"></aside>
+            </div>
+    </form>
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script type="text/javascript" src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>    
+    <!-- Select2 -->
+    <script type="text/javascript" src="plugins/select2/js/select2.full.min.js"></script>
+    <!-- ChartJS -->
+    <script type="text/javascript" src="plugins/chart.js/Chart.min.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script type="text/javascript" src="plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- Sparkline -->
+    <!-- JQVMap -->
+    <script type="text/javascript" src="plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script type="text/javascript" src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script type="text/javascript" src="plugins/jquery-knob/jquery.knob.min.js"></script>
+
+    <!-- Tempusdominus Bootstrap 4 -->
+ <%--<script type="text/javascript" src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>--%>
+    <!-- Summernote -->
+    <script type="text/javascript" src="plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script type="text/javascript" src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script type="text/javascript" src="dist/js/adminlte.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script type="text/javascript" src="dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script type="text/javascript" src="dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <%--    <script src="dist/js/pages/dashboard3.js"></script>--%>
+    <!-- FLOT CHARTS -->
+    <script type="text/javascript" src="plugins/flot/jquery.flot.js"></script>
+    <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+    <script type="text/javascript" ="plugins/flot/plugins/jquery.flot.resize.js"></script>
+    <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+    <script type="text/javascript" src="plugins/flot/plugins/jquery.flot.pie.js"></script>    
+    <link rel="stylesheet" type="text/css" href="Style/datatables/dataTables.bootstrap.css" />
+    <script type="text/javascript" src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css"/>
+    <script src="plugins/inputmask/jquery.inputmask.bundle.js"></script>
+    <script type="text/javascript">
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+        function pageLoad() {
+
+            $('.txtDate').each(function (index, element) {
+                $(element).pikaday({
+                    field: element,
+                    format: 'DD-MMM-YYYY',
+                    yearRange: [1910, 2050],
+                    maxDate: new Date()
+                });
+            });
+
+            $('.txtTime').each(function (index, element) {
+                $(element).inputmask(
+                    "hh:mm", {
+                    placeholder: "HH:MM",
+                    insertMode: false,
+                    showMaskOnHover: false,
+                    hourFormat: "24"
+                });
+            });
+
+            $('.initial').each(function (index, element) {
+                $(element).inputmask({
+                    mask: '***',
+                    placeholder: '___',
+                    casing: 'upper'
+                });
+            });
+
+            $('.select2').select2({
+                theme: 'bootstrap4'
+            });
+
+        }
+
+        $(document).ready(function () {
+            $('.txtDate').each(function (index, element) {
+                $(element).pikaday({
+                    field: element,
+                    format: 'DD-MMM-YYYY',
+                    yearRange: [1910, 2050],
+                    maxDate: new Date()
+                });
+            });
+
+            $('.txtTime').each(function (index, element) {
+                $(element).inputmask(
+                    "hh:mm", {
+                    placeholder: "HH:MM",
+                    insertMode: false,
+                    showMaskOnHover: false,
+                    hourFormat: "24"
+                });
+            });
+
+            $('.initial').each(function (index, element) {
+                $(element).inputmask({
+                    mask: '***',
+                    placeholder: '___',
+                    casing: 'upper'
+                });
+            });
+
+            $(".txtDate").keypress(function (e) {
+                e.preventDefault();
+            });
+
+            // Initially close all sub-menus
+            $('.nav-item.has-treeview').removeClass('menu-open').addClass('menu-close');
+            $('.nav-item.has-treeview > .nav-treeview').slideUp();
+
+            $('.select2').select2({
+                theme: 'bootstrap4'
+            });
+
+        });
+        //Initialize Select2 Elements
+        $('.select2').select2({
+            theme: 'bootstrap4'
+        })
+
+
+       
+
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 20) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+
+            $('#back-to-top').click(function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 1000);
+                return false;
+            });
+        });
+        
+
+        var sessionTimeout = 20;
+
+        var sessionTimeoutMs = sessionTimeout * 60 * 1000;
+
+        var countdown = sessionTimeoutMs / 1000;
+
+        function formatTime(seconds) {
+            var minutes = Math.floor(seconds / 60);
+            var seconds = seconds % 60;
+            return (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        }
+
+        function updateCountdown() {
+            countdown--;
+            if (countdown <= 0) {
+
+                window.location.href = '<%= ResolveUrl("~/SessionExpired.aspx") %>';
+            } else {
+
+                $('#<%= lblTimeRemaining.ClientID %>').text(formatTime(countdown));
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+
+        $(document).ready(function () {
+
+            updateCountdown();
+        });
+
+        
+
+    </script>
+   <script>
+       $(function () {
+           $(".Datatable").DataTable({
+               "bSort": false,
+               "ordering": false,
+               "bDestroy": false,
+               stateSave: false
+           });
+       });
+   </script>
+    <script>
+        $(function () {
+            $(".Datatable1").DataTable({
+                "bSort": false,
+                "ordering": false,
+                "bDestroy": false,
+                stateSave: false
+            });
+        });
+    </script>
+     <script>
+         $(document).ready(function () {
+             // Apply hover effect to nav-item
+             $(document).on('mouseenter', '.nav-link', function () {
+                 $(this).addClass('nav-link active');
+             });
+
+             $(document).on('mouseleave', '.nav-link', function () {
+                 $(this).removeClass('active');
+             });
+         });
+     </script>
+</body>
+</html>
