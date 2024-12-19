@@ -4,6 +4,10 @@ bin/
 obj/
 Shipment Manifest/
 Exceptions/
+eTMF_Docs/
+eTMF_Editable/
+eTMF_Zip/
+SAE Report Templates/
 
 # Common node modules locations
 /node_modules

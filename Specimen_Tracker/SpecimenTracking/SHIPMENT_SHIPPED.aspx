@@ -365,13 +365,13 @@
                                     <label>Enter Shipment Date:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:TextBox runat="server" ID="txtSHIPMENTDAT" Text="" CssClass="form-control txtDate required2"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtSHIPMENTDAT" Text="" CssClass="form-control txtDate"></asp:TextBox>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Enter AWB No.:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:TextBox runat="server" ID="txtAWBNUM" Text="" CssClass="form-control required2"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtAWBNUM" Text="" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
                             <br />

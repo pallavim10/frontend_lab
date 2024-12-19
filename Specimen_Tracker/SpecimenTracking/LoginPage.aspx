@@ -65,7 +65,7 @@
             <%--<span class="form-avatar">
                 <%--<img src="dist/img/tracking-icon.jpg" class="logo-3d-border" alt="AVATAR"/>--%>
             <%--</span>--%>
-            <h3><b>Specimen Tracker</b></h3>
+            <h3><b>Specimen Tracking System</b></h3>
 
         </div>
         <!-- /.login-logo -->

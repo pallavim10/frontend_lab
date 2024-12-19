@@ -69,7 +69,7 @@
                                             <label>Specimen Type:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <asp:Label ID="lblSpecimenType" runat="server" BackColor="#e9ecef"  CssClass="form-control">
+                                            <asp:Label ID="lblSpecimenType" runat="server" BackColor="#e9ecef" CssClass="form-control">
                                             </asp:Label>
                                         </div>
                                     </div>
@@ -216,7 +216,7 @@
                                                                     <h6><u>Additional Fields</u>:</h6>
                                                                     <div runat="server" id="divALIQUOT" style="position: relative; overflow: auto;">
                                                                         <div class="col-md-12 d-inline-flex">
-                                                                            <asp:Repeater runat="server" ID="rptALIQUOT">
+                                                                            <asp:Repeater runat="server" ID="rptALIQUOT" OnItemDataBound="rptALIQUOT_ItemDataBound">
                                                                                 <ItemTemplate>
                                                                                     <div class="col-md-4 d-inline-flex">
                                                                                         <div class="col-md-4">
@@ -227,7 +227,7 @@
                                                                                         <div class="col-md-6">
                                                                                             <asp:HiddenField runat="server" ID="hdnINDEX" Value='<%# Container.ItemIndex %>'></asp:HiddenField>
                                                                                             <asp:HiddenField runat="server" ID="hdnOldDATA" />
-                                                                                            <asp:TextBox ID="txtDATA" runat="server" CssClass="form-control required" autocomplete="off" AutoPostBack="true" OnTextChanged="txtDATA_TextChanged">
+                                                                                            <asp:TextBox ID="txtDATA" runat="server" CssClass="form-control" autocomplete="off" AutoPostBack="true" OnTextChanged="txtDATA_TextChanged">
                                                                                             </asp:TextBox>
                                                                                             <asp:HiddenField runat="server" ID="hdnVARIABLENAME" Value='<%# Eval("VARIABLENAME") %>' />
                                                                                         </div>

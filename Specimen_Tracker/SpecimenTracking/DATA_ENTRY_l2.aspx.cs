@@ -551,7 +551,7 @@ namespace SpecimenTracking
                     string script = @"
                                     swal({
                                         title: 'Success',
-                                        text: 'Specimen ID entered successfully.',
+                                        text: 'Data saved successfully.',
                                         icon: 'success',
                                         button: 'OK'
                                     }).then((value) => {
@@ -1399,22 +1399,33 @@ namespace SpecimenTracking
                         int INDEX = Convert.ToInt32(hdnINDEX.Value);
                         if (gridAliquots.Rows.Count > INDEX + 1)
                         {
-                            GridViewRow gvRow = gridAliquots.Rows[INDEX + 1];
+                            Repeater rptALIQUOT = (Repeater)row.FindControl("rptALIQUOT");
 
-                            if (gridAliquots.Columns[3].Visible)
+                            if (rptALIQUOT.Items.Count > 0)
                             {
-                                TextBox gv_txtALIQUOTNO = (TextBox)gvRow.FindControl("txtALIQUOTNO");
-
-                                //gv_txtALIQUOTNO.Focus();
-                                FocusWithoutScroll(gv_txtALIQUOTNO);
-
+                                RepeaterItem rptItem = rptALIQUOT.Items[0];
+                                TextBox txtDATA = (TextBox)rptItem.FindControl("txtDATA");
+                                FocusWithoutScroll(txtDATA);
                             }
                             else
                             {
-                                TextBox gv_txtBOXNO = (TextBox)gvRow.FindControl("txtBOXNO");
+                                GridViewRow gvRow = gridAliquots.Rows[INDEX + 1];
 
-                                //gv_txtBOXNO.Focus();
-                                FocusWithoutScroll(gv_txtBOXNO);
+                                if (gridAliquots.Columns[3].Visible)
+                                {
+                                    TextBox gv_txtALIQUOTNO = (TextBox)gvRow.FindControl("txtALIQUOTNO");
+
+                                    //gv_txtALIQUOTNO.Focus();
+                                    FocusWithoutScroll(gv_txtALIQUOTNO);
+
+                                }
+                                else
+                                {
+                                    TextBox gv_txtBOXNO = (TextBox)gvRow.FindControl("txtBOXNO");
+
+                                    //gv_txtBOXNO.Focus();
+                                    FocusWithoutScroll(gv_txtBOXNO);
+                                }
                             }
                         }
                         else
@@ -1436,9 +1447,18 @@ namespace SpecimenTracking
                             }
                             else
                             {
-                                //btnSubmit.Focus();
+                                Repeater rptALIQUOT = (Repeater)row.FindControl("rptALIQUOT");
 
-                                FocusWithoutScroll(btnSubmit);
+                                if (rptALIQUOT.Items.Count > 0)
+                                {
+                                    RepeaterItem rptItem = rptALIQUOT.Items[0];
+                                    TextBox txtDATA = (TextBox)rptItem.FindControl("txtDATA");
+                                    FocusWithoutScroll(txtDATA);
+                                }
+                                else
+                                {
+                                    FocusWithoutScroll(btnSubmit);
+                                }
                             }
                         }
                     }
@@ -1585,6 +1605,7 @@ namespace SpecimenTracking
                 HiddenField hdnVARIABLENAME = (HiddenField)childRepeaterItem.FindControl("hdnVARIABLENAME");
                 TextBox txtDATA = (TextBox)childRepeaterItem.FindControl("txtDATA");
                 HiddenField hdnOldDATA = (HiddenField)childRepeaterItem.FindControl("hdnOldDATA");
+                HiddenField rptINDEX = (HiddenField)childRepeaterItem.FindControl("hdnINDEX");
 
                 HiddenField hdnID = (HiddenField)parentGridViewRow.FindControl("hdnID");
                 HiddenField hdnINDEX = (HiddenField)parentGridViewRow.FindControl("hdnINDEX");
@@ -1603,6 +1624,40 @@ namespace SpecimenTracking
                         hdnReasonALQID.Value = hdnID.Value;
 
                         txtReason.Focus();
+                    }
+                    else
+                    {
+                        int gvINDEX = Convert.ToInt32(hdnINDEX.Value);
+                        GridViewRow gvRow = parentGridView.Rows[gvINDEX + 1];
+
+                        if (gridAliquots.Columns[3].Visible)
+                        {
+                            TextBox gv_txtALIQUOTNO = (TextBox)gvRow.FindControl("txtALIQUOTNO");
+                            FocusWithoutScroll(gv_txtALIQUOTNO);
+
+                        }
+                        else
+                        {
+                            TextBox gv_txtBOXNO = (TextBox)gvRow.FindControl("txtBOXNO");
+                            FocusWithoutScroll(gv_txtBOXNO);
+                        }
+                    }
+                }
+                else
+                {
+                    int gvINDEX = Convert.ToInt32(hdnINDEX.Value);
+                    GridViewRow gvRow = parentGridView.Rows[gvINDEX + 1];
+
+                    if (gridAliquots.Columns[3].Visible)
+                    {
+                        TextBox gv_txtALIQUOTNO = (TextBox)gvRow.FindControl("txtALIQUOTNO");
+                        FocusWithoutScroll(gv_txtALIQUOTNO);
+
+                    }
+                    else
+                    {
+                        TextBox gv_txtBOXNO = (TextBox)gvRow.FindControl("txtBOXNO");
+                        FocusWithoutScroll(gv_txtBOXNO);
                     }
                 }
 
@@ -1662,6 +1717,33 @@ namespace SpecimenTracking
                         NEWVAL: txtComment.Text);
 
                     txtReason.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
+
+        protected void rptALIQUOT_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    DataRowView drv = (DataRowView)e.Item.DataItem;
+
+                    TextBox txtDATA = (TextBox)e.Item.FindControl("txtDATA");
+
+                    if (drv["REQUIRED"].ToString() == "True")
+                    {
+                        txtDATA.CssClass = txtDATA.CssClass + " required";
+                    }
+
+                    if (drv["MAXLEN"].ToString().Trim() != "0" && drv["MAXLEN"].ToString().Trim() != "")
+                    {
+                        txtDATA.MaxLength = Convert.ToInt32(drv["MAXLEN"].ToString().Trim());
+                    }
                 }
             }
             catch (Exception ex)

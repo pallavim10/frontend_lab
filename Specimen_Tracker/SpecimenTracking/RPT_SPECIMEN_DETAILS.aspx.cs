@@ -231,6 +231,7 @@ namespace SpecimenTracking
 
                 GridView gv = (sender as GridView);
 
+                
                 gv.HeaderRow.Cells[1].Visible = false;
                 e.Row.Cells[1].Visible = false;
 
@@ -243,13 +244,16 @@ namespace SpecimenTracking
                 gv.HeaderRow.Cells[4].Visible = false;
                 e.Row.Cells[4].Visible = false;
 
+                gv.HeaderRow.Cells[5].Visible = false;
+                e.Row.Cells[5].Visible = false;
+
                 if (Session["SID_ACTIVE"].ToString() == "False")
                 {
-                    gv.HeaderRow.Cells[7].Visible = false;
-                    e.Row.Cells[7].Visible = false;
+                    gv.HeaderRow.Cells[8].Visible = false;
+                    e.Row.Cells[8].Visible = false;
                 }
 
-                gv.HeaderRow.Cells[6].Text = Session["Subject ID"].ToString();
+                gv.HeaderRow.Cells[7].Text = Session["Subject ID"].ToString();
 
             }
         }

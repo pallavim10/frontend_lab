@@ -21,7 +21,7 @@ namespace SpecimenTracking.App_Code
             return ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         }
 
-        public DataSet SHIPMENT_MENIFEST_SP(string ACTION = null, string SPECTYP = null, string VISIT = null, string VISITNUM = null, string ALIQUOTTYPE = null, string ALIQUOTID = null, string SITEID = null, string FROMDAT = null, string TODAT = null, string LABID = null, string LABNAME = null, string SHIPMENTID = null, string SHIPMENTDAT = null, string AWBNUM = null, string REASON = null)
+        public DataSet SHIPMENT_MENIFEST_SP(string ACTION = null, string SPECTYP = null, string VISIT = null, string VISITNUM = null, string ALIQUOTTYPE = null, string ALIQUOTID = null, string SITEID = null, string SUBJID = null, string FROMDAT = null, string TODAT = null, string LABID = null, string LABNAME = null, string SHIPMENTID = null, string SHIPMENTDAT = null, string AWBNUM = null, string REASON = null)
         {
             DataSet ds = new DataSet();
             SqlCommand cmd;
@@ -55,6 +55,7 @@ namespace SpecimenTracking.App_Code
                 cmd.Parameters.AddWithValue("@ALIQUOTTYPE", ALIQUOTTYPE);
                 cmd.Parameters.AddWithValue("@ALIQUOTID", ALIQUOTID);
                 cmd.Parameters.AddWithValue("@SITEID", SITEID);
+                cmd.Parameters.AddWithValue("@SUBJID", SUBJID);
                 cmd.Parameters.AddWithValue("@FROMDAT", FROMDAT);
                 cmd.Parameters.AddWithValue("@TODAT", TODAT);
 

@@ -58,39 +58,39 @@
                                 <div class="rows">
                                     <div class="col-md-12">
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Select Site ID : &nbsp;</label>
-                                                    <asp:DropDownList ID="drpSite" runat="server" AutoPostBack="true" class="form-control drpControl w-75 required select2" SelectionMode="Single" OnSelectedIndexChanged="drpSite_SelectedIndexChanged">
+                                                    <asp:DropDownList ID="drpSite" runat="server" AutoPostBack="true" class="form-control drpControl w-100 required select2" SelectionMode="Single" OnSelectedIndexChanged="drpSite_SelectedIndexChanged">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Select <asp:Label runat="server" ID="lblSUBSCRID" Text=''></asp:Label> : &nbsp;</label>
-                                                    <asp:DropDownList ID="drpSubject" runat="server" AutoPostBack="false" class="form-control drpControl w-75 required select2" SelectionMode="Single">
+                                                    <asp:DropDownList ID="drpSubject" runat="server" AutoPostBack="false" class="form-control drpControl w-100 required select2" SelectionMode="Single">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3" id="divSID" runat="server">
+                                            <div class="col-md-4" id="divSID" runat="server">
                                                 <div class="form-group">
                                                     <label>Enter Specimen ID : &nbsp;</label>
-                                                    <asp:TextBox ID="txtSpecimenID" runat="server" CssClass="form-control required numeric w-75"></asp:TextBox>
+                                                    <asp:TextBox ID="txtSpecimenID" runat="server" CssClass="form-control required numeric w-100"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Select From Date : &nbsp;</label>
-                                                    <asp:TextBox ID="txtFROMDAT" runat="server" class="form-control txtDate w-75 required">
+                                                    <asp:TextBox ID="txtFROMDAT" runat="server" class="form-control txtDate w-100 required">
                                                     </asp:TextBox>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Select To Date : &nbsp;</label>
-                                                    <asp:TextBox ID="txtTODAT" runat="server" class="form-control txtDate w-75 required"></asp:TextBox>
+                                                    <asp:TextBox ID="txtTODAT" runat="server" class="form-control txtDate w-100 required"></asp:TextBox>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -135,7 +135,6 @@
                                                     <asp:TemplateField HeaderText="Acknowledge" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center" ItemStyle-CssClass="text-center">
                                                         <ItemTemplate>
                                                             <asp:DropDownList ID="drpAcknowledge" runat="server" CssClass="form-control w-100" AutoPostBack="false">
-                                                                <asp:ListItem Text="" Value=""></asp:ListItem>
                                                                 <asp:ListItem Text="Yes" Value="Yes"></asp:ListItem>
                                                                 <asp:ListItem Text="No" Value="No"></asp:ListItem>
                                                             </asp:DropDownList>

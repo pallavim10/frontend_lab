@@ -53,8 +53,14 @@ namespace SpecimenTracking
                     if (!IsPostBack)
                     {
                         DataSet data = Dal_Setup.SETUP_FIELD_SP(ACTION: "GETSUBJD");
-                        Session["Subject ID"] = data.Tables[0].Rows[0]["FIELDNAME"].ToString();
-
+                        if (data.Tables[0].Rows.Count > 0)
+                        {
+                            Session["Subject ID"] = data.Tables[0].Rows[0]["FIELDNAME"].ToString();
+                        }
+                        else
+                        {
+                            Session["Subject ID"] = "";
+                        }
 
 
                         if (Session["PROJECTIDTEXT"] != null)

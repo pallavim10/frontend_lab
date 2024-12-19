@@ -27,7 +27,9 @@ namespace SpecimenTracking
             {
                 if (!IsPostBack)
                 {
+                    lblSUBSCRID.Text = Session["Subject ID"].ToString();
                     GET_SITE();
+                    GET_SUBJECT();
                     GET_SPECIMENTYPE();
                     GET_VISIT();
                     GET_ALIQUOT();
@@ -170,6 +172,7 @@ namespace SpecimenTracking
                     DataSet ds = Dal_MF.SHIPMENT_MENIFEST_SP(
                         ACTION: "GET_SHIPMENT_DATA",
                         SITEID: drpsite.SelectedValue,
+                        SUBJID: drpSubject.SelectedValue,
                         SPECTYP: drpspecimentype.SelectedValue,
                         VISITNUM: drpvisit.SelectedValue,
                         VISIT: drpvisit.SelectedItem.Text,
@@ -542,6 +545,7 @@ namespace SpecimenTracking
                 Dal_MF.SHIPMENT_MENIFEST_SP(
                         ACTION: "INSERT_MANIFEST",
                         SITEID: drpsite.SelectedValue,
+                        SUBJID: drpSubject.SelectedValue,
                         SPECTYP: drpspecimentype.SelectedValue,
                         VISITNUM: drpvisit.SelectedValue,
                         VISIT: drpvisit.SelectedItem.Text,
@@ -577,6 +581,7 @@ namespace SpecimenTracking
                     Dal_MF.SHIPMENT_MENIFEST_SP(
                             ACTION: "INSERT_MANIFEST",
                             SITEID: drpsite.SelectedValue,
+                            SUBJID: drpSubject.SelectedValue,
                             SPECTYP: drpspecimentype.SelectedValue,
                             VISITNUM: drpvisit.SelectedValue,
                             VISIT: drpvisit.SelectedItem.Text,
@@ -723,6 +728,7 @@ namespace SpecimenTracking
                     DataSet ds = Dal_MF.SHIPMENT_MENIFEST_SP(
                                 ACTION: "SHOW_SHIPMENT_DATA",
                                 SITEID: drpsite.SelectedValue,
+                                SUBJID: drpSubject.SelectedValue,
                                 SPECTYP: drpspecimentype.SelectedValue,
                                 VISITNUM: drpvisit.SelectedValue,
                                 VISIT: drpvisit.SelectedItem.Text,
@@ -817,5 +823,31 @@ namespace SpecimenTracking
                 throw;
             }
         }
+
+        protected void drpsite_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GET_SUBJECT();
+        }
+
+        private void GET_SUBJECT()
+        {
+            try
+            {
+                DataSet ds = Dal_DE.GET_SUBJID_SP(drpsite.SelectedValue);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    drpSubject.DataSource = ds.Tables[0];
+                    drpSubject.DataValueField = "SUBJID";
+                    drpSubject.DataBind();
+                }
+                drpSubject.Items.Insert(0, new ListItem("", ""));
+            }
+            catch (Exception ex)
+            {
+
+                ExceptionLogging.SendErrorToText(ex);
+            }
+        }
+
     }
 }

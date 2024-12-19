@@ -121,7 +121,7 @@
                 </div>
             </div>
         </section>
-        <section>
+        <section class="content">
             <div class="container-fluid">
                 <div class="row" id="divRecord" runat="server" visible="false">
                     <div class="col-md-12">

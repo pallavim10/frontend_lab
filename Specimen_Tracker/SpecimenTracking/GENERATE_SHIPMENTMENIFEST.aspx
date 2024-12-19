@@ -59,14 +59,17 @@
                                                 <div class="form-group">
                                                     <label>Select Site ID : &nbsp;</label>
                                                     <asp:Label ID="Label3" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="drpsite" runat="server" CssClass="form-control required"></asp:DropDownList>
+                                                    <asp:DropDownList ID="drpsite" runat="server" AutoPostBack="true" CssClass="form-control required" OnSelectedIndexChanged="drpsite_SelectedIndexChanged"></asp:DropDownList>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4" runat="server" id="DivSpeciType" visible="false">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Specimen Type : &nbsp;</label>
-                                                    <asp:Label ID="Label4" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
-                                                    <asp:DropDownList ID="drpspecimentype" runat="server" CssClass="form-control required"></asp:DropDownList>
+                                                    <label>
+                                                        Select
+                                                        <asp:Label runat="server" ID="lblSUBSCRID" Text=""></asp:Label>
+                                                        : &nbsp;</label>
+                                                    <asp:DropDownList ID="drpSubject" runat="server" AutoPostBack="false" class="form-control drpControl w-100 select2" SelectionMode="Single">
+                                                    </asp:DropDownList>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -78,6 +81,13 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-4" runat="server" id="DivSpeciType" visible="false">
+                                                <div class="form-group">
+                                                    <label>Specimen Type : &nbsp;</label>
+                                                    <asp:Label ID="Label4" runat="server" Font-Size="Small" ForeColor="#FF3300" Text="*"></asp:Label>
+                                                    <asp:DropDownList ID="drpspecimentype" runat="server" CssClass="form-control required"></asp:DropDownList>
+                                                </div>
+                                            </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Aliquot Type : &nbsp;</label>
@@ -85,7 +95,7 @@
                                                     <asp:DropDownList ID="drpAliquottype" runat="server" CssClass="form-control required" AutoPostBack="true" OnSelectedIndexChanged="drpAliquottype_SelectedIndexChanged"></asp:DropDownList>
                                                 </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-4">
                                                 <label>Aliquot ID : &nbsp;</label>
                                                 <asp:ListBox runat="server" ID="lstAliquotID" CssClass="form-control required select2" SelectionMode="Multiple" autocomplete="off"></asp:ListBox>
                                             </div>
@@ -100,11 +110,11 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label>From Date : &nbsp;</label>
-                                                <asp:TextBox runat="server" ID="txtFormDate" CssClass="form-control txtDate required" autocomplete="off"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txtFormDate" CssClass="form-control txtDate " autocomplete="off"></asp:TextBox>
                                             </div>
                                             <div class="col-md-4">
                                                 <label>To Date : &nbsp;</label>
-                                                <asp:TextBox runat="server" ID="txtToDate" CssClass="form-control txtDate required" autocomplete="off"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txtToDate" CssClass="form-control txtDate " autocomplete="off"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>

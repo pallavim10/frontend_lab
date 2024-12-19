@@ -191,6 +191,8 @@ namespace SpecimenTracking
                     Label lblTODAT = row.FindControl("lblTODAT") as Label;
                     Label lblTOTAL_SID = row.FindControl("lblTOTAL_SID") as Label;
                     Label lblTOTAL_ALQ = row.FindControl("lblTOTAL_ALQ") as Label;
+                    Label lblSHIPMENTDAT = row.FindControl("lblSHIPMENTDAT") as Label;
+                    Label lblAWBNUM = row.FindControl("lblAWBNUM") as Label;
 
                     hdnID.Value = ID;
                     modalSiteID.Text = lblsiteid.Text;
@@ -203,6 +205,9 @@ namespace SpecimenTracking
                     modalTODAT.Text = lblTODAT.Text;
                     modalSID.Text = lblTOTAL_SID.Text;
                     modalALQS.Text = lblTOTAL_ALQ.Text;
+
+                    txtSHIPMENTDAT.Text = lblSHIPMENTDAT.Text;
+                    txtAWBNUM.Text = lblAWBNUM.Text;
 
                     ModalShipment.Show();
                 }
