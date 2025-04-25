@@ -1,0 +1,1925 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="PPT.SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head1" runat="server">
+    <meta charset="UTF-8">
+    <title>WAI</title>
+    <script src="Scripts/Jquery1.12.4.js" type="text/javascript"></script>
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/Common-Bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/AdminLTE.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/ionicons.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <script src="Scripts/bootstrap.js" type="text/javascript"></script>
+    <!-- for Jquery Popup//-->
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link href="Styles/Jquery.ui.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/CommonFunction.js" type="text/javascript"></script>
+    <!-- for Jquery Popup//-->
+    <!-- for pikaday datepicker//-->
+    <link href="Styles/pikaday.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/moment.js" type="text/javascript"></script>
+    <script src="Scripts/pikaday.js" type="text/javascript"></script>
+    <script src="Scripts/pikaday.jquery.js" type="text/javascript"></script>
+    <!-- for pikaday datepicker//-->
+    <script src="js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="Styles/datatables/dataTables.bootstrap.css" />
+    <script src="js/plugins/moment/moment.min.js" type="text/javascript"></script>
+    <script src="js/plugins/moment/datetime-moment.js" type="text/javascript"></script>
+    <link href="js/plugins/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Morris.js charts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <%--  <script src="js/plugins/morris/morris.min.js" type="text/javascript"></script>--%>
+    <!-- Sparkline -->
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- jvectormap -->
+    <script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+    <script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
+    <!-- daterangepicker -->
+    <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+    <script src="js/AdminLTE/app.js" type="text/javascript"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <link href="Styles/graph.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <%--<script src="js/MaxLength_Limit.js"></script>--%>
+    <script src="js/MaxLength.min.js"></script>
+
+    <link href="CommonStyles/SweetAlert.css" rel="stylesheet" />
+    <script src="CommonFunctionsJs/SweetAlert.js"></script>
+
+    <link href="CommonStyles/FixHeaderStyle.css" rel="stylesheet" />
+
+    <style type="text/css">
+        .hide {
+            display: none;
+        }
+
+        .brd-1px-redimp {
+            border: solid 1px !important;
+            border-color: Red !important;
+        }
+
+        .brd-1px-maroonimp {
+            border: solid !important;
+            border-color: Maroon !important;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            background: rgba(255,255,255,0.8) url("/image/loader.gif") center no-repeat;
+        }
+        /* Turn off scrollbar when body element has the loading class */
+        body.loading {
+            overflow: hidden;
+        }
+            /* Make spinner image visible when body element has the loading class */
+            body.loading .overlay {
+                display: block;
+            }
+
+        /*body {
+            overflow-y: scroll;*/ /* Show vertical scrollbar */
+            /*overflow-x: scroll;*/ /* Show horizontal scrollbar */
+        /*}*/
+    </style>
+    <style type="text/css">
+        .form-control-model {
+            display: block;
+            padding: 0px 12px;
+            font-size: 13px;
+            line-height: 2.428571;
+            color: #555555;
+            vertical-align: middle;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            margin-top: 3px !important;
+            box-sizing: border-box;
+        }
+
+        .strikeThrough {
+            text-decoration: line-through;
+            text-decoration-color: red;
+        }
+    </style>
+    <link href="Styles/Select2.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/Select2.js" type="text/javascript"></script>
+    <script src="js/Input%20Mask/jquery.inputmask.bundle.js"></script>
+    <style type="text/css">
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #0000ff;
+        }
+
+        .select2-container--default .select2-selection--single {
+            margin-top: 2px;
+        }
+    </style>
+    <script type="text/javascript">
+        function DisableWindow() {
+            $("body").addClass("loading");
+        }
+
+        window.onbeforeunload = DisableWindow;
+
+        function jsShowHideProgress() {
+
+            setTimeout(function () { $("body").addClass("loading"); }, 200);
+            deleteCookie();
+
+            var timeInterval = 500; // milliseconds (checks the cookie for every half second )
+
+            var loop = setInterval(function () {
+                if (IsCookieValid()) {
+                    $("body").removeClass("loading");
+                    clearInterval(loop)
+                }
+
+            }, timeInterval);
+        }
+
+        // cookies
+        function deleteCookie() {
+            var cook = getCookie('ExcelDownloadFlag');
+            if (cook != "") {
+                document.cookie = "ExcelDownloadFlag=;Path = /; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            }
+
+            var cook1 = getCookie('sessionTimeout');
+            if (cook1 != "") {
+               // document.cookie = "sessionTimeout=;Path = /; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+                document.cookie = "sessionTimeout=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+            }
+        }
+
+        function IsCookieValid() {
+            var cook = getCookie('ExcelDownloadFlag');
+            return cook != '';
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function CheckDataEntrySession(element) {
+            var DataEntrySession = '<%=Session["RedirceToAnotherPage"] %>';
+
+            if (DataEntrySession == "1") {
+                alert("You have unsaved changes. Please click on save complete button before navigating to another screen or tab.");
+                return false;
+            }
+        }
+
+        function setNavigationPath(element) {
+
+            var DataEntrySession = '<%=Session["RedirceToAnotherPage"] %>';
+
+            if (DataEntrySession == "1") {
+                alert("You have unsaved changes. Please click on save complete button before navigating to another screen or tab.");
+                return false;
+            }
+            else {
+                var Navigation_Path = $(element).next().val();
+
+                $('#lblnavmenuuName').text(Navigation_Path);
+
+                $.ajax({
+                    type: "POST",
+                    url: "AjaxFunction.aspx/setNavigationPath",
+                    data: '{NavigationPath: "' + Navigation_Path + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        return true;
+                    },
+                    failure: function (response) {
+                        return true;
+                    },
+                    error: function (response) {
+                        return true;
+                    }
+                });
+            }
+        }
+
+    </script>
+
+   <%--  <script type="text/javascript">
+         document.addEventListener('DOMContentLoaded', function () {
+             // Select all textboxes and textareas with a maxlength attribute
+             const inputs = document.querySelectorAll('input[type="text"][maxlength], textarea[maxlength]');
+
+             inputs.forEach(function (input) {
+                 const maxLength = parseInt(input.getAttribute('maxlength'), 10);
+
+                 // Handle keypress to prevent additional input
+                 input.addEventListener('keypress', function (e) {
+                     if (input.value.length >= maxLength && !e.ctrlKey && !e.metaKey) {
+                         e.preventDefault(); // Prevent further input
+                         alert(`Maximum limit of ${maxLength} characters exceeded!`);
+                     }
+                 });
+
+                 // Handle input event for pasting or other input changes
+                 input.addEventListener('input', function () {
+                     if (input.value.length > maxLength) {
+                         alert(`Maximum limit of ${maxLength} characters exceeded!`);
+                         input.value = input.value.substring(0, maxLength); // Trim the value
+                     }
+                 });
+             });
+         });
+    </script>--%>
+
+<%--    <script type="text/javascript">
+        // Function to initialize the MaxLength functionality
+        function initializeMaxLength() {
+          /*  console.log("Re-initializing MaxLength functionality."); // Debugging log*/
+
+            // Apply maxlength functionality to textarea and input elements
+            $("textarea[maxlength], input[maxlength]").each(function () {
+                // Apply the MaxLength plugin or manually enforce the maxlength attribute
+                var maxLength = $(this).attr("maxlength");
+                if (typeof $(this).MaxLength === 'function') {
+                    $(this).MaxLength({
+                        MaxLength: maxLength
+                    });
+                }
+            });
+
+
+           
+                // Select all textboxes and textareas with a maxlength attribute
+                const inputs = document.querySelectorAll('input[type="text"][maxlength], textarea[maxlength]');
+
+                inputs.forEach(function (input) {
+                    const maxLength = parseInt(input.getAttribute('maxlength'), 10);
+
+                    // Handle keypress to prevent additional input
+                    input.addEventListener('keypress', function (e) {
+                        if (input.value.length >= maxLength && !e.ctrlKey && !e.metaKey) {
+                            e.preventDefault(); // Prevent further input
+                            alert(`Maximum limit of ${maxLength} characters exceeded!`);
+                        }
+                    });
+
+                    // Handle input event for pasting or other input changes
+                    input.addEventListener('input', function () {
+                        if (input.value.length > maxLength) {
+                            alert(`Maximum limit of ${maxLength} characters exceeded!`);
+                            input.value = input.value.substring(0, maxLength); // Trim the value
+                        }
+                    });
+                });
+           
+
+
+
+
+            //// Add manual enforcement for maxlength using input event
+            //$("[maxlength]").off('input[maxlength]').on('input[maxlength]', function () {
+            //    var maxLength = $(this).attr('maxlength');
+            //    var currentLength = $(this).val().length;
+
+            //    if (currentLength > parseInt(maxLength)) {
+            //        $(this).val($(this).val().substring(0, maxLength)); // Truncate the excess
+            //        alert("Maximum character limit of " + maxLength + " exceeded.");
+            //    }
+            //});          
+        }
+
+        // Reapply functionality after UpdatePanel partial postbacks
+        $(document).ready(function () {
+            // Initial binding on page load
+            initializeMaxLength();
+
+            // Detect partial postbacks and reapply functionality
+            if (typeof Sys !== 'undefined' && typeof Sys.WebForms !== 'undefined' && Sys.WebForms.PageRequestManager) {
+                Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                 //   console.log("Partial postback detected. Re-initializing MaxLength.");
+                    initializeMaxLength();
+                });
+            } else {
+                console.error("PageRequestManager not found.");
+            }
+        });
+    </script>--%>
+
+
+        <script type="text/javascript">
+          
+            // Function to initialize the MaxLength functionality
+            function initializeMaxLength() {
+                $("textarea[maxlength], input[maxlength]").each(function () {
+                    const input = this;
+                    const maxLength = parseInt($(input).attr("maxlength"), 10);
+
+                    // Create or update a label to show the remaining characters
+                    if (!$(input).next('.char-count').length) {
+                        $(input).after('<label class="char-count" style="margin-left: 10px; font-size: 12px; color: gray;"></label>');
+                    }
+
+                    // Calculate and display the remaining characters
+                    updateRemainingCharacters(input, maxLength);
+
+                    // Handle input event
+                    $(input).on('input', function () {
+                        updateRemainingCharacters(input, maxLength);
+
+                        if (input.value.length > maxLength) {
+                            alert(`Maximum limit of ${maxLength} characters exceeded!`);
+                            input.value = input.value.substring(0, maxLength); // Trim excess
+                        }
+                    });
+
+                    // Handle keypress to prevent further input when maxlength is reached
+                    $(input).on('keypress', function (e) {
+                        if (input.value.length >= maxLength && !e.ctrlKey && !e.metaKey && maxLength > 0) {
+                            e.preventDefault(); // Prevent additional input
+                            alert(`Maximum limit of ${maxLength} characters exceeded!`);
+                        }
+                    });
+                });
+            }
+
+            // Function to update the remaining characters
+            function updateRemainingCharacters(input, maxLength) {
+                const remaining = maxLength - input.value.length;
+                const displayRemaining = Math.max(0, remaining);
+                $(input).next('.char-count').text(displayRemaining + ' characters left');
+            }
+
+            // Reapply functionality after UpdatePanel partial postbacks
+            $(document).ready(function () {
+                initializeMaxLength();
+
+                if (typeof Sys !== 'undefined' && typeof Sys.WebForms !== 'undefined' && Sys.WebForms.PageRequestManager) {
+                    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                        initializeMaxLength();
+                    });
+                }
+            });
+        </script>
+    <script type="text/javascript">
+        function UploadFile1(fileUpload, labelId,Mappedbtn) {
+            if (fileUpload.files.length > 0) {
+                var file = fileUpload.files[0];
+                var filePath = file.name;
+                var validFileTypes = /(\.xlsx|\.xls)$/i;
+                var lbl = $("#" + labelId);
+
+                if (!validFileTypes.test(filePath)) {
+                    fileUpload.value = '';  // Clear the input if invalid file
+                    lbl.text('').css({ 'color': '', 'text-decoration': '' });
+                    return;
+                }
+
+                // Create a hidden field if it doesn't exist
+                if ($("#hdnFileName").length === 0) {
+                    $("<input>").attr({
+                        type: "hidden",
+                        id: "hdnFileName"
+                    }).appendTo("body");
+                }
+
+                // Update hidden field value
+                $("#hdnFileName").val(filePath);
+
+                // Update label with file name
+                lbl.text(filePath).css({ 'color': 'blue', 'text-decoration': 'underline' });
+
+                console.log("Hidden Field Value:", $("#hdnFileName").val());
+
+                var btnclick = $("#" + Mappedbtn);
+                console.log("btnclick Value:", btnclick);
+                // Simulate button click (for postback if needed)
+                btnclick.click();
+               // __doPostBack(Mappedbtn, '');
+                var hiddenFieldValue = $("#hdnFileName").val();
+                var lbl = $("#" + labelId);
+
+                if (hiddenFieldValue) {
+                    lbl.text(hiddenFieldValue).css({ 'color': 'blue', 'text-decoration': 'underline' });
+                }
+                DisplayFileName(labelId);
+            }
+        }
+        function DisplayFileName(labelId) {
+            var hiddenFieldValue = $("#hdnFileName").val();
+            var lbl = $("#" + labelId);
+
+            if (hiddenFieldValue) {
+                lbl.text(hiddenFieldValue).css({ 'color': 'blue', 'text-decoration': 'underline' });
+            }
+        }
+</script>
+    <div id="dialog" class="disp-none">
+        <span>Because you have been inactive, your session is about to expire.</span>
+        <br />
+        <br />
+        Your session will expire in &nbsp;<span id="seconds" style="color: red;"></span>&nbsp; seconds.
+        
+    </div>
+    <script type="text/javascript">
+
+        function sformat(s) {
+            var fm = [
+                Math.floor(s / 60) % 60,
+                s % 60
+            ];
+            return $.map(fm, function (v, i) { return ((v < 10) ? '0' : '') + v; }).join(':');
+        }
+    </script>
+    <script type="text/javascript">
+        function divexpandcollapse(divname) {
+            var div = document.getElementById(divname);
+            var img = document.getElementById('img' + divname);
+
+            if (div.style.display == "none") {
+                div.style.display = "inline";
+                document.getElementById('img' + divname).className = 'icon-minus-sign-alt';
+
+            } else {
+                div.style.display = "none";
+                document.getElementById('img' + divname).className = 'icon-plus-sign-alt';
+            }
+        }
+
+        function ManipulateAll(ID) {
+            var img = document.getElementById('img' + ID);
+
+            if (img.className == 'icon-plus-sign-alt') {
+                img.className = 'icon-minus-sign-alt'
+                $("div[id*='" + ID + "']").css("display", "inline");
+                $("i[id*='" + ID + "']").removeClass('icon-plus-sign-alt');
+                $("i[id*='" + ID + "']").addClass('icon-minus-sign-alt');
+            } else {
+                img.className = 'icon-plus-sign-alt'
+                $("div[id*='" + ID + "']").css("display", "none");
+                $("i[id*='" + ID + "']").removeClass('icon-minus-sign-alt');
+                $("i[id*='" + ID + "']").addClass('icon-plus-sign-alt');
+            }
+        }
+
+        $(function () {
+
+            $(".txtTime").change(function () {
+
+                var test = "0";
+
+                var value = $(this).val();
+
+                if (value.indexOf("H") != -1 || value.indexOf("M") != -1) {
+                    this.focus();
+                    alert('Please enter valid Time');
+                    test = "1";
+                }
+
+                if (test == "1") {
+                    e.preventDefault();
+                }
+
+                return true;
+
+            });
+
+        });
+
+        $(document).on("click", ".dropdown-item", function () {
+
+            setTimeout(function () { $("body").addClass("loading"); }, 200);
+            deleteCookie();
+
+            var timeInterval = 500; // milliseconds (checks the cookie for every half second )
+
+            var loop = setInterval(function () {
+                if (IsCookieValid()) {
+                    $("body").removeClass("loading");
+                    clearInterval(loop)
+                }
+
+            }, timeInterval);
+        });
+
+        $(document).on("click", "a", function () {
+
+            if ($(this).val().includes("Export") || $(this).text().includes("Export") || $(this).val().includes("Excel") || $(this).text().includes("Excel") || $(this).val().includes("PDF") || $(this).text().includes("PDF") || $(this).val().includes("Upload") || $(this).text().includes("Upload") || $(this).val().includes("Bulk") || $(this).text().includes("Bulk") || $(this).find("span").hasClass("glyphicon-download") || $(this).find("i").hasClass("glyphicon-download") || $(this).find("i").hasClass("fa fa-download") || $(this).find("span").hasClass("fa fa-download")) {
+                setTimeout(function () { $("body").addClass("loading"); }, 200);
+                deleteCookie();
+
+                var timeInterval = 500; // milliseconds (checks the cookie for every half second )
+
+                var loop = setInterval(function () {
+                    if (IsCookieValid()) {
+                        $("body").removeClass("loading");
+                        clearInterval(loop)
+                    }
+                    else {
+                        $("body").removeClass("loading");
+                        clearInterval(loop)
+                    }
+
+                }, timeInterval);
+            }
+            else {
+
+                if ($(this).val().includes("Update Data")) {
+                    Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(function (sender, args) {
+                        // Show the loading bar
+                        $("#MainContent_Panel1").addClass("disp-none");
+                        $("body").addClass("loading Background");
+                    });
+                    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (sender, args) {
+                        // Hide the loading bar
+                        //$("#MainContent_Panel1").next().removeClass("loading Background");
+                        //$("body").removeClass("loading Background");
+                        $(location).attr('href', window.location.href);
+                    });
+                }
+            }
+        });
+
+        $(document).on("click", ".btn", function () {
+
+            if ($(this).val().includes("Export") || $(this).text().includes("Export") || $(this).val().includes("PDF") || $(this).text().includes("PDF") || $(this).val().includes("Upload") || $(this).text().includes("Upload") || $(this).val().includes("Bulk") || $(this).text().includes("Bulk") || $(this).find("span").hasClass("glyphicon-download") || $(this).find("i").hasClass("glyphicon-download") || $(this).find("i").hasClass("fa fa-download") || $(this).find("span").hasClass("fa fa-download") || $(this).val().includes("Print") || $(this).text().includes("Print")) {
+                setTimeout(function () { $("body").addClass("loading"); }, 200);
+                deleteCookie();
+
+
+                var timeInterval = 500; // milliseconds (checks the cookie for every half second )
+
+                var loop = setInterval(function () {
+                    if (IsCookieValid()) {
+                        $("body").removeClass("loading");
+                        clearInterval(loop)
+                    }
+                    else {
+                        $("body").removeClass("loading");
+                        clearInterval(loop)
+                    }
+
+                }, timeInterval);
+            }
+            else {
+
+                if ($(this).val().includes("Update Data")) {
+                    Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(function (sender, args) {
+                        // Show the loading bar
+                        $("#MainContent_Panel1").addClass("disp-none");
+                        $("body").addClass("loading Background");
+                    });
+                    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (sender, args) {
+                        // Hide the loading bar
+                        //$("#MainContent_Panel1").next().removeClass("loading Background");
+                        //$("body").removeClass("loading Background");
+                        $(location).attr('href', window.location.href);
+                    });
+                }
+            }
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(document).on('keydown', function (event) {
+            if (event.key == "Escape") {
+                return false;
+            }
+        });
+
+        $(window).unload(function () {
+            UpdateActivityLog();
+        });
+
+
+        function UpdateActivityLog() {
+
+            var id = $('#hfUserActId').val();
+
+            $.ajax({
+                type: "POST",
+                url: "AjaxFunction.aspx/UPDATE_ACTIVITY_LOG",
+                data: '{ID: "' + id + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
+
+        }
+
+        $(document).ready(function () {
+
+            if ($(location).attr('href').indexOf('NIWRS_FORM') != -1) {
+
+                $('.txtDate').each(function (index, element) {
+                    $(element).pikaday({
+                        field: element,
+                        format: 'DD-MMM-YYYY',
+                        yearRange: [1910, 2050],
+                        maxDate: new Date()
+                    });
+                });
+
+            }
+            else {
+
+                $('.txtDate').each(function (index, element) {
+                    $(element).pikaday({
+                        field: element,
+                        format: 'DD-MMM-YYYY',
+                        yearRange: [1910, 2050]
+                    });
+                });
+
+            }
+
+            $('.txtDateNoFuture').each(function (index, element) {
+                $(element).pikaday({
+                    field: element,
+                    format: 'DD-MMM-YYYY',
+                    yearRange: [1910, 2050],
+                    maxDate: new Date()
+                });
+            });
+
+            $(".txtDate").keypress(function (e) {
+                e.preventDefault();
+            });
+
+            $(".txtDateNoFuture").keypress(function (e) {
+                e.preventDefault();
+            });
+
+            $(".txtDate").prop("readonly", "readonly");
+
+            $(".txtDateNoFuture").prop("readonly", "readonly");
+
+            $('.txtDateMask').each(function (index, element) {
+                $(element).inputmask("dd/mm/yyyy", { placeholder: "dd/mm/yyyy" });
+            });
+
+            $('.txtTime').each(function (index, element) {
+                $(element).inputmask(
+                    "hh:mm", {
+                    placeholder: "HH:MM",
+                    insertMode: false,
+                    showMaskOnHover: false,
+                    hourFormat: "24"
+                });
+            });
+
+
+            $('.txtuppercase').keyup(function () {
+                $(this).val($(this).val().toUpperCase());
+            });
+
+            $('.txtuppercase').keydown(function (e) {
+
+                var key = e.keyCode;
+                if (key === 189 && e.shiftKey === true) {
+                    return true;
+                }
+                else if ((key == 189) || (key == 109)) {
+                    return true;
+                }
+                else if (e.ctrlKey || e.altKey) {
+                    e.preventDefault();
+                }
+                else {
+                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                        e.preventDefault();
+                    }
+                }
+
+            });
+        });
+
+
+        $(document).on("click", ".cls-btnSave", function () {
+            var test = "0";
+
+            $('.required').each(function (index, element) {
+                var value = $(this).val();
+                var ctrl = $(this).prop('type');
+
+                if (ctrl == "select-one") {
+                    if (value == "0" || value == null || value == "Select") {
+                        if ($(this).hasClass("select") == true) {
+                            $(this).next("span").addClass("brd-1px-redimp");
+                            test = "1";
+                        }
+                        else {
+                            $(this).addClass("brd-1px-redimp");
+                            test = "1";
+                        }
+                    }
+                }
+                else if (ctrl == "text" || ctrl == "textarea") {
+                    if (value == "") {
+                        if ($(this).hasClass("ckeditor")) {
+                            $(this).next('div').addClass("brd-1px-redimp");
+                        }
+                        else {
+                            $(this).addClass("brd-1px-redimp");
+                        }
+                        test = "1";
+                    }
+                }
+            });
+
+            if (test == "1") {
+                return false;
+            }
+            return true;
+        });
+
+
+        function pageLoad() {
+
+            $(".Datatable").dataTable({
+                "bSort": true,
+                "ordering": true,
+                "bDestroy": true,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                stateSave: false
+            });
+
+            $(".Datatable").parent().parent().addClass('fixTableHead');
+
+            $(".Datatable1").parent().parent().addClass('fixTableHead');
+
+            $(document).ready(function () {
+                var table = $('.Datatable').DataTable();
+
+                
+                table.search('').draw(); 
+
+                
+                $('.dataTables_filter input').val('');
+            });
+
+            $(document).ready(function () {
+                var table = $('.Datatable1').DataTable();
+
+
+                table.search('').draw();
+
+
+                $('.dataTables_filter input').val('');
+            });
+
+
+            if ($(location).attr('href').indexOf('NIWRS_FORM') != -1) {
+
+                $('.txtDate').each(function (index, element) {
+                    $(element).pikaday({
+                        field: element,
+                        format: 'DD-MMM-YYYY',
+                        yearRange: [1910, 2050],
+                        maxDate: new Date()
+                    });
+                });
+
+            }
+            else {
+
+                $('.txtDate').each(function (index, element) {
+                    $(element).pikaday({
+                        field: element,
+                        format: 'DD-MMM-YYYY',
+                        yearRange: [1910, 2050]
+                    });
+                });
+
+            }
+
+            $('.txtDateNoFuture').each(function (index, element) {
+                $(element).pikaday({
+                    field: element,
+                    format: 'DD-MMM-YYYY',
+                    yearRange: [1910, 2050],
+                    maxDate: new Date(),
+                });
+            });
+
+            $('.txtDateMask').each(function (index, element) {
+                $(element).inputmask("dd/mm/yyyy", { placeholder: "dd/mm/yyyy" });
+            });
+
+            $('.txtTime').each(function (index, element) {
+                $(element).inputmask(
+                    "hh:mm", {
+                    placeholder: "HH:MM",
+                    insertMode: false,
+                    showMaskOnHover: false,
+                    hourFormat: "24"
+                });
+            });
+
+            $('.txtuppercase').keyup(function () {
+                $(this).val($(this).val().toUpperCase());
+            });
+
+            $('.txtuppercase').keydown(function (e) {
+
+                var key = e.keyCode;
+                if (key === 189 && e.shiftKey === true) {
+                    return true;
+                }
+                else if ((key == 189) || (key == 109)) {
+                    return true;
+                }
+                else if (e.ctrlKey || e.altKey) {
+                    e.preventDefault();
+                }
+                else {
+                    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                        e.preventDefault();
+                    }
+                }
+
+            });
+
+        }
+
+        function SetSideBar() {
+
+            if (sessionStorage.getItem("SessionSideBarPos") == 'Close') {
+
+                sessionStorage.setItem("SessionSideBarPos", "Open");
+
+            }
+            else {
+
+                sessionStorage.setItem("SessionSideBarPos", "Close");
+
+            }
+        }
+
+        //document.onkeypress = function () {
+        //    document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+        //    checkSession();
+        //};
+
+        //document.onmouseup = function () {
+        //    document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+        //    checkSession();
+        //};
+
+
+        $(document).ready(function () {
+
+            if (sessionStorage.getItem("SessionSideBarPos") == 'Close') {
+
+                $('.right-side').addClass('strech');
+                $('.left-side').addClass('collapse-left');
+
+            }
+            else {
+
+                sessionStorage.setItem("SessionSideBarPos", "Open");
+                $('.right-side').removeClass('strech');
+                $('.left-side').removeClass('collapse-left');
+
+            }
+
+        });
+
+        function getCookieUsername(name) {
+            let value = `; ${document.cookie}`;
+            let parts = value.split(`; ${name}=`);
+            if (parts.length === 2) {
+                return /*parts.pop().split(';').shift();*/
+                decodeURIComponent(parts.pop().split(';').shift());
+            }
+            return null; // Return null if cookie is not found
+        }
+
+        function checkUserSession() {
+            //
+            var cookieName = '<%=Session["PROJECTIDTEXT"] %>' + "_WAI_Name";
+
+          //  var UserName = getCookieUsername('WAI_Name').split('=')[1];
+
+            var UserName = getCookieUsername('WAI_Name'); // Get the username from the cookie
+
+            if (UserName != undefined && UserName != '' && $('#Lbl_User_Info').text() != UserName) {
+                alert('Another user logged in after you. Any unsaved changes may be lost. Please close this tab.');
+                window.location.href = 'about:blank';
+            }
+
+            // Set a timer to check the session timeout every minute
+           // setTimeout(checkUserSession, 1000);
+
+            setTimeout(checkUserSession, 60000);
+        }
+
+       <%-- function checkSession() {
+        //    
+            // Get the session timeout value from the server-side (in minutes)
+            var sessionTimeout = "<%= Session.Timeout %>";
+
+            // Convert the session timeout to milliseconds
+            var sessionTimeoutInMilliseconds = sessionTimeout * 60 * 1000;
+
+            // Get the current time
+            var currentTime = new Date().getTime();
+
+            // Check if the sessionTimeout cookie exists
+            var sessionCookie = document.cookie.match('(^|;) ?sessionTimeout=([^;]*)(;|$)');
+
+            if (sessionCookie) {
+                var sessionStartTime = new Date(sessionCookie[2]).getTime();
+                var remainingTime = sessionTimeoutInMilliseconds - (currentTime - sessionStartTime);
+
+                // Update the UI to show the remaining time
+                $("#secondsIdle").html(msToTime(remainingTime));
+
+                // If remaining time is less than or equal to 5 minutes, show a warning
+                if (remainingTime <= 300000) {
+                    if (confirm("Your session is about to expire. Do you want to continue your session?")) {
+                        // Reset the session timeout cookie
+                        document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+                    }
+                } else if (remainingTime < 0) {
+                    // Redirect to session expired page if session has expired
+                    deleteCookie();
+                    window.location = "SessionExpired.aspx";
+                }
+            } else {
+                // Initialize the session timeout cookie if it doesn't exist
+                document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+            }
+
+            // Recheck the session every second
+            setTimeout(checkSession, 1000);
+        }--%>
+
+
+
+<%--        function checkSession() {
+            
+            // Get the session timeout value from the server-side
+            var sessionTimeout = "<%= Session.Timeout %>";
+
+
+            alert(sessionTimeout);
+
+            // Convert the session timeout value to minutes
+            var sessionTimeoutInMinutes = sessionTimeout * 60 * 1000;
+
+            alert(sessionTimeoutInMinutes);
+
+
+
+            // Calculate the remaining session timeout
+            if (document.cookie.match('(^|;) ?sessionTimeout=([^;]*)(;|$)') != null) {
+                var remainingTime = sessionTimeoutInMinutes - (new Date().getTime() - new Date(document.cookie.match('(^|;) ?sessionTimeout=([^;]*)(;|$)')[2]).getTime());
+
+                $("#secondsIdle").html(msToTime(remainingTime));
+
+                // If the remaining time is less than 5 minutes, display an alert message
+              //  if (300 == parseInt(remainingTime / 1000)) {
+                if (remainingTime <= 300000) { // 5 minutes left
+
+                    if (confirm("Your session is about to expire. Do you want to continue your session?")) {
+                        // If the user clicks "OK", reset the session timeout
+                        document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+                        $("#secondsIdle").html(msToTime(sessionTimeoutInMinutes - (new Date().getTime() - new Date(document.cookie.match('(^|;) ?sessionTimeout=([^;]*)(;|$)')[2]).getTime())));
+                    }
+                }
+                else {
+                    //if (Math.sign(parseInt(remainingTime / 1000)) == "-1") {
+                    //    deleteCookie();
+                    //    window.location = "SessionExpired.aspx";
+                    //}
+                    if (remainingTime < 0) {
+                        deleteCookie();
+                        window.location = "SessionExpired.aspx";
+                    }                }
+            }
+            else {
+                document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+            }
+
+            // Set a timer to check the session timeout every minute
+            setTimeout(checkSession, 1000);           
+        }--%>
+
+
+        // Flag to track if user selected "Cancel" to avoid repeated prompts
+        let sessionExpirationScheduled = false;
+
+        function checkSession() {
+           
+            // Get the session timeout value from the server-side (in minutes)
+            var sessionTimeout = "<%= Session.Timeout %>";
+
+            if (isNaN(sessionTimeout)) sessionTimeout = 20; // Default to 20 if not provided
+
+            // Convert the session timeout to milliseconds
+            var sessionTimeoutInMilliseconds = sessionTimeout * 60 * 1000;
+
+            // Get the current time
+            var currentTime = new Date().getTime();
+
+            // Check if the sessionTimeout cookie exists
+            var sessionCookie = document.cookie.match('(^|;) ?sessionTimeout=([^;]*)(;|$)');
+
+            if (sessionCookie) {
+                var sessionStartTime = new Date(sessionCookie[2]).getTime();
+                var remainingTime = sessionTimeoutInMilliseconds - (currentTime - sessionStartTime);
+
+
+                // Update the UI to show the remaining time
+                $("#secondsIdle").html(msToTime(remainingTime));
+
+                if (remainingTime > 0) {
+                    if (!sessionExpirationScheduled && remainingTime <= 120000) {
+                        // If remaining time is less than or equal to 2 minutes, show a warning
+                        if (confirm("Your session is about to expire. Do you want to continue your session?")) {
+                            // Reset the session timeout cookie
+                            document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+
+                            // Reset the UI to show the full session timeout
+                            $("#secondsIdle").html(msToTime(sessionTimeoutInMilliseconds));
+                        } else {
+                            // User chose "Cancel"; schedule session expiration and stop further prompts
+                            sessionExpirationScheduled = true;
+                            setTimeout(function () {
+                                deleteCookie();
+                                window.location = "SessionExpired.aspx";
+                            }, remainingTime);
+                        }
+                    }
+                } else {
+                    // If session has expired, redirect to the session expired page
+                    deleteCookie();
+                    window.location = "SessionExpired.aspx";
+                }
+            } else {
+                // Initialize the session timeout cookie if it doesn't exist
+                document.cookie = "sessionTimeout=" + new Date() + "; path=/";
+            }
+
+            // Recheck the session every second
+            setTimeout(checkSession, 1000); // Update every second to reflect the countdown
+        }
+
+
+        function msToTime(duration) {
+
+            var seconds = parseInt((duration / 1000) % 60)
+                , minutes = parseInt((duration / (1000 * 60)) % 60);
+
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            return minutes + ":" + seconds;
+        }
+
+        // Call this function during logout
+        function handleLogout() {
+            deleteCookie(); // Clear the sessionTimeout cookie
+        }
+
+       
+  
+
+    </script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .menu {
+            text-align: center;
+        }
+
+        .fontstyle {
+            font-size: medium;
+        }
+    </style>
+
+        
+</head>
+<body oncontextmenu="return false;" class="skin-black" onload="checkSession(); checkUserSession();">
+    <!-- header logo: style can be found in header.less -->
+    <div class="overlay"></div>
+    <header class="header">
+        <asp:LinkButton ID="lbtnhome" Visible="false" runat="server" OnClick="lbtnhome_Click"></asp:LinkButton>
+        <a href="HomePage.aspx?menu=Home" class="logo" runat="server" id="anchorproj" onclick="return CheckDataEntrySession(this);" style="font-size: 12px; font-family: Arial Rounded MT; font-style: italic;"></a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <div class="navbar-left inline">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="navbar-btn sidebar-toggle" onclick="return SetSideBar();" data-toggle="offcanvas" role="button">
+                            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+                                class="icon-bar"></span><span class="icon-bar"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <div runat="server" id="divUserRole" visible="false">
+                            <asp:Label ID="Label15" Text="User Role:" CssClass="navbar-brand" Style="color: black; font-weight: bold; padding-right: 0px; font-size: medium;"
+                                runat="server"></asp:Label>
+                            <asp:Label ID="lblUserRole" CssClass="navbar-brand" Style="color: black; font-weight: bold; padding-left: 5px; font-size: medium;"
+                                runat="server"></asp:Label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-right inline">
+                <ul class="nav navbar-nav">
+                    <li style="font-weight: bold; font-family: Arial;" class="disp-none">
+                        <a>
+                            <span id="session_indication" style="color: blue">Session Time: &nbsp;&nbsp;</span><asp:Label ID="secondsIdle" runat="server" Style="color: red;" Text=""></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    </li>
+                    <li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i><span>
+                            <asp:Label ID="Welcome" runat="server" Style="color: #9227be; font-family: Arial; font-weight: bold; font-size: 12px;" Text=" Welcome"></asp:Label>
+                            <asp:Label ID="Lbl_User_Info" runat="server" Style="color: Black; font-size: medium;"></asp:Label><i
+                                class="caret"></i></span> </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header bg-light-blue">
+                                <i class="glyphicon glyphicon-user" style="font-size: 90px;"></i>
+                                <p>
+                                    <asp:Label ID="Lbl_User_Dept" runat="server" Font-Size="Smaller"></asp:Label>
+                                    <small>
+                                        <asp:Label ID="Lbl_User_Country" runat="server" Font-Size="Smaller" ForeColor="Black"></asp:Label>
+                                    </small>
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <div class="text-center">
+                                    <asp:Label ID="Lbl_PWD_Exp1" runat="server" Font-Names="Arial" Style="font-size: small;"
+                                        ForeColor="Red" Visible="False"></asp:Label>
+                                </div>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div>
+                                    <asp:HyperLink ID="HyperLink5" runat="server" class="btn btn-success btn-flat" Style="font-size: unset;"
+                                        NavigateUrl="~/Change_Password.aspx" Font-Names="Arial" Width="100%"
+                                        Font-Underline="False">Change Password</asp:HyperLink>
+                                </div>
+                                <hr />
+                                <hr />
+                                <div>
+                                    <asp:HyperLink ID="HyperLink4" runat="server" class="btn btn-danger btn-flat" Style="font-size: unset;"
+                                        NavigateUrl="~/Login.aspx" Font-Names="Arial" Width="100%" Font-Underline="False" OnClientClick="handleLogout(); return false;">Log Out</asp:HyperLink>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <!-- Left side column. contains the logo and sidebar -->
+        <form id="Form1" method="post" runat="server">
+            <aside class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <asp:Label runat="server" ID="lblVersion" Font-Bold="true" Style="color: white; margin-left: 25%;"
+                        Text="System Version: 2.1"></asp:Label>
+                    <br />
+                    <br />
+                    <div id="mainmenu" runat="server" style="line-height: 0px">
+                        <asp:ListView runat="server" ID="lstmenu" OnItemCommand="lstmenu_ItemCommand" OnItemDataBound="lstmenu_ItemDataBound">
+                            <ItemTemplate>
+                                <ul class="sidebar-menu" style="height: 28px;">
+                                    <li id="li1" runat="server" onclick="return CheckDataEntrySession(this);">
+                                        <a id="amain" runat="server" title='<%# Eval("FunctionName") %>' href='<%# Eval("NavigationURL")%>'><i id="ICONCLASS" runat="server" class="fa fa-book width10px"></i>&nbsp;&nbsp;
+                                            <span><%# Eval("FunctionName") %></span>
+                                        </a>
+                                    </li>
+                                    <br />
+                                    <br />
+                                </ul>
+                            </ItemTemplate>
+                        </asp:ListView>
+                    </div>
+                    <div id="sub" runat="server">
+                        <asp:ListView runat="server" ID="lstsubmenu" OnItemDataBound="lstsubmenu_ItemDataBound">
+                            <ItemTemplate>
+                                <ul class="sidebar-menu">
+                                    <li id="lisub" runat="server"><a id="a1" runat="server" style="cursor: pointer;" onclick="return setNavigationPath(this);"
+                                        href='<%# Eval("NavigationURL")%>'><i class="fa fa-circle" style="color: white;"></i><span>
+                                            <%# Eval("FunctionName") %></span> <i id="i1" runat="server"></i></a>
+                                        <asp:LinkButton ID="lbtnmenu" Visible="false" CommandName="menu" CommandArgument='<%# Eval("FunctionName") %>'
+                                            Text='<%# Eval("FunctionName") %>' runat="server">
+                                        </asp:LinkButton>
+                                        <asp:HiddenField runat="server" ID="hdnPath" />
+                                        <ul class="treeview-menu">
+                                            <asp:ListView runat="server" ID="lstsubmenu1" OnItemDataBound="lstsubmenu1_ItemDataBound">
+                                                <ItemTemplate>
+                                                    <li id="li2" runat="server"><a id="a2" runat="server" style="cursor: pointer;" onclick="return setNavigationPath(this);" href='<%# Eval("NavigationURL")%>'>
+                                                        <i class="fa fa-angle-double-right" style="color: white;"></i>
+                                                        <i id="i2" runat="server"></i>
+                                                        <span commandargument='<%# Eval("FunctionName") %>'><%# Eval("FunctionName") %></span>
+                                                    </a>
+                                                        <asp:LinkButton ID="lbtnmenu1" Visible="false" Text='<%# Eval("FunctionName") %>'
+                                                            CommandName="menu" CommandArgument='<%# Eval("FunctionName") %>' runat="server"></asp:LinkButton>
+                                                        <asp:HiddenField runat="server" ID="hdnPath1" />
+                                                        <ul class="treeview-menu">
+                                                            <asp:ListView runat="server" ID="lstsubmenu2" OnItemDataBound="lstsubmenu2_ItemDataBound">
+                                                                <ItemTemplate>
+                                                                    <li id="li3" runat="server"><a id="a3" runat="server" style="cursor: pointer;" onclick="return setNavigationPath(this);" href='<%# Eval("NavigationURL")%>'>
+                                                                        <i id="i3" runat="server"></i><i class="fa fa-caret-right" style="color: white;"></i><span>
+                                                                            <%# Eval("FunctionName") %></span> </a>
+                                                                        <asp:LinkButton ID="lbtnmenu2" Visible="false" Text='<%# Eval("FunctionName") %>'
+                                                                            CommandName="menu" CommandArgument='<%# Eval("FunctionName") %>' runat="server"></asp:LinkButton>
+                                                                        <asp:HiddenField runat="server" ID="hdnPath2" />
+                                                                        <ul class="treeview-menu">
+                                                                            <asp:ListView runat="server" ID="lstsubmenu3" OnItemDataBound="lstsubmenu3_ItemDataBound">
+                                                                                <ItemTemplate>
+                                                                                    <li id="li4" runat="server"><a id="a4" runat="server" style="cursor: pointer;" onclick="return setNavigationPath(this);" href='<%# Eval("NavigationURL")%>'>
+                                                                                        <span>
+                                                                                            <%# Eval("FunctionName") %></span> <i id="i4" runat="server"></i></a>
+                                                                                        <asp:LinkButton ID="lbtnmenu3" Text='<%# Eval("FunctionName") %>' Visible="false"
+                                                                                            CommandName="menu" CommandArgument='<%# Eval("FunctionName") %>' runat="server"><i class="fa fa-angle-left pull-right" style="color:white;"></i> </asp:LinkButton>
+                                                                                        <asp:HiddenField runat="server" ID="hdnPath3" />
+                                                                                    </li>
+                                                                                </ItemTemplate>
+                                                                            </asp:ListView>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ItemTemplate>
+                                                            </asp:ListView>
+                                                        </ul>
+                                                    </li>
+                                                </ItemTemplate>
+                                            </asp:ListView>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </ItemTemplate>
+                        </asp:ListView>
+                    </div>
+                </section>
+            </aside>
+            <aside class="right-side">
+                <section style="display: inline-flex;">
+                    <div class="label" style="margin-top: 4px">
+                        <a href="HomePage.aspx?menu=Home" style="color: black;" onclick="return CheckDataEntrySession(this);">&nbsp;Home</a>&nbsp;&nbsp;<i
+                            class="fa fa-angle-right" style="color: black;"></i>
+                        <asp:Label ID="lblnavmenu" runat="server" />&nbsp;&nbsp;<i
+                            class="fa fa-angle-right" style="color: black;"></i>
+                        <asp:Label ID="lblnavmenuuName" runat="server" />
+                    </div>
+                </section>
+                <section class="content" style="padding-left: 10px; padding-right: 10px;">
+                    <div>
+                        <asp:Label ID="lblErrorMsg" runat="server" Visible="false" Text="Label"></asp:Label>
+                    </div>
+
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                    <div class="row">
+                        <div class="col-xs-12 connectedSortable">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <section class="col-lg-6 connectedSortable">
+                        </section>
+                        <section class="col-lg-6 connectedSortable">
+                        </section>
+                    </div>
+                </section>
+            </aside>
+            <asp:HiddenField runat="server" ID="hfUserActId" />
+            <asp:HiddenField ID="hdn_Value" runat="server" Value="" />
+            <asp:HiddenField ID="hdnQuery_OverrideId" runat="server" Value="" />
+            <asp:HiddenField ID="hdnQueryVariableName" runat="server" Value="" />
+            <div id="popup_Override_ReadOnly" title="Reason" class="disp-none">
+                <div id="grdOverrideComments_ReadOnly" style="overflow-y: auto; max-height: 270px; font-size: small;">
+                </div>
+                <div class="formControl disp-none">
+                    <asp:TextBox ID="txt_Overrideid_ReadOnly" runat="server"></asp:TextBox>
+                </div>
+                <br />
+                <div id="overrideReason_ReadOnly" class="row">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="Label17" runat="server" CssClass="wrapperLable" Text="Action"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:DropDownList ID="drpoverrideReason_ReadOnly" CssClass="width245px form-control" runat="server" onchange="drpoverrideReason_ReadOnly_Change();">
+                            <asp:ListItem Value="0">--Select--</asp:ListItem>
+                            <asp:ListItem Value="Re-query">Re-query</asp:ListItem>
+                            <asp:ListItem Value="Closed query">Close query</asp:ListItem>
+                            <asp:ListItem Value="Routed To MM">Route To MM</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="row" id="OverrideComments_ReadOnly">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="lblOverrideComm_ReadOnly" runat="server" CssClass="wrapperLable" Text="Comments"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:TextBox ID="txt_OverrideComm_ReadOnly" CssClass="form-control" TextMode="MultiLine" Width="700px" MaxLength="1000" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="row disp-none" id="DivQueryText_ReadOnly">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="Label19" runat="server" CssClass="wrapperLable" Text="Query Text"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:TextBox ID="txtQueryText_ReadOnly" CssClass="form-control" TextMode="MultiLine" MaxLength="1000" Width="700px" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div style="margin-top: 10px">
+                    <asp:Button ID="Button1" runat="server" Style="margin-left: 145px;" Text="Submit" CssClass="btn btn-sm btn-primary"
+                        OnClientClick="UpdateOverrideData_ReadOnly();" />
+                    <asp:Button ID="Button2" runat="server" Text="Cancel" CssClass="btn btn-sm btn-danger"
+                        OnClientClick="CancelOverrideData_ReadOnly(); return false;" />
+                </div>
+            </div>
+            <div id="popup_Override" title="Reason" class="disp-none">
+                <div id="grdOverrideComments" style="overflow-y: auto; max-height: 270px; font-size: small;">
+                </div>
+                <div class="formControl disp-none">
+                    <asp:TextBox ID="txt_Overrideid" runat="server"></asp:TextBox>
+                </div>
+                <br />
+                <%-- <div id="overrideReason" class="row">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="Label20" runat="server" CssClass="wrapperLable" Text="Action"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-10">
+                        <asp:DropDownList ID="drpoverrideReason" CssClass="width245px form-control" runat="server" onchange="drpoverrideReason_Change();">
+                            <asp:ListItem Value="0">--Select--</asp:ListItem>
+                            <asp:ListItem Value="Answer and update the data">Answer and update the data</asp:ListItem>
+                            <asp:ListItem Value="Answer the query">Answer the query</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>--%>
+                <div id="DivAction" class="row">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="Label21" runat="server" CssClass="wrapperLable" Text="Reason"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:DropDownList ID="drpAction" CssClass="width245px form-control" runat="server" onchange="drpAction_Change();">
+                            <asp:ListItem Value="0">--Select--</asp:ListItem>
+                            <asp:ListItem Value="Transcription error">Transcription error</asp:ListItem>
+                            <asp:ListItem Value="Data as per source">Data as per source</asp:ListItem>
+                            <asp:ListItem Value="New data available">New data available</asp:ListItem>
+                            <asp:ListItem Value="Other">Other</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="row disp-none" id="OverrideComments">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="lblOverrideComm" runat="server" CssClass="wrapperLable" Text="Comments"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:TextBox ID="txt_OverrideComm" CssClass="form-control" TextMode="MultiLine" Width="700px" MaxLength="1000" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div style="margin-top: 10px">
+                    <asp:Button ID="btnUpdateOverride" runat="server" Style="margin-left: 145px;" Text="Submit" CssClass="btn btn-sm btn-primary"
+                        OnClientClick="UpdateOverrideData();" />
+                    <asp:Button ID="btnCancelOveride" runat="server" Text="Cancel" CssClass="btn btn-sm btn-danger"
+                        OnClientClick="CancelOverrideData(); return false;" />
+                </div>
+            </div>
+            <div id="popup_MQ" title="Raise Manual Query" class="disp-none">
+                <div id="ModelPopup">
+                    <div class="disp-none">
+                        <asp:Label ID="txtMQ_TableName" runat="server"></asp:Label>
+                        <asp:Label ID="txtMQ_VariableName" runat="server"></asp:Label>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <asp:Label ID="Label4" runat="server" CssClass="wrapperLable" Text="Module Name" Style="color: black; font-weight: bold; font-size: 12px;"></asp:Label>
+                        </div>
+                        <div class="col-md-9">
+                            <asp:Label ID="lblMQModuleName" CssClass="form-control-model" runat="server" Style="min-width: 250px;"></asp:Label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <asp:Label ID="Label8" runat="server" CssClass="wrapperLable" Text="Field Name" Style="color: black; font-weight: bold; font-size: 12px;"></asp:Label>
+                        </div>
+                        <div class="col-md-9">
+                            <asp:Label ID="lblMQFieldName" CssClass="form-control-model" runat="server" Style="overflow-y: auto; max-height: 100px; min-height: 21px; min-width: 250px;">
+                            </asp:Label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <asp:Label ID="Label9" runat="server" CssClass="wrapperLable" Text="Comment" Style="color: black; font-weight: bold; font-size: 12px;"></asp:Label>
+                        </div>
+                        <div class="col-md-9">
+                            <asp:TextBox ID="txtMQComment" CssClass="form-control-model" TextMode="MultiLine" MaxLength="1000"
+                                runat="server" Style="width: 100%;"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <div class="col-md-3">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-9">
+                        <asp:Button ID="btnSubmit_MQ_Comment" runat="server" Style="margin-left: 37px; height: 34px; font-size: 14px; margin-top: 10px;" CssClass="btn btn-DarkGreen"
+                            Text="Submit" OnClientClick="return Save_MQ(this);" />
+                        &nbsp;
+                            &nbsp;
+                            <asp:Button ID="btnCancel" runat="server"
+                                CssClass="btn btn-DarkGreen" Style="height: 34px; width: 71px; font-size: 14px; margin-top: 10px;" Text="Cancel" OnClientClick="Cancel_MQ();" />
+                    </div>
+                </div>
+            </div>
+            <div id="popup_Delayed_REASON" title="Reason For Delay" class="disp-none">
+                <div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <asp:Label ID="Label1" runat="server" Text="Reason By :" Style="color: black; font-weight: bold; font-size: 12px; margin-left: -15px;"></asp:Label>
+                            </div>
+                            <div class="col-md-8">
+                                <asp:Label ID="lblDelayed_ReasonBy" runat="server" Style="min-width: 250px;"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <asp:Label ID="Label2" runat="server" Text="Datetime(Server) :" Style="color: black; font-weight: bold; font-size: 12px; margin-left: -15px;"></asp:Label>
+                            </div>
+                            <div class="col-md-8">
+                                <asp:Label ID="lblDelayed_DTServer" runat="server" Style="min-width: 250px;"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <asp:Label ID="Label3" runat="server" Text="Datetime(User),(Timezone) :" Style="color: black; font-weight: bold; font-size: 12px; margin-left: -15px;"></asp:Label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <asp:Label ID="lblDelayed_DTUser" runat="server" Style="min-width: 250px;"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <asp:Label ID="Label11" runat="server" Text="Comment :" Style="color: black; font-weight: bold; font-size: 12px; margin-left: -15px;"></asp:Label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <asp:Label ID="lblDelayedReason" runat="server" Style="min-width: 100%;"></asp:Label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="popup_Deleted_Req_REASON" title="Downgrading Request Reason" class="disp-none">
+                <div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <asp:Label ID="Label12" runat="server" Text="Request By :" Style="color: black; font-weight: bold; font-size: 12px; margin-left: -15px;"></asp:Label>
+                            </div>
+                            <div class="col-md-8">
+                                <asp:Label ID="lblDeleted_Req_ReasonBy" runat="server" Style="min-width: 250px;"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <asp:Label ID="Label14" runat="server" Text="Datetime(Server) :" Style="color: black; font-weight: bold; font-size: 12px; margin-left: -15px;"></asp:Label>
+                            </div>
+                            <div class="col-md-8">
+                                <asp:Label ID="lblDeleted_Req_DTServer" runat="server" Style="min-width: 250px;"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <asp:Label ID="Label16" runat="server" Text="Datetime(User),(Timezone) :" Style="color: black; font-weight: bold; font-size: 12px; margin-left: -15px;"></asp:Label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <asp:Label ID="lblDeleted_Req_DTUser" runat="server" Style="min-width: 250px;"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <asp:Label ID="Label18" runat="server" Text="Comment :" Style="color: black; font-weight: bold; font-size: 12px; margin-left: -15px;"></asp:Label>
+
+                            </div>
+                            <div class="col-md-8">
+                                <asp:Label ID="lblDeleted_Req_Reason" runat="server" Style="min-width: 100%;"></asp:Label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="popup_OpenQuery" title="Open Query" class="disp-none">
+                <div id="divOpenQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="popup_AnsQuery" title="Answered Query" class="disp-none">
+                <div id="divAnsQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="popup_ClosedQuery" title="Closed Query" class="disp-none">
+                <div id="DivClosedQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="Popup_ShowQryComment" title="Query Comment" class="disp-none">
+                <div id="divShowQryComment">
+                </div>
+            </div>
+            <div id="Popup_Show_MM_QryHistory" title="MM Query History" class="disp-none">
+                <div id="divShow_MM_QryHistory">
+                </div>
+            </div>
+            <div id="popup_AuditTrail" title="Audit Trail" class="disp-none">
+                <div id="DivAuditTrail" style="font-size: small;">
+                </div>
+            </div>
+            <div id="popup_Notes" title="Contextual Notes" class="disp-none">
+                <div id="grdNotes">
+                </div>
+            </div>
+            <div id="popup_Docs" title="Uploaded Document" class="disp-none">
+                <div id="grdDocs">
+                </div>
+            </div>
+            <div id="popup_FieldComments" title="Comments" class="disp-none">
+                <div id="grdfieldComments" style="overflow-y: auto; max-height: 275px;">
+                </div>
+                <div class="disp-none">
+                    <asp:Label ID="lblVariableName" runat="server"></asp:Label>
+                    <asp:Label ID="lblFieldName" runat="server"></asp:Label>
+                </div>
+                <br />
+                <div id="divAddComment" class="formControl" style="display: -webkit-inline-box;">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <asp:Label ID="lblFieldComments" runat="server" CssClass="wrapperLable" Text="Comments"></asp:Label>&nbsp&nbsp
+                        </div>
+                        <div class="col-md-10">
+                            <asp:TextBox ID="txtFieldComments" CssClass="form-control" Style="width: 600px;" TextMode="MultiLine" MaxLength="2000" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            &nbsp&nbsp
+                        </div>
+                        <div class="col-md-4">
+                            <asp:Button ID="btnSaveFieldComments" runat="server" Style="margin-left: 10px;" CssClass="btn btn-sm btn-primary"
+                                Text="Submit" OnClientClick="saveFieldComments();" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="popup_OpenAllQuery" title="Open Query Details" class="disp-none">
+                <div id="divOpenAllQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="popup_AnsAllQuery" title="Answered Query" class="disp-none">
+                <div id="divAnsAllQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="popup_ClosedAllQuery" title="Closed Query" class="disp-none">
+                <div id="DivClosedAllQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="popup_AuditTrailALL" title="Audit Trail" class="disp-none">
+                <div id="DivAuditTrailALL" style="font-size: small;">
+                </div>
+            </div>
+
+            <div id="popup_KitComments" title="Comments" class="disp-none">
+                <div id="divkitCommnet" style="font-size: small;">
+                </div>
+                <div class="disp-none">
+                    <asp:Label ID="lblKitNo" runat="server"></asp:Label>
+                </div>
+                <br />
+            </div>
+
+            <%-----------------------SAE PORTAL------------%>
+            <div id="SAE_popup_AuditTrail" title="Audit Trail" class="disp-none">
+                <div id="SAE_DivAuditTrail" style="font-size: small;">
+                </div>
+            </div>
+            <div id="SAE_popup_FieldComments" title="Comments" class="disp-none">
+                <div id="SAE_grdfieldComments" style="overflow-y: auto; max-height: 275px;">
+                </div>
+                <div class="disp-none">
+                    <asp:Label ID="lblSAE_VariableName" runat="server"></asp:Label>
+                    <asp:Label ID="lblSAE_FieldName" runat="server"></asp:Label>
+                </div>
+                <br />
+                <div id="SAE_divAddComment" class="formControl" style="display: -webkit-inline-box;">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <asp:Label ID="lblSAE_FieldComments" runat="server" CssClass="wrapperLable" Text="Comments"></asp:Label>&nbsp&nbsp
+                        </div>
+                        <div class="col-md-10">
+                            <asp:TextBox ID="txtSAE_FieldComments" CssClass="form-control" Style="width: 600px;" TextMode="MultiLine" MaxLength="2000" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            &nbsp&nbsp
+                        </div>
+                        <div class="col-md-4">
+                            <asp:Button ID="btnSAE_SaveFieldComments" runat="server" Style="margin-left: 10px;" CssClass="btn btn-sm btn-primary"
+                                Text="Submit" OnClientClick="SAE_saveFieldComments();" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="SAE_popup_OpenQuery" title="Query Details" runat="server" class="disp-none">
+                <div id="SAE_divOpenQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="SAE_popup_AnsQuery" title="Answered Query" class="disp-none">
+                <div id="SAE_divAnsQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="SAE_popup_ClosedQuery" title="Closed Query" class="disp-none">
+                <div id="SAE_DivClosedQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="SAE_Popup_ShowQryComment" title="Query Comment" class="disp-none">
+                <div id="SAE_divShowQryComment">
+                </div>
+            </div>
+            <div id="SAE_OpenAllQuery" title="Open Query Details" class="disp-none">
+                <div id="SAE_divOpenAllQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="SAE_popup_AnsAllQuery" title="Answered Query" class="disp-none">
+                <div id="SAE_divAnsAllQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="SAE_popup_ClosedAllQuery" title="Closed Query" class="disp-none">
+                <div id="SAE_DivClosedAllQuery" style="font-size: small;">
+                </div>
+            </div>
+            <div id="SAE_popup_AuditTrailALL" title="Audit Trail" class="disp-none">
+                <div id="SAE_DivAuditTrailALL" style="font-size: small;">
+                </div>
+            </div>
+            <div id="SAE_popup_Override_ReadOnly" title="Reason" class="disp-none">
+                <div id="SAE_grdOverrideComments_ReadOnly" style="overflow-y: auto; max-height: 270px; font-size: small;">
+                </div>
+                <div class="formControl disp-none">
+                    <asp:TextBox ID="SAE_txt_Overrideid_ReadOnly" runat="server"></asp:TextBox>
+                </div>
+                <br />
+                <div id="SAE_overrideReason_ReadOnly" class="row">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="Label10" runat="server" CssClass="wrapperLable" Text="Action"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:DropDownList ID="SAE_drpoverrideReason_ReadOnly" CssClass="width245px form-control" runat="server" onchange="SAE_drpoverrideReason_ReadOnly_Change();">
+                            <asp:ListItem Value="0">--Select--</asp:ListItem>
+                            <asp:ListItem Value="Re-query">Re-query</asp:ListItem>
+                            <asp:ListItem Value="Closed query">Close query</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="row" id="SAE_OverrideComments_ReadOnly">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="SAE_lblOverrideComm_ReadOnly" runat="server" CssClass="wrapperLable" Text="Comments"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:TextBox ID="SAE_txt_OverrideComm_ReadOnly" CssClass="form-control" TextMode="MultiLine" Width="700px" MaxLength="1000" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="row disp-none" id="SAE_DivQueryText_ReadOnly">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="Label13" runat="server" CssClass="wrapperLable" Text="Query Text"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:TextBox ID="SAE_txtQueryText_ReadOnly" CssClass="form-control" TextMode="MultiLine" MaxLength="1000" Width="700px" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div style="margin-top: 10px">
+                    <asp:Button ID="Button3" runat="server" Style="margin-left: 145px;" Text="Submit" CssClass="btn btn-sm btn-primary"
+                        OnClientClick="SAE_UpdateOverrideData_ReadOnly();" />
+                    <asp:Button ID="Button4" runat="server" Text="Cancel" CssClass="btn btn-sm btn-danger"
+                        OnClientClick="SAE_CancelOverrideData_ReadOnly(); return false;" />
+                </div>
+            </div>
+            <div id="SAE_popup_Override" title="Reason" class="disp-none">
+                <div id="SAE_grdOverrideComments" style="overflow-y: auto; max-height: 270px; font-size: small;">
+                </div>
+                <div class="formControl disp-none">
+                    <asp:TextBox ID="SAE_txt_Overrideid" runat="server"></asp:TextBox>
+                </div>
+                <br />
+                <div id="SAE_DivAction" class="row">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="Label20" runat="server" CssClass="wrapperLable" Text="Reason"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:DropDownList ID="SAE_drpAction" CssClass="width245px form-control" runat="server" onchange="SAE_drpAction_Change();">
+                            <asp:ListItem Value="0">--Select--</asp:ListItem>
+                            <asp:ListItem Value="Transcription error">Transcription error</asp:ListItem>
+                            <asp:ListItem Value="Data as per source">Data as per source</asp:ListItem>
+                            <asp:ListItem Value="New data available">New data available</asp:ListItem>
+                            <asp:ListItem Value="Other">Other</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="row disp-none" id="SAE_OverrideComments">
+                    <div class="col-md-2">
+                        <label>
+                            <asp:Label ID="SAE_lblOverrideComm" runat="server" CssClass="wrapperLable" Text="Comments"></asp:Label>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <asp:TextBox ID="SAE_txt_OverrideComm" CssClass="form-control" TextMode="MultiLine" Width="700px" MaxLength="1000" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div style="margin-top: 10px">
+                    <asp:Button ID="SAE_btnUpdateOverride" runat="server" Style="margin-left: 145px;" Text="Submit" CssClass="btn btn-sm btn-primary"
+                        OnClientClick="SAE_UpdateOverrideData();" />
+                    <asp:Button ID="SAE_btnCancelOveride" runat="server" Text="Cancel" CssClass="btn btn-sm btn-danger"
+                        OnClientClick="SAE_CancelOverrideData(); return false;" />
+                </div>
+            </div>
+            <div id="SAE_popup_Page_Comments" title="Module Comments" class="disp-none">
+                <div id="SAE_grdPage_Comments" style="overflow-y: auto; max-height: 275px;">
+                </div>
+                <br />
+                <div id="SAE_DivPageComment" class="formControl" style="display: -webkit-inline-box;">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <asp:Label ID="lblSAE_PageComments" runat="server" CssClass="wrapperLable" Text="Comments"></asp:Label>&nbsp&nbsp
+                        </div>
+                        <div class="col-md-10">
+                            <asp:TextBox ID="txtSAE_PageComments" CssClass="form-control" Style="width: 600px;" TextMode="MultiLine" MaxLength="2000" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            &nbsp&nbsp
+                        </div>
+                        <div class="col-md-4">
+                            <asp:Button ID="btnSAE_SavePageComments" runat="server" Style="margin-left: 10px;" CssClass="btn btn-sm btn-primary"
+                                Text="Submit" OnClientClick="SAE_SavePageComments();" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="SAE_popup_Page_Comments_All" title="Module Comments" class="disp-none">
+                <div id="SAE_grdPage_Comments_All" style="font-size: small;">
+                </div>
+            </div>
+            <div id="SAE_popup_Internal_Comments" title="Internal Comments" class="disp-none">
+                <div id="SAE_grdInternal_Comments" style="overflow-y: auto; max-height: 275px;">
+                </div>
+                <br />
+                <div id="SAE_DivInternalComment" class="formControl" style="display: -webkit-inline-box;">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <asp:Label ID="lblSAE_InternalComments" runat="server" CssClass="wrapperLable" Text="Comments"></asp:Label>&nbsp&nbsp
+                        </div>
+                        <div class="col-md-10">
+                            <asp:TextBox ID="txtSAE_InternalComments" CssClass="form-control" Style="width: 600px;" TextMode="MultiLine" MaxLength="2000" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            &nbsp&nbsp
+                        </div>
+                        <div class="col-md-4">
+                            <asp:Button ID="btnSAE_SaveInternalComments" runat="server" Style="margin-left: 10px;" CssClass="btn btn-sm btn-primary"
+                                Text="Submit" OnClientClick="SAE_SaveInternalComments();" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="SAE_popup_Internal_Comments_All" title="Internal Comments" class="disp-none">
+                <div id="SAE_grdInternal_Comments_All" style="font-size: small;">
+                </div>
+            </div>
+            <div id="popup_SAE_MQ" title="Raise Manual Query" class="disp-none">
+                <div id="SAEModelPopup">
+                    <div class="disp-none">
+                        <asp:Label ID="txtSAE_MQ_TableName" runat="server"></asp:Label>
+                        <asp:Label ID="txtSAE_MQ_VariableName" runat="server"></asp:Label>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <asp:Label ID="Label5" runat="server" CssClass="wrapperLable" Text="Module Name" Style="color: black; font-weight: bold; font-size: 12px;"></asp:Label>
+                        </div>
+                        <div class="col-md-9">
+                            <asp:Label ID="lblSAEMQModuleName" CssClass="form-control-model" runat="server" Style="min-width: 250px;"></asp:Label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <asp:Label ID="Label6" runat="server" CssClass="wrapperLable" Text="Field Name" Style="color: black; font-weight: bold; font-size: 12px;"></asp:Label>
+                        </div>
+                        <div class="col-md-9">
+                            <asp:Label ID="lblSAEMQFieldName" CssClass="form-control-model" runat="server" Style="min-width: 250px;"></asp:Label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <asp:Label ID="Label7" runat="server" CssClass="wrapperLable" Text="Comment" Style="color: black; font-weight: bold; font-size: 12px;"></asp:Label>
+                        </div>
+                        <div class="col-md-9">
+                            <asp:TextBox ID="txtSAEMQComment" CssClass="form-control-model" TextMode="MultiLine" MaxLength="1000"
+                                runat="server" Style="width: 100%;"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <div class="col-md-3">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-9">
+                        <asp:Button ID="btnSubmit_SAE_MQ_Comment" runat="server" Style="margin-left: 37px; height: 34px; font-size: 14px; margin-top: 10px;" CssClass="btn btn-DarkGreen"
+                            Text="Submit" OnClientClick="return Save_SAE_MQ(this);" />
+                        &nbsp;
+                            &nbsp;
+                            <asp:Button ID="btnSAECancel" runat="server"
+                                CssClass="btn btn-DarkGreen" Style="height: 34px; width: 71px; font-size: 14px; margin-top: 10px;" Text="Cancel" OnClientClick="Cancel_SAE_MQ();" />
+                    </div>
+                </div>
+            </div>
+            <%--MM--%>
+
+            <div id="MM_popup_Comments" title="Open Query Details" class="disp-none">
+                <div id="MM_div_Comments">
+                </div>
+            </div>
+
+            <div id="MM_popup_DeleteComments" title="Reason" class="disp-none">
+                <div class="disp-none">
+                    <asp:TextBox ID="lblMMQueryID" CssClass="width245px" runat="server"></asp:TextBox>
+                </div>
+                <br />
+                <div id="div78" class="formControl" style="display: inline-flex;">
+                    <asp:Label ID="lblDelete" runat="server" CssClass="wrapperLable" Text="Reason"></asp:Label>
+                    <asp:TextBox ID="txtDeleteComment" CssClass="form-control" Style="width: 500px; height: 200px;" TextMode="MultiLine" MaxLength="1000" runat="server"></asp:TextBox>
+                </div>
+                <div style="margin-top: 10px">
+                    <asp:Button ID="btndeleteComment" runat="server" Style="margin-left: 107px;" CssClass="btn btn-sm btn-primary"
+                        Text="Submit" OnClientClick="SaveDeletedCommnet();" />
+                </div>
+            </div>
+
+            <div id="popup_ReviewLogs" title="Review Logs" class="disp-none">
+                <div id="DivReviewLogs" style="font-size: small;">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

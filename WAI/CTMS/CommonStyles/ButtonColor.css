@@ -1,0 +1,92 @@
+﻿.btn-DarkGreen {
+    background-repeat: repeat-x;
+    border-color: #7FB27F;
+    color: White;
+    background-image: linear-gradient(to bottom, #006600 0%, #006600 100%);
+}
+
+    .btn-DarkGreen:hover, .btn-DarkGreen:focus {
+        background-color: #006600;
+        color: White;
+        background-position: 0 -15px;
+    }
+
+    .btn-DarkGreen:active, .btn-DarkGreen.active {
+        background-color: #006600;
+        border-color: #245580;
+    }
+
+    .btn-DarkGreen.disabled, .btn-DarkGreen[disabled], fieldset[disabled] .btn-DarkGreen, .btn-DarkGreen.disabled:hover, .btn-DarkGreen[disabled]:hover, fieldset[disabled] .btn-DarkGreen:hover, .btn-DarkGreen.disabled:focus, .btn-DarkGreen[disabled]:focus, fieldset[disabled] .btn-DarkGreen:focus, .btn-DarkGreen.disabled.focus, .btn-DarkGreen[disabled].focus, fieldset[disabled] .btn-DarkGreen.focus, .btn-DarkGreen.disabled:active, .btn-DarkGreen[disabled]:active, fieldset[disabled] .btn-DarkGreen:active, .btn-DarkGreen.disabled.active, .btn-DarkGreen[disabled].active, fieldset[disabled] .btn-DarkGreen.active {
+        background-color: #006600;
+        background-image: none;
+    }
+
+.btn-DARKORANGE {
+    background-repeat: repeat-x;
+    border-color: #FFB266;
+    color: White;
+    background-image: linear-gradient(to bottom, #FF8000 0%, #FF8000 100%);
+}
+
+    .btn-DARKORANGE:hover, .btn-DARKORANGE:focus {
+        background-color: #FF8000;
+        color: White;
+        background-position: 0 -15px;
+    }
+
+    .btn-DARKORANGE:active, .btn-DARKORANGE.active {
+        background-color: #FF8000;
+        border-color: #245580;
+    }
+
+    .btn-DARKORANGE.disabled, .btn-DARKORANGE[disabled], fieldset[disabled] .btn-DARKORANGE, .btn-DARKORANGE.disabled:hover, .btn-DARKORANGE[disabled]:hover, fieldset[disabled] .btn-DARKORANGE:hover, .btn-DARKORANGE.disabled:focus, .btn-DARKORANGE[disabled]:focus, fieldset[disabled] .btn-DARKORANGE:focus, .btn-DARKORANGE.disabled.focus, .btn-DARKORANGE[disabled].focus, fieldset[disabled] .btn-DARKORANGE.focus, .btn-DARKORANGE.disabled:active, .btn-DARKORANGE[disabled]:active, fieldset[disabled] .btn-DARKORANGE:active, .btn-DARKORANGE.disabled.active, .btn-DARKORANGE[disabled].active, fieldset[disabled] .btn-DARKORANGE.active {
+        background-color: #FF8000;
+        background-image: none;
+    }
+
+.btn-deepskyblue {
+    background-repeat: repeat-x;
+    border-color: #7FB27F;
+    color: White;
+    background-image: linear-gradient(to bottom, #00bfff 0%, #00bfff 100%);
+}
+
+.btn-deepskyblue:hover, .btn-deepskyblue:focus {
+    background-color: #00bfff;
+    color: White;
+    background-position: 0 -15px;
+}
+
+.btn-deepskyblue:active, .btn-deepskyblue.active {
+    background-color: #00bfff;
+    border-color: #245580;
+}
+
+.btn-deepskyblue.disabled, .btn-deepskyblue[disabled], fieldset[disabled] .btn-deepskyblue, .btn-deepskyblue.disabled:hover, .btn-deepskyblue[disabled]:hover, fieldset[disabled] .btn-deepskyblue:hover, .btn-deepskyblue.disabled:focus, .btn-deepskyblue[disabled]:focus, fieldset[disabled] .btn-deepskyblue:focus, .btn-deepskyblue.disabled.focus, .btn-deepskyblue[disabled].focus, fieldset[disabled] .btn-deepskyblue.focus, .btn-deepskyblue.disabled:active, .btn-deepskyblue[disabled]:active, fieldset[disabled] .btn-deepskyblue:active, .btn-deepskyblue.disabled.active, .btn-deepskyblue[disabled].active, fieldset[disabled] .btn-deepskyblue.active {
+    background-color: #00bfff;
+    background-image: none;
+}
+
+
+.btn-rebeccapurple {
+    background-repeat: repeat-x;
+    border-color: White;
+    color: White;
+    background-image: linear-gradient(to bottom, #663399 0%, #663399 100%);
+}
+
+.btn-rebeccapurple:hover, .btn-rebeccapurple:focus {
+    background-color: #663399;
+    color: White;
+    background-position: 0 -15px;
+}
+
+.btn-rebeccapurple:active, .btn-rebeccapurple.active {
+    background-color: #663399;
+    border-color: White;
+}
+
+.btn-rebeccapurple.disabled, .btn-rebeccapurple[disabled], fieldset[disabled] .btn-rebeccapurple, .btn-rebeccapurple.disabled:hover, .btn-rebeccapurple[disabled]:hover, fieldset[disabled] .btn-rebeccapurple:hover, .btn-rebeccapurple.disabled:focus, .btn-rebeccapurple[disabled]:focus, fieldset[disabled] .btn-rebeccapurple:focus, .btn-rebeccapurple.disabled.focus, .btn-rebeccapurple[disabled].focus, fieldset[disabled] .btn-rebeccapurple.focus, .btn-rebeccapurple.disabled:active, .btn-rebeccapurple[disabled]:active, fieldset[disabled] .btn-rebeccapurple:active, .btn-rebeccapurple.disabled.active, .btn-rebeccapurple[disabled].active, fieldset[disabled] .btn-rebeccapurple.active {
+    background-color: #663399;
+    background-image: none;
+}

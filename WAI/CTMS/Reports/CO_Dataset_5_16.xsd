@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CO_Dataset_5_16" targetNamespace="http://tempuri.org/CO_Dataset_5_16.xsd" xmlns:mstns="http://tempuri.org/CO_Dataset_5_16.xsd" xmlns="http://tempuri.org/CO_Dataset_5_16.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="PPTConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="PPTConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.PPTConnection.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="RPTCO_16TableAdapter" GeneratorDataComponentClassName="RPTCO_16TableAdapter" Name="RPTCO_16" UserDataComponentName="RPTCO_16TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="PPTConnection (Web.config)" DbObjectName="CTMS.dbo.RPTCO_16" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Project_ID, INVID, RECID, COID, SUBSECTIONID, MVID, OPENACTDAT, OPENACTDESC, OPENACTPAACT, OPENACTRESP, SECID FROM dbo.RPTCO_16</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Project_ID" DataSetColumn="Project_ID" />
+              <Mapping SourceColumn="INVID" DataSetColumn="INVID" />
+              <Mapping SourceColumn="RECID" DataSetColumn="RECID" />
+              <Mapping SourceColumn="COID" DataSetColumn="COID" />
+              <Mapping SourceColumn="SUBSECTIONID" DataSetColumn="SUBSECTIONID" />
+              <Mapping SourceColumn="MVID" DataSetColumn="MVID" />
+              <Mapping SourceColumn="OPENACTDAT" DataSetColumn="OPENACTDAT" />
+              <Mapping SourceColumn="OPENACTDESC" DataSetColumn="OPENACTDESC" />
+              <Mapping SourceColumn="OPENACTPAACT" DataSetColumn="OPENACTPAACT" />
+              <Mapping SourceColumn="OPENACTRESP" DataSetColumn="OPENACTRESP" />
+              <Mapping SourceColumn="SECID" DataSetColumn="SECID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CO_Dataset_5_16" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="CO_Dataset_5_16" msprop:Generator_UserDSName="CO_Dataset_5_16">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RPTCO_16" msprop:Generator_TableClassName="RPTCO_16DataTable" msprop:Generator_TableVarName="tableRPTCO_16" msprop:Generator_TablePropName="RPTCO_16" msprop:Generator_RowDeletingName="RPTCO_16RowDeleting" msprop:Generator_UserTableName="RPTCO_16" msprop:Generator_RowChangingName="RPTCO_16RowChanging" msprop:Generator_RowEvHandlerName="RPTCO_16RowChangeEventHandler" msprop:Generator_RowDeletedName="RPTCO_16RowDeleted" msprop:Generator_RowEvArgName="RPTCO_16RowChangeEvent" msprop:Generator_RowChangedName="RPTCO_16RowChanged" msprop:Generator_RowClassName="RPTCO_16Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Project_ID" msprop:Generator_ColumnVarNameInTable="columnProject_ID" msprop:Generator_ColumnPropNameInRow="Project_ID" msprop:Generator_ColumnPropNameInTable="Project_IDColumn" msprop:Generator_UserColumnName="Project_ID" type="xs:int" />
+              <xs:element name="INVID" msprop:Generator_ColumnVarNameInTable="columnINVID" msprop:Generator_ColumnPropNameInRow="INVID" msprop:Generator_ColumnPropNameInTable="INVIDColumn" msprop:Generator_UserColumnName="INVID" type="xs:int" />
+              <xs:element name="RECID" msprop:Generator_ColumnVarNameInTable="columnRECID" msprop:Generator_ColumnPropNameInRow="RECID" msprop:Generator_ColumnPropNameInTable="RECIDColumn" msprop:Generator_UserColumnName="RECID" type="xs:int" />
+              <xs:element name="COID" msprop:Generator_ColumnVarNameInTable="columnCOID" msprop:Generator_ColumnPropNameInRow="COID" msprop:Generator_ColumnPropNameInTable="COIDColumn" msprop:Generator_UserColumnName="COID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SUBSECTIONID" msprop:Generator_ColumnVarNameInTable="columnSUBSECTIONID" msprop:Generator_ColumnPropNameInRow="SUBSECTIONID" msprop:Generator_ColumnPropNameInTable="SUBSECTIONIDColumn" msprop:Generator_UserColumnName="SUBSECTIONID" type="xs:double" />
+              <xs:element name="MVID" msprop:Generator_ColumnVarNameInTable="columnMVID" msprop:Generator_ColumnPropNameInRow="MVID" msprop:Generator_ColumnPropNameInTable="MVIDColumn" msprop:Generator_UserColumnName="MVID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OPENACTDAT" msprop:Generator_ColumnVarNameInTable="columnOPENACTDAT" msprop:Generator_ColumnPropNameInRow="OPENACTDAT" msprop:Generator_ColumnPropNameInTable="OPENACTDATColumn" msprop:Generator_UserColumnName="OPENACTDAT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OPENACTDESC" msprop:Generator_ColumnVarNameInTable="columnOPENACTDESC" msprop:Generator_ColumnPropNameInRow="OPENACTDESC" msprop:Generator_ColumnPropNameInTable="OPENACTDESCColumn" msprop:Generator_UserColumnName="OPENACTDESC" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OPENACTPAACT" msprop:Generator_ColumnVarNameInTable="columnOPENACTPAACT" msprop:Generator_ColumnPropNameInRow="OPENACTPAACT" msprop:Generator_ColumnPropNameInTable="OPENACTPAACTColumn" msprop:Generator_UserColumnName="OPENACTPAACT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OPENACTRESP" msprop:Generator_ColumnVarNameInTable="columnOPENACTRESP" msprop:Generator_ColumnPropNameInRow="OPENACTRESP" msprop:Generator_ColumnPropNameInTable="OPENACTRESPColumn" msprop:Generator_UserColumnName="OPENACTRESP" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SECID" msprop:Generator_ColumnVarNameInTable="columnSECID" msprop:Generator_ColumnPropNameInRow="SECID" msprop:Generator_ColumnPropNameInTable="SECIDColumn" msprop:Generator_UserColumnName="SECID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

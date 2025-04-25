@@ -1,0 +1,30 @@
+﻿.table.table-head-fixed thead tr:nth-child(1) th {
+    background-color: #ffffff;
+    border-bottom: 0;
+    box-shadow: inset 0 1px 0 #dee2e6, inset 0 -1px 0 #dee2e6;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table.table-head-fixed.table-dark thead tr:nth-child(1) th {
+    background-color: #212529;
+    box-shadow: inset 0 1px 0 #383f45, inset 0 -1px 0 #383f45;
+}
+
+
+.table.table-head-fixed thead tr:nth-child(1) th {
+    background-color: #ffffff;
+    border-bottom: 0;
+    box-shadow: inset 0 1px 0 #dee2e6, inset 0 -1px 0 #dee2e6;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+
+.table.table-head-fixed.table-dark thead tr:nth-child(1) th {
+    background-color: #212529;
+    box-shadow: inset 0 1px 0 #383f45, inset 0 -1px 0 #383f45;
+}

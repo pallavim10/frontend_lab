@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="DM_AUDITTRAIL_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ACTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RECID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISITNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VARIABLENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REASON" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIELDNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TRANSACT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIELDID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="USERID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TZ_VAL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_AUDITTRAIL_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DM_AUDITTRAIL_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_INSERT_MODULE_DATA_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ACTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TABLENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RECID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTQUERY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEQUERY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISITNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULEID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsComplete" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsMissing" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="USERID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TZ_VAL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_INSERT_MODULE_DATA_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DM_INSERT_MODULE_DATA_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_GetSetPV">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Action" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISITNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PAGESTATUS" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="HasMissing" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="INVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOTAPPLICABLE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="USERID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TZ_VAL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User_Name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_GetSetPVResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DM_DELETE_RECORDS_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RECID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISITNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REASON" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="USERID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TZ_VAL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_DELETE_RECORDS_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DM_DELETE_RECORDS_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CODING_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ACTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RECID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VARIABLENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="USERID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TZ_VAL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CODING_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CODING_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_SAE_SYNC_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ACTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RECID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_SAE_SYNC_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DM_SAE_SYNC_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_COMPLETE_DATA_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RECID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INVID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISITNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="USERID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TZ_VAL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DM_COMPLETE_DATA_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DM_COMPLETE_DATA_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DM_AUDITTRAIL_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:DM_AUDITTRAIL_SP" />
+  </wsdl:message>
+  <wsdl:message name="DM_AUDITTRAIL_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:DM_AUDITTRAIL_SPResponse" />
+  </wsdl:message>
+  <wsdl:message name="DM_INSERT_MODULE_DATA_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:DM_INSERT_MODULE_DATA_SP" />
+  </wsdl:message>
+  <wsdl:message name="DM_INSERT_MODULE_DATA_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:DM_INSERT_MODULE_DATA_SPResponse" />
+  </wsdl:message>
+  <wsdl:message name="DM_GetSetPVSoapIn">
+    <wsdl:part name="parameters" element="tns:DM_GetSetPV" />
+  </wsdl:message>
+  <wsdl:message name="DM_GetSetPVSoapOut">
+    <wsdl:part name="parameters" element="tns:DM_GetSetPVResponse" />
+  </wsdl:message>
+  <wsdl:message name="DM_DELETE_RECORDS_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:DM_DELETE_RECORDS_SP" />
+  </wsdl:message>
+  <wsdl:message name="DM_DELETE_RECORDS_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:DM_DELETE_RECORDS_SPResponse" />
+  </wsdl:message>
+  <wsdl:message name="CODING_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:CODING_SP" />
+  </wsdl:message>
+  <wsdl:message name="CODING_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:CODING_SPResponse" />
+  </wsdl:message>
+  <wsdl:message name="DM_SAE_SYNC_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:DM_SAE_SYNC_SP" />
+  </wsdl:message>
+  <wsdl:message name="DM_SAE_SYNC_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:DM_SAE_SYNC_SPResponse" />
+  </wsdl:message>
+  <wsdl:message name="DM_COMPLETE_DATA_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:DM_COMPLETE_DATA_SP" />
+  </wsdl:message>
+  <wsdl:message name="DM_COMPLETE_DATA_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:DM_COMPLETE_DATA_SPResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DMSoap">
+    <wsdl:operation name="DM_AUDITTRAIL_SP">
+      <wsdl:input message="tns:DM_AUDITTRAIL_SPSoapIn" />
+      <wsdl:output message="tns:DM_AUDITTRAIL_SPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DM_INSERT_MODULE_DATA_SP">
+      <wsdl:input message="tns:DM_INSERT_MODULE_DATA_SPSoapIn" />
+      <wsdl:output message="tns:DM_INSERT_MODULE_DATA_SPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DM_GetSetPV">
+      <wsdl:input message="tns:DM_GetSetPVSoapIn" />
+      <wsdl:output message="tns:DM_GetSetPVSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DM_DELETE_RECORDS_SP">
+      <wsdl:input message="tns:DM_DELETE_RECORDS_SPSoapIn" />
+      <wsdl:output message="tns:DM_DELETE_RECORDS_SPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CODING_SP">
+      <wsdl:input message="tns:CODING_SPSoapIn" />
+      <wsdl:output message="tns:CODING_SPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DM_SAE_SYNC_SP">
+      <wsdl:input message="tns:DM_SAE_SYNC_SPSoapIn" />
+      <wsdl:output message="tns:DM_SAE_SYNC_SPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DM_COMPLETE_DATA_SP">
+      <wsdl:input message="tns:DM_COMPLETE_DATA_SPSoapIn" />
+      <wsdl:output message="tns:DM_COMPLETE_DATA_SPSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DMSoap" type="tns:DMSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DM_AUDITTRAIL_SP">
+      <soap:operation soapAction="http://tempuri.org/DM_AUDITTRAIL_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_INSERT_MODULE_DATA_SP">
+      <soap:operation soapAction="http://tempuri.org/DM_INSERT_MODULE_DATA_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_GetSetPV">
+      <soap:operation soapAction="http://tempuri.org/DM_GetSetPV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_DELETE_RECORDS_SP">
+      <soap:operation soapAction="http://tempuri.org/DM_DELETE_RECORDS_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CODING_SP">
+      <soap:operation soapAction="http://tempuri.org/CODING_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_SAE_SYNC_SP">
+      <soap:operation soapAction="http://tempuri.org/DM_SAE_SYNC_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_COMPLETE_DATA_SP">
+      <soap:operation soapAction="http://tempuri.org/DM_COMPLETE_DATA_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DMSoap12" type="tns:DMSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DM_AUDITTRAIL_SP">
+      <soap12:operation soapAction="http://tempuri.org/DM_AUDITTRAIL_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_INSERT_MODULE_DATA_SP">
+      <soap12:operation soapAction="http://tempuri.org/DM_INSERT_MODULE_DATA_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_GetSetPV">
+      <soap12:operation soapAction="http://tempuri.org/DM_GetSetPV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_DELETE_RECORDS_SP">
+      <soap12:operation soapAction="http://tempuri.org/DM_DELETE_RECORDS_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CODING_SP">
+      <soap12:operation soapAction="http://tempuri.org/CODING_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_SAE_SYNC_SP">
+      <soap12:operation soapAction="http://tempuri.org/DM_SAE_SYNC_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DM_COMPLETE_DATA_SP">
+      <soap12:operation soapAction="http://tempuri.org/DM_COMPLETE_DATA_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DM">
+    <wsdl:port name="DMSoap" binding="tns:DMSoap">
+      <soap:address location="https://wai_dev.opus-analytics.com/Service/DM.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DMSoap12" binding="tns:DMSoap12">
+      <soap12:address location="https://wai_dev.opus-analytics.com/Service/DM.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

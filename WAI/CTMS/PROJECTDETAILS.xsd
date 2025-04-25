@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PROJECTDETAILS" targetNamespace="http://tempuri.org/PROJECTDETAILS.xsd" xmlns:mstns="http://tempuri.org/PROJECTDETAILS.xsd" xmlns="http://tempuri.org/PROJECTDETAILS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="WAD_IWRSConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="WAD_IWRSConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.WAD_IWRSConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DS_Project_Details_ViewTableAdapter" GeneratorDataComponentClassName="DS_Project_Details_ViewTableAdapter" Name="DS_Project_Details_View" UserDataComponentName="DS_Project_Details_ViewTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="WAD_IWRSConnectionString (Web.config)" DbObjectName="HPV_WAD_WCF.dbo.DS_Project_Details_View" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Project_ID, PROJNAME, SPONSOR, Collarborating_Sponsor FROM dbo.DS_Project_Details_View</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Project_ID" DataSetColumn="Project_ID" />
+              <Mapping SourceColumn="PROJNAME" DataSetColumn="PROJNAME" />
+              <Mapping SourceColumn="SPONSOR" DataSetColumn="SPONSOR" />
+              <Mapping SourceColumn="Collarborating_Sponsor" DataSetColumn="Collarborating_Sponsor" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PROJECTDETAILS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="PROJECTDETAILS" msprop:Generator_UserDSName="PROJECTDETAILS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DS_Project_Details_View" msprop:Generator_TableClassName="DS_Project_Details_ViewDataTable" msprop:Generator_TableVarName="tableDS_Project_Details_View" msprop:Generator_TablePropName="DS_Project_Details_View" msprop:Generator_RowDeletingName="DS_Project_Details_ViewRowDeleting" msprop:Generator_RowChangingName="DS_Project_Details_ViewRowChanging" msprop:Generator_RowEvHandlerName="DS_Project_Details_ViewRowChangeEventHandler" msprop:Generator_RowDeletedName="DS_Project_Details_ViewRowDeleted" msprop:Generator_UserTableName="DS_Project_Details_View" msprop:Generator_RowChangedName="DS_Project_Details_ViewRowChanged" msprop:Generator_RowEvArgName="DS_Project_Details_ViewRowChangeEvent" msprop:Generator_RowClassName="DS_Project_Details_ViewRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Project_ID" msprop:Generator_ColumnVarNameInTable="columnProject_ID" msprop:Generator_ColumnPropNameInRow="Project_ID" msprop:Generator_ColumnPropNameInTable="Project_IDColumn" msprop:Generator_UserColumnName="Project_ID" type="xs:int" />
+              <xs:element name="PROJNAME" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnPROJNAME" msprop:Generator_ColumnPropNameInRow="PROJNAME" msprop:Generator_ColumnPropNameInTable="PROJNAMEColumn" msprop:Generator_UserColumnName="PROJNAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SPONSOR" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSPONSOR" msprop:Generator_ColumnPropNameInRow="SPONSOR" msprop:Generator_ColumnPropNameInTable="SPONSORColumn" msprop:Generator_UserColumnName="SPONSOR" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Collarborating_Sponsor" msprop:Generator_ColumnVarNameInTable="columnCollarborating_Sponsor" msprop:Generator_ColumnPropNameInRow="Collarborating_Sponsor" msprop:Generator_ColumnPropNameInTable="Collarborating_SponsorColumn" msprop:Generator_UserColumnName="Collarborating_Sponsor" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DS_Project_Details_View" />
+      <xs:field xpath="mstns:Project_ID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CTMS.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CTMS_DM_DM" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://wai_dev.opus-analytics.com/Service/DM.asmx</Value>
+    </Setting>
+    <Setting Name="CTMS_IWRS_WAI_IWRS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://localhost:44386/IWRS.asmx</Value>
+    </Setting>
+    <Setting Name="CTMS_IWRS1_WAI_IWRS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://wai_dev.opus-analytics.com/Service/IWRS.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

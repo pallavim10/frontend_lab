@@ -1,0 +1,51 @@
+﻿/* Custom styling for SweetAlert2 popup */
+.large-swal-popup {
+    width: 600px !important; /* Adjust width */
+    max-width: 90% !important;
+    padding: 20px !important;
+    font-size: 16px !important;
+    border-radius: 10px;
+}
+
+/* Styling for Yes button */
+.swal-confirm-btn {
+    background-color: #28a745 !important; /* Green */
+    color: white !important;
+    font-size: 16px !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    width: 100px;
+    height: 45px; /* Set button height */
+}
+
+/* Styling for No button */
+.swal-cancel-btn {
+    background-color: #dc3545 !important; /* Red */
+    color: white !important;
+    font-size: 16px !important;
+    border-radius: 5px !important;
+    width: 100px;
+    padding: 10px 20px !important;
+    height: 45px; /* Set button height */
+}
+
+/* Styling for Yes button */
+.swal-confirm-btn {
+    background-color: #28a745 !important;
+    color: white !important;
+    font-size: 16px !important;
+    padding: 12px 20px !important;
+    border-radius: 5px !important;
+    width: 120px;
+    height: 45px;
+}
+
+/* Make sure buttons are aligned properly */
+.swal2-actions {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+}
+
+

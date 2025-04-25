@@ -1,0 +1,168 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="NSAE_REQUEST_CLOSED_SAE_REOPEN.aspx.cs" Inherits="CTMS.NSAE_REQUEST_CLOSED_SAE_REOPEN" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script type="text/javascript">
+
+        function pageLoad() {
+
+            $(".Datatable").dataTable({
+                "bSort": true,
+                "ordering": true,
+                "bDestroy": false,
+                stateSave: true
+            });
+
+        }
+    </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <div class="box box-warning">
+        <div class="box-header">
+            <h3 class="box-title">
+                Request For Re-Open SAE</h3>
+        </div>
+        <div class="row">
+            <div class="form-group has-warning">
+                <asp:Label ID="lblErrorMsg" runat="server"></asp:Label>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 15px;">
+            <div class="col-md-12">
+                <div class="label col-md-2">
+                    Site ID:
+                </div>
+                <div class="col-md-4">
+                    <asp:DropDownList ID="drpInvID" runat="server" AutoPostBack="True" CssClass="form-control required"
+                        OnSelectedIndexChanged="drpInvID_SelectedIndexChanged">
+                    </asp:DropDownList>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 15px;">
+            <div class="col-md-12">
+                <div class="label col-md-2">
+                    Subject ID:
+                </div>
+                <div class="col-md-4">
+                    <asp:DropDownList ID="drpSubID" runat="server" CssClass="form-control required" AutoPostBack="true"
+                        OnSelectedIndexChanged="drpSubID_SelectedIndexChanged">
+                    </asp:DropDownList>
+                </div>
+            </div>
+        </div>
+        <div class="row" runat="server" style="padding-top: 15px;">
+            <div class="col-md-12">
+                <div class="label col-md-2">
+                    SAE ID:
+                </div>
+                <div class="col-md-4">
+                    <asp:DropDownList ID="drpSAEID" runat="server" CssClass="form-control required" AutoPostBack="true"
+                        OnSelectedIndexChanged="drpSAEID_SelectedIndexChanged">
+                    </asp:DropDownList>
+                </div>
+            </div>
+        </div>
+        <div id="Div1" class="row" runat="server" style="padding-top: 15px;">
+            <div class="col-md-12">
+                <div class="label col-md-2">
+                    Comment:
+                </div>
+                <div class="col-md-4">
+                    <asp:TextBox runat="server" ID="txtComment" TextMode="MultiLine" Height="200" Width="700"
+                        CssClass="form-control required"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="div12" runat="server" style="padding-top: 15px; padding-bottom: 15px;">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-3">
+                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary btn-sm cls-btnSave"
+                        OnClick="btnSubmit_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box box-warning">
+        <div class="box-header">
+            <h3 class="box-title">
+                Records</h3>
+        </div>
+        <div class="box">
+            <asp:HiddenField ID="hdnStepId" runat="server" Value="5" />
+            <asp:GridView ID="grdSAE" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-striped Datatable"
+                AllowSorting="true" Width="100%" OnPreRender="grd_data_PreRender">
+                <Columns>
+                    <asp:TemplateField HeaderText="ID" ItemStyle-CssClass="txt_center disp-none" HeaderStyle-CssClass="disp-none">
+                        <ItemTemplate>
+                            <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="INVID" ItemStyle-CssClass="txt_center " HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="INVID" runat="server" Text='<%# Bind("INVID") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Subject Id" ItemStyle-CssClass="txt_center" HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="SUBJID" runat="server" Text='<%# Bind("SUBJID") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="SAEID" ItemStyle-CssClass="txt_center" HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSAEID" runat="server" Text='<%# Bind("SAEID") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Raised Comment" ItemStyle-CssClass="txt_center" HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="RaisedComment" runat="server" Text='<%# Bind("RaisedComment") %>'>
+                            </asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Raised By" ItemStyle-CssClass="txt_center" HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="RaisedBY" runat="server" Text='<%# Bind("RaisedBY") %>'>
+                            </asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Raised Date-Time" ItemStyle-CssClass="txt_center"
+                        HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="RaisedDateTime" runat="server" Text='<%# Bind("RaisedDateTime") %>'>
+                            </asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Status" ItemStyle-CssClass="txt_center" HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("STATUS") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Approved Comment" ItemStyle-CssClass="txt_center"
+                        HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="ApproveComment" runat="server" Text='<%# Bind("ApproveComment") %>'>
+                            </asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Approved By" ItemStyle-CssClass="txt_center" HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="ApproveBy" runat="server" Text='<%# Bind("ApproveBy") %>'>
+                            </asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Approved Date-Time" ItemStyle-CssClass="txt_center"
+                        HeaderStyle-CssClass="txt_center">
+                        <ItemTemplate>
+                            <asp:Label ID="ApprovedDate" runat="server" Text='<%# Bind("ApprovedDate") %>'>
+                            </asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+        </div>
+    </div>
+</asp:Content>

@@ -1,0 +1,154 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using PPT;
+using System.Data;
+
+namespace CTMS
+{
+    public partial class MM_IssueList : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (!this.IsPostBack)
+                {
+                    if (Session["PROJECTID"] != null)
+                    {
+                        Drp_Project.Items.Add(new ListItem(Session["PROJECTIDTEXT"].ToString(), Session["PROJECTID"].ToString()));
+                       
+                    }
+                    else
+                    {
+                        fill_Project();
+                    }
+
+                    fill_status();
+                    getData();
+                }
+         }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.Message.ToString();
+            }
+        }
+
+        private void fill_Project()
+        {
+            try
+            {
+                DAL dal;
+                dal = new DAL();
+                DataSet ds = dal.GetSetPROJECTDETAILS(
+                Action: "Get_Specific_Project",
+                Project_ID: Convert.ToInt32(Session["PROJECTID"]),
+                ENTEREDBY: Session["User_ID"].ToString()
+                );
+                Drp_Project.DataSource = ds.Tables[0];
+                Drp_Project.DataValueField = "Project_ID";
+                Drp_Project.DataTextField = "PROJNAME";
+                Drp_Project.DataBind();
+                Drp_Project.Items.Insert(0, new ListItem("--Select Project--", "0"));
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.Message.ToString();
+                throw;
+            }
+        }
+       
+        private void fill_status()
+        {
+            try
+            {
+                DAL dal = new DAL();
+
+                DataSet ds = new DataSet();
+                ds = dal.getDDLValue(Project_ID: Session["PROJECTID"].ToString(), SERVICE: "ISSUERISK", VARIABLENAME: "Status");
+                dal.BindDropDown(Drp_Status, ds.Tables[0]);
+                Drp_Status.Items.RemoveAt(0);
+                Drp_Status.Items.Insert(0, new ListItem("--ALL--", "0"));
+
+
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.Message.ToString();
+            }
+        }
+        private void getData()
+        {
+            try
+            {
+
+                DAL dal;
+                dal = new DAL();                           
+                    DataSet ds = new DataSet();
+                    ds = dal.getsetISSUES(
+                    Action: "GET_MEDICAL_ISSUE",
+                    Project_ID: Drp_Project.SelectedValue,              
+                    Status: Drp_Status.SelectedValue                   
+                    );
+                    grdISSUES.DataSource = ds;
+                    grdISSUES.DataBind();         
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.Message.ToString();
+            }
+        }
+
+        protected void Drp_Project_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {               
+                getData();
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.Message.ToString();
+            }
+        }
+
+        protected void Drp_Status_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                getData();
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.Message.ToString();
+            }
+        }
+
+        protected void grdISSUES_PreRender(object sender, EventArgs e)
+        {
+            try
+            {
+                GridView gv = (GridView)sender;
+                if ((gv.ShowHeader == true && gv.Rows.Count > 0)
+                    || (gv.ShowHeaderWhenEmpty == true))
+                {
+                    //Force GridView to use <thead> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+                if (gv.ShowFooter == true && gv.Rows.Count > 0)
+                {
+                    //Force GridView to use <tfoot> instead of <tbody> - 11/03/2013 - MCR.
+                    gv.FooterRow.TableSection = TableRowSection.TableFooter;
+                }
+            }
+            catch (Exception ex)
+            {
+                lblErrorMsg.Text = ex.ToString();
+                throw;
+            }
+        }
+    }
+}

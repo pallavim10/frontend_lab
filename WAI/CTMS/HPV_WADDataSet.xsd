@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="HPV_WADDataSet" targetNamespace="http://tempuri.org/HPV_WADDataSet.xsd" xmlns:mstns="http://tempuri.org/HPV_WADDataSet.xsd" xmlns="http://tempuri.org/HPV_WADDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="PPTConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="PPTConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.PPTConnection.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DS_RandSubjectsTableAdapter" GeneratorDataComponentClassName="DS_RandSubjectsTableAdapter" Name="DS_RandSubjects" UserDataComponentName="DS_RandSubjectsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="PPTConnection (Web.config)" DbObjectName="HPV_WAD.dbo.DS_RandSubjects" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Project_ID, INVID, SUBJID, Rand_No, Randomised_Dt, initials, Age_Group, Age, DOB, GENDER, Treatment_Grp_Name, Sub_Site_ID FROM dbo.DS_RandSubjects</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Project_ID" DataSetColumn="Project_ID" />
+              <Mapping SourceColumn="INVID" DataSetColumn="INVID" />
+              <Mapping SourceColumn="SUBJID" DataSetColumn="SUBJID" />
+              <Mapping SourceColumn="Rand_No" DataSetColumn="Rand_No" />
+              <Mapping SourceColumn="Randomised_Dt" DataSetColumn="Randomised_Dt" />
+              <Mapping SourceColumn="initials" DataSetColumn="initials" />
+              <Mapping SourceColumn="Age_Group" DataSetColumn="Age_Group" />
+              <Mapping SourceColumn="Age" DataSetColumn="Age" />
+              <Mapping SourceColumn="DOB" DataSetColumn="DOB" />
+              <Mapping SourceColumn="GENDER" DataSetColumn="GENDER" />
+              <Mapping SourceColumn="Treatment_Grp_Name" DataSetColumn="Treatment_Grp_Name" />
+              <Mapping SourceColumn="Sub_Site_ID" DataSetColumn="Sub_Site_ID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="HPV_WADDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="HPV_WADDataSet" msprop:Generator_UserDSName="HPV_WADDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DS_RandSubjects" msprop:Generator_TableClassName="DS_RandSubjectsDataTable" msprop:Generator_TableVarName="tableDS_RandSubjects" msprop:Generator_TablePropName="DS_RandSubjects" msprop:Generator_RowDeletingName="DS_RandSubjectsRowDeleting" msprop:Generator_RowChangingName="DS_RandSubjectsRowChanging" msprop:Generator_RowEvHandlerName="DS_RandSubjectsRowChangeEventHandler" msprop:Generator_RowDeletedName="DS_RandSubjectsRowDeleted" msprop:Generator_UserTableName="DS_RandSubjects" msprop:Generator_RowChangedName="DS_RandSubjectsRowChanged" msprop:Generator_RowEvArgName="DS_RandSubjectsRowChangeEvent" msprop:Generator_RowClassName="DS_RandSubjectsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Project_ID" msprop:Generator_ColumnVarNameInTable="columnProject_ID" msprop:Generator_ColumnPropNameInRow="Project_ID" msprop:Generator_ColumnPropNameInTable="Project_IDColumn" msprop:Generator_UserColumnName="Project_ID" type="xs:int" />
+              <xs:element name="INVID" msprop:Generator_ColumnVarNameInTable="columnINVID" msprop:Generator_ColumnPropNameInRow="INVID" msprop:Generator_ColumnPropNameInTable="INVIDColumn" msprop:Generator_UserColumnName="INVID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SUBJID" msprop:Generator_ColumnVarNameInTable="columnSUBJID" msprop:Generator_ColumnPropNameInRow="SUBJID" msprop:Generator_ColumnPropNameInTable="SUBJIDColumn" msprop:Generator_UserColumnName="SUBJID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Rand_No" msprop:Generator_ColumnVarNameInTable="columnRand_No" msprop:Generator_ColumnPropNameInRow="Rand_No" msprop:Generator_ColumnPropNameInTable="Rand_NoColumn" msprop:Generator_UserColumnName="Rand_No" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Randomised_Dt" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnRandomised_Dt" msprop:Generator_ColumnPropNameInRow="Randomised_Dt" msprop:Generator_ColumnPropNameInTable="Randomised_DtColumn" msprop:Generator_UserColumnName="Randomised_Dt" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="initials" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columninitials" msprop:Generator_ColumnPropNameInRow="initials" msprop:Generator_ColumnPropNameInTable="initialsColumn" msprop:Generator_UserColumnName="initials" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Age_Group" msprop:Generator_ColumnVarNameInTable="columnAge_Group" msprop:Generator_ColumnPropNameInRow="Age_Group" msprop:Generator_ColumnPropNameInTable="Age_GroupColumn" msprop:Generator_UserColumnName="Age_Group" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Age" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAge" msprop:Generator_ColumnPropNameInRow="Age" msprop:Generator_ColumnPropNameInTable="AgeColumn" msprop:Generator_UserColumnName="Age" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DOB" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDOB" msprop:Generator_ColumnPropNameInRow="DOB" msprop:Generator_ColumnPropNameInTable="DOBColumn" msprop:Generator_UserColumnName="DOB" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GENDER" msprop:Generator_ColumnVarNameInTable="columnGENDER" msprop:Generator_ColumnPropNameInRow="GENDER" msprop:Generator_ColumnPropNameInTable="GENDERColumn" msprop:Generator_UserColumnName="GENDER" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Treatment_Grp_Name" msprop:Generator_ColumnVarNameInTable="columnTreatment_Grp_Name" msprop:Generator_ColumnPropNameInRow="Treatment_Grp_Name" msprop:Generator_ColumnPropNameInTable="Treatment_Grp_NameColumn" msprop:Generator_UserColumnName="Treatment_Grp_Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Sub_Site_ID" msprop:Generator_ColumnVarNameInTable="columnSub_Site_ID" msprop:Generator_ColumnPropNameInRow="Sub_Site_ID" msprop:Generator_ColumnPropNameInTable="Sub_Site_IDColumn" msprop:Generator_UserColumnName="Sub_Site_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

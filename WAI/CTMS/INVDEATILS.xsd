@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="INVDEATILS" targetNamespace="http://tempuri.org/INVDEATILS.xsd" xmlns:mstns="http://tempuri.org/INVDEATILS.xsd" xmlns="http://tempuri.org/INVDEATILS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="WAD_IWRSConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="WAD_IWRSConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.WAD_IWRSConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_INVDETAILSTableAdapter" GeneratorDataComponentClassName="V_INVDETAILSTableAdapter" Name="V_INVDETAILS" UserDataComponentName="V_INVDETAILSTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="WAD_IWRSConnectionString (Web.config)" DbObjectName="HPV_WAD_WCF.dbo.V_INVDETAILS" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Site_ID, INVNAM, ADDRESS, SPONSOR, Sponser_Address FROM dbo.V_INVDETAILS</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Site_ID" DataSetColumn="Site_ID" />
+              <Mapping SourceColumn="INVNAM" DataSetColumn="INVNAM" />
+              <Mapping SourceColumn="ADDRESS" DataSetColumn="ADDRESS" />
+              <Mapping SourceColumn="SPONSOR" DataSetColumn="SPONSOR" />
+              <Mapping SourceColumn="Sponser_Address" DataSetColumn="Sponser_Address" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="INVDEATILS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="INVDEATILS" msprop:Generator_UserDSName="INVDEATILS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="V_INVDETAILS" msprop:Generator_TableClassName="V_INVDETAILSDataTable" msprop:Generator_TableVarName="tableV_INVDETAILS" msprop:Generator_TablePropName="V_INVDETAILS" msprop:Generator_RowDeletingName="V_INVDETAILSRowDeleting" msprop:Generator_RowChangingName="V_INVDETAILSRowChanging" msprop:Generator_RowEvHandlerName="V_INVDETAILSRowChangeEventHandler" msprop:Generator_RowDeletedName="V_INVDETAILSRowDeleted" msprop:Generator_UserTableName="V_INVDETAILS" msprop:Generator_RowChangedName="V_INVDETAILSRowChanged" msprop:Generator_RowEvArgName="V_INVDETAILSRowChangeEvent" msprop:Generator_RowClassName="V_INVDETAILSRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Site_ID" msprop:Generator_ColumnVarNameInTable="columnSite_ID" msprop:Generator_ColumnPropNameInRow="Site_ID" msprop:Generator_ColumnPropNameInTable="Site_IDColumn" msprop:Generator_UserColumnName="Site_ID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INVNAM" msprop:Generator_ColumnVarNameInTable="columnINVNAM" msprop:Generator_ColumnPropNameInRow="INVNAM" msprop:Generator_ColumnPropNameInTable="INVNAMColumn" msprop:Generator_UserColumnName="INVNAM" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ADDRESS" msprop:Generator_ColumnVarNameInTable="columnADDRESS" msprop:Generator_ColumnPropNameInRow="ADDRESS" msprop:Generator_ColumnPropNameInTable="ADDRESSColumn" msprop:Generator_UserColumnName="ADDRESS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SPONSOR" msprop:Generator_ColumnVarNameInTable="columnSPONSOR" msprop:Generator_ColumnPropNameInRow="SPONSOR" msprop:Generator_ColumnPropNameInTable="SPONSORColumn" msprop:Generator_UserColumnName="SPONSOR" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="400" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Sponser_Address" msprop:Generator_ColumnVarNameInTable="columnSponser_Address" msprop:Generator_ColumnPropNameInRow="Sponser_Address" msprop:Generator_ColumnPropNameInTable="Sponser_AddressColumn" msprop:Generator_UserColumnName="Sponser_Address" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

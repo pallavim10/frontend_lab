@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="HPV_WAD_WCFDat" targetNamespace="http://tempuri.org/HPV_WAD_WCFDat.xsd" xmlns:mstns="http://tempuri.org/HPV_WAD_WCFDat.xsd" xmlns="http://tempuri.org/HPV_WAD_WCFDat.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="WAD_IWRSConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="WAD_IWRSConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.WAD_IWRSConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="IWRS_KitSummary_NewTableAdapter" GeneratorDataComponentClassName="IWRS_KitSummary_NewTableAdapter" Name="IWRS_KitSummary_New" UserDataComponentName="IWRS_KitSummary_NewTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="WAD_IWRSConnectionString (Web.config)" DbObjectName="HPV_WAD_WCF.dbo.IWRS_KitSummary_New" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Site_ID, Sub_Site_ID, kit_Rec, Kit_Dispensed, Kit_Damaged, Kit_Quarantine, Kit_Blocked, Kit_Available, Kit_Return, Kit_Destroyed, Kit_Rejected, Kit_Backup FROM dbo.IWRS_KitSummary_New</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Site_ID" DataSetColumn="Site_ID" />
+              <Mapping SourceColumn="Sub_Site_ID" DataSetColumn="Sub_Site_ID" />
+              <Mapping SourceColumn="kit_Rec" DataSetColumn="kit_Rec" />
+              <Mapping SourceColumn="Kit_Dispensed" DataSetColumn="Kit_Dispensed" />
+              <Mapping SourceColumn="Kit_Damaged" DataSetColumn="Kit_Damaged" />
+              <Mapping SourceColumn="Kit_Quarantine" DataSetColumn="Kit_Quarantine" />
+              <Mapping SourceColumn="Kit_Blocked" DataSetColumn="Kit_Blocked" />
+              <Mapping SourceColumn="Kit_Available" DataSetColumn="Kit_Available" />
+              <Mapping SourceColumn="Kit_Return" DataSetColumn="Kit_Return" />
+              <Mapping SourceColumn="Kit_Destroyed" DataSetColumn="Kit_Destroyed" />
+              <Mapping SourceColumn="Kit_Rejected" DataSetColumn="Kit_Rejected" />
+              <Mapping SourceColumn="Kit_Backup" DataSetColumn="Kit_Backup" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="HPV_WAD_WCFDat" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="HPV_WAD_WCFDat" msprop:Generator_UserDSName="HPV_WAD_WCFDat">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="IWRS_KitSummary_New" msprop:Generator_TableClassName="IWRS_KitSummary_NewDataTable" msprop:Generator_TableVarName="tableIWRS_KitSummary_New" msprop:Generator_TablePropName="IWRS_KitSummary_New" msprop:Generator_RowDeletingName="IWRS_KitSummary_NewRowDeleting" msprop:Generator_RowChangingName="IWRS_KitSummary_NewRowChanging" msprop:Generator_RowEvHandlerName="IWRS_KitSummary_NewRowChangeEventHandler" msprop:Generator_RowDeletedName="IWRS_KitSummary_NewRowDeleted" msprop:Generator_UserTableName="IWRS_KitSummary_New" msprop:Generator_RowChangedName="IWRS_KitSummary_NewRowChanged" msprop:Generator_RowEvArgName="IWRS_KitSummary_NewRowChangeEvent" msprop:Generator_RowClassName="IWRS_KitSummary_NewRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Site_ID" msprop:Generator_ColumnVarNameInTable="columnSite_ID" msprop:Generator_ColumnPropNameInRow="Site_ID" msprop:Generator_ColumnPropNameInTable="Site_IDColumn" msprop:Generator_UserColumnName="Site_ID" type="xs:int" minOccurs="0" />
+              <xs:element name="Sub_Site_ID" msprop:Generator_ColumnVarNameInTable="columnSub_Site_ID" msprop:Generator_ColumnPropNameInRow="Sub_Site_ID" msprop:Generator_ColumnPropNameInTable="Sub_Site_IDColumn" msprop:Generator_UserColumnName="Sub_Site_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="kit_Rec" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnkit_Rec" msprop:Generator_ColumnPropNameInRow="kit_Rec" msprop:Generator_ColumnPropNameInTable="kit_RecColumn" msprop:Generator_UserColumnName="kit_Rec" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_Dispensed" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnKit_Dispensed" msprop:Generator_ColumnPropNameInRow="Kit_Dispensed" msprop:Generator_ColumnPropNameInTable="Kit_DispensedColumn" msprop:Generator_UserColumnName="Kit_Dispensed" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_Damaged" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnKit_Damaged" msprop:Generator_ColumnPropNameInRow="Kit_Damaged" msprop:Generator_ColumnPropNameInTable="Kit_DamagedColumn" msprop:Generator_UserColumnName="Kit_Damaged" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_Quarantine" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnKit_Quarantine" msprop:Generator_ColumnPropNameInRow="Kit_Quarantine" msprop:Generator_ColumnPropNameInTable="Kit_QuarantineColumn" msprop:Generator_UserColumnName="Kit_Quarantine" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_Blocked" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnKit_Blocked" msprop:Generator_ColumnPropNameInRow="Kit_Blocked" msprop:Generator_ColumnPropNameInTable="Kit_BlockedColumn" msprop:Generator_UserColumnName="Kit_Blocked" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_Available" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnKit_Available" msprop:Generator_ColumnPropNameInRow="Kit_Available" msprop:Generator_ColumnPropNameInTable="Kit_AvailableColumn" msprop:Generator_UserColumnName="Kit_Available" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_Return" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnKit_Return" msprop:Generator_ColumnPropNameInRow="Kit_Return" msprop:Generator_ColumnPropNameInTable="Kit_ReturnColumn" msprop:Generator_UserColumnName="Kit_Return" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_Destroyed" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnKit_Destroyed" msprop:Generator_ColumnPropNameInRow="Kit_Destroyed" msprop:Generator_ColumnPropNameInTable="Kit_DestroyedColumn" msprop:Generator_UserColumnName="Kit_Destroyed" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_Rejected" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnKit_Rejected" msprop:Generator_ColumnPropNameInRow="Kit_Rejected" msprop:Generator_ColumnPropNameInTable="Kit_RejectedColumn" msprop:Generator_UserColumnName="Kit_Rejected" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_Backup" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnKit_Backup" msprop:Generator_ColumnPropNameInRow="Kit_Backup" msprop:Generator_ColumnPropNameInTable="Kit_BackupColumn" msprop:Generator_UserColumnName="Kit_Backup" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

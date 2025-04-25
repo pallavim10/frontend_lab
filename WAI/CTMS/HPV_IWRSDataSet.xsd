@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="HPV_IWRSDataSet" targetNamespace="http://tempuri.org/HPV_IWRSDataSet.xsd" xmlns:mstns="http://tempuri.org/HPV_IWRSDataSet.xsd" xmlns="http://tempuri.org/HPV_IWRSDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="PPTConnection" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="PPTConnection (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.PPTConnection.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Randno_KitlistTableAdapter" GeneratorDataComponentClassName="Randno_KitlistTableAdapter" Name="Randno_Kitlist" UserDataComponentName="Randno_KitlistTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="PPTConnection (Web.config)" DbObjectName="HPV_IWRS.dbo.Randno_Kitlist" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Project_ID, INVID, Rand_No, Kit_No, VISIT, Back_Up_Kit, UserName, ReportDate, Sub_Site_ID, Subject_ID, Gender, Age_Group FROM dbo.Randno_Kitlist</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Project_ID" DataSetColumn="Project_ID" />
+              <Mapping SourceColumn="INVID" DataSetColumn="INVID" />
+              <Mapping SourceColumn="Rand_No" DataSetColumn="Rand_No" />
+              <Mapping SourceColumn="Kit_No" DataSetColumn="Kit_No" />
+              <Mapping SourceColumn="VISIT" DataSetColumn="VISIT" />
+              <Mapping SourceColumn="Back_Up_Kit" DataSetColumn="Back_Up_Kit" />
+              <Mapping SourceColumn="UserName" DataSetColumn="UserName" />
+              <Mapping SourceColumn="ReportDate" DataSetColumn="ReportDate" />
+              <Mapping SourceColumn="Sub_Site_ID" DataSetColumn="Sub_Site_ID" />
+              <Mapping SourceColumn="Subject_ID" DataSetColumn="Subject_ID" />
+              <Mapping SourceColumn="Gender" DataSetColumn="Gender" />
+              <Mapping SourceColumn="Age_Group" DataSetColumn="Age_Group" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="HPV_IWRSDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="HPV_IWRSDataSet" msprop:Generator_UserDSName="HPV_IWRSDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Randno_Kitlist" msprop:Generator_TableClassName="Randno_KitlistDataTable" msprop:Generator_TableVarName="tableRandno_Kitlist" msprop:Generator_TablePropName="Randno_Kitlist" msprop:Generator_RowDeletingName="Randno_KitlistRowDeleting" msprop:Generator_RowChangingName="Randno_KitlistRowChanging" msprop:Generator_RowEvHandlerName="Randno_KitlistRowChangeEventHandler" msprop:Generator_RowDeletedName="Randno_KitlistRowDeleted" msprop:Generator_UserTableName="Randno_Kitlist" msprop:Generator_RowChangedName="Randno_KitlistRowChanged" msprop:Generator_RowEvArgName="Randno_KitlistRowChangeEvent" msprop:Generator_RowClassName="Randno_KitlistRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Project_ID" msprop:Generator_ColumnVarNameInTable="columnProject_ID" msprop:Generator_ColumnPropNameInRow="Project_ID" msprop:Generator_ColumnPropNameInTable="Project_IDColumn" msprop:Generator_UserColumnName="Project_ID" type="xs:int" />
+              <xs:element name="INVID" msprop:Generator_ColumnVarNameInTable="columnINVID" msprop:Generator_ColumnPropNameInRow="INVID" msprop:Generator_ColumnPropNameInTable="INVIDColumn" msprop:Generator_UserColumnName="INVID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Rand_No" msprop:Generator_ColumnVarNameInTable="columnRand_No" msprop:Generator_ColumnPropNameInRow="Rand_No" msprop:Generator_ColumnPropNameInTable="Rand_NoColumn" msprop:Generator_UserColumnName="Rand_No" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kit_No" msprop:Generator_ColumnVarNameInTable="columnKit_No" msprop:Generator_ColumnPropNameInRow="Kit_No" msprop:Generator_ColumnPropNameInTable="Kit_NoColumn" msprop:Generator_UserColumnName="Kit_No">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VISIT" msprop:Generator_ColumnVarNameInTable="columnVISIT" msprop:Generator_ColumnPropNameInRow="VISIT" msprop:Generator_ColumnPropNameInTable="VISITColumn" msprop:Generator_UserColumnName="VISIT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Back_Up_Kit" msprop:Generator_ColumnVarNameInTable="columnBack_Up_Kit" msprop:Generator_ColumnPropNameInRow="Back_Up_Kit" msprop:Generator_ColumnPropNameInTable="Back_Up_KitColumn" msprop:Generator_UserColumnName="Back_Up_Kit" type="xs:boolean" minOccurs="0" />
+              <xs:element name="UserName" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnUserName" msprop:Generator_ColumnPropNameInRow="UserName" msprop:Generator_ColumnPropNameInTable="UserNameColumn" msprop:Generator_UserColumnName="UserName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ReportDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnReportDate" msprop:Generator_ColumnPropNameInRow="ReportDate" msprop:Generator_ColumnPropNameInTable="ReportDateColumn" msprop:Generator_UserColumnName="ReportDate" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Sub_Site_ID" msprop:Generator_ColumnVarNameInTable="columnSub_Site_ID" msprop:Generator_ColumnPropNameInRow="Sub_Site_ID" msprop:Generator_ColumnPropNameInTable="Sub_Site_IDColumn" msprop:Generator_UserColumnName="Sub_Site_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Subject_ID" msprop:Generator_ColumnVarNameInTable="columnSubject_ID" msprop:Generator_ColumnPropNameInRow="Subject_ID" msprop:Generator_ColumnPropNameInTable="Subject_IDColumn" msprop:Generator_UserColumnName="Subject_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Gender" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnGender" msprop:Generator_ColumnPropNameInRow="Gender" msprop:Generator_ColumnPropNameInTable="GenderColumn" msprop:Generator_UserColumnName="Gender" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Age_Group" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAge_Group" msprop:Generator_ColumnPropNameInRow="Age_Group" msprop:Generator_ColumnPropNameInTable="Age_GroupColumn" msprop:Generator_UserColumnName="Age_Group" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

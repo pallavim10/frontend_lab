@@ -1,0 +1,30 @@
+﻿.style1 {
+    width: 100%;
+    margin-right: 142px;
+}
+
+.style2 {
+    width: 540px;
+    background-color: #E98454;
+}
+
+.table-bordered > tbody > tr > td {
+    border: none;
+}
+
+.table-bordered {
+    border-color: transparent;
+}
+
+.fontbold {
+    font-weight: bold;
+}
+
+.inpputchkCriticalDP {
+    outline: 2px #c00 solid;
+    outline-offset: -2px;
+}
+
+.table .table {
+    box-shadow: 0 0 0 0;
+}

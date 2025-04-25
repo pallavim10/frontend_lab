@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="IWRS_INSERT_DATA_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ACTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TABLENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTQUERY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEQUERY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IWRS_INSERT_DATA_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IWRS_INSERT_DATA_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IWRS_ACTIONS_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NAV_TYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ACTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTQUERY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NAV_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LISTID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SITEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="STEPID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WHERE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIELDID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBSITEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RANDNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="STRATA" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISITNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ENTERED_DT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NEXT_VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WINDOW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EARLY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VARIABLENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TABLENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DATA" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NEXT_VISIT_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EARLY_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LATE_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrentDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INDICATION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INDICATION_ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IWRS_ACTIONS_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IWRS_ACTIONS_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IWRS_VISIT_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CritCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Criteria" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Field1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Field2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Field3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Field4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Field5" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Field6" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CONDITION1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Condition2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Condition3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Condition4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Condition5" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Condition6" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Value1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Value2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Value3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Value4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Value5" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Value6" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AndOr1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AndOr2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AndOr3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AndOr4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AndOr5" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DEPEND" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EARLY_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LATE_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LAST_VISIT_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NEXT_VISIT_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrentDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LAST_VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="COL_NAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISITNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INDICATION_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NEXT_VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NEXT_VISITNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WINDOW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EARLY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MODULEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VARIABLENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FIELDID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SEQNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TABLENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DATA" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ACTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="STEPID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ENTEREDBY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ENTEREDBYNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ENTERED_TZVAL" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IWRS_VISIT_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IWRS_VISIT_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IWRS_KITS_SP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SITEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBSITEID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RANDNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUBJID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISITNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ENTEREDBY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OLD_KITNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NEW_KITNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="REASON" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="STEPID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrentDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WHERE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TREAT_STRENGTH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="STATUSNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TREAT_GRP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LAST_VISIT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LAST_VISIT_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QUANTITY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ACTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INDICATION_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LOTNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="KITNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EXPIRYDAT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EXPIRY_COMMENT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="USERID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TZ_VAL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DISPENSE_IDX" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IWRS_KITS_SPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IWRS_KITS_SPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="IWRS_INSERT_DATA_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:IWRS_INSERT_DATA_SP" />
+  </wsdl:message>
+  <wsdl:message name="IWRS_INSERT_DATA_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:IWRS_INSERT_DATA_SPResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWRS_ACTIONS_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:IWRS_ACTIONS_SP" />
+  </wsdl:message>
+  <wsdl:message name="IWRS_ACTIONS_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:IWRS_ACTIONS_SPResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWRS_VISIT_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:IWRS_VISIT_SP" />
+  </wsdl:message>
+  <wsdl:message name="IWRS_VISIT_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:IWRS_VISIT_SPResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWRS_KITS_SPSoapIn">
+    <wsdl:part name="parameters" element="tns:IWRS_KITS_SP" />
+  </wsdl:message>
+  <wsdl:message name="IWRS_KITS_SPSoapOut">
+    <wsdl:part name="parameters" element="tns:IWRS_KITS_SPResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WAI_IWRSSoap">
+    <wsdl:operation name="IWRS_INSERT_DATA_SP">
+      <wsdl:input message="tns:IWRS_INSERT_DATA_SPSoapIn" />
+      <wsdl:output message="tns:IWRS_INSERT_DATA_SPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IWRS_ACTIONS_SP">
+      <wsdl:input message="tns:IWRS_ACTIONS_SPSoapIn" />
+      <wsdl:output message="tns:IWRS_ACTIONS_SPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IWRS_VISIT_SP">
+      <wsdl:input message="tns:IWRS_VISIT_SPSoapIn" />
+      <wsdl:output message="tns:IWRS_VISIT_SPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IWRS_KITS_SP">
+      <wsdl:input message="tns:IWRS_KITS_SPSoapIn" />
+      <wsdl:output message="tns:IWRS_KITS_SPSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WAI_IWRSSoap" type="tns:WAI_IWRSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IWRS_INSERT_DATA_SP">
+      <soap:operation soapAction="http://tempuri.org/IWRS_INSERT_DATA_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IWRS_ACTIONS_SP">
+      <soap:operation soapAction="http://tempuri.org/IWRS_ACTIONS_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IWRS_VISIT_SP">
+      <soap:operation soapAction="http://tempuri.org/IWRS_VISIT_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IWRS_KITS_SP">
+      <soap:operation soapAction="http://tempuri.org/IWRS_KITS_SP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WAI_IWRSSoap12" type="tns:WAI_IWRSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IWRS_INSERT_DATA_SP">
+      <soap12:operation soapAction="http://tempuri.org/IWRS_INSERT_DATA_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IWRS_ACTIONS_SP">
+      <soap12:operation soapAction="http://tempuri.org/IWRS_ACTIONS_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IWRS_VISIT_SP">
+      <soap12:operation soapAction="http://tempuri.org/IWRS_VISIT_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IWRS_KITS_SP">
+      <soap12:operation soapAction="http://tempuri.org/IWRS_KITS_SP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WAI_IWRS">
+    <wsdl:port name="WAI_IWRSSoap" binding="tns:WAI_IWRSSoap">
+      <soap:address location="https://wai_dev.opus-analytics.com/Service/IWRS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WAI_IWRSSoap12" binding="tns:WAI_IWRSSoap12">
+      <soap12:address location="https://wai_dev.opus-analytics.com/Service/IWRS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,28 @@
+﻿.layer1 {
+    color: #0000ff;
+}
+
+.layer2 {
+    color: #800000;
+}
+
+.layer3 {
+    color: #008000;
+}
+
+.layer4 {
+    color: Black;
+}
+
+.layerFiles {
+    color: #800000;
+    font-style: italic;
+}
+
+.label {
+    max-width: 100%;
+    margin-bottom: -2px;
+    font-weight: bold;
+    font-size: 13px;
+    margin-left: 0px;
+}

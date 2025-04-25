@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="WAD_IWRSDataSet" targetNamespace="http://tempuri.org/WAD_IWRSDataSet.xsd" xmlns:mstns="http://tempuri.org/WAD_IWRSDataSet.xsd" xmlns="http://tempuri.org/WAD_IWRSDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="WAD_IWRSConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="WAD_IWRSConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.WAD_IWRSConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="GetRandKitNumTreatmentTableAdapter" GeneratorDataComponentClassName="GetRandKitNumTreatmentTableAdapter" Name="GetRandKitNumTreatment" UserDataComponentName="GetRandKitNumTreatmentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="WAD_IWRSConnectionString (Web.config)" DbObjectName="WAD_IWRS.dbo.GetRandKitNumTreatment" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT INVID, SUBJID, VISITNUM, Kit_No, Treatment_ID, Rand_No, Treatment_Group FROM dbo.GetRandKitNumTreatment</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="INVID" DataSetColumn="INVID" />
+              <Mapping SourceColumn="SUBJID" DataSetColumn="SUBJID" />
+              <Mapping SourceColumn="VISITNUM" DataSetColumn="VISITNUM" />
+              <Mapping SourceColumn="Kit_No" DataSetColumn="Kit_No" />
+              <Mapping SourceColumn="Treatment_ID" DataSetColumn="Treatment_ID" />
+              <Mapping SourceColumn="Rand_No" DataSetColumn="Rand_No" />
+              <Mapping SourceColumn="Treatment_Group" DataSetColumn="Treatment_Group" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="WAD_IWRSDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="WAD_IWRSDataSet" msprop:Generator_UserDSName="WAD_IWRSDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="GetRandKitNumTreatment" msprop:Generator_TableClassName="GetRandKitNumTreatmentDataTable" msprop:Generator_TableVarName="tableGetRandKitNumTreatment" msprop:Generator_TablePropName="GetRandKitNumTreatment" msprop:Generator_RowDeletingName="GetRandKitNumTreatmentRowDeleting" msprop:Generator_RowChangingName="GetRandKitNumTreatmentRowChanging" msprop:Generator_RowEvHandlerName="GetRandKitNumTreatmentRowChangeEventHandler" msprop:Generator_RowDeletedName="GetRandKitNumTreatmentRowDeleted" msprop:Generator_UserTableName="GetRandKitNumTreatment" msprop:Generator_RowChangedName="GetRandKitNumTreatmentRowChanged" msprop:Generator_RowEvArgName="GetRandKitNumTreatmentRowChangeEvent" msprop:Generator_RowClassName="GetRandKitNumTreatmentRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="INVID" msprop:Generator_ColumnVarNameInTable="columnINVID" msprop:Generator_ColumnPropNameInRow="INVID" msprop:Generator_ColumnPropNameInTable="INVIDColumn" msprop:Generator_UserColumnName="INVID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SUBJID" msprop:Generator_ColumnVarNameInTable="columnSUBJID" msprop:Generator_ColumnPropNameInRow="SUBJID" msprop:Generator_ColumnPropNameInTable="SUBJIDColumn" msprop:Generator_UserColumnName="SUBJID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VISITNUM" msprop:Generator_ColumnVarNameInTable="columnVISITNUM" msprop:Generator_ColumnPropNameInRow="VISITNUM" msprop:Generator_ColumnPropNameInTable="VISITNUMColumn" msprop:Generator_UserColumnName="VISITNUM" type="xs:int" />
+              <xs:element name="Kit_No" msprop:Generator_ColumnVarNameInTable="columnKit_No" msprop:Generator_ColumnPropNameInRow="Kit_No" msprop:Generator_ColumnPropNameInTable="Kit_NoColumn" msprop:Generator_UserColumnName="Kit_No">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Treatment_ID" msprop:Generator_ColumnVarNameInTable="columnTreatment_ID" msprop:Generator_ColumnPropNameInRow="Treatment_ID" msprop:Generator_ColumnPropNameInTable="Treatment_IDColumn" msprop:Generator_UserColumnName="Treatment_ID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Rand_No" msprop:Generator_ColumnVarNameInTable="columnRand_No" msprop:Generator_ColumnPropNameInRow="Rand_No" msprop:Generator_ColumnPropNameInTable="Rand_NoColumn" msprop:Generator_UserColumnName="Rand_No" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Treatment_Group" msprop:Generator_ColumnVarNameInTable="columnTreatment_Group" msprop:Generator_ColumnPropNameInRow="Treatment_Group" msprop:Generator_ColumnPropNameInTable="Treatment_GroupColumn" msprop:Generator_UserColumnName="Treatment_Group" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

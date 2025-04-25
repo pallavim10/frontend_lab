@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="HPV_WAD_WCFDataSet" targetNamespace="http://tempuri.org/HPV_WAD_WCFDataSet.xsd" xmlns:mstns="http://tempuri.org/HPV_WAD_WCFDataSet.xsd" xmlns="http://tempuri.org/HPV_WAD_WCFDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="WAD_IWRSConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="WAD_IWRSConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.WAD_IWRSConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_UnblindingDetailsTableAdapter" GeneratorDataComponentClassName="V_UnblindingDetailsTableAdapter" Name="V_UnblindingDetails" UserDataComponentName="V_UnblindingDetailsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="WAD_IWRSConnectionString (Web.config)" DbObjectName="HPV_WAD_WCF.dbo.V_UnblindingDetails" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT SUBJID, Rand_No, Treatment_Grp_Name, UnBlinding_Reason, UnBlinding_Reason_other, Requested_By, Request_Dt, Approved_By, Approved_Dt, UnblindBy, Unblind_Dt FROM dbo.V_UnblindingDetails</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="SUBJID" DataSetColumn="SUBJID" />
+              <Mapping SourceColumn="Rand_No" DataSetColumn="Rand_No" />
+              <Mapping SourceColumn="Treatment_Grp_Name" DataSetColumn="Treatment_Grp_Name" />
+              <Mapping SourceColumn="UnBlinding_Reason" DataSetColumn="UnBlinding_Reason" />
+              <Mapping SourceColumn="UnBlinding_Reason_other" DataSetColumn="UnBlinding_Reason_other" />
+              <Mapping SourceColumn="Requested_By" DataSetColumn="Requested_By" />
+              <Mapping SourceColumn="Request_Dt" DataSetColumn="Request_Dt" />
+              <Mapping SourceColumn="Approved_By" DataSetColumn="Approved_By" />
+              <Mapping SourceColumn="Approved_Dt" DataSetColumn="Approved_Dt" />
+              <Mapping SourceColumn="UnblindBy" DataSetColumn="UnblindBy" />
+              <Mapping SourceColumn="Unblind_Dt" DataSetColumn="Unblind_Dt" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="HPV_WAD_WCFDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="HPV_WAD_WCFDataSet" msprop:Generator_UserDSName="HPV_WAD_WCFDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="V_UnblindingDetails" msprop:Generator_TableClassName="V_UnblindingDetailsDataTable" msprop:Generator_TableVarName="tableV_UnblindingDetails" msprop:Generator_TablePropName="V_UnblindingDetails" msprop:Generator_RowDeletingName="V_UnblindingDetailsRowDeleting" msprop:Generator_RowChangingName="V_UnblindingDetailsRowChanging" msprop:Generator_RowEvHandlerName="V_UnblindingDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="V_UnblindingDetailsRowDeleted" msprop:Generator_UserTableName="V_UnblindingDetails" msprop:Generator_RowChangedName="V_UnblindingDetailsRowChanged" msprop:Generator_RowEvArgName="V_UnblindingDetailsRowChangeEvent" msprop:Generator_RowClassName="V_UnblindingDetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SUBJID" msprop:Generator_ColumnVarNameInTable="columnSUBJID" msprop:Generator_ColumnPropNameInRow="SUBJID" msprop:Generator_ColumnPropNameInTable="SUBJIDColumn" msprop:Generator_UserColumnName="SUBJID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Rand_No" msprop:Generator_ColumnVarNameInTable="columnRand_No" msprop:Generator_ColumnPropNameInRow="Rand_No" msprop:Generator_ColumnPropNameInTable="Rand_NoColumn" msprop:Generator_UserColumnName="Rand_No" type="xs:int" minOccurs="0" />
+              <xs:element name="Treatment_Grp_Name" msprop:Generator_ColumnVarNameInTable="columnTreatment_Grp_Name" msprop:Generator_ColumnPropNameInRow="Treatment_Grp_Name" msprop:Generator_ColumnPropNameInTable="Treatment_Grp_NameColumn" msprop:Generator_UserColumnName="Treatment_Grp_Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UnBlinding_Reason" msprop:Generator_ColumnVarNameInTable="columnUnBlinding_Reason" msprop:Generator_ColumnPropNameInRow="UnBlinding_Reason" msprop:Generator_ColumnPropNameInTable="UnBlinding_ReasonColumn" msprop:Generator_UserColumnName="UnBlinding_Reason" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UnBlinding_Reason_other" msprop:Generator_ColumnVarNameInTable="columnUnBlinding_Reason_other" msprop:Generator_ColumnPropNameInRow="UnBlinding_Reason_other" msprop:Generator_ColumnPropNameInTable="UnBlinding_Reason_otherColumn" msprop:Generator_UserColumnName="UnBlinding_Reason_other" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Requested_By" msprop:Generator_ColumnVarNameInTable="columnRequested_By" msprop:Generator_ColumnPropNameInRow="Requested_By" msprop:Generator_ColumnPropNameInTable="Requested_ByColumn" msprop:Generator_UserColumnName="Requested_By" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Request_Dt" msprop:Generator_ColumnVarNameInTable="columnRequest_Dt" msprop:Generator_ColumnPropNameInRow="Request_Dt" msprop:Generator_ColumnPropNameInTable="Request_DtColumn" msprop:Generator_UserColumnName="Request_Dt" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Approved_By" msprop:Generator_ColumnVarNameInTable="columnApproved_By" msprop:Generator_ColumnPropNameInRow="Approved_By" msprop:Generator_ColumnPropNameInTable="Approved_ByColumn" msprop:Generator_UserColumnName="Approved_By" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Approved_Dt" msprop:Generator_ColumnVarNameInTable="columnApproved_Dt" msprop:Generator_ColumnPropNameInRow="Approved_Dt" msprop:Generator_ColumnPropNameInTable="Approved_DtColumn" msprop:Generator_UserColumnName="Approved_Dt" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UnblindBy" msprop:Generator_ColumnVarNameInTable="columnUnblindBy" msprop:Generator_ColumnPropNameInRow="UnblindBy" msprop:Generator_ColumnPropNameInTable="UnblindByColumn" msprop:Generator_UserColumnName="UnblindBy" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Unblind_Dt" msprop:Generator_ColumnVarNameInTable="columnUnblind_Dt" msprop:Generator_ColumnPropNameInRow="Unblind_Dt" msprop:Generator_ColumnPropNameInTable="Unblind_DtColumn" msprop:Generator_UserColumnName="Unblind_Dt" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
